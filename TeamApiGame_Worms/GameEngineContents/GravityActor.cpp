@@ -56,3 +56,28 @@ void GravityActor::Gravity(float _Delta)
 
 	AddPos(GravityVector * _Delta);
 }
+
+void GravityActor::GroundCheck(float _Delta)
+{
+	unsigned int Color = GetGroundColor(RGB(255, 255, 255));
+
+	// 위치가 흰색이면 중력작용.
+	// 모두 흰색이면 공중이다.
+	if (RGB(255, 255, 255) == Color)
+	{
+		Gravity(_Delta);
+	}
+	else // 모두흰색이 아니다 = 땅에닿아있다.
+	{
+		unsigned int CheckColor = GetGroundColor(RGB(255, 255, 255), float4::UP);
+
+		// 체크중 어느하나라도  흰색이 아니라면 한칸올리기 반복한다.
+		while (CheckColor != RGB(255, 255, 255))
+		{
+			CheckColor = GetGroundColor(RGB(255, 255, 255), float4::UP);
+
+			AddPos(float4::UP);
+		}
+		GravityReset();
+	}
+}

@@ -23,12 +23,12 @@ public:
 
 	float4 ActorCameraPos();
 
+	void GroundCheck(float _Delta);
+
 protected:
 
 private:
 	class GameEngineWindowTexture* GroundTexture = nullptr;
-
-
 
 
 	// Gravity
@@ -53,10 +53,8 @@ public:
 private:
 	bool IsGravity = true;
 
-	float GravityPower = 0.0f;
+	float GravityPower = 100.0f;
 	float4 GravityVector = float4::ZERO;
-
-
 
 };
 

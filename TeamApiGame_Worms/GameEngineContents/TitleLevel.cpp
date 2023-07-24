@@ -14,6 +14,6 @@ void TitleLevel::Update(float _DeltaTime)
 {
 	if (true == GameEngineInput::IsDown('P'))
 	{
-		GameEngineCore::ChangeLevel("TestLevel");
+		GameEngineCore::ChangeLevel("PlayLevel");
 	}
 }

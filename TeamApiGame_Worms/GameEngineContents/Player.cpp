@@ -6,6 +6,8 @@
 #include <GameEngineCore/ResourcesManager.h>
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEngineCore/GameEngineCollision.h>
+#include <GameEngineCore/GameEngineLevel.h>
+#include <GameEngineCore/GameEngineCamera.h>
 
 
 Player::Player()
@@ -19,20 +21,42 @@ Player::~Player()
 void Player::Start()
 {
 	// Resource 추가
-	if (false)
+	bool IsResource = ResourcesManager::GetInst().IsLoadTexture("KirbyLeft_Idel.bmp");
+	if (false == IsResource)
 	{
 		GameEnginePath FilePath;
 		FilePath.SetCurrentPath();
 		FilePath.MoveParentToExistsChild("ContentsResources");
-		FilePath.MoveChild("ContentsResources\\Texture\\Player\\");
+		FilePath.MoveChild("ContentsResources\\Worms\\");
 		//ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("파일명"), 가로, 세로);
+		
+		{ // LeftAnimation 셋팅
+			FilePath.MoveChild("Left\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("KirbyLeft_Idel.bmp"), 4, 1);
+		}
+
+		{ // RinghtAnimation 셋팅
+			FilePath.MoveParentToExistsChild("Right");
+			FilePath.MoveChild("Right\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("KirbyRight_Idel.bmp"), 4, 1);
+		}
 	}
+	
+	MainRenderer = CreateRenderer(RenderOrder::Player);
+	MainRenderer->SetTexture("KirbyLeft_Idel.bmp");
 
 	{
-		//MainRenderer = CreateRenderer(RenderOrder::Player);
-
 		//MainRenderer->CreateAnimation("aniname", "filename", start, end, frame, loop
 
+		{ // LeftAnimation 생성
+			MainRenderer->CreateAnimation("Left_Idle", "KirbyLeft_Idel.bmp", 0, 1, 0.2f, true);
+		}
+
+		{ // RightAnimation 생성
+			MainRenderer->CreateAnimation("Right_Idle", "KirbyRight_Idel.bmp", 0, 1, 0.2f, true);
+		}
+		MainRenderer->SetScaleRatio(3.0f);
+		SetOrder(UpdateOrder::Player);
 		
 	}
 	
@@ -40,20 +64,32 @@ void Player::Start()
 		//Collision
 	}
 
+	Dir = PlayerDir::Right;
 	ChangeState(PlayerState::Idle);
 }
+
+
 void Player::Update(float _Delta)
 {
 	StateUpdate(_Delta);
 }
+
+
 void Player::Render(float _Delta)
 {
 	// PosCheck
 	HDC dc = GameEngineWindow::MainWindow.GetBackBuffer()->GetImageDC();
 
-	CollisionData Data;
+	std::string Text = "플레이어 현재위치 : ";
+	Text += std::to_string(GetPos().X);
+	Text += ", ";
+	Text += std::to_string(GetPos().Y);
+	Text += "  카메라 현재위치 :";
+	Text += std::to_string(GetLevel()->GetMainCamera()->GetPos().X);
+	Text += ", ";
+	Text += std::to_string(GetLevel()->GetMainCamera()->GetPos().Y);
 
-	
+	TextOutA(dc, 2, 3, Text.c_str(), static_cast<int>(Text.size()));
 
 }
 
@@ -105,6 +141,8 @@ void Player::ChangeAnimationState(const std::string& _State)
 	}
 
 	AnimationName += _State;
+
+	CurState = _State;
 	
-	//MainRenderer->ChangeAnimation(AnimationName);
+	MainRenderer->ChangeAnimation(AnimationName);
 }

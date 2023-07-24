@@ -8,12 +8,15 @@
     <ClInclude Include="Player.h">
       <Filter>Player</Filter>
     </ClInclude>
-    <ClInclude Include="ContentsEnum.h" />
     <ClInclude Include="GravityActor.h">
       <Filter>Player</Filter>
     </ClInclude>
-    <ClInclude Include="TestLevel.h">
+    <ClInclude Include="BackGround.h" />
+    <ClInclude Include="PlayLevel.h">
       <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="ContentsEnum.h">
+      <Filter>Global</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -33,7 +36,8 @@
     <ClCompile Include="GravityActor.cpp">
       <Filter>Player</Filter>
     </ClCompile>
-    <ClCompile Include="TestLevel.cpp">
+    <ClCompile Include="BackGround.cpp" />
+    <ClCompile Include="PlayLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
   </ItemGroup>

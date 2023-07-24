@@ -28,11 +28,12 @@ public:
 	Player& operator=(const Player & _Other) = delete;
 	Player& operator=(Player && _Other) noexcept = delete;
 
-	//GameEngineRenderer* MainRenderer = nullptr;
+	class GameEngineRenderer* MainRenderer = nullptr;
 
 protected:
 	PlayerState State = PlayerState::Max;
 	PlayerDir Dir = PlayerDir::Left;
+	std::string CurState = "";
 
 	void ChangeState(PlayerState _State);
 	void StateUpdate(float _Delta);

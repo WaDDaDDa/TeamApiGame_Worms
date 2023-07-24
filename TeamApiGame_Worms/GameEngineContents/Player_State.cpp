@@ -2,11 +2,12 @@
 
 void Player::IdleStart()
 {
-
+	ChangeAnimationState("Idle");
 }
 void Player::IdleUpdate(float _Delta)
 {
-
+	Gravity(_Delta);
+	//GroundCheck(_Delta);
 }
 
 void Player::MoveStart()

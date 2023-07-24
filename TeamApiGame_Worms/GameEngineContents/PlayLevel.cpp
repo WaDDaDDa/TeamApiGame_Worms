@@ -6,6 +6,7 @@
 
 
 #include "BackGround.h"
+#include "Player.h"
 
 PlayLevel::PlayLevel()
 {
@@ -36,6 +37,9 @@ void PlayLevel::Start()
 	BackGroundPtr = CreateActor<BackGround>();
 	BackGroundPtr->Init("TestGround.Bmp", "TestGroundPixel.bmp");
 
+	Player* TestPlayer = CreateActor<Player>();
+	TestPlayer->SetGroundTexture("TestGroundPixel.bmp");
+	TestPlayer->SetPos(float4{ 100, 100});
 
 }
 
