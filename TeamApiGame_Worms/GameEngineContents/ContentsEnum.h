@@ -2,6 +2,8 @@
 
 enum class RenderOrder
 {
+	BackGround,
+	Ground,
 	Player
 };
 
