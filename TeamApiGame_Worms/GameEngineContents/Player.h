@@ -1,5 +1,5 @@
 #pragma once
-#include "PlayActor.h"
+#include "GravityActor.h"
 
 enum class PlayerState
 {
@@ -15,7 +15,7 @@ enum class PlayerDir
 };
 
 // Ό³Έν : 
-class Player : public PlayActor
+class Player : public GravityActor
 {
 public:
 	// constrcuter destructer

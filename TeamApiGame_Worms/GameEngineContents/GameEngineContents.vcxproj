@@ -164,7 +164,7 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="ContentsEnum.h" />
-    <ClInclude Include="PlayActor.h">
+    <ClInclude Include="GravityActor.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -190,7 +190,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="PlayActor.cpp">
+    <ClCompile Include="GravityActor.cpp">
       <SubType>
       </SubType>
     </ClCompile>

@@ -2,18 +2,18 @@
 #include <GameEngineCore/GameEngineActor.h>
 
 // Ό³Έν : 
-class PlayActor : public GameEngineActor
+class GravityActor : public GameEngineActor
 {
 public:
 	// constrcuter destructer
-	PlayActor();
-	~PlayActor();
+	GravityActor();
+	~GravityActor();
 
 	// delete Function
-	PlayActor(const PlayActor & _Other) = delete;
-	PlayActor(PlayActor && _Other) noexcept = delete;
-	PlayActor& operator=(const PlayActor & _Other) = delete;
-	PlayActor& operator=(PlayActor && _Other) noexcept = delete;
+	GravityActor(const GravityActor& _Other) = delete;
+	GravityActor(GravityActor&& _Other) noexcept = delete;
+	GravityActor& operator=(const GravityActor& _Other) = delete;
+	GravityActor& operator=(GravityActor&& _Other) noexcept = delete;
 
 	void SetGroundTexture(const std::string& _GroundTextureName);
 
@@ -31,7 +31,7 @@ private:
 
 
 
-// Gravity
+	// Gravity
 public:
 	void Gravity(float _Delta);
 
@@ -56,7 +56,7 @@ private:
 	float GravityPower = 0.0f;
 	float4 GravityVector = float4::ZERO;
 
-	
+
 
 };
 
