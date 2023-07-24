@@ -54,13 +54,10 @@ void BackGround::Init(const std::string& _FileName, const std::string& _DebugFil
 	DebugRenderer->SetRenderScale(Scale);
 	SetPos({ Scale.hX(), Scale.hY() });
 
-
-
 }
 
 void BackGround::SwitchRender()
 {
-
 	SwitchRenderValue = !SwitchRenderValue;
 
 	if (SwitchRenderValue)

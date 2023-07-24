@@ -15,11 +15,14 @@ public:
 
 
 protected:
+	void LevelStart(GameEngineLevel* _PrevLevel) override;
+	void LevelEnd(GameEngineLevel* _NextLevel) override;
 
 private:
 	class BackGround* BackGroundPtr=nullptr;
 	void Start() override;
 	void Update(float _Delta) override;
+	void Release() override;
 	
 
 };

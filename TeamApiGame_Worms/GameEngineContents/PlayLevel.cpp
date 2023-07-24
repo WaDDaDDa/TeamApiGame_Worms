@@ -30,25 +30,34 @@ void PlayLevel::Start()
 		FilePath.MoveChild("ContentsResources\\Texture\\");
 		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("TestGround.bmp"));
 		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("TestGroundPixel.bmp"));
-
-		
 	}
 
+}
+
+void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
+{
 	BackGroundPtr = CreateActor<BackGround>();
 	BackGroundPtr->Init("TestGround.Bmp", "TestGroundPixel.bmp");
 
 	Player* TestPlayer = CreateActor<Player>();
 	TestPlayer->SetGroundTexture("TestGroundPixel.bmp");
-	TestPlayer->SetPos(float4{ 100, 100});
-
+	TestPlayer->SetPos(float4{ 100, 100 });
 }
 
 void PlayLevel::Update(float _Delta)
 {
-
 	if (true == GameEngineInput::IsDown('J'))
 	{
 		BackGroundPtr->SwitchRender();
 	}
+}
+
+void PlayLevel::Release()
+{
+
+}
+
+void PlayLevel::LevelEnd(GameEngineLevel* _NextLevel)
+{
 
 }
