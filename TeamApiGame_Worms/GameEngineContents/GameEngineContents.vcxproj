@@ -159,6 +159,15 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="ContentsEnum.h" />
+    <ClInclude Include="PlayActor.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="TitleLevel.h">
       <SubType>
       </SubType>
@@ -169,6 +178,15 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="PlayActor.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Player_State.cpp" />
     <ClCompile Include="TitleLevel.cpp">
       <SubType>
       </SubType>

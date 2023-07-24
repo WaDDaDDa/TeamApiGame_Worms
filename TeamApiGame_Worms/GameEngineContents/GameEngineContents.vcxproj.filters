@@ -5,16 +5,35 @@
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="ContentCore.h" />
+    <ClInclude Include="Player.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayActor.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="ContentsEnum.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="ContentCore.cpp" />
+    <ClCompile Include="Player.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayActor.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_State.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
       <UniqueIdentifier>{b7cca68c-5ba7-4be7-960e-398dba3d0ecd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player">
+      <UniqueIdentifier>{ce2fb86f-a6ee-40b7-aa3f-5d8ec65aa6e3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

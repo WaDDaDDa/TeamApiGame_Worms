@@ -1,85 +1,55 @@
 #pragma once
 #include "PlayActor.h"
 
-enum class PlayerState 
+enum class PlayerState
 {
 	Idle,
-	Run,
-	Jump,
-	Max, // 일반적으로 사용하지 않는 값.
+	Move,
+	Max
 };
 
 enum class PlayerDir
 {
-	Right,
 	Left,
-	Max,
+	Right
 };
 
-// 설명 :
+// 설명 : 
 class Player : public PlayActor
 {
-private:
-	static Player* MainPlayer;
-
-public:
-	static Player* GetMainPlayer() 
-	{
-		return MainPlayer;
-	}
-
-
 public:
 	// constrcuter destructer
 	Player();
 	~Player();
 
 	// delete Function
-	Player(const Player& _Other) = delete;
-	Player(Player&& _Other) noexcept = delete;
-	Player& operator=(const Player& _Other) = delete;
-	Player& operator=(Player&& _Other) noexcept = delete;
+	Player(const Player & _Other) = delete;
+	Player(Player && _Other) noexcept = delete;
+	Player& operator=(const Player & _Other) = delete;
+	Player& operator=(Player && _Other) noexcept = delete;
 
-	GameEngineRenderer* MainRenderer = nullptr;
+	//GameEngineRenderer* MainRenderer = nullptr;
 
 protected:
+	PlayerState State = PlayerState::Max;
+	PlayerDir Dir = PlayerDir::Left;
+
+	void ChangeState(PlayerState _State);
 	void StateUpdate(float _Delta);
+	void ChangeAnimationState(const std::string& _State);
 
 	void IdleStart();
 	void IdleUpdate(float _Delta);
 
-	void RunStart();
-	void RunUpdate(float _Delta);
-
-	// 클래스로 만들어도 되고.
-	void JumpStart();
-	void JumpUpdate(float _Delta);
-
-	void ChanageState(PlayerState State);
-
-	PlayerState State = PlayerState::Max;
-	PlayerDir Dir = PlayerDir::Right;
-	std::string CurState = "";
-	GameEngineRenderer* HPRender;
-
-	int TestValue = 0;
-
-	GameEngineCollision* BodyCollsion = nullptr;
-
-	void DirCheck();
-
-	void ChangeAnimationState(const std::string& _StateName);
+	void MoveStart();
+	void MoveUpdate(float _Delta);
 
 private:
-	void LevelStart() override; 
-
 	void Start() override;
 	void Update(float _Delta) override;
 	void Render(float _Delta) override;
 
-////////////////////// DebugValue
-	float4 LeftCheck = { -50.0f, -50.0f };
-	float4 RightCheck = { 50.0f, -50.0f };
-	float4 MovePos = float4::ZERO;
+
+
 };
 

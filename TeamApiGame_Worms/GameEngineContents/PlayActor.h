@@ -1,7 +1,7 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
 
-// 설명 :
+// 설명 : 
 class PlayActor : public GameEngineActor
 {
 public:
@@ -10,53 +10,53 @@ public:
 	~PlayActor();
 
 	// delete Function
-	PlayActor(const PlayActor& _Other) = delete;
-	PlayActor(PlayActor&& _Other) noexcept = delete;
-	PlayActor& operator=(const PlayActor& _Other) = delete;
-	PlayActor& operator=(PlayActor&& _Other) noexcept = delete;
-
-	void Gravity(float _Delta);
-
-	void CameraFocus();
-
-	void GravityReset() 
-	{
-		GravityVector = float4::ZERO;
-	}
-
-	float4 GetGravityVector() 
-	{
-		// GravityVector.y > 0.0f
-		return GravityVector;
-	}
-
-
-	void GravityOff() 
-	{
-		IsGravity = false;
-	}
+	PlayActor(const PlayActor & _Other) = delete;
+	PlayActor(PlayActor && _Other) noexcept = delete;
+	PlayActor& operator=(const PlayActor & _Other) = delete;
+	PlayActor& operator=(PlayActor && _Other) noexcept = delete;
 
 	void SetGroundTexture(const std::string& _GroundTextureName);
 
-	// 내 위치에서 
 	int GetGroundColor(unsigned int _DefaultColor, float4 _Pos = float4::ZERO);
 
-	float4 ActorCameraPos();
+	void CameraFocus();
 
-	void SetGravityVector(float4 _GravityVector)
-	{
-		GravityVector = _GravityVector;
-	}
+	float4 ActorCameraPos();
 
 protected:
 
 private:
 	class GameEngineWindowTexture* GroundTexture = nullptr;
 
+
+
+
+// Gravity
+public:
+	void Gravity(float _Delta);
+
+	void GravityReset()
+	{
+		GravityVector = float4::ZERO;
+	}
+
+	float4 GetGravityVector()
+	{
+		return GravityVector;
+	}
+
+	void SetGravityVector(float4 _GravityVector)
+	{
+		GravityVector = _GravityVector;
+	}
+
+private:
 	bool IsGravity = true;
 
-	float GravityPower = 1000.0f;
+	float GravityPower = 0.0f;
 	float4 GravityVector = float4::ZERO;
+
+	
 
 };
 
