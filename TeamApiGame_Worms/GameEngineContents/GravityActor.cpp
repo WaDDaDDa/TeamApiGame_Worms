@@ -1,4 +1,4 @@
-#include "PlayActor.h"
+#include "GravityActor.h"
 
 #include <GameEnginePlatform/GameEngineWindow.h>
 #include <GameEnginePlatform/GameEngineWindowTexture.h>
@@ -6,15 +6,15 @@
 #include <GameEngineCore/GameEngineCamera.h>
 #include <GameEngineCore/GameEngineLevel.h>
 
-PlayActor::PlayActor()
+GravityActor::GravityActor()
 {
 }
 
-PlayActor::~PlayActor()
+GravityActor::~GravityActor()
 {
 }
 
-void PlayActor::SetGroundTexture(const std::string& _GroundTextureName)
+void GravityActor::SetGroundTexture(const std::string& _GroundTextureName)
 {
 	GroundTexture = ResourcesManager::GetInst().FindTexture(_GroundTextureName);
 
@@ -24,7 +24,7 @@ void PlayActor::SetGroundTexture(const std::string& _GroundTextureName)
 	}
 }
 
-int PlayActor::GetGroundColor(unsigned int _DefaultColor, float4 _Pos = float4::ZERO)
+int GravityActor::GetGroundColor(unsigned int _DefaultColor, float4 _Pos)
 {
 	if (nullptr == GroundTexture)
 	{
@@ -34,18 +34,18 @@ int PlayActor::GetGroundColor(unsigned int _DefaultColor, float4 _Pos = float4::
 	return GroundTexture->GetColor(_DefaultColor, GetPos() + _Pos);
 }
 
-void PlayActor::CameraFocus()
+void GravityActor::CameraFocus()
 {
 	//float4 WindowScale = GameEngineWindow::MainWindow.GetScale();
 	//GetLevel()->GetMainCamera()->SetPos(GetPos() + float4{ -WindowScale.hX(), -WindowScale.hY() });
 }
 
-float4 PlayActor::ActorCameraPos()
+float4 GravityActor::ActorCameraPos()
 {
 	return GetPos() - GetLevel()->GetMainCamera()->GetPos();
 }
 
-void PlayActor::Gravity(float _Delta)
+void GravityActor::Gravity(float _Delta)
 {
 	if (false == IsGravity)
 	{
