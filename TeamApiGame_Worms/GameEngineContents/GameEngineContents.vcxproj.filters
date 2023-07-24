@@ -12,6 +12,9 @@
     <ClInclude Include="GravityActor.h">
       <Filter>Player</Filter>
     </ClInclude>
+    <ClInclude Include="TestLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -29,6 +32,9 @@
     </ClCompile>
     <ClCompile Include="GravityActor.cpp">
       <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="TestLevel.cpp">
+      <Filter>Level</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
