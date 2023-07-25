@@ -77,7 +77,7 @@ void Player::Update(float _Delta)
 {
 	if (IsTurnPlayer == false)
 	{
-		return;
+		GameEngineInput::Reset;
 	}
 	StateUpdate(_Delta);
 }

@@ -11,14 +11,15 @@ void Player::IdleUpdate(float _Delta)
 {
 	GroundCheck(_Delta);
 
-	if (true == GameEngineInput::IsPress(VK_LEFT) || true == GameEngineInput::IsPress(VK_RIGHT))
+	if (true == GameEngineInput::IsPress(VK_LEFT) && true == IsTurnPlayer
+		|| true == GameEngineInput::IsPress(VK_RIGHT) && true == IsTurnPlayer)
 	{
 		DirCheck();
 		ChangeState(PlayerState::Move);
 		return;
 	}
 
-	if (true == GameEngineInput::IsDown('A'))
+	if (true == GameEngineInput::IsDown('A') && true == IsTurnPlayer)
 	{
 		ChangeState(PlayerState::Fire);
 		return;
