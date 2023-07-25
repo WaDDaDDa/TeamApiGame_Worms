@@ -3,6 +3,7 @@
 
 #include <GameEngineBase/GameEnginePath.h>
 #include <GameEnginePlatform/GameEngineWindow.h>
+#include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/ResourcesManager.h>
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEngineCore/GameEngineCollision.h>
@@ -64,6 +65,7 @@ void Player::Start()
 		//Collision
 	}
 
+	
 	Dir = PlayerDir::Right;
 	ChangeState(PlayerState::Idle);
 }
@@ -71,6 +73,7 @@ void Player::Start()
 
 void Player::Update(float _Delta)
 {
+	CameraFocus();
 	StateUpdate(_Delta);
 }
 
@@ -105,6 +108,9 @@ void Player::ChangeState(PlayerState _State)
 		case PlayerState::Move:
 			MoveStart();
 			break;
+		case PlayerState::Fire:
+			FireStart();
+			break;
 		default:
 			break;
 		}
@@ -119,6 +125,8 @@ void Player::StateUpdate(float _Delta)
 		return IdleUpdate(_Delta);
 	case PlayerState::Move:
 		return MoveUpdate(_Delta);
+	case PlayerState::Fire:
+		return FireUpdate(_Delta);
 	default:
 		break;
 	}
@@ -145,4 +153,24 @@ void Player::ChangeAnimationState(const std::string& _State)
 	CurState = _State;
 	
 	MainRenderer->ChangeAnimation(AnimationName);
+}
+
+void Player::DirCheck()
+{
+	if (true == GameEngineInput::IsFree(VK_LEFT) && true == GameEngineInput::IsFree(VK_RIGHT))
+	{
+		return;
+	}
+
+	if (true == GameEngineInput::IsDown(VK_LEFT) || true == GameEngineInput::IsFree(VK_RIGHT))
+	{
+		Dir = PlayerDir::Left;
+		return;
+	}
+
+	if (true == GameEngineInput::IsFree(VK_LEFT) || true == GameEngineInput::IsDown(VK_RIGHT))
+	{
+		Dir = PlayerDir::Right;
+		return;
+	}
 }

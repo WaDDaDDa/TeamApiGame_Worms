@@ -5,6 +5,7 @@ enum class PlayerState
 {
 	Idle,
 	Move,
+	Fire,
 	Max
 };
 
@@ -39,11 +40,16 @@ protected:
 	void StateUpdate(float _Delta);
 	void ChangeAnimationState(const std::string& _State);
 
+	void DirCheck();
+
 	void IdleStart();
 	void IdleUpdate(float _Delta);
 
 	void MoveStart();
 	void MoveUpdate(float _Delta);
+
+	void FireStart();
+	void FireUpdate(float _Delta);
 
 private:
 	void Start() override;

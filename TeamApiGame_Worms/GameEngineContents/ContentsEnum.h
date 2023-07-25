@@ -11,6 +11,7 @@ enum class RenderOrder
 	BackGround,
 	Ground,
 	Player,
+	Weapon
 };
 
 enum class CollisionOrder
