@@ -1,7 +1,7 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
 
-// Ό³Έν : 
+class GameEngineWindowTexture;
 class GravityActor : public GameEngineActor
 {
 public:
@@ -15,7 +15,17 @@ public:
 	GravityActor& operator=(const GravityActor& _Other) = delete;
 	GravityActor& operator=(GravityActor&& _Other) noexcept = delete;
 
+	GameEngineWindowTexture* GetGroundTexture()
+	{
+		return GroundTexture;
+	}
+
 	void SetGroundTexture(const std::string& _GroundTextureName);
+
+	void SetGroundTexture(GameEngineWindowTexture* _GroundTexture)
+	{
+		GroundTexture = _GroundTexture;
+	}
 
 	int GetGroundColor(unsigned int _DefaultColor, float4 _Pos = float4::ZERO);
 

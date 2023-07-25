@@ -73,5 +73,7 @@ private:
 	// 카메라, 조작 등 메인으로 움직일 수 있는 플레이어를 판별하기 위한 bool값. 추가
 	bool IsTurnPlayer = false;
 
+	float PlayerSpeed = 100.0f;
+
 };
 

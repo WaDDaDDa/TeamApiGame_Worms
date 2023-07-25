@@ -38,17 +38,15 @@ void Player::MoveUpdate(float _Delta)
 
 	GroundCheck(_Delta);
 
-	float Speed = 100.0f;
-
 	float4 MovePos = float4::ZERO;
 
 	if (true == GameEngineInput::IsPress(VK_LEFT) && Dir == PlayerDir::Left)
 	{
-		MovePos = { -Speed * _Delta, 0.0f };
+		MovePos = { -PlayerSpeed * _Delta, 0.0f };
 	}
 	else if (true == GameEngineInput::IsPress(VK_RIGHT) && Dir == PlayerDir::Right)
 	{
-		MovePos = { Speed * _Delta, 0.0f };
+		MovePos = { PlayerSpeed * _Delta, 0.0f };
 	}
 	
 	if (MovePos == float4::ZERO)
@@ -63,7 +61,7 @@ void Player::MoveUpdate(float _Delta)
 void Player::FireStart()
 {
 	Weapon* NewWeapon = GetLevel()->CreateActor<Weapon>();
-	NewWeapon->SetGroundTexture("TestGroundPixel.bmp");
+	NewWeapon->SetGroundTexture(GetGroundTexture());
 	
 	float4 Pos = GetPos();
 	NewWeapon->SetPos(Pos);
