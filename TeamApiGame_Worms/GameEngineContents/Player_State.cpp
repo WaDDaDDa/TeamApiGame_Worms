@@ -34,7 +34,9 @@ void Player::MoveStart()
 }
 void Player::MoveUpdate(float _Delta)
 {
-	//DirCheck();
+	DirCheck();
+
+	GroundCheck(_Delta);
 
 	float Speed = 100.0f;
 
