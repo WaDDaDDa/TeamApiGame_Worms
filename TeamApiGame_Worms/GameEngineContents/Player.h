@@ -1,5 +1,6 @@
 #pragma once
 #include "GravityActor.h"
+#include <vector>
 
 enum class PlayerState
 {
@@ -31,6 +32,16 @@ public:
 
 	class GameEngineRenderer* MainRenderer = nullptr;
 
+	static std::vector<Player*> GetAllPlayer()
+	{
+		return AllPlayer;
+	}
+
+	void SwitchIsTurnPlayer()
+	{
+		IsTurnPlayer = !IsTurnPlayer;
+	}
+
 protected:
 	PlayerState State = PlayerState::Max;
 	PlayerDir Dir = PlayerDir::Left;
@@ -52,11 +63,15 @@ protected:
 	void FireUpdate(float _Delta);
 
 private:
+	// 플레이어 전체를 관리하도록 list로 플레이어 관리
+	static std::vector<Player*> AllPlayer;
+
 	void Start() override;
 	void Update(float _Delta) override;
 	void Render(float _Delta) override;
 
-
+	// 카메라, 조작 등 메인으로 움직일 수 있는 플레이어를 판별하기 위한 bool값. 추가
+	bool IsTurnPlayer = false;
 
 };
 

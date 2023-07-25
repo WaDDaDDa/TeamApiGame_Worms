@@ -10,9 +10,11 @@
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/GameEngineCamera.h>
 
+std::vector<Player*> Player::AllPlayer;
 
 Player::Player()
 {
+	AllPlayer.push_back(this);
 }
 
 Player::~Player()
@@ -73,26 +75,16 @@ void Player::Start()
 
 void Player::Update(float _Delta)
 {
-	CameraFocus();
+	if (IsTurnPlayer == false)
+	{
+		return;
+	}
 	StateUpdate(_Delta);
 }
 
 
 void Player::Render(float _Delta)
 {
-	// PosCheck
-	HDC dc = GameEngineWindow::MainWindow.GetBackBuffer()->GetImageDC();
-
-	std::string Text = "플레이어 현재위치 : ";
-	Text += std::to_string(GetPos().X);
-	Text += ", ";
-	Text += std::to_string(GetPos().Y);
-	Text += "  카메라 현재위치 :";
-	Text += std::to_string(GetLevel()->GetMainCamera()->GetPos().X);
-	Text += ", ";
-	Text += std::to_string(GetLevel()->GetMainCamera()->GetPos().Y);
-
-	TextOutA(dc, 2, 3, Text.c_str(), static_cast<int>(Text.size()));
 
 }
 

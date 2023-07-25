@@ -36,8 +36,8 @@ int GravityActor::GetGroundColor(unsigned int _DefaultColor, float4 _Pos)
 
 void GravityActor::CameraFocus()
 {
-	float4 WindowScale = GameEngineWindow::MainWindow.GetScale();
-	GetLevel()->GetMainCamera()->SetPos(GetPos() + float4{ -WindowScale.hX(), -WindowScale.hY() });
+	//float4 WindowScale = GameEngineWindow::MainWindow.GetScale();
+	//GetLevel()->GetMainCamera()->SetPos(GetPos() + float4{ -WindowScale.hX(), -WindowScale.hY() });
 }
 
 float4 GravityActor::ActorCameraPos()

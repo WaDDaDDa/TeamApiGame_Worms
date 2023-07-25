@@ -7,6 +7,7 @@
 
 #include "BackGround.h"
 #include "Player.h"
+#include "GameTurn.h"
 
 PlayLevel::PlayLevel()
 {
@@ -39,9 +40,31 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 	BackGroundPtr = CreateActor<BackGround>();
 	BackGroundPtr->Init("TestGround.Bmp", "TestGroundPixel.bmp");
 
-	Player* TestPlayer = CreateActor<Player>();
-	TestPlayer->SetGroundTexture("TestGroundPixel.bmp");
-	TestPlayer->SetPos(float4{ 100, 100 });
+	{
+		Player* TestPlayer = CreateActor<Player>();
+		TestPlayer->SetGroundTexture("TestGroundPixel.bmp");
+		TestPlayer->SetPos(float4{ 100, 100 });
+	}
+
+	{
+		Player* TestPlayer = CreateActor<Player>();
+		TestPlayer->SetGroundTexture("TestGroundPixel.bmp");
+		TestPlayer->SetPos(float4{ 400, 100 });
+	}
+
+	{
+		Player* TestPlayer = CreateActor<Player>();
+		TestPlayer->SetGroundTexture("TestGroundPixel.bmp");
+		TestPlayer->SetPos(float4{ 700, 100 });
+	}
+
+	{
+		Player* TestPlayer = CreateActor<Player>();
+		TestPlayer->SetGroundTexture("TestGroundPixel.bmp");
+		TestPlayer->SetPos(float4{ 1000, 100 });
+	}
+
+	CreateActor<GameTurn>();
 }
 
 void PlayLevel::Update(float _Delta)
