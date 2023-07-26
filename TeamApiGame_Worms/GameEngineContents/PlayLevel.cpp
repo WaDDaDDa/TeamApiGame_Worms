@@ -11,6 +11,8 @@
 #include "GameTurn.h"
 #include "MouseObject.h"
 
+#include "UI_Mouse.h"
+
 PlayLevel::PlayLevel()
 {
 }
@@ -42,6 +44,10 @@ void PlayLevel::Start()
 
 void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 {
+
+	CreateActor<UI_Mouse>();
+
+
 	GroundPtr = CreateActor<Ground>();
 	GroundPtr->Init("TestGround.Bmp", "TestGroundPixel.bmp");
 
