@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "ContentsEnum.h"
+#include "MouseObject.h"
 
 #include <GameEngineBase/GameEnginePath.h>
 #include <GameEnginePlatform/GameEngineWindow.h>
@@ -11,6 +12,8 @@
 #include <GameEngineCore/GameEngineCamera.h>
 
 std::vector<Player*> Player::AllPlayer;
+
+float4 Player::DirPos = float4::ZERO;
 
 Player::Player()
 {
@@ -79,6 +82,7 @@ void Player::Update(float _Delta)
 	{
 		GameEngineInput::Reset;
 	}
+	SetDirPosNormalize();
 	StateUpdate(_Delta);
 }
 
@@ -167,4 +171,13 @@ void Player::DirCheck()
 		ChangeAnimationState(CurState);
 		return;
 	}
+}
+
+void Player::SetDirPosNormalize()
+{
+	float4 MousePos = MouseObject::GetPlayMousePos();
+	float4 PlayerPos = GetPos();
+
+	float4 PlayerMouseDir = MousePos - PlayerPos;
+	DirPos = PlayerMouseDir.NormalizeReturn();
 }

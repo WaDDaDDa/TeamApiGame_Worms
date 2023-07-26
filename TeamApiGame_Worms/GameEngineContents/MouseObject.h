@@ -15,7 +15,7 @@ public:
 	MouseObject& operator=(const MouseObject & _Other) = delete;
 	MouseObject& operator=(MouseObject && _Other) noexcept = delete;
 
-	float4 GetPlayMousePos()
+	static float4 GetPlayMousePos()
 	{
 		return PlayMousePos;
 	}
@@ -26,7 +26,7 @@ protected:
 private:
 	GameEngineRenderer* CrossHairRenderer;
 
-	float4 PlayMousePos = float4::ZERO;
+	static float4 PlayMousePos;
 
 	void Start() override;
 	void Update(float _Delta) override;

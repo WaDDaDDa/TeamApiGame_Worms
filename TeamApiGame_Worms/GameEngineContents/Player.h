@@ -31,6 +31,7 @@ public:
 	Player& operator=(Player && _Other) noexcept = delete;
 
 	class GameEngineRenderer* MainRenderer = nullptr;
+	static float4 DirPos;
 
 	static std::vector<Player*> GetAllPlayer()
 	{
@@ -67,10 +68,14 @@ protected:
 	void FireStart();
 	void FireUpdate(float _Delta);
 
+	void SetDirPosNormalize();
+
 private:
 	// PlayerStatus 관련
 	int Hp = 100;
 	float PlayerSpeed = 100.0f;
+	
+	
 
 	// 플레이어 전체를 관리하도록 list로 플레이어 관리
 	static std::vector<Player*> AllPlayer;

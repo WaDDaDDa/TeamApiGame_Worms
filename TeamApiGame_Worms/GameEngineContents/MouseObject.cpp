@@ -8,6 +8,8 @@
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/GameEngineCamera.h>
 
+float4 MouseObject::PlayMousePos = float4::ZERO;
+
 MouseObject::MouseObject()
 {
 }

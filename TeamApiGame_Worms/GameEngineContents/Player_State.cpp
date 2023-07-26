@@ -64,6 +64,7 @@ void Player::FireStart()
 	NewWeapon->SetGroundTexture(GetGroundTexture());
 	
 	float4 Pos = GetPos();
+	Pos.Y -= 15.0f;
 	NewWeapon->SetPos(Pos);
 }
 void Player::FireUpdate(float _Delta)

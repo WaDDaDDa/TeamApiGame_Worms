@@ -1,5 +1,6 @@
 #include "Weapon.h"
 #include "ContentsEnum.h"
+#include "Player.h"
 
 #include <GameEngineBase/GameEnginePath.h>
 #include <GameEngineCore/ResourcesManager.h>
@@ -28,9 +29,11 @@ void Weapon::Start()
 
 	Renderer->SetTexture("PistolBullet.bmp");
 
-	GravityDir = float4::UP;
-	GravityDir += Dir * 0.5f;
-	SetGravityVector(GravityDir * 200.0f);
+	SetDir(Player::DirPos);
+
+	//GravityDir = float4::UP;
+	GravityDir += Dir * 30.0f;
+	SetGravityVector(GravityDir * 10.0f);
 
 }
 
