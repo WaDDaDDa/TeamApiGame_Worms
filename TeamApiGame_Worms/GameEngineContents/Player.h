@@ -42,6 +42,11 @@ public:
 		IsTurnPlayer = !IsTurnPlayer;
 	}
 
+	int GetHp()
+	{
+		return Hp;
+	}
+
 protected:
 	PlayerState State = PlayerState::Max;
 	PlayerDir Dir = PlayerDir::Left;
@@ -63,6 +68,10 @@ protected:
 	void FireUpdate(float _Delta);
 
 private:
+	// PlayerStatus 관련
+	int Hp = 100;
+	float PlayerSpeed = 100.0f;
+
 	// 플레이어 전체를 관리하도록 list로 플레이어 관리
 	static std::vector<Player*> AllPlayer;
 
@@ -72,8 +81,5 @@ private:
 
 	// 카메라, 조작 등 메인으로 움직일 수 있는 플레이어를 판별하기 위한 bool값. 추가
 	bool IsTurnPlayer = false;
-
-	float PlayerSpeed = 100.0f;
-
 };
 

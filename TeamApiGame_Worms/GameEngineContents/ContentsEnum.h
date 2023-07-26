@@ -12,11 +12,12 @@ enum class RenderOrder
 	Ground,
 	Player,
 	Weapon,
-	UI,
+
+
+	Mouse,
 };
 
 enum class CollisionOrder
 {
 	PlayerBody,
-	UI,
 };
