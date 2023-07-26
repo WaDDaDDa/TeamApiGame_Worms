@@ -11,7 +11,6 @@
     <ClInclude Include="GravityActor.h">
       <Filter>Player</Filter>
     </ClInclude>
-    <ClInclude Include="BackGround.h" />
     <ClInclude Include="PlayLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
@@ -22,6 +21,12 @@
       <Filter>Player</Filter>
     </ClInclude>
     <ClInclude Include="GameTurn.h" />
+    <ClInclude Include="BackGround.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Ground.h">
+      <Filter>Map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -40,7 +45,6 @@
     <ClCompile Include="GravityActor.cpp">
       <Filter>Player</Filter>
     </ClCompile>
-    <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="PlayLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
@@ -48,6 +52,12 @@
       <Filter>Player</Filter>
     </ClCompile>
     <ClCompile Include="GameTurn.cpp" />
+    <ClCompile Include="BackGround.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Ground.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">

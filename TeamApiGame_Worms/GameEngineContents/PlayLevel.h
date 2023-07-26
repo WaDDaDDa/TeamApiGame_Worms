@@ -19,7 +19,7 @@ protected:
 	void LevelEnd(GameEngineLevel* _NextLevel) override;
 
 private:
-	class BackGround* BackGroundPtr=nullptr;
+	class Ground* GroundPtr=nullptr;
 	void Start() override;
 	void Update(float _Delta) override;
 	void Release() override;

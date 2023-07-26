@@ -5,7 +5,7 @@
 #include <GameEngineCore/ResourcesManager.h>
 
 
-#include "BackGround.h"
+#include "Ground.h"
 #include "Player.h"
 #include "GameTurn.h"
 
@@ -37,8 +37,8 @@ void PlayLevel::Start()
 
 void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 {
-	BackGroundPtr = CreateActor<BackGround>();
-	BackGroundPtr->Init("TestGround.Bmp", "TestGroundPixel.bmp");
+	GroundPtr = CreateActor<Ground>();
+	GroundPtr->Init("TestGround.Bmp", "TestGroundPixel.bmp");
 
 	{
 		Player* TestPlayer = CreateActor<Player>();
@@ -71,7 +71,7 @@ void PlayLevel::Update(float _Delta)
 {
 	if (true == GameEngineInput::IsDown('J'))
 	{
-		BackGroundPtr->SwitchRender();
+		GroundPtr->SwitchRender();
 	}
 }
 
