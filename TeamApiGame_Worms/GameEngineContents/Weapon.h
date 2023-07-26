@@ -17,13 +17,16 @@ public:
 
 	class GameEngineRenderer* Renderer;
 
-	
+	void SetDir(float4& _DirPos)
+	{
+		Dir = _DirPos;
+	}
 
 protected:
 
 private:
 	float Speed = 200.0f;
-	float4 Dir = float4::RIGHT;
+	float4 Dir = float4::ZERO;
 	float4 GravityDir = float4::ZERO;
 
 	void Start() override;

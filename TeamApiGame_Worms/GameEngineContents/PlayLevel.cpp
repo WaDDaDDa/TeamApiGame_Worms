@@ -1,6 +1,7 @@
 #include "PlayLevel.h"
 
 #include <GameEnginePlatform/GameEngineInput.h>
+#include <GameEnginePlatform/GameEngineWindow.h>
 #include <GameEngineCore/GameEngineCore.h>
 #include <GameEngineCore/ResourcesManager.h>
 
@@ -8,6 +9,7 @@
 #include "Ground.h"
 #include "Player.h"
 #include "GameTurn.h"
+#include "MouseObject.h"
 
 PlayLevel::PlayLevel()
 {
@@ -33,6 +35,9 @@ void PlayLevel::Start()
 		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("TestGroundPixel.bmp"));
 	}
 
+	GameEngineWindow::MainWindow.CursorOff();
+
+	CreateActor<MouseObject>();
 }
 
 void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)

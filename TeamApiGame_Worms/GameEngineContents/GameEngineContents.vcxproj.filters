@@ -27,6 +27,9 @@
     <ClInclude Include="Ground.h">
       <Filter>Map</Filter>
     </ClInclude>
+    <ClInclude Include="MouseObject.h">
+      <Filter>Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -57,6 +60,9 @@
     </ClCompile>
     <ClCompile Include="Ground.cpp">
       <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseObject.cpp">
+      <Filter>Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
