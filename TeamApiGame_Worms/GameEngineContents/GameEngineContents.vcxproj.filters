@@ -27,6 +27,9 @@
     <ClInclude Include="Ground.h">
       <Filter>Map</Filter>
     </ClInclude>
+    <ClInclude Include="UI_Mouse.h">
+      <Filter>Global\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -58,6 +61,9 @@
     <ClCompile Include="Ground.cpp">
       <Filter>Map</Filter>
     </ClCompile>
+    <ClCompile Include="UI_Mouse.cpp">
+      <Filter>Global\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
@@ -71,6 +77,9 @@
     </Filter>
     <Filter Include="Map">
       <UniqueIdentifier>{8ac6bea4-1560-44b4-ab19-bc19a1204053}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Global\UI">
+      <UniqueIdentifier>{2f172bbf-af87-4978-b068-23d16776f345}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
