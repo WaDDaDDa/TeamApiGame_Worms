@@ -18,18 +18,19 @@ void Hole::AddHoleAtGround(GameEngineRenderer* _GroundTexture, GameEngineRendere
 	{
 		MsgBoxAssert("Hole의 텍스쳐가 nullptr입니다");
 	}
+
 	GameEngineWindowTexture* GroundTexture = _GroundTexture->GetTexture();
 	GameEngineWindowTexture* GroundPixelTexture = _GroundPixelTexture->GetTexture();
 
-	float4 GroundTexturePos = _GroundTexture->GetActor()->GetPos();
-	float4 GroundTextureScale = GroundTexture->GetScale();
 	float4 TexturePos = GetPos();
-	float4 TextureScale = Texture->GetScale();
+	float4 TextureScale =Texture->GetScale();
 	
-	GroundTexture->TransCopy(Texture, GroundTexturePos, GroundTextureScale, TexturePos, TextureScale);
-	GroundPixelTexture->TransCopy(Texture, GroundTexturePos, GroundTextureScale, TexturePos, TextureScale);
+	 GroundTexture->TransCopy(Texture, TexturePos, TextureScale, float4::ZERO, TextureScale, RGB(255, 255, 255));
+	GroundPixelTexture->TransCopy(Texture, TexturePos, TextureScale, float4::ZERO, TextureScale, RGB(255, 255, 255));
 
 
+
+	Off();
 }
 
 void Hole::Start()

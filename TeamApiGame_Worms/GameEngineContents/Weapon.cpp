@@ -49,9 +49,10 @@ void Weapon::Update(float _Delta)
 		if (Color != RGB(255, 255, 255))
 		{
 			Renderer->Off();
-			// 맵충돌 작업중
-			/*PlayLevel* CurPlayLevel=dynamic_cast<PlayLevel*>(GetLevel());
-			CurPlayLevel->GetGround()->ContactGround(GetPos());*/
+			
+			// PlayLevel에서 만 존재하는 것에만 사용할수 있는예제코드
+			PlayLevel* CurPlayLevel=dynamic_cast<PlayLevel*>(GetLevel());
+			CurPlayLevel->GetGround()->ContactGround(GetPos());
 			
 		}
 	}

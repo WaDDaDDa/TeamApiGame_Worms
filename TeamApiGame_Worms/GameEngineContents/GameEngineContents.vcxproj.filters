@@ -39,6 +39,9 @@
     <ClInclude Include="UI_Button_StartGame.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="Hole.h">
+      <Filter>Map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -81,6 +84,9 @@
     </ClCompile>
     <ClCompile Include="UI_Button_StartGame.cpp">
       <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Hole.cpp">
+      <Filter>Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
