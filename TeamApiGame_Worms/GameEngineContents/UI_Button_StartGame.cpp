@@ -26,6 +26,8 @@ void UI_Button_StartGame::Start()
 
 void UI_Button_StartGame::Update(float _Delta)
 {
+	UI_Button::Update(_Delta);
+//	UI_Button::CheckButtonCollision();
 	OnClickEvent();
 }
 
@@ -33,7 +35,9 @@ void UI_Button_StartGame::OnClickEvent()
 {
 	if (BUTTON_STATE::BUTTON_STATE_CLICKED == GetMouseState())
 	{
-		GameEngineCore::ChangeLevel("PlayLevel");
+		int a = 0;
+
+		GameEngineCore::ChangeLevel("TitleLevel");
 	}
 	
 }

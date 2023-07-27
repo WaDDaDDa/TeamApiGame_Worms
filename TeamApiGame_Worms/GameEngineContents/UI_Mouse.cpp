@@ -5,6 +5,8 @@
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEngineCore/GameEngineCollision.h>
 #include <GameEnginePlatform/GameEngineWindow.h>
+
+#include <GameEngineCore/GameEngineLevel.h>
 #pragma endregion
 
 #define MOUSE_WITDH	32
@@ -40,10 +42,10 @@ void UI_Mouse::Start()
 	MainRenderer = CreateUIRenderer("UI_MOUSE.bmp", RenderOrder::UI);
 	MainRenderer->SetRenderScale({ MOUSE_WITDH, MOUSE_HEIGHT });
 
-	// 충돌체 설정
-	MainCollision = CreateCollision(CollisionOrder::UI);
-	MainCollision->SetCollisionScale({ MOUSE_WITDH, MOUSE_HEIGHT });
-	MainCollision->SetCollisionType(CollisionType::CirCle);
+	//// 충돌체 설정
+	//MainCollision = CreateCollision(CollisionOrder::UI);
+	//MainCollision->SetCollisionScale({ MOUSE_WITDH, MOUSE_HEIGHT });
+	//MainCollision->SetCollisionType(CollisionType::CirCle);
 
 }
 
@@ -51,6 +53,7 @@ void UI_Mouse::Update(float _Delta)
 {
 	float4 MosuePos = GameEngineWindow::MainWindow.GetMousePos();
 	MainRenderer->SetRenderPos(MosuePos);
+
 }
 
 void UI_Mouse::Render(float _Delta)

@@ -8,6 +8,8 @@
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/GameEngineCamera.h>
 
+#include <GameEngineCore/GameEngineCollision.h>
+
 float4 MouseObject::PlayMousePos = float4::ZERO;
 
 MouseObject::MouseObject()
@@ -33,6 +35,11 @@ void MouseObject::Start()
 
 	CrossHairRenderer->SetTexture("CrossHair.bmp");
 	CrossHairRenderer->SetRenderScaleToTexture();
+
+	Collision = CreateCollision(CollisionOrder::Mouse);
+	Collision->SetCollisionScale({ 100, 100 });
+	Collision->SetCollisionType(CollisionType::CirCle);
+
 }
 void MouseObject::Update(float _Delta)
 {

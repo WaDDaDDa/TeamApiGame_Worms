@@ -26,6 +26,8 @@ protected:
 private:
 	GameEngineRenderer* CrossHairRenderer;
 
+	GameEngineCollision* Collision;
+
 	static float4 PlayMousePos;
 
 	void Start() override;
