@@ -20,8 +20,7 @@ UI_Mouse::~UI_Mouse()
 
 void UI_Mouse::Start()
 {
-	
-	// 마우스 생성 전에 기존에 존재하는 기본 커서를 OFF 해줍니다.
+	// 마우스 적용 전에 기존에 존재하는 기본 커서를 OFF 해줍니다.
 	GameEngineWindow::MainWindow.CursorOff();
 
 	// 마우스 리소스 로딩
@@ -44,7 +43,7 @@ void UI_Mouse::Start()
 	// 충돌체 설정
 	MainCollision = CreateCollision(CollisionOrder::UI);
 	MainCollision->SetCollisionScale({ MOUSE_WITDH, MOUSE_HEIGHT });
-	MainCollision->SetCollisionType(CollisionType::Rect);
+	MainCollision->SetCollisionType(CollisionType::CirCle);
 
 }
 

@@ -45,8 +45,7 @@ void PlayLevel::Start()
 void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 {
 
-	CreateActor<UI_Mouse>();
-
+//	CreateActor<UI_Mouse>();
 
 	GroundPtr = CreateActor<Ground>();
 	GroundPtr->Init("TestGround.Bmp", "TestGroundPixel.bmp");
