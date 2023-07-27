@@ -30,6 +30,10 @@
     <ClInclude Include="MouseObject.h">
       <Filter>Player</Filter>
     </ClInclude>
+    <ClInclude Include="UI_Mouse.h" />
+    <ClInclude Include="Hole.h">
+      <Filter>Map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -63,6 +67,10 @@
     </ClCompile>
     <ClCompile Include="MouseObject.cpp">
       <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Mouse.cpp" />
+    <ClCompile Include="Hole.cpp">
+      <Filter>Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

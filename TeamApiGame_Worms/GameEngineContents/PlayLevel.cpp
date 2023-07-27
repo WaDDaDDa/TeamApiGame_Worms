@@ -21,6 +21,17 @@ PlayLevel::~PlayLevel()
 {
 }
 
+Ground* PlayLevel::GetGround() const
+{
+	if (nullptr == GroundPtr)
+	{
+		MsgBoxAssert("Ground가 설정되지 않은채로 사용되려했습니다.");
+		return nullptr;
+	}
+	
+	return GroundPtr;
+}
+
 void PlayLevel::Start()
 {
 	//
@@ -41,6 +52,8 @@ void PlayLevel::Start()
 
 	CreateActor<MouseObject>();
 }
+
+
 
 void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 {

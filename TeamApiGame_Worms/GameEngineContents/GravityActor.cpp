@@ -61,7 +61,7 @@ void GravityActor::GroundCheck(float _Delta)
 {
 	unsigned int Color = GetGroundColor(RGB(255, 255, 255));
 
-	// 위치가 흰색이면 중력작용.
+	// 위치가 흰색이면 중ㅓㅓㅓㅓ력작용.
 	// 모두 흰색이면 공중이다.
 	if (RGB(255, 255, 255) == Color)
 	{

@@ -1,8 +1,11 @@
 #include "Weapon.h"
+#include "Ground.h"
 #include "ContentsEnum.h"
 #include "Player.h"
+#include "PlayLevel.h"
 
 #include <GameEngineBase/GameEnginePath.h>
+#include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/ResourcesManager.h>
 #include <GameEngineCore/GameEngineRenderer.h>
 
@@ -46,6 +49,10 @@ void Weapon::Update(float _Delta)
 		if (Color != RGB(255, 255, 255))
 		{
 			Renderer->Off();
+			// 맵충돌 작업중
+			/*PlayLevel* CurPlayLevel=dynamic_cast<PlayLevel*>(GetLevel());
+			CurPlayLevel->GetGround()->ContactGround(GetPos());*/
+			
 		}
 	}
 }

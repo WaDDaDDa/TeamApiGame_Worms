@@ -2,8 +2,10 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
 
+class GameEngineWindowTexture;
 class Ground : public GameEngineActor
 {
+	friend class Hole;
 public:
 	Ground();
 	~Ground();
@@ -16,6 +18,13 @@ public:
 	void Init(const std::string& _FileName, const std::string& _DebugFileName);
 
 	void SwitchRender();
+
+	void ContactGround(float4 _Pos);
+	
+	GameEngineWindowTexture* GetGroundTexture()
+	{
+		//return Renderer.GetTexture();
+	}
 protected:
 
 private:

@@ -1,8 +1,12 @@
 #include "Ground.h"
+#include "Hole.h"
 #include "ContentsEnum.h"
+
 #include <GameEngineCore/ResourcesManager.h>
 #include <GameEngineCore/GameEngineRenderer.h>
+#include <GameEngineCore/GameEngineLevel.h>
 #include <GameEnginePlatform/GameEngineWindowTexture.h>
+#include <GameEnginePlatform/GameEngineInput.h>
 
 Ground::Ground()
 {
@@ -40,6 +44,27 @@ void Ground::Init(const std::string& _FileName, const std::string& _DebugFileNam
 
 void Ground::SwitchRender()
 {
+
+	SwitchRenderValue = !SwitchRenderValue;
+
+	if (SwitchRenderValue)
+	{
+		Renderer->On();
+		DebugRenderer->Off();
+	}
+	else {
+		Renderer->Off();
+		DebugRenderer->On();
+	}
+}
+
+void Ground::ContactGround(float4 _Pos)
+{
+	Hole* NewHole = GetLevel()->CreateActor<Hole>();
+	NewHole->SetPos(_Pos);
+	NewHole->AddHoleAtGround(Renderer, DebugRenderer);
+	
+	
 }
 
 void Ground::Start()

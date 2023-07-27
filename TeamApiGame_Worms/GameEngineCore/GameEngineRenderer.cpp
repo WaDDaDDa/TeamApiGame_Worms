@@ -419,3 +419,4 @@ float GameEngineRenderer::GetActorYPivot()
 
 	return ActorPos.Y + YPivot;
 }
+
