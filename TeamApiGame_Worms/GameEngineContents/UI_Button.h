@@ -41,6 +41,7 @@ protected:
 		return ButtonState;
 	}
 
+	void CheckButtonCollision();
 
 	GameEngineRenderer* MainRenderer = nullptr;
 	GameEngineCollision* MainCollision = nullptr;
@@ -51,7 +52,10 @@ private:
 	void StateUpdate();
 	void ChangeState(BUTTON_STATE _ButtonState);
 
-	void CheckButtonCollision();
+
+	void BUTTON_STATE_HOVERED_UPDATE();
+
+
 	void CheckButtonClick();
 
 	bool m_IsActive = true;

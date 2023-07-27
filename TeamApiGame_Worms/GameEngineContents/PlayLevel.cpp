@@ -5,7 +5,6 @@
 #include <GameEngineCore/GameEngineCore.h>
 #include <GameEngineCore/ResourcesManager.h>
 
-
 #include "Ground.h"
 #include "Player.h"
 #include "GameTurn.h"
@@ -58,7 +57,7 @@ void PlayLevel::Start()
 void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 {
 
-//	CreateActor<UI_Mouse>();
+	CreateActor<UI_Mouse>();
 
 	GroundPtr = CreateActor<Ground>();
 	GroundPtr->Init("TestGround.Bmp", "TestGroundPixel.bmp");
@@ -94,6 +93,7 @@ void PlayLevel::Update(float _Delta)
 {
 	if (true == GameEngineInput::IsDown('J'))
 	{
+		GameEngineLevel::CollisionDebugRenderSwitch();
 		GroundPtr->SwitchRender();
 	}
 }

@@ -20,5 +20,6 @@ enum class RenderOrder
 enum class CollisionOrder
 {
 	PlayerBody,
-	UI
+	UI,
+	Mouse,
 };
