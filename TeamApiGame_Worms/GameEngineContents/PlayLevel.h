@@ -23,6 +23,7 @@ protected:
 
 private:
 	Ground* GroundPtr=nullptr;
+	class BackGround* BackGroundPtr = nullptr;
 	void Start() override;
 	void Update(float _Delta) override;
 	void Release() override;

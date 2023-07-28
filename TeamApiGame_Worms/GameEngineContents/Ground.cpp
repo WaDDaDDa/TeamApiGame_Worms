@@ -39,7 +39,7 @@ void Ground::Init(const std::string& _FileName, const std::string& _DebugFileNam
 	DebugRenderer->SetRenderScale(Scale);
 	SetPos({ Scale.hX(), Scale.hY() });
 
-
+	SetOrder(RenderOrder::Ground);
 }
 
 void Ground::SwitchRender()
@@ -69,9 +69,9 @@ void Ground::ContactGround(float4 _Pos)
 
 void Ground::Start()
 {
-	Renderer = CreateRenderer(GetOrder());
+	Renderer = CreateRenderer(RenderOrder::Ground);
 
-	DebugRenderer = CreateRenderer(RenderOrder::BackGround);
+	DebugRenderer = CreateRenderer(RenderOrder::Ground);
 
 	Renderer->On();
 	DebugRenderer->Off();

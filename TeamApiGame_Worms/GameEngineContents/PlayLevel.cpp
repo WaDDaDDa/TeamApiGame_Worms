@@ -1,10 +1,12 @@
 #include "PlayLevel.h"
 
+
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEnginePlatform/GameEngineWindow.h>
 #include <GameEngineCore/GameEngineCore.h>
 #include <GameEngineCore/ResourcesManager.h>
 
+#include "BackGround.h"
 #include "Ground.h"
 #include "Player.h"
 #include "GameTurn.h"
@@ -59,8 +61,14 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 
 	CreateActor<UI_Mouse>();
 
-	GroundPtr = CreateActor<Ground>();
-	GroundPtr->Init("TestGround.Bmp", "TestGroundPixel.bmp");
+	{
+		BackGroundPtr = CreateActor<BackGround>();
+		BackGroundPtr->Init("Back.bmp");
+
+		GroundPtr = CreateActor<Ground>();
+		GroundPtr->Init("TestGround.Bmp", "TestGroundPixel.bmp");
+	}
+
 
 	{
 		Player* TestPlayer = CreateActor<Player>();
