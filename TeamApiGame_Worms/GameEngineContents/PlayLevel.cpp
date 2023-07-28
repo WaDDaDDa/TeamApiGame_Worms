@@ -64,7 +64,7 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 #pragma region UI 세팅
 	CreateActor<UI_Mouse>();
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
 	//// UI 세팅 테스트
 	//UI_Button* Btn_StartGame = CreateActor<UI_Button>();
 	//Btn_StartGame->InitButtonData("UI_Button_StartGame", float4{ UI_BUTTON_START_WITDH, UI_BUTTON_START_HEIGHT });
@@ -72,9 +72,7 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 	//Btn_StartGame->SetClickedCallBack(ChangeLevel, 0, 0);
 #pragma endregion
 
-	GroundPtr = CreateActor<Ground>();
-	GroundPtr->Init("TestGround.Bmp", "TestGroundPixel.bmp");
-=======
+
 	{
 		BackGroundPtr = CreateActor<BackGround>();
 		BackGroundPtr->Init("Back.bmp");
@@ -83,7 +81,7 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 		GroundPtr->Init("TestGround.Bmp", "TestGroundPixel.bmp");
 	}
 
->>>>>>> 5c6b0c500c11efe47febb913f8460cc034f58ad8
+
 
 	{
 		Player* TestPlayer = CreateActor<Player>();
