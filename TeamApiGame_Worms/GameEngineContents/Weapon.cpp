@@ -48,11 +48,15 @@ void Weapon::Update(float _Delta)
 		unsigned int Color = GetGroundColor(RGB(255, 255, 255));
 		if (Color != RGB(255, 255, 255))
 		{
-			Renderer->Off();
+			
 			
 			// PlayLevel에서 만 존재하는 것에만 사용할수 있는예제코드
+			{
 			PlayLevel* CurPlayLevel=dynamic_cast<PlayLevel*>(GetLevel());
 			CurPlayLevel->GetGround()->ContactGround(GetPos());
+
+			Off();
+			}
 			
 		}
 	}

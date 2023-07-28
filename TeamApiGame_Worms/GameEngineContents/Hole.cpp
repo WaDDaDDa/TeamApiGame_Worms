@@ -19,18 +19,28 @@ void Hole::AddHoleAtGround(GameEngineRenderer* _GroundTexture, GameEngineRendere
 		MsgBoxAssert("Hole의 텍스쳐가 nullptr입니다");
 	}
 
+	if (Scale == float4::ZERO)
+	{
+		MsgBoxAssert("Hole의 Scale이 정해지지 않았습니다.")
+	}
+
 	GameEngineWindowTexture* GroundTexture = _GroundTexture->GetTexture();
 	GameEngineWindowTexture* GroundPixelTexture = _GroundPixelTexture->GetTexture();
 
 	float4 TexturePos = GetPos();
 	float4 TextureScale =Texture->GetScale();
 	
-	 GroundTexture->TransCopy(Texture, TexturePos, TextureScale, float4::ZERO, TextureScale, RGB(255, 255, 255));
-	GroundPixelTexture->TransCopy(Texture, TexturePos, TextureScale, float4::ZERO, TextureScale, RGB(255, 255, 255));
+	 GroundTexture->TransCopy(Texture, TexturePos, {128.0f,128.0f}, float4::ZERO, TextureScale);
+	GroundPixelTexture->TransCopy(Texture, TexturePos, { 128.0f,128.0f }, float4::ZERO, TextureScale);
 
 
 
 	Off();
+}
+
+void Hole::SetScale()
+{
+ //Scale= ; 
 }
 
 void Hole::Start()
@@ -51,6 +61,8 @@ void Hole::Start()
 	}
 
 	Texture = ResourcesManager::GetInst().FindTexture("MagentaHole.Bmp");
+
+	Scale = float4{ 128.0f,128.0f };
 
 }
 

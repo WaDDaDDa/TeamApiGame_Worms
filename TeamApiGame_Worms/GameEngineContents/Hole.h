@@ -14,12 +14,15 @@ public:
 	Hole& operator=(const Hole&& _Other) noexcept = delete;
 
 	void AddHoleAtGround(class GameEngineRenderer* _GroundTexture, GameEngineRenderer* _GroundPixelTexture);
+
+	void SetScale();
+		
 protected:
 
 private:
 	class GameEngineWindowTexture* Texture = nullptr;
 
-
+	float4 Scale=float4::ZERO;
 
 	void Start();
 
