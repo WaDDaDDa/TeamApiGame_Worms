@@ -9,6 +9,7 @@ enum class UpdateOrder
 enum class RenderOrder
 {
 	BackGround,
+	BackGroundEffect,
 	Ground,
 	Player,
 	Weapon,
