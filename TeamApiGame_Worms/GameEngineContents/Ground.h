@@ -3,6 +3,7 @@
 #include <GameEngineCore/GameEngineActor.h>
 
 class GameEngineWindowTexture;
+class GameEngineRenderer;
 class Ground : public GameEngineActor
 {
 	friend class Hole;
@@ -21,18 +22,16 @@ public:
 
 	void ContactGround(float4 _Pos);
 	
-	GameEngineWindowTexture* GetGroundTexture()
-	{
-		//return Renderer.GetTexture();
-	}
+	GameEngineWindowTexture* GetGroundTexture();
+	
 protected:
 
 private:
 	
 	bool SwitchRenderValue = true;
 	std::string FileName;
-	class GameEngineRenderer* Renderer;
-	class GameEngineRenderer* DebugRenderer;
+	 GameEngineRenderer* Renderer;
+	 GameEngineRenderer* DebugRenderer;
 
 	void Start() override;
 	void Update(float _Delta) override;

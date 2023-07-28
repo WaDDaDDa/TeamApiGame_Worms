@@ -74,11 +74,13 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 
 
 	{
-		BackGroundPtr = CreateActor<BackGround>();
-		BackGroundPtr->Init("Back.bmp");
 
 		GroundPtr = CreateActor<Ground>();
 		GroundPtr->Init("TestGround.Bmp", "TestGroundPixel.bmp");
+
+		BackGroundPtr = CreateActor<BackGround>();
+		BackGroundPtr->Init("Back.bmp");
+		
 	}
 
 

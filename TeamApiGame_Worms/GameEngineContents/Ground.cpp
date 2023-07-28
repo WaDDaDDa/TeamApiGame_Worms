@@ -67,6 +67,12 @@ void Ground::ContactGround(float4 _Pos)
 	
 }
 
+GameEngineWindowTexture* Ground::GetGroundTexture()
+{
+	return Renderer->GetTexture();
+}
+
+
 void Ground::Start()
 {
 	Renderer = CreateRenderer(RenderOrder::Ground);

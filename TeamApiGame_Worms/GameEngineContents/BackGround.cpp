@@ -12,6 +12,8 @@ BackGround::~BackGround()
 {
 }
 
+
+
 void BackGround::Start()
 {
 	Renderer = CreateRenderer(RenderOrder::BackGround);
@@ -27,11 +29,11 @@ void BackGround::Release()
 {
 }
 
-void BackGround::Init(const std::string& _FileName)
+void BackGround::Init(const std::string& _FileName,const float4 _Scale)
 {
 	
 
-	if (false == ResourcesManager::GetInst().IsLoadTexture("Back.bmp"))
+	if (false == ResourcesManager::GetInst().IsLoadTexture(_FileName))
 	{
 		GameEnginePath FilePath;
 		FilePath.SetCurrentPath();
@@ -42,11 +44,19 @@ void BackGround::Init(const std::string& _FileName)
 	}
 
 	GameEngineWindowTexture* Texture = ResourcesManager::GetInst().FindTexture(_FileName);
-	float4 Scale = Texture->GetScale();
+	
 	Renderer->SetTexture(_FileName);
-	Renderer->SetRenderScale(Scale);
+	Renderer->SetRenderScale(_Scale);
 	
-	SetPos({ Scale.hX(), Scale.hY() });
+	SetPos({ _Scale.hX(), _Scale.hY() });
 	
+}
+
+void BackGround::Init(const std::string& _FileName)
+{
+	float4 Scale = GameEngineWindow::MainWindow.GetScale();
+
+	Init(_FileName, Scale);
+
 }
 

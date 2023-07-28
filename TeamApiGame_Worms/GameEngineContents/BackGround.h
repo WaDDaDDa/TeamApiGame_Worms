@@ -3,6 +3,7 @@
 #include <GameEngineCore/GameEngineActor.h>
 #include <string>
 
+
 class BackGround : public GameEngineActor
 {
 public:
@@ -15,8 +16,9 @@ public:
 	BackGround& operator=(const BackGround&& _Other) noexcept = delete;
 
 
-
 	void Init(const std::string& _FileName);
+	void Init(const std::string& _FileName,const float4 _Scale);
+
 
 	
 
