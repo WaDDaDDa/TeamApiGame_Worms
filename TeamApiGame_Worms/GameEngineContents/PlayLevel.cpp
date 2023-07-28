@@ -1,10 +1,12 @@
 #include "PlayLevel.h"
 
+
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEnginePlatform/GameEngineWindow.h>
 #include <GameEngineCore/GameEngineCore.h>
 #include <GameEngineCore/ResourcesManager.h>
 
+#include "BackGround.h"
 #include "Ground.h"
 #include "Player.h"
 #include "GameTurn.h"
@@ -62,6 +64,7 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 #pragma region UI 세팅
 	CreateActor<UI_Mouse>();
 
+<<<<<<< HEAD
 	//// UI 세팅 테스트
 	//UI_Button* Btn_StartGame = CreateActor<UI_Button>();
 	//Btn_StartGame->InitButtonData("UI_Button_StartGame", float4{ UI_BUTTON_START_WITDH, UI_BUTTON_START_HEIGHT });
@@ -71,6 +74,16 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 
 	GroundPtr = CreateActor<Ground>();
 	GroundPtr->Init("TestGround.Bmp", "TestGroundPixel.bmp");
+=======
+	{
+		BackGroundPtr = CreateActor<BackGround>();
+		BackGroundPtr->Init("Back.bmp");
+
+		GroundPtr = CreateActor<Ground>();
+		GroundPtr->Init("TestGround.Bmp", "TestGroundPixel.bmp");
+	}
+
+>>>>>>> 5c6b0c500c11efe47febb913f8460cc034f58ad8
 
 	{
 		Player* TestPlayer = CreateActor<Player>();

@@ -2,6 +2,7 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
 
+class GameEngineWindowTexture;
 class Hole : public GameEngineActor
 {
 public:
@@ -20,7 +21,10 @@ public:
 protected:
 
 private:
-	class GameEngineWindowTexture* Texture = nullptr;
+	 GameEngineWindowTexture* Texture = nullptr;
+	 GameEngineWindowTexture* PixelTexture = nullptr;
+
+
 
 	float4 Scale=float4::ZERO;
 

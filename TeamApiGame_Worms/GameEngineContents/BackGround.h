@@ -16,7 +16,7 @@ public:
 
 
 
-	void Init(const std::string& _FileName, const std::string& _DebugFileName);
+	void Init(const std::string& _FileName);
 
 	
 
@@ -24,9 +24,9 @@ protected:
 
 private:
 
-	bool SwitchRenderValue = true;
-	std::string FileName;
-	class GameEngineRenderer* Renderer;
+	
+	
+	class GameEngineRenderer* Renderer=nullptr;
 	
 
 	void Start() override;
