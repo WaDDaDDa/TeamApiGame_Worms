@@ -1,9 +1,12 @@
 #include "UI_Button.h"
 #include <GameEnginePlatform/GameEngineInput.h>
+
 #include "ContentsEnum.h"
+
 #include <GameEngineCore/GameEngineCollision.h>
 #include <GameEngineCore/ResourcesManager.h>
 #include <GameEngineCore/GameEngineRenderer.h>
+
 
 UI_Button::UI_Button()
 {
@@ -71,11 +74,14 @@ void UI_Button::StateUpdate()
 	switch (ButtonState)
 	{
 	case BUTTON_STATE::BUTTON_STATE_HOVERED:
-		BUTTON_STATE_HOVERED_UPDATE();
-		//CheckButtonClick();
+		CheckButtonClick();
 		break;
 
 	case BUTTON_STATE::BUTTON_STATE_UNHOVERED:
+		break;
+
+	case BUTTON_STATE::BUTTON_STATE_CLICKED:
+		ClickedMouseButtonDown();
 		break;
 
 	default:
@@ -86,11 +92,6 @@ void UI_Button::StateUpdate()
 void UI_Button::ChangeState(BUTTON_STATE _ButtonState)
 {
 	ButtonState = _ButtonState;
-}
-
-void UI_Button::BUTTON_STATE_HOVERED_UPDATE()
-{
-	CheckButtonClick();
 }
 
 void UI_Button::CheckButtonCollision()
@@ -113,10 +114,7 @@ void UI_Button::CheckButtonCollision()
 
 			, [](GameEngineCollision* _this, GameEngineCollision* _Other)
 			{
-				GameEngineActor* thisActor = _this->GetActor();
-				UI_Button* ButtonPtr = dynamic_cast<UI_Button*>(thisActor);
 
-				ButtonPtr->ChangeState(BUTTON_STATE::BUTTON_STATE_HOVERED);
 			}
 
 			, [](GameEngineCollision* _this, GameEngineCollision* _Other)
@@ -128,6 +126,14 @@ void UI_Button::CheckButtonCollision()
 			}
 			);
 
+	}
+}
+
+void UI_Button::ClickedMouseButtonDown()
+{
+	if (nullptr != m_pFunc)
+	{
+		m_pFunc(m_param1, m_param2);
 	}
 }
 

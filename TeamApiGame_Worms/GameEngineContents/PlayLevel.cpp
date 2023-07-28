@@ -10,7 +10,13 @@
 #include "GameTurn.h"
 #include "MouseObject.h"
 
+#pragma region UI에서 사용할 헤더 & 함수 전방 선언
 #include "UI_Mouse.h"
+#include "UI_Button.h"
+#include "ContentsDefine.h"
+
+void ChangeLevel(DWORD_PTR, DWORD_PTR);
+#pragma endregion
 
 PlayLevel::PlayLevel()
 {
@@ -33,7 +39,6 @@ Ground* PlayLevel::GetGround() const
 
 void PlayLevel::Start()
 {
-	//
 	if (false == ResourcesManager::GetInst().IsLoadTexture("TestGround.Bmp"))
 	{
 		GameEnginePath FilePath;
@@ -47,8 +52,6 @@ void PlayLevel::Start()
 		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("TestGroundPixel.bmp"));
 	}
 
-	GameEngineWindow::MainWindow.CursorOff();
-
 	CreateActor<MouseObject>();
 }
 
@@ -56,8 +59,15 @@ void PlayLevel::Start()
 
 void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 {
-
+#pragma region UI 세팅
 	CreateActor<UI_Mouse>();
+
+	//// UI 세팅 테스트
+	//UI_Button* Btn_StartGame = CreateActor<UI_Button>();
+	//Btn_StartGame->InitButtonData("UI_Button_StartGame", float4{ UI_BUTTON_START_WITDH, UI_BUTTON_START_HEIGHT });
+	//Btn_StartGame->SetPos({ 400, 1000 });
+	//Btn_StartGame->SetClickedCallBack(ChangeLevel, 0, 0);
+#pragma endregion
 
 	GroundPtr = CreateActor<Ground>();
 	GroundPtr->Init("TestGround.Bmp", "TestGroundPixel.bmp");
@@ -107,3 +117,13 @@ void PlayLevel::LevelEnd(GameEngineLevel* _NextLevel)
 {
 
 }
+
+
+#pragma region UI 함수 포인터 등록용 함수
+
+void ChangeLevel(DWORD_PTR, DWORD_PTR)
+{
+	GameEngineCore::ChangeLevel("TitleLevel");
+}
+
+#pragma endregion
