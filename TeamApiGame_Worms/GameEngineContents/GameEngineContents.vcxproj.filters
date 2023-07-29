@@ -45,6 +45,12 @@
     <ClInclude Include="ContentsDefine.h">
       <Filter>Global</Filter>
     </ClInclude>
+    <ClInclude Include="UI_IntroLogo.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_FadeObject.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -90,6 +96,12 @@
     </ClCompile>
     <ClCompile Include="Hole.cpp">
       <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_IntroLogo.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_FadeObject.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
