@@ -181,3 +181,78 @@ void Player::SetDirPosNormalize()
 	float4 PlayerMouseDir = MousePos - PlayerPos;
 	DirPos = PlayerMouseDir.NormalizeReturn();
 }
+
+void Player::Movement(float _Delta)
+{
+	DirCheck();
+
+	float4 MovePos1 = float4::ZERO;
+
+	if (true == GameEngineInput::IsPress(VK_LEFT) && Dir == PlayerDir::Left)
+	{
+		if (true != IsTurnPlayer)
+		{
+			return;
+		}
+
+		CheckPos = LeftCheckPos;
+		MovePos1 = { -PlayerSpeed * _Delta, 0.0f };
+	}
+	else if (true == GameEngineInput::IsPress(VK_RIGHT) && Dir == PlayerDir::Right)
+	{
+		if (true != IsTurnPlayer)
+		{
+			return;
+		}
+
+		CheckPos = RightCheckPos;
+		MovePos1 = { PlayerSpeed * _Delta, 0.0f };
+	}
+
+	{
+		unsigned int Color = GetGroundColor(RGB(255, 255, 255), CheckPos);
+
+		if (Color == RGB(255, 255, 255))
+		{
+			// MovePos를 바꿔버리는 방법이 있을것이고.
+
+			if (RGB(255, 255, 255) == GetGroundColor(RGB(255, 255, 255), MovePos1))
+			{
+				float4 XPos = float4::ZERO;
+				float4 Dir = MovePos1.X <= 0.0f ? float4::RIGHT : float4::LEFT;
+
+				while (RGB(0, 255, 0) != GetGroundColor(RGB(255, 255, 255), MovePos1 + XPos))
+				{
+					XPos += Dir;
+
+					if (abs(XPos.X) > 50.0f)
+					{
+						break;
+					}
+				}
+
+				float4 YPos = float4::ZERO;
+				while (RGB(0, 255, 0) != GetGroundColor(RGB(255, 255, 255), MovePos1 + YPos))
+				{
+					YPos.Y += 1;
+
+					if (YPos.Y > 60.0f)
+					{
+						break;
+					}
+				}
+
+				if (abs(XPos.X) >= YPos.Y)
+				{
+					while (RGB(0, 255, 0) != GetGroundColor(RGB(255, 255, 255), MovePos1))
+					{
+						MovePos1.Y += 1;
+					}
+				}
+
+			}
+
+			AddPos(MovePos1);
+		}
+	}
+}

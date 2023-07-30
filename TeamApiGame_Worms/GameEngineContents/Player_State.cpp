@@ -48,34 +48,21 @@ void Player::MoveUpdate(float _Delta)
 
 	GroundCheck(_Delta);
 
-	float4 MovePos = float4::ZERO;
+	Movement(_Delta);
 
-	if (true == GameEngineInput::IsPress(VK_LEFT) && Dir == PlayerDir::Left)
-	{
-		if (true != IsTurnPlayer)
-		{
-			return;
-		}
-
-		MovePos = { -PlayerSpeed * _Delta, 0.0f };
-	}
-	else if (true == GameEngineInput::IsPress(VK_RIGHT) && Dir == PlayerDir::Right)
-	{
-		if (true != IsTurnPlayer)
-		{
-			return;
-		}
-
-		MovePos = { PlayerSpeed * _Delta, 0.0f };
-	}
 	
-	if (MovePos == float4::ZERO)
+	if (true == GameEngineInput::IsFree(VK_LEFT) && true == GameEngineInput::IsFree(VK_RIGHT))
 	{
 		ChangeState(PlayerState::Idle);
+	}
+	unsigned int Color = GetGroundColor(RGB(255, 255, 255), float4::DOWN);
+
+	if ((RGB(255, 255, 255) == Color))
+	{
+		//ChangeState(KirbyState::Falling);
 		return;
 	}
 
-	AddPos(MovePos);
 }
 
 void Player::FireStart()
