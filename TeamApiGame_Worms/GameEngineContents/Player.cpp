@@ -107,6 +107,12 @@ void Player::ChangeState(PlayerState _State)
 		case PlayerState::Fire:
 			FireStart();
 			break;
+		case PlayerState::Jump:
+			JumpStart();
+			break;
+		case PlayerState::Falling:
+			FallingStart();
+			break;
 		default:
 			break;
 		}
@@ -123,6 +129,10 @@ void Player::StateUpdate(float _Delta)
 		return MoveUpdate(_Delta);
 	case PlayerState::Fire:
 		return FireUpdate(_Delta);
+	case PlayerState::Jump:
+		return JumpUpdate(_Delta);
+	case PlayerState::Falling:
+		return FallingUpdate(_Delta);
 	default:
 		break;
 	}
@@ -219,8 +229,6 @@ void Player::Movement(float _Delta)
 
 		if (Color == RGB(255, 255, 255))
 		{
-			// MovePos를 바꿔버리는 방법이 있을것이고.
-
 			if (RGB(255, 255, 255) == GetGroundColor(RGB(255, 255, 255), MovePos1))
 			{
 				float4 XPos = float4::ZERO;

@@ -7,6 +7,8 @@ enum class PlayerState
 	Idle,
 	Move,
 	Fire,
+	Jump,
+	Falling,
 	Max
 };
 
@@ -70,12 +72,19 @@ protected:
 	void FireStart();
 	void FireUpdate(float _Delta);
 
+	void JumpStart();
+	void JumpUpdate(float _Delta);
+
+	void FallingStart();
+	void FallingUpdate(float _Delta);
+
 	void SetDirPosNormalize();
 
 private:
 	// PlayerStatus ฐüทร
 	int Hp = 100;
-	float PlayerSpeed = 100.0f;
+	float PlayerSpeed = 200.0f;
+	float PlayerJumpPower = 400.0f;
 	
 	
 
