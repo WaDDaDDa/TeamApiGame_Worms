@@ -11,16 +11,26 @@ void Player::IdleUpdate(float _Delta)
 {
 	GroundCheck(_Delta);
 
-	if (true == GameEngineInput::IsPress(VK_LEFT) && true == IsTurnPlayer
-		|| true == GameEngineInput::IsPress(VK_RIGHT) && true == IsTurnPlayer)
+	if (true == GameEngineInput::IsPress(VK_LEFT)
+		|| true == GameEngineInput::IsPress(VK_RIGHT))
 	{
+		if (true != IsTurnPlayer)
+		{
+			return;
+		}
+
 		DirCheck();
 		ChangeState(PlayerState::Move);
 		return;
 	}
 
-	if (true == GameEngineInput::IsDown('A') && true == IsTurnPlayer)
+	if (true == GameEngineInput::IsDown('A'))
 	{
+		if (true != IsTurnPlayer)
+		{
+			return;
+		}
+
 		ChangeState(PlayerState::Fire);
 		return;
 	}
@@ -42,10 +52,20 @@ void Player::MoveUpdate(float _Delta)
 
 	if (true == GameEngineInput::IsPress(VK_LEFT) && Dir == PlayerDir::Left)
 	{
+		if (true != IsTurnPlayer)
+		{
+			return;
+		}
+
 		MovePos = { -PlayerSpeed * _Delta, 0.0f };
 	}
 	else if (true == GameEngineInput::IsPress(VK_RIGHT) && Dir == PlayerDir::Right)
 	{
+		if (true != IsTurnPlayer)
+		{
+			return;
+		}
+
 		MovePos = { PlayerSpeed * _Delta, 0.0f };
 	}
 	
