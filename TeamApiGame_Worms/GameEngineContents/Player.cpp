@@ -153,6 +153,11 @@ void Player::ChangeAnimationState(const std::string& _State)
 
 void Player::DirCheck()
 {
+	if (true != IsTurnPlayer)
+	{
+		return;
+	}
+
 	if (true == GameEngineInput::IsFree(VK_LEFT) && true == GameEngineInput::IsFree(VK_RIGHT))
 	{
 		return;

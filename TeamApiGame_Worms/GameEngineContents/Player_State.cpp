@@ -50,16 +50,16 @@ void Player::MoveUpdate(float _Delta)
 
 	Movement(_Delta);
 
-	
 	if (true == GameEngineInput::IsFree(VK_LEFT) && true == GameEngineInput::IsFree(VK_RIGHT))
 	{
 		ChangeState(PlayerState::Idle);
 	}
+
 	unsigned int Color = GetGroundColor(RGB(255, 255, 255), float4::DOWN);
 
 	if ((RGB(255, 255, 255) == Color))
 	{
-		//ChangeState(KirbyState::Falling);
+		//ChangeState(PlayerState::Falling);
 		return;
 	}
 
