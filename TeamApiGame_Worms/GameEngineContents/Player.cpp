@@ -197,7 +197,6 @@ void Player::Start()
 		//Collision
 	}
 
-	
 	Dir = PlayerDir::Right;
 	ChangeState(PlayerState::Idle);
 }

@@ -25,8 +25,11 @@ private:
 
     void ChangeTurnPlayer();
 
-    void CameraFocus();
+    void CameraFocus(float _Delta);
 
+    // 턴플레이어 넘버
     int StartValue = 0;
+    // 턴플레이어 제한시간.
+    float TurnPlayTime = 10.0f;
 };
 

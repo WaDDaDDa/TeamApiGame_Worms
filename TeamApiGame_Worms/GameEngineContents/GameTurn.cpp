@@ -23,7 +23,12 @@ void GameTurn::Start()
 
 void GameTurn::Update(float _Delta)
 {
-	CameraFocus();
+	CameraFocus(_Delta);
+
+	if (TurnPlayTime <= GetLiveTime())
+	{
+		ChangeTurnPlayer();
+	}
 
 	if (true == GameEngineInput::IsDown('Q'))
 	{
@@ -43,12 +48,17 @@ void GameTurn::Render(float _Delta)
 	Text += std::to_string(GetLevel()->GetMainCamera()->GetPos().X);
 	Text += ", ";
 	Text += std::to_string(GetLevel()->GetMainCamera()->GetPos().Y);
+	Text += "  턴 시간 :";
+	Text += std::to_string(GetLiveTime());
+	Text += "  턴 플레이어 번호 :";
+	Text += std::to_string(StartValue);
 
 	TextOutA(dc, 2, 3, Text.c_str(), static_cast<int>(Text.size()));
 }
 
 void GameTurn::ChangeTurnPlayer()
 {
+	ResetLiveTime();
 	//원래 플레이어bool값 false로 변경
 	TurnPlayer->SwitchIsTurnPlayer();
 
@@ -63,8 +73,39 @@ void GameTurn::ChangeTurnPlayer()
 	TurnPlayer->SwitchIsTurnPlayer();
 }
 
-void GameTurn::CameraFocus()
+//void GameTurn::CameraFocus()
+//{
+//	float4 WindowScale = GameEngineWindow::MainWindow.GetScale();
+//	GetLevel()->GetMainCamera()->SetPos(TurnPlayer->GetPos() + float4{ -WindowScale.hX(), -WindowScale.hY() });
+//}
+
+
+void GameTurn::CameraFocus(float _Delta)
 {
 	float4 WindowScale = GameEngineWindow::MainWindow.GetScale();
+
+	int CameraRangeX = GetLevel()->GetMainCamera()->GetPos().iX();
+	int CameraRangeY = GetLevel()->GetMainCamera()->GetPos().iY();
+
+	float ImageX = TurnPlayer->GetGroundTexture()->GetScale().X - 1280.0f;
+	float ImageY = TurnPlayer->GetGroundTexture()->GetScale().Y - 720.0f;
+
 	GetLevel()->GetMainCamera()->SetPos(TurnPlayer->GetPos() + float4{ -WindowScale.hX(), -WindowScale.hY() });
+
+
+	// 카메라가 맵의 왼쪽으로 못나가게.
+	if (0 >= GetLevel()->GetMainCamera()->GetPos().X)
+	{
+		GetLevel()->GetMainCamera()->SetPos({ 0.0f, GetLevel()->GetMainCamera()->GetPos().Y });
+	}
+	// 카메라가 맵의 오른쪽 최대치를 못나가게.
+	if (ImageX <= GetLevel()->GetMainCamera()->GetPos().X)
+	{
+		GetLevel()->GetMainCamera()->SetPos({ ImageX, GetLevel()->GetMainCamera()->GetPos().Y });
+	}
+
+	if (ImageY <= GetLevel()->GetMainCamera()->GetPos().Y)
+	{
+		GetLevel()->GetMainCamera()->SetPos({ GetLevel()->GetMainCamera()->GetPos().X, ImageY });
+	}
 }
