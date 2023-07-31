@@ -35,7 +35,7 @@ void Hole::AddHoleAtGround(GameEngineRenderer* _GroundTexture, GameEngineRendere
 
 
 
-	Off();
+	Death();
 }
 
 void Hole::SetScale()
