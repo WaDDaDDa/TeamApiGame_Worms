@@ -76,10 +76,6 @@ private:
 	void StateUpdate();
 	void ChangeState(BUTTON_STATE _ButtonState);
 
-
-	void BUTTON_STATE_HOVERED_UPDATE();
-
-
 	void ClickedMouseButtonDown();
 	void CheckButtonClick();
 

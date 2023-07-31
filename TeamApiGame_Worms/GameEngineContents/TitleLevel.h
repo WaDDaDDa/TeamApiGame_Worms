@@ -12,11 +12,9 @@ private:
 	};
 
 public:
-	// constrcuter destructer
 	TitleLevel();
 	~TitleLevel();
 
-	// delete Function
 	TitleLevel(const TitleLevel& _Other) = delete;
 	TitleLevel(TitleLevel&& _Other) noexcept = delete;
 	TitleLevel& operator=(const TitleLevel& _Other) = delete;
@@ -27,6 +25,17 @@ protected:
 	void Update(float _DeltaTime) override;
 
 private:
+	TITLE_STATE TitleState;
+
+	void StateUpdate(float _Delta);
+	void ChangeState(TITLE_STATE _TitleState);
+
+	void Title_Intro_Start();
+	void Title_ShowTitle_Start();
+	void Title_Main_Start();
+
+	void Title_Intro_Update(float _Delta);
+	void Title_ShowTitle_Update(float _Delta);
+	void Title_Main_Update(float _Delta);
 
 };
-
