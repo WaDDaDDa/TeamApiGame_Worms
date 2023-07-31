@@ -22,8 +22,12 @@ void TitleLevel::Start()
 	UI_IntroLogo* IntroLogo = CreateActor<UI_IntroLogo>();
 	IntroLogo->SetPos(GameEngineWindow::MainWindow.GetScale().Half());
 
-	UI_FadeObject* Fade = CreateActor<UI_FadeObject>();
-	Fade->SetPos({ 0, 0 });
+	//UI_FadeObject* FadeOut = CreateActor<UI_FadeObject>();
+	//FadeOut->SetFadeOutMode();
+
+	//UI_FadeObject* FadeIn = CreateActor<UI_FadeObject>();
+	//FadeIn->SetFadeInMode();
+	//
 
 }
 

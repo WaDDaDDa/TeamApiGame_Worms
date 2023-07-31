@@ -33,7 +33,6 @@ void UI_FadeObject::Start()
 	MainRenderer->SetRenderScale(GameEngineWindow::MainWindow.GetScale());
 	MainRenderer->Off();
 	
-	ChangeState(FADE_STATE::FADE_STATE_IN);
 }
 
 void UI_FadeObject::Update(float _Delta)
@@ -45,14 +44,12 @@ void UI_FadeObject::StateUpdate(float _Delta)
 {
 	switch (FadeState)
 	{
-	case FADE_STATE::FADE_STATE_IN:
-//		m_fCurrentAlpha = 255.0f;
-		SetFadeIn(_Delta);
+	case FADE_STATE::FADE_STATE_IN:	
+		FadeIn(_Delta);
 		break;
 
-	case FADE_STATE::FADE_STATE_OUT:
-//		m_fCurrentAlpha = 0.0f;
-		SetFadeOut(_Delta);
+	case FADE_STATE::FADE_STATE_OUT:	
+		FadeOut(_Delta);
 		break;
 
 	default:
@@ -65,7 +62,19 @@ void UI_FadeObject::ChangeState(FADE_STATE _FadeState)
 	FadeState = _FadeState;
 }
 
-void UI_FadeObject::SetFadeIn(float _Delta)
+void UI_FadeObject::SetFadeOutMode()
+{
+	m_fCurrentAlpha = 0.0f;
+	ChangeState(FADE_STATE::FADE_STATE_OUT);
+}
+
+void UI_FadeObject::SetFadeInMode()
+{
+	m_fCurrentAlpha = 255.0f;
+	ChangeState(FADE_STATE::FADE_STATE_IN);
+}
+
+void UI_FadeObject::FadeIn(float _Delta)
 {
 	MainRenderer->On();
 
@@ -79,12 +88,12 @@ void UI_FadeObject::SetFadeIn(float _Delta)
 	MainRenderer->SetAlpha(static_cast<unsigned char>(m_fCurrentAlpha));
 }
 
-void UI_FadeObject::SetFadeOut(float _Delta)
+void UI_FadeObject::FadeOut(float _Delta)
 {
 	MainRenderer->On();
 
 	m_fCurrentAlpha += _Delta * 100;
-	if (0.0f <= m_fCurrentAlpha)
+	if (255.0f <= m_fCurrentAlpha)
 	{
 		Death();
 		return;

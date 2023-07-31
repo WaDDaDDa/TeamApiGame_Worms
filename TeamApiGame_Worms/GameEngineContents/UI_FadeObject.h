@@ -29,8 +29,11 @@ public:
 	FADE_STATE FadeState;
 
 
-	void SetFadeIn(float _Delta);
-	void SetFadeOut(float _Delta);
+	void SetFadeOutMode();
+	void SetFadeInMode();
+
+	void FadeIn(float _Delta);
+	void FadeOut(float _Delta);
 
 private:
 	void Start() override;
@@ -40,6 +43,6 @@ private:
 
 	GameEngineRenderer* MainRenderer = nullptr;
 
-	float m_fCurrentAlpha = 255.0f;
+	float m_fCurrentAlpha = 0.0f;
 };
 
