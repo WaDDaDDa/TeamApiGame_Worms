@@ -48,10 +48,14 @@ void GameTurn::Render(float _Delta)
 	Text += std::to_string(GetLevel()->GetMainCamera()->GetPos().X);
 	Text += ", ";
 	Text += std::to_string(GetLevel()->GetMainCamera()->GetPos().Y);
-	Text += "  턴 시간 :";
-	Text += std::to_string(GetLiveTime());
+
 	Text += "  턴 플레이어 번호 :";
 	Text += std::to_string(StartValue);
+	Text += "  턴 플레이어 체력 :";
+	Text += std::to_string(TurnPlayer->GetHp());
+
+	Text += "  턴 시간 :";
+	Text += std::to_string(GetLiveTime());
 
 	TextOutA(dc, 2, 3, Text.c_str(), static_cast<int>(Text.size()));
 }
