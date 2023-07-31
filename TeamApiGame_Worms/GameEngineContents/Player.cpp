@@ -197,6 +197,8 @@ void Player::Start()
 		//Collision
 	}
 
+	MainRenderer->SetRenderPos({ 0, -15 });
+
 	Dir = PlayerDir::Right;
 	ChangeState(PlayerState::Idle);
 }
@@ -215,7 +217,15 @@ void Player::Update(float _Delta)
 
 void Player::Render(float _Delta)
 {
+	HDC dc = GameEngineWindow::MainWindow.GetBackBuffer()->GetImageDC();
 
+	CollisionData Data;
+
+	Data.Pos = ActorCameraPos();
+
+	Data.Scale = { 5,5 };
+
+	Rectangle(dc, Data.iLeft(), Data.iTop(), Data.iRight(), Data.iBot());
 }
 
 void Player::ChangeState(PlayerState _State)
