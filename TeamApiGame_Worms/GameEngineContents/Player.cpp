@@ -27,43 +27,170 @@ Player::~Player()
 void Player::Start()
 {
 	// Resource 추가
-	bool IsResource = ResourcesManager::GetInst().IsLoadTexture("KirbyLeft_Idel.bmp");
-	if (false == IsResource)
+	//bool IsResource = ResourcesManager::GetInst().IsLoadTexture("KirbyLeft_Idel.bmp");
+	//if (false == IsResource)
+	//{
+	//	GameEnginePath FilePath;
+	//	FilePath.SetCurrentPath();
+	//	FilePath.MoveParentToExistsChild("ContentsResources");
+	//	FilePath.MoveChild("ContentsResources\\Worms\\");
+	//	//ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("파일명"), 가로, 세로);
+	//	
+	//	{ // LeftAnimation 셋팅
+	//		FilePath.MoveChild("Left\\");
+	//		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("KirbyLeft_Idel.bmp"), 4, 1);
+	//	}
+
+	//	{ // RinghtAnimation 셋팅
+	//		FilePath.MoveParentToExistsChild("Right");
+	//		FilePath.MoveChild("Right\\");
+	//		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("KirbyRight_Idel.bmp"), 4, 1);
+	//	}
+	//}
+
+	// Resource
 	{
-		GameEnginePath FilePath;
-		FilePath.SetCurrentPath();
-		FilePath.MoveParentToExistsChild("ContentsResources");
-		FilePath.MoveChild("ContentsResources\\Worms\\");
-		//ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("파일명"), 가로, 세로);
-		
-		{ // LeftAnimation 셋팅
-			FilePath.MoveChild("Left\\");
-			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("KirbyLeft_Idel.bmp"), 4, 1);
+		if (false == ResourcesManager::GetInst().IsLoadTexture("idleLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("idleLeft.bmp"), 1, 6);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("idleRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("idleRight.bmp"), 1, 6);
 		}
 
-		{ // RinghtAnimation 셋팅
-			FilePath.MoveParentToExistsChild("Right");
-			FilePath.MoveChild("Right\\");
-			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("KirbyRight_Idel.bmp"), 4, 1);
+		if (false == ResourcesManager::GetInst().IsLoadTexture("walkLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("walkLeft.bmp"), 1, 15);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("walkRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("walkRight.bmp"), 1, 15);
+		}
+
+		// Jump
+		if (false == ResourcesManager::GetInst().IsLoadTexture("jumpReadyLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("jumpReadyLeft.bmp"), 1, 10);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("jumpReadyRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("jumpReadyRight.bmp"), 1, 10);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("flyUpLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("flyUpLeft.bmp"), 1, 2);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("flyUpRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("flyUpRight.bmp"), 1, 2);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("flyLinkLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("flyLinkLeft.bmp"), 1, 7);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("flyLinkRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("flyLinkRight.bmp"), 1, 7);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("flyDownLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("flyDownLeft.bmp"), 1, 2);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("flyDownRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("flyDownRight.bmp"), 1, 2);
 		}
 	}
+
 	
 	MainRenderer = CreateRenderer(RenderOrder::Player);
-	MainRenderer->SetTexture("KirbyLeft_Idel.bmp");
+	//MainRenderer->SetTexture("KirbyLeft_Idel.bmp");
 
+	//{
+	//	//MainRenderer->CreateAnimation("aniname", "filename", start, end, frame, loop
+
+	//	{ // LeftAnimation 생성
+	//		MainRenderer->CreateAnimation("Left_Idle", "KirbyLeft_Idel.bmp", 0, 1, 0.2f, true);
+	//	}
+
+	//	{ // RightAnimation 생성
+	//		MainRenderer->CreateAnimation("Right_Idle", "KirbyRight_Idel.bmp", 0, 1, 0.2f, true);
+	//	}
+	//	MainRenderer->SetScaleRatio(3.0f);
+	//	SetOrder(UpdateOrder::Player);
+	//	
+	//}
+
+	// Animation
 	{
-		//MainRenderer->CreateAnimation("aniname", "filename", start, end, frame, loop
-
-		{ // LeftAnimation 생성
-			MainRenderer->CreateAnimation("Left_Idle", "KirbyLeft_Idel.bmp", 0, 1, 0.2f, true);
-		}
-
-		{ // RightAnimation 생성
-			MainRenderer->CreateAnimation("Right_Idle", "KirbyRight_Idel.bmp", 0, 1, 0.2f, true);
-		}
-		MainRenderer->SetScaleRatio(3.0f);
-		SetOrder(UpdateOrder::Player);
+		// Left
+		MainRenderer->CreateAnimation("Left_Idle", "idleLeft.bmp", 0, 5, 0.2f, true);
+		MainRenderer->CreateAnimation("Left_Move", "walkLeft.bmp", 0, 14, 0.2f, true);
+		MainRenderer->CreateAnimation("Left_JumpReady", "jumpReadyLeft.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_JumpUp", "flyUpLeft.bmp", 0, 1, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_Jump", "flyLinkLeft.bmp", 0, 6, 0.1f, false);
+		//MainRenderer->CreateAnimation("Left_JumpDown", "flyDownLeft.bmp", 0, 1, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_Falling", "flyDownLeft.bmp", 0, 1, 0.1f, false);
 		
+
+
+		// Right
+		MainRenderer->CreateAnimation("Right_Idle", "idleRight.bmp", 0, 5, 0.2f, true);
+		MainRenderer->CreateAnimation("Right_Move", "walkRight.bmp", 0, 14, 0.2f, true);
+		MainRenderer->CreateAnimation("Right_JumpReady", "jumpReadyRight.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_JumpUp", "flyUpRight.bmp", 0, 1, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_Jump", "flyLinkRight.bmp", 0, 6, 0.1f, false);
+		//MainRenderer->CreateAnimation("Right_JumpDown", "flyDownRight.bmp", 0, 1, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_Falling", "flyDownRight.bmp", 0, 1, 0.1f, false);
 	}
 	
 	{
@@ -107,6 +234,9 @@ void Player::ChangeState(PlayerState _State)
 		case PlayerState::Fire:
 			FireStart();
 			break;
+		case PlayerState::JumpReady:
+			JumpReadyStart();
+			break;
 		case PlayerState::Jump:
 			JumpStart();
 			break;
@@ -129,6 +259,8 @@ void Player::StateUpdate(float _Delta)
 		return MoveUpdate(_Delta);
 	case PlayerState::Fire:
 		return FireUpdate(_Delta);
+	case PlayerState::JumpReady:
+		return JumpReadyUpdate(_Delta);
 	case PlayerState::Jump:
 		return JumpUpdate(_Delta);
 	case PlayerState::Falling:

@@ -7,6 +7,7 @@ enum class PlayerState
 	Idle,
 	Move,
 	Fire,
+	JumpReady,
 	Jump,
 	Falling,
 	Max
@@ -71,6 +72,9 @@ protected:
 
 	void FireStart();
 	void FireUpdate(float _Delta);
+
+	void JumpReadyStart();
+	void JumpReadyUpdate(float _Delta);
 
 	void JumpStart();
 	void JumpUpdate(float _Delta);

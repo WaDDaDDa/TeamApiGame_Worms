@@ -35,7 +35,7 @@ void Weapon::Start()
 	SetDir(Player::DirPos);
 
 	//GravityDir = float4::UP;
-	GravityDir += Dir * 30.0f;
+	GravityDir += Dir * 40.0f;
 	SetGravityVector(GravityDir * 10.0f);
 
 }

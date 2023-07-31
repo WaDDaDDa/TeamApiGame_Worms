@@ -2,6 +2,7 @@
 #include "Weapon.h"
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineLevel.h>
+#include <GameEngineCore/GameEngineRenderer.h>
 
 void Player::IdleStart()
 {
@@ -32,7 +33,8 @@ void Player::IdleUpdate(float _Delta)
 
 	if (true == GameEngineInput::IsDown(VK_SPACE))
 	{
-		ChangeState(PlayerState::Jump);
+		//ChangeState(PlayerState::Jump);
+		ChangeState(PlayerState::JumpReady);
 		return;
 	}
 
@@ -40,7 +42,7 @@ void Player::IdleUpdate(float _Delta)
 
 void Player::MoveStart()
 {
-	ChangeAnimationState("Idle");
+	ChangeAnimationState("Move");
 }
 void Player::MoveUpdate(float _Delta)
 {
@@ -79,8 +81,22 @@ void Player::FireUpdate(float _Delta)
 	ChangeState(PlayerState::Idle);
 }
 
+void Player::JumpReadyStart()
+{
+	ChangeAnimationState("JumpReady");
+}
+void Player::JumpReadyUpdate(float _Delta)
+{
+	if (true == MainRenderer->IsAnimationEnd())
+	{
+		ChangeState(PlayerState::Jump);
+	}
+	
+}
+
 void Player::JumpStart()
 {
+	ChangeAnimationState("Jump");
 	if (PlayerDir::Left == Dir)
 	{
 		SetGravityVector(float4::UP * PlayerJumpPower + float4::LEFT * 300.0f);
@@ -89,7 +105,7 @@ void Player::JumpStart()
 	{
 		SetGravityVector(float4::UP * PlayerJumpPower + float4::RIGHT * 300.0f);
 	}
-	//ChangeAnimationState("Jump");
+	
 }
 void Player::JumpUpdate(float _Delta)
 {
@@ -122,7 +138,7 @@ void Player::JumpUpdate(float _Delta)
 
 void Player::FallingStart()
 {
-	//ChangeAnimationState("Falling");
+	ChangeAnimationState("Falling");
 }
 
 
