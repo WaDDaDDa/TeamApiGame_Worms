@@ -181,6 +181,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="LobbyLevel.h" />
     <ClInclude Include="MouseObject.h" />
     <ClInclude Include="Player.h">
       <SubType>
@@ -232,6 +233,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="LobbyLevel.cpp" />
     <ClCompile Include="MouseObject.cpp" />
     <ClCompile Include="Player.cpp">
       <SubType>

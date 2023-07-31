@@ -1,9 +1,16 @@
 #pragma once
 #include <GameEngineCore/GameEngineLevel.h>
 
-// Ό³Έν :
 class TitleLevel : public GameEngineLevel
 {
+private:
+	enum class TITLE_STATE
+	{
+		TITLE_STATE_INTRO,
+		TITLE_STATE_SHOWTITLE,
+		TITLE_STATE_MAIN
+	};
+
 public:
 	// constrcuter destructer
 	TitleLevel();

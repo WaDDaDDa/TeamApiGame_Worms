@@ -51,6 +51,9 @@
     <ClInclude Include="UI_FadeObject.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="LobbyLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -102,6 +105,9 @@
     </ClCompile>
     <ClCompile Include="UI_FadeObject.cpp">
       <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="LobbyLevel.cpp">
+      <Filter>Level</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
