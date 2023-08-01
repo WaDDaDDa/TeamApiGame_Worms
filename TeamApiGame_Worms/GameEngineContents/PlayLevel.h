@@ -24,6 +24,10 @@ protected:
 private:
 	Ground* GroundPtr=nullptr;
 	class BackGround* BackGroundPtr = nullptr;
+	std::string GroundFileName = "";
+	std::string GroundPixelFileName = "";
+
+
 	void Start() override;
 	void Update(float _Delta) override;
 	void Release() override;

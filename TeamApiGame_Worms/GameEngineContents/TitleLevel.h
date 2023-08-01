@@ -1,6 +1,8 @@
 #pragma once
 #include <GameEngineCore/GameEngineLevel.h>
 
+#include "UI_IntroLogo.h"
+
 class TitleLevel : public GameEngineLevel
 {
 private:
@@ -37,5 +39,8 @@ private:
 	void Title_Intro_Update(float _Delta);
 	void Title_ShowTitle_Update(float _Delta);
 	void Title_Main_Update(float _Delta);
+
+
+	UI_IntroLogo* IntroLogo = nullptr;
 
 };

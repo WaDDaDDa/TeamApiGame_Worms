@@ -41,7 +41,15 @@ Ground* PlayLevel::GetGround() const
 
 void PlayLevel::Start()
 {
-	if (false == ResourcesManager::GetInst().IsLoadTexture("TestGround.Bmp"))
+	//나중에 LobbyLevel에서 받아올것
+	{
+		GroundFileName = "MapBooks.Bmp";
+		GroundPixelFileName = "MapBooks_Ground.Bmp";
+
+	}
+
+
+	if (false == ResourcesManager::GetInst().IsLoadTexture(GroundFileName))
 	{
 		GameEnginePath FilePath;
 		FilePath.SetCurrentPath();
@@ -49,9 +57,9 @@ void PlayLevel::Start()
 
 		GameEnginePath FolderPath = FilePath;
 
-		FilePath.MoveChild("ContentsResources\\Texture\\");
-		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("TestGround.bmp"));
-		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("TestGroundPixel.bmp"));
+		FilePath.MoveChild("ContentsResources\\Texture\\Map\\");
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath(GroundFileName));
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath(GroundPixelFileName));
 	}
 
 	CreateActor<MouseObject>();
@@ -75,7 +83,7 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 	{
 
 		GroundPtr = CreateActor<Ground>();
-		GroundPtr->Init("TestGround.Bmp", "TestGroundPixel.bmp");
+		GroundPtr->Init(GroundFileName, GroundPixelFileName);
 
 		BackGroundPtr = CreateActor<BackGround>();
 		BackGroundPtr->Init("Back.bmp",GroundPtr->GetGroundTexture()->GetScale());
@@ -86,25 +94,25 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 
 	{
 		Player* TestPlayer = CreateActor<Player>();
-		TestPlayer->SetGroundTexture("TestGroundPixel.bmp");
+		TestPlayer->SetGroundTexture(GroundPixelFileName);
 		TestPlayer->SetPos(float4{ 100, 100 });
 	}
 
 	{
 		Player* TestPlayer = CreateActor<Player>();
-		TestPlayer->SetGroundTexture("TestGroundPixel.bmp");
+		TestPlayer->SetGroundTexture(GroundPixelFileName);
 		TestPlayer->SetPos(float4{ 400, 100 });
 	}
 
 	{
 		Player* TestPlayer = CreateActor<Player>();
-		TestPlayer->SetGroundTexture("TestGroundPixel.bmp");
+		TestPlayer->SetGroundTexture(GroundPixelFileName);
 		TestPlayer->SetPos(float4{ 700, 100 });
 	}
 
 	{
 		Player* TestPlayer = CreateActor<Player>();
-		TestPlayer->SetGroundTexture("TestGroundPixel.bmp");
+		TestPlayer->SetGroundTexture(GroundPixelFileName);
 		TestPlayer->SetPos(float4{ 1000, 100 });
 	}
 

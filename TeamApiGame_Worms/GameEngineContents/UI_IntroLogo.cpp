@@ -14,38 +14,43 @@ UI_IntroLogo::~UI_IntroLogo()
 
 void UI_IntroLogo::Start()
 {
-	// 마우스 리소스 로딩
-	bool IsResource = ResourcesManager::GetInst().IsLoadTexture("UI_Intro_Logo1.bmp");
+	MainRenderer = CreateUIRenderer(RenderOrder::UI);
+	MainRenderer->SetRenderScale({ GameEngineWindow::MainWindow.GetScale().X, GameEngineWindow::MainWindow.GetScale().Y });
 
-	if (false == IsResource)
+	// 리소스 로딩
+	GameEnginePath FilePath;
+	FilePath.SetCurrentPath();
+	FilePath.MoveParentToExistsChild("ContentsResources");
+	FilePath.MoveChild("ContentsResources\\UI\\Title\\");
+
+	if (false == ResourcesManager::GetInst().IsLoadTexture("UI_Intro_Logo1.bmp"))
 	{
-		GameEnginePath FilePath;
-		FilePath.SetCurrentPath();
-		FilePath.MoveParentToExistsChild("ContentsResources");
-		FilePath.MoveChild("ContentsResources\\UI\\Title\\");
-
-		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("UI_Intro_Logo1.bmp"));
+		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("UI_Intro_Logo1.bmp"),0, 0);	
 	}
 
-	// 렌더러 설정
-	MainRenderer = CreateUIRenderer("UI_Intro_Logo1.bmp", RenderOrder::UI);
-	MainRenderer->SetRenderScale({ GameEngineWindow::MainWindow.GetScale().X, GameEngineWindow::MainWindow.GetScale().Y});
+	if (false == ResourcesManager::GetInst().IsLoadTexture("UI_DefaultBackGround.bmp"))
+	{
+		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("UI_DefaultBackGround.bmp"), 0, 0);
+	}
 
-	MainRenderer->SetAlpha(255);
-	
+	if (false == ResourcesManager::GetInst().IsLoadTexture("UI_MainTitle_Backdrop.bmp"))
+	{
+		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("UI_MainTitle_Backdrop.bmp"), 0, 0);
+	}
+
+	if (false == ResourcesManager::GetInst().IsLoadTexture("UI_MainTitle.bmp"))
+	{
+		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("UI_MainTitle.bmp"), 0, 0);
+	}
+
+	// 애니메이션 생성
+	MainRenderer->CreateAnimation("TITLE_INTRO_LOGO", "UI_Intro_Logo1.bmp", 0, 0, 5.0f, false);
+	MainRenderer->CreateAnimation("TITLE_BALCK", "UI_DefaultBackGround.bmp", 0, 0, 5.0f, false);
+	MainRenderer->CreateAnimation("TITLE_MAIN_BACK", "UI_MainTitle_Backdrop.bmp", 0, 0, 5.0f, false);
+	MainRenderer->CreateAnimation("TITLE_MAIN", "UI_MainTitle.bmp", 0, 0, 5.0f, true);
 }
 
 void UI_IntroLogo::Update(float _Delta)
 {
-	//FadeSpeed += 0.5f * _Delta;
-	//CurAlpha -= static_cast<int>(FadeSpeed * _Delta);
-
-
-	//if (0 >= CurAlpha)
-	//{
-	//	CurAlpha = 0;
-	//}
-
-//	MainRenderer->SetAlpha(CurAlpha);
 
 }
