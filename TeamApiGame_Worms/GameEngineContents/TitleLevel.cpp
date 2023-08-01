@@ -1,8 +1,11 @@
 #include "TitleLevel.h"
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineCore.h>
+
 #include "UI_IntroLogo.h"
 #include "UI_FadeObject.h"
+#include "UI_MainLogo.h"
+
 #include <GameEnginePlatform/GameEngineWindow.h>
 
 /*
@@ -22,15 +25,18 @@ TitleLevel::~TitleLevel()
 
 void TitleLevel::Start()
 {
+	IntroLogo = CreateActor<UI_IntroLogo>();
+	IntroLogo->SetPos(GameEngineWindow::MainWindow.GetScale().Half());
+
 	ChangeState(TITLE_STATE::TITLE_STATE_INTRO);
 }
 
 void TitleLevel::Update(float _DeltaTime)
 {
-	if (true == GameEngineInput::IsDown('P'))
-	{
-		GameEngineCore::ChangeLevel("PlayLevel");
-	}
+	//if (true == GameEngineInput::IsDown('P'))
+	//{
+	//	GameEngineCore::ChangeLevel("PlayLevel");
+	//}
 
 	StateUpdate(_DeltaTime);
 }
@@ -59,6 +65,9 @@ void TitleLevel::StateUpdate(float _Delta)
 
 void TitleLevel::ChangeState(TITLE_STATE _TitleState)
 {
+
+	TitleState = _TitleState;
+
 	switch (TitleState)
 	{
 	case TITLE_STATE::TITLE_STATE_INTRO:
@@ -77,52 +86,77 @@ void TitleLevel::ChangeState(TITLE_STATE _TitleState)
 		break;
 	}
 
-	TitleState = _TitleState;
 }
 
 void TitleLevel::Title_Intro_Start()
 {
-	IntroLogo = CreateActor<UI_IntroLogo>();
-	IntroLogo->SetPos(GameEngineWindow::MainWindow.GetScale().Half());
-
 	UI_FadeObject* FadeIn = CreateActor<UI_FadeObject>();
 	FadeIn->SetFadeInMode();
 }
 
 void TitleLevel::Title_ShowTitle_Start()
 {
-	
+	IntroLogo->ChangeState_Black();
+	MainLogo = CreateActor<UI_MainLogo>();
+
 }
 
 void TitleLevel::Title_Main_Start()
 {
-
-
-
+	IntroLogo->ChangeState_Main_Back();
+	MainLogo->On();
+	MainLogo->SetShowAllTitleText();
 }
 
 void TitleLevel::Title_Intro_Update(float _Delta)
 {
-	if (IntroLogo->GetLiveTime() > 5.0f)
+	if (IntroLogo != nullptr)
 	{
-		UI_FadeObject* FadeOut = CreateActor<UI_FadeObject>();
-		FadeOut->SetFadeOutMode();
-	}
+		if (IntroLogo->GetLiveTime() > 4.0f)
+		{
+			UI_FadeObject* FadeOut = CreateActor<UI_FadeObject>();
+			FadeOut->SetFadeOutMode();
 
-	if (IntroLogo->GetLiveTime() > 6.0f)
-	{
-		ChangeState(TITLE_STATE::TITLE_STATE_SHOWTITLE);
-	}
+		}
 
-	
+		if (IntroLogo->GetLiveTime() > 6.0f)
+		{
+			ChangeState(TITLE_STATE::TITLE_STATE_SHOWTITLE);
+		}
+
+	}
 
 }
 
 void TitleLevel::Title_ShowTitle_Update(float _Delta)
 {
+	if (MainLogo != nullptr)
+	{
+
+		if (MainLogo->GetLiveTime() > 5.0f)
+		{
+			ChangeState(TITLE_STATE::TITLE_STATE_MAIN);
+			UI_FadeObject* FadeIn = CreateActor<UI_FadeObject>();
+			FadeIn->SetFadeInMode();
+		}
+	}
 }
 
 void TitleLevel::Title_Main_Update(float _Delta)
 {
+	if (true == MainLogo->IsUpdate())
+	{
+		if (false == MainLogo->GetShowAllTitleText())
+		{
+			IntroLogo->ChangeState_Main();
+			MainLogo->Off();
+		}
+	}
+
+	if (true == GameEngineInput::IsDown(VK_SPACE))
+	{
+		GameEngineCore::ChangeLevel("LobbyLevel");
+	}
+
 }
 

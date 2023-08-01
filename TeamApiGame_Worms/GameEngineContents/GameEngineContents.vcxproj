@@ -206,6 +206,7 @@
     </ClInclude>
     <ClInclude Include="UI_FadeObject.h" />
     <ClInclude Include="UI_IntroLogo.h" />
+    <ClInclude Include="UI_MainLogo.h" />
     <ClInclude Include="UI_Mouse.h" />
     <ClInclude Include="Weapon.h">
       <SubType>
@@ -263,6 +264,7 @@
     </ClCompile>
     <ClCompile Include="UI_FadeObject.cpp" />
     <ClCompile Include="UI_IntroLogo.cpp" />
+    <ClCompile Include="UI_MainLogo.cpp" />
     <ClCompile Include="UI_Mouse.cpp" />
     <ClCompile Include="Weapon.cpp">
       <SubType>

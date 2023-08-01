@@ -2,6 +2,7 @@
 #include <GameEngineCore/GameEngineLevel.h>
 
 #include "UI_IntroLogo.h"
+#include "UI_MainLogo.h"
 
 class TitleLevel : public GameEngineLevel
 {
@@ -42,5 +43,6 @@ private:
 
 
 	UI_IntroLogo* IntroLogo = nullptr;
+	UI_MainLogo* MainLogo = nullptr;
 
 };

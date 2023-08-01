@@ -57,6 +57,9 @@
     <ClInclude Include="Bazooka.h">
       <Filter>Weapon</Filter>
     </ClInclude>
+    <ClInclude Include="UI_MainLogo.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -114,6 +117,9 @@
     </ClCompile>
     <ClCompile Include="Bazooka.cpp">
       <Filter>Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_MainLogo.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

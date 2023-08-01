@@ -11,6 +11,10 @@ public:
 	UI_IntroLogo(UI_IntroLogo&& _Other) noexcept = delete;
 	UI_IntroLogo& operator=(const UI_IntroLogo& _Other) = delete;
 	UI_IntroLogo& operator=(UI_IntroLogo&& _Other) noexcept = delete;
+	
+	void ChangeState_Black();
+	void ChangeState_Main_Back();
+	void ChangeState_Main();
 
 protected:
 	void Start() override;
@@ -18,7 +22,4 @@ protected:
 
 private:
 	GameEngineRenderer* MainRenderer = nullptr;
-	int CurAlpha = 255;
-	float FadeSpeed = 0.5f;
-
 };

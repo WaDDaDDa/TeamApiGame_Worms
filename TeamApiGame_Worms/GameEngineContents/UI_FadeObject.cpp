@@ -15,16 +15,19 @@ UI_FadeObject::~UI_FadeObject()
 
 void UI_FadeObject::Start()
 {
-	bool IsResource = ResourcesManager::GetInst().IsLoadTexture("UI_FADE.bmp");
+	GameEnginePath FilePath;
+	FilePath.SetCurrentPath();
+	FilePath.MoveParentToExistsChild("ContentsResources");
+	FilePath.MoveChild("ContentsResources\\UI\\");
 
-	if (false == IsResource)
+	if (false == ResourcesManager::GetInst().IsLoadTexture("UI_FADE.bmp"))
 	{
-		GameEnginePath FilePath;
-		FilePath.SetCurrentPath();
-		FilePath.MoveParentToExistsChild("ContentsResources");
-		FilePath.MoveChild("ContentsResources\\UI\\");
-
 		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("UI_FADE.bmp"));
+	}
+
+	if (false == ResourcesManager::GetInst().IsLoadTexture("UI_FADE_WHITE.bmp"))
+	{
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("UI_FADE_WHITE.bmp"));
 	}
 
 	// ·»´õ·¯ ¼³Á¤
@@ -61,6 +64,18 @@ void UI_FadeObject::ChangeState(FADE_STATE _FadeState)
 {
 	FadeState = _FadeState;
 }
+
+void UI_FadeObject::SetFadeColor_White()
+{
+	MainRenderer->SetTexture("UI_FADE_WHITE.bmp");
+}
+
+void UI_FadeObject::SetFadeColor_Black()
+{
+	MainRenderer->SetTexture("UI_FADE.bmp");
+}
+
+
 
 void UI_FadeObject::SetFadeOutMode()
 {

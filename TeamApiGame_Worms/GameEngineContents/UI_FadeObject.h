@@ -28,6 +28,8 @@ public:
 
 	FADE_STATE FadeState;
 
+	void SetFadeColor_White();
+	void SetFadeColor_Black();
 
 	void SetFadeOutMode();
 	void SetFadeInMode();
