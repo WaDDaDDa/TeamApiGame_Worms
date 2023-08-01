@@ -141,9 +141,5 @@ void PlayLevel::LevelEnd(GameEngineLevel* _NextLevel)
 
 #pragma region UI 함수 포인터 등록용 함수
 
-void ChangeLevel(DWORD_PTR, DWORD_PTR)
-{
-	GameEngineCore::ChangeLevel("TitleLevel");
-}
 
 #pragma endregion
