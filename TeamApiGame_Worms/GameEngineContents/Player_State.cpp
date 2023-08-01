@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "Weapon.h"
+#include "Bazooka.h"
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/GameEngineRenderer.h>
@@ -69,7 +70,7 @@ void Player::MoveUpdate(float _Delta)
 
 void Player::FireStart()
 {
-	Weapon* NewWeapon = GetLevel()->CreateActor<Weapon>();
+	Weapon* NewWeapon = GetLevel()->CreateActor<Bazooka>();
 	NewWeapon->SetGroundTexture(GetGroundTexture());
 	
 	float4 Pos = GetPos();

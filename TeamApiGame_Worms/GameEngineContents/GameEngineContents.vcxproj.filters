@@ -17,9 +17,6 @@
     <ClInclude Include="ContentsEnum.h">
       <Filter>Global</Filter>
     </ClInclude>
-    <ClInclude Include="Weapon.h">
-      <Filter>Player</Filter>
-    </ClInclude>
     <ClInclude Include="GameTurn.h" />
     <ClInclude Include="BackGround.h">
       <Filter>Map</Filter>
@@ -54,6 +51,12 @@
     <ClInclude Include="LobbyLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Bazooka.h">
+      <Filter>Weapon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -74,9 +77,6 @@
     </ClCompile>
     <ClCompile Include="PlayLevel.cpp">
       <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="Weapon.cpp">
-      <Filter>Player</Filter>
     </ClCompile>
     <ClCompile Include="GameTurn.cpp" />
     <ClCompile Include="BackGround.cpp">
@@ -109,6 +109,12 @@
     <ClCompile Include="LobbyLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Bazooka.cpp">
+      <Filter>Weapon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
@@ -125,6 +131,9 @@
     </Filter>
     <Filter Include="UI">
       <UniqueIdentifier>{b2bd0c6d-efa1-44bd-8809-2223c25a7afe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Weapon">
+      <UniqueIdentifier>{0b251b90-6daf-447e-9ae7-64f9da354a82}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
