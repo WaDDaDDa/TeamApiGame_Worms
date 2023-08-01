@@ -29,11 +29,12 @@ void Bazooka::Start()
 		FilePath.SetCurrentPath();
 		FilePath.MoveParentToExistsChild("ContentsResources");
 		FilePath.MoveChild("ContentsResources\\Image\\Weapons\\");
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("Blank.bmp"));
 		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("bullet.bmp"), 1, 32);
-		//ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("bullet.bmp"));
 	}
 
-	Renderer->SetTexture("bullet.bmp");
+	Renderer->SetTexture("Blank.bmp");
+
 	// 90µµ
 	Renderer->CreateAnimation("8_Bazooka_Fly", "bullet.bmp", 0, 0, 0.05f, false);
 	// 78.75µµ
@@ -101,14 +102,10 @@ void Bazooka::Start()
 	//// -270
 	//Renderer->CreateAnimation("Bazooka_Fly", "bullet.bmp", 32, 32, 0.05f, false);
 
-	SetDir(Player::DirPos);
 
-	//GravityDir = float4::UP;
-	GravityDir += Dir * 40.0f;
-
-	float Angle = 0.0f;
+	float Angle = -45.0f;
 	float4 AngleVec = { 1.0f, 0.0f };
-	SetGravityVector(AngleVec.GetRotationToDegZ(Angle) * 200.0f);
+	SetGravityVector(AngleVec.GetRotationToDegZ(Angle) * 700.0f);
 
 	ChangeState(BazookaState::Fly);
 
@@ -116,10 +113,7 @@ void Bazooka::Start()
 
 void Bazooka::LevelStart()
 {
-
-
 	SetPos(Master->GetPos() + float4{0, -15});
-
 }
 
 void Bazooka::Update(float _Delta)
@@ -172,20 +166,6 @@ void Bazooka::DirCheck()
 	float CheckDir = CurDir / 11.25f;
 
 	std::string Text = "";
-
-	//for (float i = 0.0f; CurDir >= i ; i+=11.25f)
-	//{
-	//	if (CurDir <= i)
-	//	{
-	//		CurDir /= 11.25f;
-
-	//		Text += std::to_string(static_cast<int>(CurDir));
-	//		Text += "_Bazooka_Fly";
-	//		Renderer->ChangeAnimation(Text);
-	//		return;
-	//	}
-	//}
-
 
 	switch (static_cast<int>(CheckDir))
 	{
@@ -292,7 +272,7 @@ void Bazooka::DirCheck()
 
 void Bazooka::FlyStart()
 {
-	Renderer->ChangeAnimation("Bazooka_Fly");
+	Renderer->ChangeAnimation("32_Bazooka_Fly");
 }
 
 void Bazooka::FlyUpdate(float _Delta)
