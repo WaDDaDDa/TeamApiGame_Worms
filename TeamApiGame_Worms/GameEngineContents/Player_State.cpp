@@ -72,7 +72,8 @@ void Player::FireStart()
 {
 	Weapon* NewWeapon = GetLevel()->CreateActor<Bazooka>();
 	NewWeapon->SetGroundTexture(GetGroundTexture());
-	
+	NewWeapon->SetMaster(this);
+
 	float4 Pos = GetPos();
 	Pos.Y -= 15.0f;
 	NewWeapon->SetPos(Pos);

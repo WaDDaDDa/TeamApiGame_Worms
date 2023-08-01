@@ -15,7 +15,13 @@ public:
 	Weapon& operator=(const Weapon & _Other) = delete;
 	Weapon& operator=(Weapon && _Other) noexcept = delete;
 
+	void SetMaster(class Player* _CurPlayer)
+	{
+		Master = _CurPlayer;
+	}
+
 protected:
+	Player* Master = nullptr;
 
 private:
 

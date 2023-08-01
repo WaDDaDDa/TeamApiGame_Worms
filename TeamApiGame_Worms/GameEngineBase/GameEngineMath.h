@@ -213,6 +213,7 @@ public:
 		return POINT{ iX(), iY() };
 	}
 
+	// 각도 넣으면 해당하는 벡터 나온다.
 	float4 	GetRotationToDegZ(const float _Angle) const
 	{
 		return GetRotationToDegZ(*this, _Angle);
@@ -235,7 +236,7 @@ public:
 
 		float Angle = acosf(AngleVector.X);
 
-		if (0 >= AngleVector.Y)
+		if (0 <= AngleVector.Y)
 		{
 			Angle = GameEngineMath::PI + GameEngineMath::PI - Angle;
 		}
