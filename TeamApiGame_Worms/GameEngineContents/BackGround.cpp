@@ -39,7 +39,7 @@ void BackGround::Init(const std::string& _FileName,const float4 _Scale)
 		GameEnginePath FilePath;
 		FilePath.SetCurrentPath();
 		FilePath.MoveParentToExistsChild("ContentsResources");
-		FilePath.MoveChild("ContentsResources\\Texture\\" + _FileName);
+		FilePath.MoveChild("ContentsResources\\Texture\\Map\\" + _FileName);
 
 		GameEngineWindowTexture* Texture = ResourcesManager::GetInst().TextureLoad(FilePath.GetStringPath());
 	}
@@ -72,7 +72,7 @@ void BackGround::VerticalPatternInit(const std::string& _FileName)
 		GameEnginePath FilePath;
 		FilePath.SetCurrentPath();
 		FilePath.MoveParentToExistsChild("ContentsResources");
-		FilePath.MoveChild("ContentsResources\\Texture\\" + _FileName);
+		FilePath.MoveChild("ContentsResources\\Texture\\Map\\" + _FileName);
 
 		GameEngineWindowTexture* Texture = ResourcesManager::GetInst().TextureLoad(FilePath.GetStringPath());
 	}

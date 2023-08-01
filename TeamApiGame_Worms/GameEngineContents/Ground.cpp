@@ -25,7 +25,7 @@ void Ground::Init(const std::string& _FileName, const std::string& _DebugFileNam
 		GameEnginePath FilePath;
 		FilePath.SetCurrentPath();
 		FilePath.MoveParentToExistsChild("ContentsResources");
-		FilePath.MoveChild("ContentsResources\\Texture\\" + _FileName);
+		FilePath.MoveChild("ContentsResources\\Texture\\Map\\" + _FileName);
 
 		GameEngineWindowTexture* Text = ResourcesManager::GetInst().TextureLoad(FilePath.GetStringPath());
 	}
