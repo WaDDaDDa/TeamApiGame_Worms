@@ -23,26 +23,75 @@ void Bazooka::Start()
 {
 	Renderer = CreateRenderer(RenderOrder::Weapon);
 
-	if (false == ResourcesManager::GetInst().IsLoadTexture("PistolBullet.bmp"))
+	if (false == ResourcesManager::GetInst().IsLoadTexture("bullet.bmp"))
 	{
 		GameEnginePath FilePath;
 		FilePath.SetCurrentPath();
 		FilePath.MoveParentToExistsChild("ContentsResources");
-		FilePath.MoveChild("ContentsResources\\Worms\\Weapon\\");
-		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("PistolBullet.bmp"));
+		FilePath.MoveChild("ContentsResources\\Image\\Weapons\\");
+		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("bullet.bmp"), 1, 32);
+		//ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("bullet.bmp"));
 	}
 
-	Renderer->SetTexture("PistolBullet.bmp");
+	Renderer->SetTexture("bullet.bmp");
+	Renderer->CreateAnimation("Bazooka_Fly", "bullet.bmp", 0, 15, 0.05f, false);
 
 	SetDir(Player::DirPos);
 
 	//GravityDir = float4::UP;
 	GravityDir += Dir * 40.0f;
 	SetGravityVector(GravityDir * 10.0f);
+	ChangeState(BazookaState::Fly);
 
 }
 
 void Bazooka::Update(float _Delta)
+{
+	StateUpdate(_Delta);
+}
+
+
+void Bazooka::StateUpdate(float _Delta)
+{
+	switch (State)
+	{
+	case BazookaState::Fly:
+		return FlyUpdate(_Delta);
+	case BazookaState::Bomb:
+		return BombUpdate(_Delta);
+	default:
+		break;
+	}
+}
+
+void Bazooka::ChangeState(BazookaState _State)
+{
+	if (_State != State)
+	{
+		switch (_State)
+		{
+		case BazookaState::Fly:
+			FlyStart();
+			break;
+		case BazookaState::Bomb:
+			BombStart();
+			break;
+		default:
+			break;
+		}
+	}
+
+	ResetLiveTime();
+
+	State = _State;
+}
+
+void Bazooka::FlyStart()
+{
+	Renderer->ChangeAnimation("Bazooka_Fly");
+}
+
+void Bazooka::FlyUpdate(float _Delta)
 {
 	Gravity(_Delta);
 
@@ -60,6 +109,32 @@ void Bazooka::Update(float _Delta)
 				Off();
 			}
 
+		}
+	}
+
+	// 1초뒤 데스
+	if (2.0f < GetLiveTime())
+	{
+		if (nullptr != Renderer)
+		{
+			Death();
+		}
+	}
+
+}
+
+void Bazooka::BombStart()
+{
+	Renderer->ChangeAnimation("Bazooka_Boom");
+}
+
+void Bazooka::BombUpdate(float _Delta)
+{
+	if (0.4f < GetLiveTime())
+	{
+		if (nullptr != Renderer)
+		{
+			Death();
 		}
 	}
 }
