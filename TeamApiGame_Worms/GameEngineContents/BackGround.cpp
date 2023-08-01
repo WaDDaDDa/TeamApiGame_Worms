@@ -39,7 +39,7 @@ void BackGround::Init(const std::string& _FileName,const float4 _Scale)
 		GameEnginePath FilePath;
 		FilePath.SetCurrentPath();
 		FilePath.MoveParentToExistsChild("ContentsResources");
-		FilePath.MoveChild("ContentsResources\\Texture\\" + _FileName);
+		FilePath.MoveChild("ContentsResources\\Texture\\Map\\" + _FileName);
 
 		GameEngineWindowTexture* Texture = ResourcesManager::GetInst().TextureLoad(FilePath.GetStringPath());
 	}
@@ -72,13 +72,22 @@ void BackGround::VerticalPatternInit(const std::string& _FileName)
 		GameEnginePath FilePath;
 		FilePath.SetCurrentPath();
 		FilePath.MoveParentToExistsChild("ContentsResources");
-		FilePath.MoveChild("ContentsResources\\Texture\\" + _FileName);
+		FilePath.MoveChild("ContentsResources\\Texture\\Map\\" + _FileName);
 
 		GameEngineWindowTexture* Texture = ResourcesManager::GetInst().TextureLoad(FilePath.GetStringPath());
 	}
 
 	GameEngineWindowTexture* Texture = ResourcesManager::GetInst().FindTexture(_FileName);
-	GameEngineWindowTexture* NewTexture = ResourcesManager::GetInst().TextureCreate("VerticalPattern" +_FileName,Scale);
+
+
+	if (false == ResourcesManager::GetInst().IsLoadTexture("VerticalPattern" + _FileName))
+	{
+		GameEngineWindowTexture* NewTexture = ResourcesManager::GetInst().TextureCreate("VerticalPattern" +_FileName,Scale);
+
+	}
+
+	GameEngineWindowTexture* NewTexture = ResourcesManager::GetInst().FindTexture("VerticalPattern" + _FileName);
+
 	
 
 	float4 DrawScale={Texture->GetScale().X, Scale.Y};
