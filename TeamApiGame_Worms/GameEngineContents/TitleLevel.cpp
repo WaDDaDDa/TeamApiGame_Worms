@@ -33,10 +33,10 @@ void TitleLevel::Start()
 
 void TitleLevel::Update(float _DeltaTime)
 {
-	//if (true == GameEngineInput::IsDown('P'))
-	//{
-	//	GameEngineCore::ChangeLevel("PlayLevel");
-	//}
+	if (true == GameEngineInput::IsDown('P'))
+	{
+		GameEngineCore::ChangeLevel("LobbyLevel");
+	}
 
 	StateUpdate(_DeltaTime);
 }

@@ -60,6 +60,9 @@
     <ClInclude Include="UI_MainLogo.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="UI_Lobby_SelectTitle.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -119,6 +122,9 @@
       <Filter>Weapon</Filter>
     </ClCompile>
     <ClCompile Include="UI_MainLogo.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Lobby_SelectTitle.cpp">
       <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
