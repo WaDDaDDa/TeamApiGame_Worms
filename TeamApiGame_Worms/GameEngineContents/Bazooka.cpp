@@ -113,7 +113,7 @@ void Bazooka::Start()
 	BombCollision->SetCollisionType(CollisionType::CirCle);
 	BombCollision->SetCollisionPos({ 0, 0 });
 
-	ChangeState(BazookaState::Fly);
+	ChangeState(BazookaState::Max);
 
 }
 
