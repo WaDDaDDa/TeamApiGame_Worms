@@ -27,7 +27,7 @@ void Player::IdleUpdate(float _Delta)
 
 			GameEngineActor* Actor = Collison->GetActor();
 		}
-		ChangeState(PlayerState::Damaging);
+		// ChangeState(PlayerState::Damaging);
 
 	}
 
@@ -96,7 +96,12 @@ void Player::MoveUpdate(float _Delta)
 
 void Player::FireStart()
 {
+	// 무기사용으로 
 	Weapon* NewWeapon = GetLevel()->CreateActor<Bazooka>();
+	// 플레이어의 제어권을 끄고
+	SwitchIsTurnPlayer();
+	// 무기에 카메라 포커싱 하기위해 제어권을 킨다.
+	NewWeapon->SwitchIsTurnPlayer();
 	NewWeapon->SetGroundTexture(GetGroundTexture());
 	NewWeapon->SetMaster(this);
 }

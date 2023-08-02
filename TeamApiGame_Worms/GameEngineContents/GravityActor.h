@@ -29,13 +29,22 @@ public:
 
 	int GetGroundColor(unsigned int _DefaultColor, float4 _Pos = float4::ZERO);
 
-	void CameraFocus();
 
 	float4 ActorCameraPos();
 
 	void GroundCheck(float _Delta);
 
+	void SwitchIsTurnPlayer()
+	{
+		IsTurnPlayer = !IsTurnPlayer;
+	}
+	// GravityActor들의 제어권 (카메라 포커싱, 턴플레이어의 행동권)
+	bool IsTurnPlayer = false;
+
 protected:
+	void CameraFocus();
+
+
 
 private:
 	class GameEngineWindowTexture* GroundTexture = nullptr;
@@ -65,6 +74,5 @@ private:
 
 	float GravityPower = 1000.0f;
 	float4 GravityVector = float4::ZERO;
-
 };
 

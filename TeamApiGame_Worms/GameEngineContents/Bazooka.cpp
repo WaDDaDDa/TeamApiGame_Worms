@@ -3,6 +3,7 @@
 #include "ContentsEnum.h"
 #include "Player.h"
 #include "PlayLevel.h"
+#include "GameTurn.h"
 
 #include <GameEngineBase/GameEnginePath.h>
 #include <GameEngineCore/GameEngineLevel.h>
@@ -134,6 +135,7 @@ void Bazooka::LevelStart()
 
 void Bazooka::Update(float _Delta)
 {
+	CameraFocus();
 	StateUpdate(_Delta);
 }
 
@@ -333,6 +335,8 @@ void Bazooka::BombUpdate(float _Delta)
 
 	if (true == Renderer->IsAnimationEnd())
 	{
+		// 무기사용이 종료되면 다시 플레이어로 돌아간다.
+		Master->SwitchIsTurnPlayer();
 		Death();
 	}
 }

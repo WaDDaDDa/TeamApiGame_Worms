@@ -29,6 +29,5 @@ void Weapon::LevelStart()
 
 void Weapon::Update(float _Delta)
 {
-
 }
 

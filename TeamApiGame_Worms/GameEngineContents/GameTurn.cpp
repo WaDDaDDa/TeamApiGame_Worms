@@ -5,9 +5,11 @@
 #include <GameEngineCore/GameEngineCamera.h>
 #include "Player.h"
 
+GameTurn GameTurn::MainGameTurn;
 
 GameTurn::GameTurn()
 {
+	
 }
 
 GameTurn::~GameTurn()
@@ -23,7 +25,18 @@ void GameTurn::Start()
 
 void GameTurn::Update(float _Delta)
 {
-	CameraFocus(_Delta);
+	// 턴플레이어인데 무기사용으로 IsTurnPlayer가 false가되면 Turn의 시간을 멈춘다.
+	if (TurnPlayer->IsTurnPlayer == false)
+	{
+		StopLiveTime();
+	}
+	// 턴의 시간이 멈춘상태에서 무기 사용 종료로 IsTurnPlayer가 True로 돌아오면
+	// Turn의시간이 다시 흐르고 Turn플레이어를 변경한다.
+	if (GetStopValue() == true && TurnPlayer->IsTurnPlayer == true)
+	{
+		GoLiveTime(); 
+		ChangeTurnPlayer();
+	}
 
 	if (TurnPlayTime <= GetLiveTime())
 	{
@@ -83,41 +96,4 @@ void GameTurn::ChangeTurnPlayer()
 	TurnPlayer = Player::GetAllPlayer()[StartValue];
 	// 현재 플레이어 bool값 true로 변경
 	TurnPlayer->SwitchIsTurnPlayer();
-}
-
-//void GameTurn::CameraFocus()
-//{
-//	float4 WindowScale = GameEngineWindow::MainWindow.GetScale();
-//	GetLevel()->GetMainCamera()->SetPos(TurnPlayer->GetPos() + float4{ -WindowScale.hX(), -WindowScale.hY() });
-//}
-
-
-void GameTurn::CameraFocus(float _Delta)
-{
-	float4 WindowScale = GameEngineWindow::MainWindow.GetScale();
-
-	int CameraRangeX = GetLevel()->GetMainCamera()->GetPos().iX();
-	int CameraRangeY = GetLevel()->GetMainCamera()->GetPos().iY();
-
-	float ImageX = TurnPlayer->GetGroundTexture()->GetScale().X - 1280.0f;
-	float ImageY = TurnPlayer->GetGroundTexture()->GetScale().Y - 720.0f;
-
-	GetLevel()->GetMainCamera()->SetPos(TurnPlayer->GetPos() + float4{ -WindowScale.hX(), -WindowScale.hY() });
-
-
-	// 카메라가 맵의 왼쪽으로 못나가게.
-	if (0 >= GetLevel()->GetMainCamera()->GetPos().X)
-	{
-		GetLevel()->GetMainCamera()->SetPos({ 0.0f, GetLevel()->GetMainCamera()->GetPos().Y });
-	}
-	// 카메라가 맵의 오른쪽 최대치를 못나가게.
-	if (ImageX <= GetLevel()->GetMainCamera()->GetPos().X)
-	{
-		GetLevel()->GetMainCamera()->SetPos({ ImageX, GetLevel()->GetMainCamera()->GetPos().Y });
-	}
-
-	if (ImageY <= GetLevel()->GetMainCamera()->GetPos().Y)
-	{
-		GetLevel()->GetMainCamera()->SetPos({ GetLevel()->GetMainCamera()->GetPos().X, ImageY });
-	}
 }

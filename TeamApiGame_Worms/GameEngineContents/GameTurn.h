@@ -17,6 +17,10 @@ public:
         return TurnPlayer;
     }
 
+    void ChangeTurnPlayer();
+
+    static GameTurn MainGameTurn;
+
 protected:
 
 private:
@@ -28,13 +32,10 @@ private:
 
     void Render(float _Delta) override;
 
-    void ChangeTurnPlayer();
-
-    void CameraFocus(float _Delta);
-
     // 턴플레이어 넘버
     int StartValue = 0;
     // 턴플레이어 제한시간.
     float TurnPlayTime = 20.0f;
+
 };
 

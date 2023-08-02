@@ -46,11 +46,6 @@ public:
 		return AllPlayer;
 	}
 
-	void SwitchIsTurnPlayer()
-	{
-		IsTurnPlayer = !IsTurnPlayer;
-	}
-
 	int GetHp()
 	{
 		return Hp;
@@ -120,9 +115,6 @@ private:
 
 	float CurAngle = -45.0f;
 
-	
-	
-
 	// 플레이어 전체를 관리하도록 list로 플레이어 관리
 	static std::vector<Player*> AllPlayer;
 
@@ -131,7 +123,7 @@ private:
 	void Render(float _Delta) override;
 
 	// 카메라, 조작 등 메인으로 움직일 수 있는 플레이어를 판별하기 위한 bool값. 추가
-	bool IsTurnPlayer = false;
+	// bool IsTurnPlayer = false;
 
 	float4 CheckPos = float4::ZERO;
 

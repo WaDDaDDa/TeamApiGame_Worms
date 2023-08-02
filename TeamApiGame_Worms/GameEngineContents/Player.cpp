@@ -274,11 +274,13 @@ void Player::Start()
 
 void Player::Update(float _Delta)
 {	
+	CameraFocus();
 
 	if (IsTurnPlayer == false)
 	{
 		GameEngineInput::Reset;
 	}
+
 	SetDirPosNormalize();
 	StateUpdate(_Delta);
 }

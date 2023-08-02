@@ -36,8 +36,37 @@ int GravityActor::GetGroundColor(unsigned int _DefaultColor, float4 _Pos)
 
 void GravityActor::CameraFocus()
 {
-	//float4 WindowScale = GameEngineWindow::MainWindow.GetScale();
-	//GetLevel()->GetMainCamera()->SetPos(GetPos() + float4{ -WindowScale.hX(), -WindowScale.hY() });
+	if (true != IsTurnPlayer)
+	{
+		return;
+	}
+
+	float4 WindowScale = GameEngineWindow::MainWindow.GetScale();
+
+	int CameraRangeX = GetLevel()->GetMainCamera()->GetPos().iX();
+	int CameraRangeY = GetLevel()->GetMainCamera()->GetPos().iY();
+
+	float ImageX = GetGroundTexture()->GetScale().X - 1280.0f;
+	float ImageY = GetGroundTexture()->GetScale().Y - 720.0f;
+
+	GetLevel()->GetMainCamera()->SetPos(GetPos() + float4{ -WindowScale.hX(), -WindowScale.hY() });
+
+
+	// 카메라가 맵의 왼쪽으로 못나가게.
+	if (0 >= GetLevel()->GetMainCamera()->GetPos().X)
+	{
+		GetLevel()->GetMainCamera()->SetPos({ 0.0f, GetLevel()->GetMainCamera()->GetPos().Y });
+	}
+	// 카메라가 맵의 오른쪽 최대치를 못나가게.
+	if (ImageX <= GetLevel()->GetMainCamera()->GetPos().X)
+	{
+		GetLevel()->GetMainCamera()->SetPos({ ImageX, GetLevel()->GetMainCamera()->GetPos().Y });
+	}
+
+	if (ImageY <= GetLevel()->GetMainCamera()->GetPos().Y)
+	{
+		GetLevel()->GetMainCamera()->SetPos({ GetLevel()->GetMainCamera()->GetPos().X, ImageY });
+	}
 }
 
 float4 GravityActor::ActorCameraPos()

@@ -93,6 +93,21 @@ public:
 		return Name;
 	}
 
+	void StopLiveTime()
+	{
+		StopValue = true;
+	}
+
+	void GoLiveTime()
+	{
+		StopValue = false;
+	}
+
+	bool GetStopValue()
+	{
+		return StopValue;
+	}
+
 protected:
 
 
@@ -104,8 +119,15 @@ private:
 	bool IsUpdateValue = true; // 이걸 false로 만들면 됩니다.
 	bool IsDeathValue = false; // 아예 메모리에서 날려버리고 싶어.
 
+	bool StopValue = false;
+
 	void AddLiveTime(float _DeltaTime) 
 	{
+		if (true == StopValue)
+		{
+			return;
+		}
+
 		LiveTime += _DeltaTime;
 	}
 };
