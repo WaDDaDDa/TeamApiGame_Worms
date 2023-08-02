@@ -57,6 +57,9 @@ void GameTurn::Render(float _Delta)
 	Text += "  ≈œ Ω√∞£ :";
 	Text += std::to_string(GetLiveTime());
 
+	Text += "  CurAngle : ";
+	Text += std::to_string(static_cast<int>(TurnPlayer->GetCurAngle() * 1000));
+
 	TextOutA(dc, 2, 3, Text.c_str(), static_cast<int>(Text.size()));
 }
 
