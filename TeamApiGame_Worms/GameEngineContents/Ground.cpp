@@ -63,8 +63,6 @@ void Ground::ContactGround(float4 _Pos)
 	Hole* NewHole = GetLevel()->CreateActor<Hole>();
 	NewHole->SetPos(_Pos);
 	NewHole->AddHoleAtGround(Renderer, DebugRenderer);
-	
-	
 }
 
 GameEngineWindowTexture* Ground::GetGroundTexture()

@@ -31,8 +31,16 @@ void Bazooka::Start()
 		FilePath.MoveChild("ContentsResources\\Image\\Weapons\\");
 		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("Blank.bmp"));
 		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("bazooka.bmp"), 1, 32);
+
+
+
+		// 이펙트 로드
+		FilePath.MoveParentToExistsChild("Image");
+		FilePath.MoveChild("Image\\Effects\\");
+		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("circle25.bmp"), 1, 8);
 	}
 
+	
 	Renderer->SetTexture("Blank.bmp");
 
 	// 90도
@@ -102,6 +110,8 @@ void Bazooka::Start()
 	//// -270
 	//Renderer->CreateAnimation("Bazooka_Fly", "bazooka.bmp", 32, 32, 0.05f, false);
 
+	Renderer->CreateAnimation("Bazooka_Bomb", "circle25.bmp", 0, 7, 0.1f, false);
+
 	float Angle = -45.0f;
 	//SetGravityVector(AngleVec.GetRotationToDegZ(Angle) * 700.0f);
 	
@@ -118,7 +128,6 @@ void Bazooka::LevelStart()
 
 void Bazooka::Update(float _Delta)
 {
-	DirCheck();
 	StateUpdate(_Delta);
 }
 
@@ -284,6 +293,7 @@ void Bazooka::FlyStart()
 
 void Bazooka::FlyUpdate(float _Delta)
 {
+	DirCheck();
 	Gravity(_Delta);
 
 	{
@@ -291,14 +301,8 @@ void Bazooka::FlyUpdate(float _Delta)
 		if (Color != RGB(255, 255, 255))
 		{
 
-
-			// PlayLevel에서 만 존재하는 것에만 사용할수 있는예제코드
-			{
-				PlayLevel* CurPlayLevel = dynamic_cast<PlayLevel*>(GetLevel());
-				CurPlayLevel->GetGround()->ContactGround(GetPos());
-
-				Off();
-			}
+			ChangeState(BazookaState::Bomb);
+			return;
 
 		}
 	}
@@ -307,17 +311,18 @@ void Bazooka::FlyUpdate(float _Delta)
 
 void Bazooka::BombStart()
 {
-	Renderer->ChangeAnimation("Bazooka_Boom");
+	Renderer->ChangeAnimation("Bazooka_Bomb");
 }
 
 void Bazooka::BombUpdate(float _Delta)
 {
-	if (0.4f < GetLiveTime())
+
+	PlayLevel* CurPlayLevel = dynamic_cast<PlayLevel*>(GetLevel());
+	CurPlayLevel->GetGround()->ContactGround(GetPos());
+
+	if (true == Renderer->IsAnimationEnd())
 	{
-		if (nullptr != Renderer)
-		{
-			Death();
-		}
+		Death();
 	}
 }
 
