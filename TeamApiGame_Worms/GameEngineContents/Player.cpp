@@ -26,28 +26,6 @@ Player::~Player()
 
 void Player::Start()
 {
-	// Resource 추가
-	//bool IsResource = ResourcesManager::GetInst().IsLoadTexture("KirbyLeft_Idel.bmp");
-	//if (false == IsResource)
-	//{
-	//	GameEnginePath FilePath;
-	//	FilePath.SetCurrentPath();
-	//	FilePath.MoveParentToExistsChild("ContentsResources");
-	//	FilePath.MoveChild("ContentsResources\\Worms\\");
-	//	//ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("파일명"), 가로, 세로);
-	//	
-	//	{ // LeftAnimation 셋팅
-	//		FilePath.MoveChild("Left\\");
-	//		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("KirbyLeft_Idel.bmp"), 4, 1);
-	//	}
-
-	//	{ // RinghtAnimation 셋팅
-	//		FilePath.MoveParentToExistsChild("Right");
-	//		FilePath.MoveChild("Right\\");
-	//		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("KirbyRight_Idel.bmp"), 4, 1);
-	//	}
-	//}
-
 	// Resource
 	{
 		if (false == ResourcesManager::GetInst().IsLoadTexture("idleLeft.bmp"))
@@ -204,22 +182,6 @@ void Player::Start()
 
 	
 	MainRenderer = CreateRenderer(RenderOrder::Player);
-	//MainRenderer->SetTexture("KirbyLeft_Idel.bmp");
-
-	//{
-	//	//MainRenderer->CreateAnimation("aniname", "filename", start, end, frame, loop
-
-	//	{ // LeftAnimation 생성
-	//		MainRenderer->CreateAnimation("Left_Idle", "KirbyLeft_Idel.bmp", 0, 1, 0.2f, true);
-	//	}
-
-	//	{ // RightAnimation 생성
-	//		MainRenderer->CreateAnimation("Right_Idle", "KirbyRight_Idel.bmp", 0, 1, 0.2f, true);
-	//	}
-	//	MainRenderer->SetScaleRatio(3.0f);
-	//	SetOrder(UpdateOrder::Player);
-	//	
-	//}
 
 	// Animation
 	{
@@ -274,6 +236,7 @@ void Player::Render(float _Delta)
 {
 	HDC dc = GameEngineWindow::MainWindow.GetBackBuffer()->GetImageDC();
 
+	{
 	CollisionData Data;
 
 	Data.Pos = ActorCameraPos();
@@ -281,6 +244,37 @@ void Player::Render(float _Delta)
 	Data.Scale = { 5,5 };
 
 	Rectangle(dc, Data.iLeft(), Data.iTop(), Data.iRight(), Data.iBot());
+	}
+
+	{
+		CollisionData Data;
+
+		Data.Pos = ActorCameraPos() + LeftCheckPos;
+
+		Data.Scale = { 5,5 };
+
+		Rectangle(dc, Data.iLeft(), Data.iTop(), Data.iRight(), Data.iBot());
+	}
+
+	{
+		CollisionData Data;
+
+		Data.Pos = ActorCameraPos() + RightCheckPos;
+
+		Data.Scale = { 5,5 };
+
+		Rectangle(dc, Data.iLeft(), Data.iTop(), Data.iRight(), Data.iBot());
+	}
+
+	{
+		CollisionData Data;
+
+		Data.Pos = ActorCameraPos() + UpCheckPos;
+
+		Data.Scale = { 5,5 };
+
+		Rectangle(dc, Data.iLeft(), Data.iTop(), Data.iRight(), Data.iBot());
+	}
 }
 
 void Player::ChangeState(PlayerState _State)
@@ -432,19 +426,23 @@ void Player::Movement(float _Delta)
 
 		CheckPos = RightCheckPos;
 		MovePos1 = { PlayerSpeed * _Delta, 0.0f };
+		// 움직일 곳의 Pos를 MovePos에 담았다.
 	}
+	
 
 	{
 		unsigned int Color = GetGroundColor(RGB(255, 255, 255), CheckPos);
-
+		// 플레이어가 공중이면
 		if (Color == RGB(255, 255, 255))
 		{
+			// 움직일 예정의 곳도 공중인지 체크한다.
 			if (RGB(255, 255, 255) == GetGroundColor(RGB(255, 255, 255), MovePos1))
 			{
+				// 움직일 곳 또한 공중이라면
 				float4 XPos = float4::ZERO;
 				float4 Dir = MovePos1.X <= 0.0f ? float4::RIGHT : float4::LEFT;
 
-				while (RGB(0, 255, 0) != GetGroundColor(RGB(255, 255, 255), MovePos1 + XPos))
+				while (RGB(0, 0, 255) != GetGroundColor(RGB(255, 255, 255), MovePos1 + XPos))
 				{
 					XPos += Dir;
 
@@ -455,9 +453,9 @@ void Player::Movement(float _Delta)
 				}
 
 				float4 YPos = float4::ZERO;
-				while (RGB(0, 255, 0) != GetGroundColor(RGB(255, 255, 255), MovePos1 + YPos))
+				while (RGB(0, 0, 255) != GetGroundColor(RGB(255, 255, 255), MovePos1 + YPos))
 				{
-					YPos.Y += 1;
+					YPos.Y += 2;
 
 					if (YPos.Y > 60.0f)
 					{
@@ -467,14 +465,13 @@ void Player::Movement(float _Delta)
 
 				if (abs(XPos.X) >= YPos.Y)
 				{
-					while (RGB(0, 255, 0) != GetGroundColor(RGB(255, 255, 255), MovePos1))
+					while (RGB(0, 0, 255) != GetGroundColor(RGB(255, 255, 255), MovePos1))
 					{
-						MovePos1.Y += 1;
+						MovePos1.Y += 2;
 					}
 				}
 
 			}
-
 			AddPos(MovePos1);
 		}
 	}
