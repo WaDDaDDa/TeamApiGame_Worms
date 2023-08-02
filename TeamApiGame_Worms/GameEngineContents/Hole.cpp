@@ -41,9 +41,15 @@ void Hole::AddHoleAtGround(GameEngineRenderer* _GroundTexture, GameEngineRendere
 	Death();
 }
 
+//폭발 중심에서 부터 거리 측정
 float Hole::GetDistanceFromHoleCenter(float4 _Pos)
 {
 	float4 Vector = GetPos() - _Pos;
+
+	if (Scale.Size()<=Vector.Size())
+	{
+		return -1;
+	}
 	
 	return Vector.Size();
 }
