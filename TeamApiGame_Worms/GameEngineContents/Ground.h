@@ -20,9 +20,10 @@ public:
 
 	void SwitchRender();
 
-	void ContactGround(float4 _Pos);
+	void ContactGround(float4 _Pos,float4 _HoleScale);
 	
 	GameEngineWindowTexture* GetGroundTexture();
+	GameEngineWindowTexture* GetPixelGroundTexture();
 	
 protected:
 

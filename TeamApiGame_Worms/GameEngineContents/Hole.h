@@ -18,7 +18,11 @@ public:
 
 	float GetDistanceFromHoleCenter(float4 _Pos);
 
-	void SetScale();
+	void SetScale(float4 _Scale)
+	{
+		Scale = _Scale;
+	}
+
 		
 protected:
 

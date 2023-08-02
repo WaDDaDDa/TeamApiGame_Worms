@@ -54,11 +54,6 @@ float Hole::GetDistanceFromHoleCenter(float4 _Pos)
 	return Vector.Size();
 }
 
-void Hole::SetScale()
-{
- //Scale= ; 
-}
-
 void Hole::Start()
 {
 
@@ -76,7 +71,7 @@ void Hole::Start()
 
 
 	}
-	Scale = float4{ 128.0f,128.0f }; //SetScale();
+	 
 
 	Texture = ResourcesManager::GetInst().FindTexture("MagentaHole.Bmp");
 	PixelTexture = ResourcesManager::GetInst().FindTexture("PixelMagentaHole.Bmp");
