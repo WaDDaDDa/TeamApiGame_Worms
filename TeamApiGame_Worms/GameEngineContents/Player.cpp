@@ -149,6 +149,57 @@ void Player::Start()
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("flyDownRight.bmp"), 1, 2);
 		}
+
+		// Bazooka
+		if (false == ResourcesManager::GetInst().IsLoadTexture("bazOnLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("bazOnLeft.bmp"), 1, 7);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("bazOnRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("bazOnRight.bmp"), 1, 7);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("bazAimLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("bazAimLeft.bmp"), 1, 32);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("bazAimRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("bazAimRight.bmp"), 1, 32);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("bazOffLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("bazOffLeft.bmp"), 1, 7);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("bazOffRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("bazOffRight.bmp"), 1, 7);
+		}
+		
 	}
 
 	
@@ -180,7 +231,8 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Left_Jump", "flyLinkLeft.bmp", 0, 6, 0.1f, false);
 		//MainRenderer->CreateAnimation("Left_JumpDown", "flyDownLeft.bmp", 0, 1, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_Falling", "flyDownLeft.bmp", 0, 1, 0.1f, false);
-		
+		MainRenderer->CreateAnimation("Left_BazookaOn", "bazOnLeft.bmp", 0, 6, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_BazookaOff", "bazOffLeft.bmp", 0, 6, 0.1f, false);
 
 
 		// Right
@@ -191,6 +243,9 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Right_Jump", "flyLinkRight.bmp", 0, 6, 0.1f, false);
 		//MainRenderer->CreateAnimation("Right_JumpDown", "flyDownRight.bmp", 0, 1, 0.1f, false);
 		MainRenderer->CreateAnimation("Right_Falling", "flyDownRight.bmp", 0, 1, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_BazookaOn", "bazOnRight.bmp", 0, 6, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_BazookaOff", "bazOffRight.bmp", 0, 6, 0.1f, false);
+
 	}
 	
 	{
@@ -252,6 +307,14 @@ void Player::ChangeState(PlayerState _State)
 		case PlayerState::Falling:
 			FallingStart();
 			break;
+		case PlayerState::BazookaOn:
+			BazookaOnStart();
+			break;
+		case PlayerState::Bazooka:
+			BazookaStart();
+		case PlayerState::BazookaOff:
+			BazookaOffStart();
+			break;
 		default:
 			break;
 		}
@@ -274,6 +337,12 @@ void Player::StateUpdate(float _Delta)
 		return JumpUpdate(_Delta);
 	case PlayerState::Falling:
 		return FallingUpdate(_Delta);
+	case PlayerState::BazookaOn:
+		return BazookaOnUpdate(_Delta);
+	case PlayerState::Bazooka:
+		return BazookaUpdate(_Delta);
+	case PlayerState::BazookaOff:
+		return BazookaOffUpdate(_Delta);
 	default:
 		break;
 	}

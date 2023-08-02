@@ -39,6 +39,12 @@ void Player::IdleUpdate(float _Delta)
 		return;
 	}
 
+	if (true == GameEngineInput::IsDown('2'))
+	{
+		ChangeState(PlayerState::BazookaOn);
+		return;
+	}
+
 }
 
 void Player::MoveStart()
@@ -155,6 +161,41 @@ void Player::FallingUpdate(float _Delta)
 	if (RGB(255, 255, 255) != Color)
 	{
 		GravityReset();
+		ChangeState(PlayerState::Idle);
+		return;
+	}
+}
+
+void Player::BazookaOnStart()
+{
+	ChangeAnimationState("BazookaOn");
+}
+void Player::BazookaOnUpdate(float _Delta)
+{
+	if (true == GameEngineInput::IsDown('1'))
+	{
+		ChangeState(PlayerState::BazookaOff);
+		return;
+	}
+}
+
+void Player::BazookaStart()
+{
+
+}
+void Player::BazookaUpdate(float _Delta)
+{
+
+}
+
+void Player::BazookaOffStart()
+{
+	ChangeAnimationState("BazookaOff");
+}
+void Player::BazookaOffUpdate(float _Delta)
+{
+	if (true == MainRenderer->IsAnimationEnd())
+	{
 		ChangeState(PlayerState::Idle);
 		return;
 	}

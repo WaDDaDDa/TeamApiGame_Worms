@@ -10,6 +10,9 @@ enum class PlayerState
 	JumpReady,
 	Jump,
 	Falling,
+	BazookaOn,
+	Bazooka,
+	BazookaOff,
 	Max
 };
 
@@ -81,6 +84,15 @@ protected:
 
 	void FallingStart();
 	void FallingUpdate(float _Delta);
+
+	void BazookaOnStart();
+	void BazookaOnUpdate(float _Delta);
+
+	void BazookaStart();
+	void BazookaUpdate(float _Delta);
+
+	void BazookaOffStart();
+	void BazookaOffUpdate(float _Delta);
 
 	void SetDirPosNormalize();
 
