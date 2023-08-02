@@ -23,89 +23,89 @@ void Bazooka::Start()
 {
 	Renderer = CreateRenderer(RenderOrder::Weapon);
 
-	if (false == ResourcesManager::GetInst().IsLoadTexture("bullet.bmp"))
+	if (false == ResourcesManager::GetInst().IsLoadTexture("bazooka.bmp"))
 	{
 		GameEnginePath FilePath;
 		FilePath.SetCurrentPath();
 		FilePath.MoveParentToExistsChild("ContentsResources");
 		FilePath.MoveChild("ContentsResources\\Image\\Weapons\\");
 		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("Blank.bmp"));
-		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("bullet.bmp"), 1, 32);
+		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("bazooka.bmp"), 1, 32);
 	}
 
 	Renderer->SetTexture("Blank.bmp");
 
 	// 90도
-	Renderer->CreateAnimation("8_Bazooka_Fly", "bullet.bmp", 0, 0, 0.05f, false);
+	Renderer->CreateAnimation("8_Bazooka_Fly", "bazooka.bmp", 0, 0, 0.05f, false);
 	// 78.75도
-	Renderer->CreateAnimation("7_Bazooka_Fly", "bullet.bmp", 1, 1, 0.05f, false);
+	Renderer->CreateAnimation("7_Bazooka_Fly", "bazooka.bmp", 1, 1, 0.05f, false);
 	// 67.5도
-	Renderer->CreateAnimation("6_Bazooka_Fly", "bullet.bmp", 2, 2, 0.05f, false);
+	Renderer->CreateAnimation("6_Bazooka_Fly", "bazooka.bmp", 2, 2, 0.05f, false);
 	// 56.25도
-	Renderer->CreateAnimation("5_Bazooka_Fly", "bullet.bmp", 3, 3, 0.05f, false);
+	Renderer->CreateAnimation("5_Bazooka_Fly", "bazooka.bmp", 3, 3, 0.05f, false);
 	// 45 도
-	Renderer->CreateAnimation("4_Bazooka_Fly", "bullet.bmp", 4, 4, 0.05f, false);
+	Renderer->CreateAnimation("4_Bazooka_Fly", "bazooka.bmp", 4, 4, 0.05f, false);
 	// 33.75도
-	Renderer->CreateAnimation("3_Bazooka_Fly", "bullet.bmp", 5, 5, 0.05f, false);
+	Renderer->CreateAnimation("3_Bazooka_Fly", "bazooka.bmp", 5, 5, 0.05f, false);
 	// 22,5도
-	Renderer->CreateAnimation("2_Bazooka_Fly", "bullet.bmp", 6, 6, 0.05f, false);
+	Renderer->CreateAnimation("2_Bazooka_Fly", "bazooka.bmp", 6, 6, 0.05f, false);
 	// 11.25도
-	Renderer->CreateAnimation("1_Bazooka_Fly", "bullet.bmp", 7, 7, 0.05f, false);
+	Renderer->CreateAnimation("1_Bazooka_Fly", "bazooka.bmp", 7, 7, 0.05f, false);
 	// 0도
-	Renderer->CreateAnimation("0_Bazooka_Fly", "bullet.bmp", 8, 8, 0.05f, false);
+	Renderer->CreateAnimation("0_Bazooka_Fly", "bazooka.bmp", 8, 8, 0.05f, false);
 	// -11.25도
-	Renderer->CreateAnimation("31_Bazooka_Fly", "bullet.bmp", 9, 9, 0.05f, false);
+	Renderer->CreateAnimation("31_Bazooka_Fly", "bazooka.bmp", 9, 9, 0.05f, false);
 	// -22.5도
-	Renderer->CreateAnimation("30_Bazooka_Fly", "bullet.bmp", 10, 10, 0.05f, false);
+	Renderer->CreateAnimation("30_Bazooka_Fly", "bazooka.bmp", 10, 10, 0.05f, false);
 	// -33.75도
-	Renderer->CreateAnimation("29_Bazooka_Fly", "bullet.bmp", 11, 11, 0.05f, false);
+	Renderer->CreateAnimation("29_Bazooka_Fly", "bazooka.bmp", 11, 11, 0.05f, false);
 	// -45도
-	Renderer->CreateAnimation("28_Bazooka_Fly", "bullet.bmp", 12, 12, 0.05f, false);
+	Renderer->CreateAnimation("28_Bazooka_Fly", "bazooka.bmp", 12, 12, 0.05f, false);
 	// -56.25도
-	Renderer->CreateAnimation("27_Bazooka_Fly", "bullet.bmp", 13, 13, 0.05f, false);
+	Renderer->CreateAnimation("27_Bazooka_Fly", "bazooka.bmp", 13, 13, 0.05f, false);
 	// -67.5도
-	Renderer->CreateAnimation("26_Bazooka_Fly", "bullet.bmp", 14, 14, 0.05f, false);
+	Renderer->CreateAnimation("26_Bazooka_Fly", "bazooka.bmp", 14, 14, 0.05f, false);
 	// -78.75도
-	Renderer->CreateAnimation("25_Bazooka_Fly", "bullet.bmp", 15, 15, 0.05f, false);
+	Renderer->CreateAnimation("25_Bazooka_Fly", "bazooka.bmp", 15, 15, 0.05f, false);
 	// -90 도
-	Renderer->CreateAnimation("24_Bazooka_Fly", "bullet.bmp", 16, 16, 0.05f, false);
+	Renderer->CreateAnimation("24_Bazooka_Fly", "bazooka.bmp", 16, 16, 0.05f, false);
 	// -101.25 도
-	Renderer->CreateAnimation("23_Bazooka_Fly", "bullet.bmp", 17, 17, 0.05f, false);
+	Renderer->CreateAnimation("23_Bazooka_Fly", "bazooka.bmp", 17, 17, 0.05f, false);
 	// -112.5도
-	Renderer->CreateAnimation("22_Bazooka_Fly", "bullet.bmp", 18, 18, 0.05f, false);
+	Renderer->CreateAnimation("22_Bazooka_Fly", "bazooka.bmp", 18, 18, 0.05f, false);
 	// -123.75도
-	Renderer->CreateAnimation("21_Bazooka_Fly", "bullet.bmp", 19, 19, 0.05f, false);
+	Renderer->CreateAnimation("21_Bazooka_Fly", "bazooka.bmp", 19, 19, 0.05f, false);
 	// -135도
-	Renderer->CreateAnimation("20_Bazooka_Fly", "bullet.bmp", 20, 20, 0.05f, false);
+	Renderer->CreateAnimation("20_Bazooka_Fly", "bazooka.bmp", 20, 20, 0.05f, false);
 	// -146.25도
-	Renderer->CreateAnimation("19_Bazooka_Fly", "bullet.bmp", 21, 21, 0.05f, false);
+	Renderer->CreateAnimation("19_Bazooka_Fly", "bazooka.bmp", 21, 21, 0.05f, false);
 	//-157.5
-	Renderer->CreateAnimation("18_Bazooka_Fly", "bullet.bmp", 22, 22, 0.05f, false);
+	Renderer->CreateAnimation("18_Bazooka_Fly", "bazooka.bmp", 22, 22, 0.05f, false);
 	//-168.75
-	Renderer->CreateAnimation("17_Bazooka_Fly", "bullet.bmp", 23, 23, 0.05f, false);
+	Renderer->CreateAnimation("17_Bazooka_Fly", "bazooka.bmp", 23, 23, 0.05f, false);
 	//-180
-	Renderer->CreateAnimation("16_Bazooka_Fly", "bullet.bmp", 24, 24, 0.05f, false);
+	Renderer->CreateAnimation("16_Bazooka_Fly", "bazooka.bmp", 24, 24, 0.05f, false);
 	//-191.25
-	Renderer->CreateAnimation("15_Bazooka_Fly", "bullet.bmp", 25, 25, 0.05f, false);
+	Renderer->CreateAnimation("15_Bazooka_Fly", "bazooka.bmp", 25, 25, 0.05f, false);
 	//-202.5
-	Renderer->CreateAnimation("14_Bazooka_Fly", "bullet.bmp", 26, 26, 0.05f, false);
+	Renderer->CreateAnimation("14_Bazooka_Fly", "bazooka.bmp", 26, 26, 0.05f, false);
 	//-213.75
-	Renderer->CreateAnimation("13_Bazooka_Fly", "bullet.bmp", 27, 27, 0.05f, false);
+	Renderer->CreateAnimation("13_Bazooka_Fly", "bazooka.bmp", 27, 27, 0.05f, false);
 	//-225
-	Renderer->CreateAnimation("12_Bazooka_Fly", "bullet.bmp", 28, 28, 0.05f, false);
+	Renderer->CreateAnimation("12_Bazooka_Fly", "bazooka.bmp", 28, 28, 0.05f, false);
 	//-236.25
-	Renderer->CreateAnimation("11_Bazooka_Fly", "bullet.bmp", 29, 29, 0.05f, false);
+	Renderer->CreateAnimation("11_Bazooka_Fly", "bazooka.bmp", 29, 29, 0.05f, false);
 	//-247.5
-	Renderer->CreateAnimation("10_Bazooka_Fly", "bullet.bmp", 30, 30, 0.05f, false);
+	Renderer->CreateAnimation("10_Bazooka_Fly", "bazooka.bmp", 30, 30, 0.05f, false);
 	//-258.75
-	Renderer->CreateAnimation("9_Bazooka_Fly", "bullet.bmp", 31, 31, 0.05f, false);
+	Renderer->CreateAnimation("9_Bazooka_Fly", "bazooka.bmp", 31, 31, 0.05f, false);
 	//// -270
-	//Renderer->CreateAnimation("Bazooka_Fly", "bullet.bmp", 32, 32, 0.05f, false);
-
+	//Renderer->CreateAnimation("Bazooka_Fly", "bazooka.bmp", 32, 32, 0.05f, false);
 
 	float Angle = -45.0f;
 	float4 AngleVec = { 1.0f, 0.0f };
 	SetGravityVector(AngleVec.GetRotationToDegZ(Angle) * 700.0f);
+	//SetGravityVector(AngleVec.GetRotationToDegZ(Master->GetAngle()) * 700.0f);
 
 	ChangeState(BazookaState::Fly);
 
@@ -113,7 +113,7 @@ void Bazooka::Start()
 
 void Bazooka::LevelStart()
 {
-	SetPos(Master->GetPos() + float4{0, -15});
+
 }
 
 void Bazooka::Update(float _Delta)

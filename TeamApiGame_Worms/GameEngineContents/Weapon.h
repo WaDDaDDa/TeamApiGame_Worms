@@ -1,5 +1,6 @@
 #pragma once
 #include "GravityActor.h"
+#include "Player.h"
 
 // Ό³Έν : 
 class Weapon : public GravityActor
@@ -18,6 +19,7 @@ public:
 	void SetMaster(class Player* _CurPlayer)
 	{
 		Master = _CurPlayer;
+		SetPos(Master->GetPos() + float4{0, -15});
 	}
 
 protected:
