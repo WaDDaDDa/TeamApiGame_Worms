@@ -26,28 +26,6 @@ Player::~Player()
 
 void Player::Start()
 {
-	// Resource 추가
-	//bool IsResource = ResourcesManager::GetInst().IsLoadTexture("KirbyLeft_Idel.bmp");
-	//if (false == IsResource)
-	//{
-	//	GameEnginePath FilePath;
-	//	FilePath.SetCurrentPath();
-	//	FilePath.MoveParentToExistsChild("ContentsResources");
-	//	FilePath.MoveChild("ContentsResources\\Worms\\");
-	//	//ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("파일명"), 가로, 세로);
-	//	
-	//	{ // LeftAnimation 셋팅
-	//		FilePath.MoveChild("Left\\");
-	//		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("KirbyLeft_Idel.bmp"), 4, 1);
-	//	}
-
-	//	{ // RinghtAnimation 셋팅
-	//		FilePath.MoveParentToExistsChild("Right");
-	//		FilePath.MoveChild("Right\\");
-	//		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("KirbyRight_Idel.bmp"), 4, 1);
-	//	}
-	//}
-
 	// Resource
 	{
 		if (false == ResourcesManager::GetInst().IsLoadTexture("idleLeft.bmp"))
@@ -204,22 +182,6 @@ void Player::Start()
 
 	
 	MainRenderer = CreateRenderer(RenderOrder::Player);
-	//MainRenderer->SetTexture("KirbyLeft_Idel.bmp");
-
-	//{
-	//	//MainRenderer->CreateAnimation("aniname", "filename", start, end, frame, loop
-
-	//	{ // LeftAnimation 생성
-	//		MainRenderer->CreateAnimation("Left_Idle", "KirbyLeft_Idel.bmp", 0, 1, 0.2f, true);
-	//	}
-
-	//	{ // RightAnimation 생성
-	//		MainRenderer->CreateAnimation("Right_Idle", "KirbyRight_Idel.bmp", 0, 1, 0.2f, true);
-	//	}
-	//	MainRenderer->SetScaleRatio(3.0f);
-	//	SetOrder(UpdateOrder::Player);
-	//	
-	//}
 
 	// Animation
 	{
@@ -274,6 +236,7 @@ void Player::Render(float _Delta)
 {
 	HDC dc = GameEngineWindow::MainWindow.GetBackBuffer()->GetImageDC();
 
+	{
 	CollisionData Data;
 
 	Data.Pos = ActorCameraPos();
@@ -281,6 +244,37 @@ void Player::Render(float _Delta)
 	Data.Scale = { 5,5 };
 
 	Rectangle(dc, Data.iLeft(), Data.iTop(), Data.iRight(), Data.iBot());
+	}
+
+	{
+		CollisionData Data;
+
+		Data.Pos = ActorCameraPos() + LeftCheckPos;
+
+		Data.Scale = { 5,5 };
+
+		Rectangle(dc, Data.iLeft(), Data.iTop(), Data.iRight(), Data.iBot());
+	}
+
+	{
+		CollisionData Data;
+
+		Data.Pos = ActorCameraPos() + RightCheckPos;
+
+		Data.Scale = { 5,5 };
+
+		Rectangle(dc, Data.iLeft(), Data.iTop(), Data.iRight(), Data.iBot());
+	}
+
+	{
+		CollisionData Data;
+
+		Data.Pos = ActorCameraPos() + UpCheckPos;
+
+		Data.Scale = { 5,5 };
+
+		Rectangle(dc, Data.iLeft(), Data.iTop(), Data.iRight(), Data.iBot());
+	}
 }
 
 void Player::ChangeState(PlayerState _State)
@@ -474,7 +468,6 @@ void Player::Movement(float _Delta)
 				}
 
 			}
-
 			AddPos(MovePos1);
 		}
 	}

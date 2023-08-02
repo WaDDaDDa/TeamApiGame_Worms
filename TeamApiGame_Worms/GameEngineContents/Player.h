@@ -117,8 +117,9 @@ private:
 	float4 CheckPos = float4::ZERO;
 
 	// Move 중 벽을 판정해서 막히는 지점
-	float4 LeftCheckPos = float4{ -30.0f, -40.0f };
-	float4 RightCheckPos = float4{ 30.0f, -40.0f };
+	float4 LeftCheckPos = float4{ -5.0f, -10.0f };
+	float4 RightCheckPos = float4{ 5.0f, -10.0f };
+	float4 UpCheckPos = float4{ 0 , -20.0f };
 
 };
 

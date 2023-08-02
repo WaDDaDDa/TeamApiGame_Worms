@@ -64,12 +64,12 @@ void Player::MoveUpdate(float _Delta)
 		ChangeState(PlayerState::Idle);
 	}
 
-	unsigned int Color = GetGroundColor(RGB(255, 255, 255), float4::DOWN);
+	unsigned int Color = GetGroundColor(RGB(255, 255, 255), float4::DOWN * 10.0f);
 
 	if ((RGB(255, 255, 255) == Color))
 	{
 		//ChangeState(PlayerState::Falling);
-		return;
+		//return;
 	}
 
 }
@@ -118,13 +118,26 @@ void Player::JumpStart()
 void Player::JumpUpdate(float _Delta)
 {
 	Gravity(_Delta);
-	DirCheck();
+	//DirCheck();
 
 	// 머리위 체크가 하얀색이 아니라면 Falling으로 상태전환. = 다른색상이 있다면 Falling
 	// 머리위 체크가 녹색이면 Falling,  빨간색이면 통과.  이런식으로 하면 통과하는 발판이 가능해질듯함.
-	float4 UpCheck = { 0 , -64 };
+	unsigned int ColorCheck = GetGroundColor(RGB(255, 255, 255), UpCheckPos);
+	unsigned int LeftColorCheck = GetGroundColor(RGB(255, 255, 255), LeftCheckPos);
+	unsigned int RightColorCheck = GetGroundColor(RGB(255, 255, 255), RightCheckPos);
 
-	unsigned int ColorCheck = GetGroundColor(RGB(255, 255, 255), UpCheck);
+	if (PlayerDir::Left == Dir && LeftColorCheck != RGB(255, 255, 255))
+	{
+		SetGravityVector(float4::ZERO);
+		ChangeState(PlayerState::Falling);
+		return;
+	}
+	else if (PlayerDir::Right == Dir && RightColorCheck != RGB(255, 255, 255))
+	{
+		SetGravityVector(float4::ZERO);
+		ChangeState(PlayerState::Falling);
+		return;
+	}
 
 	// 천장에 머리 부딪힘 -> Falling으로 전환
 	if (ColorCheck != RGB(255, 255, 255))
@@ -152,7 +165,7 @@ void Player::FallingStart()
 
 void Player::FallingUpdate(float _Delta)
 {
-	DirCheck();
+	//DirCheck();
 	Gravity(_Delta);
 
 	// 땅에 닿으면 기본상태.
