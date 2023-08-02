@@ -54,9 +54,9 @@ public:
 		return Hp;
 	}
 
-	float GetAngle()
+	float GetCurAngle()
 	{
-		return FireAngle;
+		return CurAngle;
 	}
 
 	void Movement(float _Delta);
@@ -106,8 +106,11 @@ private:
 	int Hp = 100;
 	float PlayerSpeed = 200.0f;
 	float PlayerJumpPower = 400.0f;
+
+	float CurAngle = 0.0f;
+
 	
-	float FireAngle = 0.0f;
+	
 
 	// 플레이어 전체를 관리하도록 list로 플레이어 관리
 	static std::vector<Player*> AllPlayer;

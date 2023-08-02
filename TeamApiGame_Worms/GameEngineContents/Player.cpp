@@ -208,6 +208,12 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Right_BazookaOn", "bazOnRight.bmp", 0, 6, 0.1f, false);
 		MainRenderer->CreateAnimation("Right_BazookaOff", "bazOffRight.bmp", 0, 6, 0.1f, false);
 
+		// BazookaAnimation
+		for (int i = 0; i < 32; i++)
+		{
+			MainRenderer->CreateAnimation("Left_Bazooka" + std::to_string(i), "bazAimLeft.bmp", i, i, 0.1f, false);
+			MainRenderer->CreateAnimation("Right_Bazooka" + std::to_string(i), "bazAimRight.bmp", i, i, 0.1f, false);
+		}
 	}
 	
 	{

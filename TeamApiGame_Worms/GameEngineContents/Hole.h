@@ -16,6 +16,8 @@ public:
 
 	void AddHoleAtGround(class GameEngineRenderer* _GroundTexture, GameEngineRenderer* _GroundPixelTexture);
 
+	float GetDistanceFromHoleCenter(float4 _Pos);
+
 	void SetScale();
 		
 protected:

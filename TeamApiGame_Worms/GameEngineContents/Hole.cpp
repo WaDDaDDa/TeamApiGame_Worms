@@ -1,7 +1,10 @@
 #include "Hole.h"
 #include "Ground.h"
+#include "ContentsEnum.h"
+
 #include <GameEngineCore/ResourcesManager.h>
 #include <GameEngineCore/GameEngineRenderer.h>
+#include <GameEngineCore/GameEngineCollision.h>
 #include <GameEnginePlatform/GameEngineWindowTexture.h>
 
 Hole::Hole()
@@ -38,6 +41,19 @@ void Hole::AddHoleAtGround(GameEngineRenderer* _GroundTexture, GameEngineRendere
 	Death();
 }
 
+//폭발 중심에서 부터 거리 측정
+float Hole::GetDistanceFromHoleCenter(float4 _Pos)
+{
+	float4 Vector = GetPos() - _Pos;
+
+	if (Scale.Size()<=Vector.Size())
+	{
+		return -1;
+	}
+	
+	return Vector.Size();
+}
+
 void Hole::SetScale()
 {
  //Scale= ; 
@@ -60,11 +76,18 @@ void Hole::Start()
 
 
 	}
+	Scale = float4{ 128.0f,128.0f }; //SetScale();
 
 	Texture = ResourcesManager::GetInst().FindTexture("MagentaHole.Bmp");
 	PixelTexture = ResourcesManager::GetInst().FindTexture("PixelMagentaHole.Bmp");
 
-	Scale = float4{ 128.0f,128.0f };
+
+	{
+		GameEngineCollision* Collision = CreateCollision(CollisionOrder::Boom);
+		Collision->SetCollisionType(CollisionType::CirCle);
+		Collision->SetCollisionScale(Scale);
+
+	}
 
 }
 
