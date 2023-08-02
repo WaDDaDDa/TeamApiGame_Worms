@@ -322,7 +322,6 @@ void Bazooka::BombStart()
 	BombCollision->SetCollisionType(CollisionType::CirCle);
 	BombCollision->SetCollisionPos({ 0, 0 });
 
-	Renderer->ChangeAnimation("Bazooka_Boom");
 	Renderer->ChangeAnimation("Bazooka_Bomb");
 }
 
@@ -330,7 +329,7 @@ void Bazooka::BombUpdate(float _Delta)
 {
 
 	PlayLevel* CurPlayLevel = dynamic_cast<PlayLevel*>(GetLevel());
-	CurPlayLevel->GetGround()->ContactGround(GetPos());
+	CurPlayLevel->GetGround()->ContactGround(GetPos(), {100.0f,100.0f});
 
 	if (true == Renderer->IsAnimationEnd())
 	{

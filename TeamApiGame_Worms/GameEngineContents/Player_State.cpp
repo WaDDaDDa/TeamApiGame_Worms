@@ -201,7 +201,7 @@ void Player::DamagingStart()
 }
 void Player::DamagingUpdate(float _Delta)
 {
-	Gravity(_Delta);
+	GroundCheck(_Delta);
 }
 
 void Player::DeathStart()
@@ -210,7 +210,7 @@ void Player::DeathStart()
 }
 void Player::DeathUpdate(float _Delta)
 {
-
+	
 }
 
 void Player::BazookaOnStart()
