@@ -1,9 +1,11 @@
 #include "Player.h"
 #include "Weapon.h"
 #include "Bazooka.h"
+#include "ContentsEnum.h"
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/GameEngineRenderer.h>
+#include <GameEngineCore/GameEngineCollision.h>
 
 void Player::IdleStart()
 {
@@ -12,6 +14,22 @@ void Player::IdleStart()
 void Player::IdleUpdate(float _Delta)
 {
 	GroundCheck(_Delta);
+
+	std::vector<GameEngineCollision*> _Col;
+	if (true == PlayerBodyCollision->Collision(CollisionOrder::Boom, _Col
+		, CollisionType::Rect
+		, CollisionType::CirCle
+	))
+	{
+		for (size_t i = 0; i < _Col.size(); i++)
+		{
+			GameEngineCollision* Collison = _Col[i];
+
+			GameEngineActor* Actor = Collison->GetActor();
+		}
+		ChangeState(PlayerState::Damaging);
+
+	}
 
 	if (true != IsTurnPlayer)
 	{
@@ -44,6 +62,8 @@ void Player::IdleUpdate(float _Delta)
 		ChangeState(PlayerState::BazookaOn);
 		return;
 	}
+
+	
 
 }
 
@@ -79,10 +99,6 @@ void Player::FireStart()
 	Weapon* NewWeapon = GetLevel()->CreateActor<Bazooka>();
 	NewWeapon->SetGroundTexture(GetGroundTexture());
 	NewWeapon->SetMaster(this);
-
-	float4 Pos = GetPos();
-	Pos.Y -= 15.0f;
-	NewWeapon->SetPos(Pos);
 }
 void Player::FireUpdate(float _Delta)
 {
@@ -179,26 +195,172 @@ void Player::FallingUpdate(float _Delta)
 	}
 }
 
+void Player::DamagingStart()
+{
+	ChangeAnimationState("Damaging");
+}
+void Player::DamagingUpdate(float _Delta)
+{
+	Gravity(_Delta);
+}
+
+void Player::DeathStart()
+{
+
+}
+void Player::DeathUpdate(float _Delta)
+{
+
+}
+
 void Player::BazookaOnStart()
 {
 	ChangeAnimationState("BazookaOn");
 }
 void Player::BazookaOnUpdate(float _Delta)
 {
-	if (true == GameEngineInput::IsDown('1'))
+	//if (true == GameEngineInput::IsDown('1'))
+	//{
+	//	ChangeState(PlayerState::BazookaOff);
+	//	return;
+	//}
+
+	if (true == MainRenderer->IsAnimationEnd())
 	{
-		ChangeState(PlayerState::BazookaOff);
+		ChangeState(PlayerState::Bazooka);
 		return;
 	}
 }
 
 void Player::BazookaStart()
 {
-
+	ChangeAnimationState("Bazooka15");
 }
 void Player::BazookaUpdate(float _Delta)
 {
+	if (true == GameEngineInput::IsDown('1'))
+	{
+		ChangeState(PlayerState::BazookaOff);
+		return;
+	}
 
+	if (true == GameEngineInput::IsPress(VK_UP))
+	{
+		CurAngle -= (5.625f * _Delta * 4.0f);
+		if (CurAngle <= -90.0f)
+		{
+			CurAngle = -90.0f;
+		}
+	}
+	if (true == GameEngineInput::IsPress(VK_DOWN))
+	{
+		CurAngle += (5.625f * _Delta * 4.0f);
+		if (CurAngle >= +90.0f)
+		{
+			CurAngle = 90.0f;
+		}
+	}
+
+	int iCurAngle = static_cast<int>(CurAngle);
+	switch (iCurAngle)
+	{
+	case -90:
+		ChangeAnimationState("Bazooka31");
+		break;
+	case -84:
+		ChangeAnimationState("Bazooka30");
+		break;
+	case -78:
+		ChangeAnimationState("Bazooka29");
+		break;
+	case -73:
+		ChangeAnimationState("Bazooka28");
+		break;
+	case -67:
+		ChangeAnimationState("Bazooka27");
+		break;
+	case -61:
+		ChangeAnimationState("Bazooka26");
+		break;
+	case -56:
+		ChangeAnimationState("Bazooka25");
+		break;
+	case -50:
+		ChangeAnimationState("Bazooka24");
+		break;
+	case -45:
+		ChangeAnimationState("Bazooka23");
+		break;
+	case -39:
+		ChangeAnimationState("Bazooka22");
+		break;
+	case -33:
+		ChangeAnimationState("Bazooka21");
+		break;
+	case -28:
+		ChangeAnimationState("Bazooka20");
+		break;
+	case -22:
+		ChangeAnimationState("Bazooka19");
+		break;
+	case -16:
+		ChangeAnimationState("Bazooka18");
+		break;
+	case -11:
+		ChangeAnimationState("Bazooka17");
+		break;
+	case -5:
+		ChangeAnimationState("Bazooka16");
+		break;
+	case 0:
+		ChangeAnimationState("Bazooka15");
+		break;
+	case 5:
+		ChangeAnimationState("Bazooka14");
+		break;
+	case 11:
+		ChangeAnimationState("Bazooka13");
+		break;
+	case 16:
+		ChangeAnimationState("Bazooka12");
+		break;
+	case 22:
+		ChangeAnimationState("Bazooka11");
+		break;
+	case 28:
+		ChangeAnimationState("Bazooka10");
+		break;
+	case 33:
+		ChangeAnimationState("Bazooka9");
+		break;
+	case 39:
+		ChangeAnimationState("Bazooka8");
+		break;
+	case 45:
+		ChangeAnimationState("Bazooka7");
+		break;
+	case 50:
+		ChangeAnimationState("Bazooka6");
+		break;
+	case 56:
+		ChangeAnimationState("Bazooka5");
+		break;
+	case 61:
+		ChangeAnimationState("Bazooka4");
+		break;
+	case 67:
+		ChangeAnimationState("Bazooka3");
+		break;
+	case 73:
+		ChangeAnimationState("Bazooka2");
+		break;
+	case 78:
+		ChangeAnimationState("Bazooka1");
+		break;
+	case 84:
+		ChangeAnimationState("Bazooka0");
+		break;
+	}
 }
 
 void Player::BazookaOffStart()

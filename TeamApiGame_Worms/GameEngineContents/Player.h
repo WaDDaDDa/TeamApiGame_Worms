@@ -10,6 +10,8 @@ enum class PlayerState
 	JumpReady,
 	Jump,
 	Falling,
+	Damaging,
+	Death,
 	BazookaOn,
 	Bazooka,
 	BazookaOff,
@@ -54,6 +56,11 @@ public:
 		return Hp;
 	}
 
+	float GetCurAngle()
+	{
+		return CurAngle;
+	}
+
 	void Movement(float _Delta);
 
 protected:
@@ -85,6 +92,12 @@ protected:
 	void FallingStart();
 	void FallingUpdate(float _Delta);
 
+	void DamagingStart();
+	void DamagingUpdate(float _Delta);
+
+	void DeathStart();
+	void DeathUpdate(float _Delta);
+
 	void BazookaOnStart();
 	void BazookaOnUpdate(float _Delta);
 
@@ -96,11 +109,17 @@ protected:
 
 	void SetDirPosNormalize();
 
+	// Collision
+	GameEngineCollision* PlayerBodyCollision = nullptr;
+
 private:
 	// PlayerStatus ฐüทร
 	int Hp = 100;
 	float PlayerSpeed = 200.0f;
 	float PlayerJumpPower = 400.0f;
+
+	float CurAngle = -45.0f;
+
 	
 	
 

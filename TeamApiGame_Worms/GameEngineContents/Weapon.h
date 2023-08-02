@@ -1,5 +1,6 @@
 #pragma once
 #include "GravityActor.h"
+#include "Player.h"
 
 // 설명 : 
 class Weapon : public GravityActor
@@ -18,6 +19,8 @@ public:
 	void SetMaster(class Player* _CurPlayer)
 	{
 		Master = _CurPlayer;
+		// 플레이어 랜더러 위치 옮긴만큼.
+		SetPos(Master->GetPos() + float4{0, -15});
 	}
 
 protected:
