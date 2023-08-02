@@ -23,4 +23,5 @@ enum class CollisionOrder
 	PlayerBody,
 	UI,
 	Mouse,
+	Boom,
 };
