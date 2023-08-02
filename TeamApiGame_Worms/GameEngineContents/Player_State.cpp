@@ -1,9 +1,11 @@
 #include "Player.h"
 #include "Weapon.h"
 #include "Bazooka.h"
+#include "ContentsEnum.h"
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/GameEngineRenderer.h>
+#include <GameEngineCore/GameEngineCollision.h>
 
 void Player::IdleStart()
 {
@@ -12,6 +14,22 @@ void Player::IdleStart()
 void Player::IdleUpdate(float _Delta)
 {
 	GroundCheck(_Delta);
+
+	std::vector<GameEngineCollision*> _Col;
+	if (true == PlayerBodyCollision->Collision(CollisionOrder::Boom, _Col
+		, CollisionType::Rect
+		, CollisionType::CirCle
+	))
+	{
+		for (size_t i = 0; i < _Col.size(); i++)
+		{
+			GameEngineCollision* Collison = _Col[i];
+
+			GameEngineActor* Actor = Collison->GetActor();
+		}
+		ChangeState(PlayerState::Damaging);
+
+	}
 
 	if (true != IsTurnPlayer)
 	{
@@ -44,6 +62,8 @@ void Player::IdleUpdate(float _Delta)
 		ChangeState(PlayerState::BazookaOn);
 		return;
 	}
+
+	
 
 }
 
@@ -177,6 +197,24 @@ void Player::FallingUpdate(float _Delta)
 		ChangeState(PlayerState::Idle);
 		return;
 	}
+}
+
+void Player::DamagingStart()
+{
+	ChangeAnimationState("Damaging");
+}
+void Player::DamagingUpdate(float _Delta)
+{
+	Gravity(_Delta);
+}
+
+void Player::DeathStart()
+{
+
+}
+void Player::DeathUpdate(float _Delta)
+{
+
 }
 
 void Player::BazookaOnStart()

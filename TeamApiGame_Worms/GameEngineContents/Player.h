@@ -10,6 +10,8 @@ enum class PlayerState
 	JumpReady,
 	Jump,
 	Falling,
+	Damaging,
+	Death,
 	BazookaOn,
 	Bazooka,
 	BazookaOff,
@@ -90,6 +92,12 @@ protected:
 	void FallingStart();
 	void FallingUpdate(float _Delta);
 
+	void DamagingStart();
+	void DamagingUpdate(float _Delta);
+
+	void DeathStart();
+	void DeathUpdate(float _Delta);
+
 	void BazookaOnStart();
 	void BazookaOnUpdate(float _Delta);
 
@@ -100,6 +108,9 @@ protected:
 	void BazookaOffUpdate(float _Delta);
 
 	void SetDirPosNormalize();
+
+	// Collision
+	GameEngineCollision* PlayerBodyCollision = nullptr;
 
 private:
 	// PlayerStatus ฐüทร

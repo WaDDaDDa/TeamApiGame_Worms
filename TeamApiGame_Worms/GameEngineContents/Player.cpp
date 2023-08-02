@@ -10,6 +10,7 @@
 #include <GameEngineCore/GameEngineCollision.h>
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/GameEngineCamera.h>
+#include <GameEngineCore/GameEngineCollision.h>
 
 std::vector<Player*> Player::AllPlayer;
 
@@ -178,9 +179,44 @@ void Player::Start()
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("bazOffRight.bmp"), 1, 7);
 		}
 		
+		// DamageFly
+		if (false == ResourcesManager::GetInst().IsLoadTexture("wfly1_L.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("wfly1_L.bmp"), 1, 32);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("wfly1_R.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("wfly1_R.bmp"), 1, 32);
+		}
+
+		// Die
+		if (false == ResourcesManager::GetInst().IsLoadTexture("wdieLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("wdieLeft.bmp"), 1, 60);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("wdieRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("wdieRight.bmp"), 1, 60);
+		}
 	}
 
-	
+
 	MainRenderer = CreateRenderer(RenderOrder::Player);
 
 	// Animation
@@ -193,6 +229,8 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Left_Jump", "flyLinkLeft.bmp", 0, 6, 0.1f, false);
 		//MainRenderer->CreateAnimation("Left_JumpDown", "flyDownLeft.bmp", 0, 1, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_Falling", "flyDownLeft.bmp", 0, 1, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_Damaging", "wfly1_L.bmp", 0, 31, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_Death", "wdieLeft.bmp", 0, 59, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_BazookaOn", "bazOnLeft.bmp", 0, 6, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_BazookaOff", "bazOffLeft.bmp", 0, 6, 0.1f, false);
 
@@ -205,6 +243,8 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Right_Jump", "flyLinkRight.bmp", 0, 6, 0.1f, false);
 		//MainRenderer->CreateAnimation("Right_JumpDown", "flyDownRight.bmp", 0, 1, 0.1f, false);
 		MainRenderer->CreateAnimation("Right_Falling", "flyDownRight.bmp", 0, 1, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_Damaging", "wfly1_R.bmp", 0, 31, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_Death", "wdieRight.bmp", 0, 59, 0.1f, false);
 		MainRenderer->CreateAnimation("Right_BazookaOn", "bazOnRight.bmp", 0, 6, 0.1f, false);
 		MainRenderer->CreateAnimation("Right_BazookaOff", "bazOffRight.bmp", 0, 6, 0.1f, false);
 
@@ -218,6 +258,11 @@ void Player::Start()
 	
 	{
 		//Collision
+		PlayerBodyCollision = CreateCollision(CollisionOrder::PlayerBody);
+
+		PlayerBodyCollision->SetCollisionScale({ 20, 25 });
+		PlayerBodyCollision->SetCollisionType(CollisionType::Rect);
+		PlayerBodyCollision->SetCollisionPos({ 0, -10 });
 	}
 
 	MainRenderer->SetRenderPos({ 0, -15 });
@@ -228,7 +273,8 @@ void Player::Start()
 
 
 void Player::Update(float _Delta)
-{
+{	
+
 	if (IsTurnPlayer == false)
 	{
 		GameEngineInput::Reset;
@@ -307,11 +353,18 @@ void Player::ChangeState(PlayerState _State)
 		case PlayerState::Falling:
 			FallingStart();
 			break;
+		case PlayerState::Damaging:
+			DamagingStart();
+			break;
+		case PlayerState::Death:
+			DeathStart();
+			break;
 		case PlayerState::BazookaOn:
 			BazookaOnStart();
 			break;
 		case PlayerState::Bazooka:
 			BazookaStart();
+			break;
 		case PlayerState::BazookaOff:
 			BazookaOffStart();
 			break;
@@ -337,6 +390,10 @@ void Player::StateUpdate(float _Delta)
 		return JumpUpdate(_Delta);
 	case PlayerState::Falling:
 		return FallingUpdate(_Delta);
+	case PlayerState::Damaging:
+		return DamagingUpdate(_Delta);
+	case PlayerState::Death:
+		return DeathUpdate(_Delta);
 	case PlayerState::BazookaOn:
 		return BazookaOnUpdate(_Delta);
 	case PlayerState::Bazooka:

@@ -8,6 +8,7 @@
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/ResourcesManager.h>
 #include <GameEngineCore/GameEngineRenderer.h>
+#include <GameEngineCore/GameEnginecollision.h>
 
 Bazooka::Bazooka()
 {
@@ -106,6 +107,11 @@ void Bazooka::Start()
 	float4 AngleVec = { 1.0f, 0.0f };
 	SetGravityVector(AngleVec.GetRotationToDegZ(Angle) * 700.0f);
 	//SetGravityVector(AngleVec.GetRotationToDegZ(Master->GetAngle()) * 700.0f);
+
+	BombCollision = CreateCollision(CollisionOrder::Boom);
+	BombCollision->SetCollisionScale({ 128, 128 });
+	BombCollision->SetCollisionType(CollisionType::CirCle);
+	BombCollision->SetCollisionPos({ 0, 0 });
 
 	ChangeState(BazookaState::Fly);
 
@@ -300,6 +306,11 @@ void Bazooka::FlyUpdate(float _Delta)
 
 void Bazooka::BombStart()
 {
+	BombCollision = CreateCollision(CollisionOrder::Boom);
+	BombCollision->SetCollisionScale({ 128, 128 });
+	BombCollision->SetCollisionType(CollisionType::CirCle);
+	BombCollision->SetCollisionPos({ 0, 0 });
+
 	Renderer->ChangeAnimation("Bazooka_Boom");
 }
 

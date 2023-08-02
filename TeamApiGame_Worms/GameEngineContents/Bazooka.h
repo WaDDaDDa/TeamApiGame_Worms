@@ -23,6 +23,8 @@ public:
 
 	class GameEngineRenderer* Renderer;
 
+	GameEngineCollision* BombCollision = nullptr;
+
 	void SetDir(float4& _DirPos)
 	{
 		Dir = _DirPos;
