@@ -426,19 +426,23 @@ void Player::Movement(float _Delta)
 
 		CheckPos = RightCheckPos;
 		MovePos1 = { PlayerSpeed * _Delta, 0.0f };
+		// 움직일 곳의 Pos를 MovePos에 담았다.
 	}
+	
 
 	{
 		unsigned int Color = GetGroundColor(RGB(255, 255, 255), CheckPos);
-
+		// 플레이어가 공중이면
 		if (Color == RGB(255, 255, 255))
 		{
+			// 움직일 예정의 곳도 공중인지 체크한다.
 			if (RGB(255, 255, 255) == GetGroundColor(RGB(255, 255, 255), MovePos1))
 			{
+				// 움직일 곳 또한 공중이라면
 				float4 XPos = float4::ZERO;
 				float4 Dir = MovePos1.X <= 0.0f ? float4::RIGHT : float4::LEFT;
 
-				while (RGB(0, 255, 0) != GetGroundColor(RGB(255, 255, 255), MovePos1 + XPos))
+				while (RGB(0, 0, 255) != GetGroundColor(RGB(255, 255, 255), MovePos1 + XPos))
 				{
 					XPos += Dir;
 
@@ -449,9 +453,9 @@ void Player::Movement(float _Delta)
 				}
 
 				float4 YPos = float4::ZERO;
-				while (RGB(0, 255, 0) != GetGroundColor(RGB(255, 255, 255), MovePos1 + YPos))
+				while (RGB(0, 0, 255) != GetGroundColor(RGB(255, 255, 255), MovePos1 + YPos))
 				{
-					YPos.Y += 1;
+					YPos.Y += 2;
 
 					if (YPos.Y > 60.0f)
 					{
@@ -461,9 +465,9 @@ void Player::Movement(float _Delta)
 
 				if (abs(XPos.X) >= YPos.Y)
 				{
-					while (RGB(0, 255, 0) != GetGroundColor(RGB(255, 255, 255), MovePos1))
+					while (RGB(0, 0, 255) != GetGroundColor(RGB(255, 255, 255), MovePos1))
 					{
-						MovePos1.Y += 1;
+						MovePos1.Y += 2;
 					}
 				}
 

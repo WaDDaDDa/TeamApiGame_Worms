@@ -64,12 +64,12 @@ void Player::MoveUpdate(float _Delta)
 		ChangeState(PlayerState::Idle);
 	}
 
-	unsigned int Color = GetGroundColor(RGB(255, 255, 255), float4::DOWN * 10.0f);
+	unsigned int Color = GetGroundColor(RGB(255, 255, 255), float4::DOWN * 20.0f);
 
 	if ((RGB(255, 255, 255) == Color))
 	{
-		//ChangeState(PlayerState::Falling);
-		//return;
+		ChangeState(PlayerState::Falling);
+		return;
 	}
 
 }
