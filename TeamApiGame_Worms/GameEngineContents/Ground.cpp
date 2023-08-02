@@ -111,7 +111,12 @@ void Ground::Start()
 	{
 		GameEngineWindowTexture* Magenta = ResourcesManager::GetInst().FindTexture("Magenta.bmp");
 		Renderer = CreateRenderer(RenderOrder::Ground);
+<<<<<<< HEAD
 		GameEngineWindowTexture* Texture = ResourcesManager::GetInst().TextureCreate("StageTexture",STAGE_SCALE);
+=======
+		//GameEngineWindowTexture* Texture = ResourcesManager::GetInst().TextureCreate("StageTexture",STAGE_SCALE);
+		GameEngineWindowTexture* Texture = Renderer->GetTexture();
+>>>>>>> 450920526e2d37596dc62577ad259187d2a0ab9f
 		Texture->FillTexture(RGB(255, 0, 255));
 		Renderer->SetTexture("StageTexture");
 
