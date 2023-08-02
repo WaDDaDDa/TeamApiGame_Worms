@@ -49,18 +49,18 @@ void PlayLevel::Start()
 	}
 
 
-	if (false == ResourcesManager::GetInst().IsLoadTexture(GroundFileName))
-	{
-		GameEnginePath FilePath;
-		FilePath.SetCurrentPath();
-		FilePath.MoveParentToExistsChild("ContentsResources");
+	//if (false == ResourcesManager::GetInst().IsLoadTexture(GroundFileName))
+	//{
+	//	GameEnginePath FilePath;
+	//	FilePath.SetCurrentPath();
+	//	FilePath.MoveParentToExistsChild("ContentsResources");
 
-		GameEnginePath FolderPath = FilePath;
+	//	GameEnginePath FolderPath = FilePath;
 
-		FilePath.MoveChild("ContentsResources\\Texture\\Map\\");
-		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath(GroundFileName));
-		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath(GroundPixelFileName));
-	}
+	//	FilePath.MoveChild("ContentsResources\\Texture\\Map\\");
+	//	ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath(GroundFileName));
+	//	ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath(GroundPixelFileName));
+	//}
 
 	CreateActor<MouseObject>();
 }
@@ -94,25 +94,25 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 
 	{
 		Player* TestPlayer = CreateActor<Player>();
-		TestPlayer->SetGroundTexture(GroundPixelFileName);
+		TestPlayer->SetGroundTexture(GroundPtr->GetPixelGroundTexture());
 		TestPlayer->SetPos(float4{ 100, 100 });
 	}
 
 	{
 		Player* TestPlayer = CreateActor<Player>();
-		TestPlayer->SetGroundTexture(GroundPixelFileName);
+		TestPlayer->SetGroundTexture(GroundPtr->GetPixelGroundTexture());
 		TestPlayer->SetPos(float4{ 400, 100 });
 	}
 
 	{
 		Player* TestPlayer = CreateActor<Player>();
-		TestPlayer->SetGroundTexture(GroundPixelFileName);
+		TestPlayer->SetGroundTexture(GroundPtr->GetPixelGroundTexture());
 		TestPlayer->SetPos(float4{ 700, 100 });
 	}
 
 	{
 		Player* TestPlayer = CreateActor<Player>();
-		TestPlayer->SetGroundTexture(GroundPixelFileName);
+		TestPlayer->SetGroundTexture(GroundPtr->GetPixelGroundTexture());
 		TestPlayer->SetPos(float4{ 1000, 100 });
 	}
 

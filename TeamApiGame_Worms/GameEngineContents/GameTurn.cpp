@@ -34,6 +34,11 @@ void GameTurn::Update(float _Delta)
 	{
 		ChangeTurnPlayer();
 	}
+
+	if (true == GameEngineInput::IsDown(VK_F2))
+	{
+		GameEngineLevel::CollisionDebugRenderSwitch();
+	}
 }
 
 void GameTurn::Render(float _Delta)
