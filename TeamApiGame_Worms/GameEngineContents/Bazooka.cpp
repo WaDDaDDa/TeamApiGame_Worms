@@ -104,8 +104,8 @@ void Bazooka::Start()
 	//Renderer->CreateAnimation("Bazooka_Fly", "bazooka.bmp", 32, 32, 0.05f, false);
 
 	float Angle = -45.0f;
-	float4 AngleVec = { 1.0f, 0.0f };
-	SetGravityVector(AngleVec.GetRotationToDegZ(Angle) * 700.0f);
+	//SetGravityVector(AngleVec.GetRotationToDegZ(Angle) * 700.0f);
+	
 	//SetGravityVector(AngleVec.GetRotationToDegZ(Master->GetAngle()) * 700.0f);
 
 	BombCollision = CreateCollision(CollisionOrder::Boom);
@@ -137,6 +137,8 @@ void Bazooka::StateUpdate(float _Delta)
 		return FlyUpdate(_Delta);
 	case BazookaState::Bomb:
 		return BombUpdate(_Delta);
+	case BazookaState::Max:
+		return MaxUpdate(_Delta);
 	default:
 		break;
 	}
@@ -153,6 +155,9 @@ void Bazooka::ChangeState(BazookaState _State)
 			break;
 		case BazookaState::Bomb:
 			BombStart();
+			break;
+		case BazookaState::Max:
+			MaxStart();
 			break;
 		default:
 			break;
@@ -278,7 +283,9 @@ void Bazooka::DirCheck()
 
 void Bazooka::FlyStart()
 {
-	Renderer->ChangeAnimation("32_Bazooka_Fly");
+	SetGravityVector(AngleVec.GetRotationToDegZ(Master->GetCurAngle()) * 700.0f);
+
+	Renderer->ChangeAnimation("0_Bazooka_Fly");
 }
 
 void Bazooka::FlyUpdate(float _Delta)
@@ -323,4 +330,14 @@ void Bazooka::BombUpdate(float _Delta)
 			Death();
 		}
 	}
+}
+
+void Bazooka::MaxStart()
+{
+
+}
+
+void Bazooka::MaxUpdate(float _Delta)
+{
+	ChangeState(BazookaState::Fly);
 }

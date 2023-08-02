@@ -99,10 +99,6 @@ void Player::FireStart()
 	Weapon* NewWeapon = GetLevel()->CreateActor<Bazooka>();
 	NewWeapon->SetGroundTexture(GetGroundTexture());
 	NewWeapon->SetMaster(this);
-
-	float4 Pos = GetPos();
-	Pos.Y -= 15.0f;
-	NewWeapon->SetPos(Pos);
 }
 void Player::FireUpdate(float _Delta)
 {
@@ -250,7 +246,7 @@ void Player::BazookaUpdate(float _Delta)
 
 	if (true == GameEngineInput::IsPress(VK_UP))
 	{
-		CurAngle -= (5.625 * _Delta * 4);
+		CurAngle -= (5.625f * _Delta * 4.0f);
 		if (CurAngle <= -90.0f)
 		{
 			CurAngle = -90.0f;
@@ -258,7 +254,7 @@ void Player::BazookaUpdate(float _Delta)
 	}
 	if (true == GameEngineInput::IsPress(VK_DOWN))
 	{
-		CurAngle += (5.625 * _Delta * 4);
+		CurAngle += (5.625f * _Delta * 4.0f);
 		if (CurAngle >= +90.0f)
 		{
 			CurAngle = 90.0f;

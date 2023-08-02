@@ -12,10 +12,15 @@ public:
     GameTurn& operator=(const GameTurn& _Other) = delete;
     GameTurn& operator=(GameTurn&& _Other) noexcept = delete;
 
+    class Player* GetTurnPlayer()
+    {
+        return TurnPlayer;
+    }
+
 protected:
 
 private:
-    class Player* TurnPlayer = nullptr;
+    Player* TurnPlayer = nullptr;
 
     void Start() override;
 

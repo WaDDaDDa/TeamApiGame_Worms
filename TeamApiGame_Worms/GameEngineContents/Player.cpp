@@ -430,6 +430,7 @@ void Player::ChangeAnimationState(const std::string& _State)
 
 void Player::DirCheck()
 {
+
 	if (true != IsTurnPlayer)
 	{
 		return;
@@ -442,14 +443,26 @@ void Player::DirCheck()
 
 	if (true == GameEngineInput::IsDown(VK_LEFT) || true == GameEngineInput::IsFree(VK_RIGHT))
 	{
-		Dir = PlayerDir::Left;
+		PlayerDir CurDir = PlayerDir::Left;
+		if (Dir == CurDir)
+		{
+			return;
+		}
+		Dir = CurDir;
+		CurAngle = 180 - CurAngle;
 		ChangeAnimationState(CurState);
 		return;
 	}
 
 	if (true == GameEngineInput::IsFree(VK_LEFT) || true == GameEngineInput::IsDown(VK_RIGHT))
 	{
-		Dir = PlayerDir::Right;
+		PlayerDir CurDir = PlayerDir::Right;
+		if (Dir == CurDir)
+		{
+			return;
+		}
+		Dir = CurDir;
+		CurAngle = 180 - CurAngle;
 		ChangeAnimationState(CurState);
 		return;
 	}

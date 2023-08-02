@@ -118,7 +118,7 @@ private:
 	float PlayerSpeed = 200.0f;
 	float PlayerJumpPower = 400.0f;
 
-	float CurAngle = 0.0f;
+	float CurAngle = -45.0f;
 
 	
 	

@@ -19,6 +19,7 @@ public:
 	void SetMaster(class Player* _CurPlayer)
 	{
 		Master = _CurPlayer;
+		// 플레이어 랜더러 위치 옮긴만큼.
 		SetPos(Master->GetPos() + float4{0, -15});
 	}
 
