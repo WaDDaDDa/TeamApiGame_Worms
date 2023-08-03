@@ -230,7 +230,7 @@ void Player::Start()
 		//MainRenderer->CreateAnimation("Left_JumpDown", "flyDownLeft.bmp", 0, 1, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_Falling", "flyDownLeft.bmp", 0, 1, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_Damaging", "wfly1_L.bmp", 0, 31, 0.05f, false);
-		MainRenderer->CreateAnimation("Left_Death", "wdieLeft.bmp", 0, 59, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_Death", "wdieLeft.bmp", 0, 59, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_BazookaOn", "bazOnLeft.bmp", 0, 6, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_BazookaOff", "bazOffLeft.bmp", 0, 6, 0.1f, false);
 
@@ -244,7 +244,7 @@ void Player::Start()
 		//MainRenderer->CreateAnimation("Right_JumpDown", "flyDownRight.bmp", 0, 1, 0.1f, false);
 		MainRenderer->CreateAnimation("Right_Falling", "flyDownRight.bmp", 0, 1, 0.1f, false);
 		MainRenderer->CreateAnimation("Right_Damaging", "wfly1_R.bmp", 0, 31, 0.05f, false);
-		MainRenderer->CreateAnimation("Right_Death", "wdieRight.bmp", 0, 59, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_Death", "wdieRight.bmp", 0, 59, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_BazookaOn", "bazOnRight.bmp", 0, 6, 0.1f, false);
 		MainRenderer->CreateAnimation("Right_BazookaOff", "bazOffRight.bmp", 0, 6, 0.1f, false);
 
@@ -360,6 +360,9 @@ void Player::ChangeState(PlayerState _State)
 			break;
 		case PlayerState::Death:
 			DeathStart();
+			break;
+		case PlayerState::DeathEnd:
+			DeathEnd();
 			break;
 		case PlayerState::BazookaOn:
 			BazookaOnStart();

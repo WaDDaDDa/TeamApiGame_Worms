@@ -15,6 +15,8 @@ enum class PlayerState
 	BazookaOn,
 	Bazooka,
 	BazookaOff,
+
+	DeathEnd,
 	Max
 };
 
@@ -92,6 +94,7 @@ protected:
 
 	void DeathStart();
 	void DeathUpdate(float _Delta);
+	void DeathEnd();
 
 	void BazookaOnStart();
 	void BazookaOnUpdate(float _Delta);

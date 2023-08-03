@@ -238,6 +238,7 @@ void Player::DamagingUpdate(float _Delta)
 	if (RGB(255, 255, 255) != Color)
 	{
 		GravityReset();
+		//ChangeState(PlayerState::Death);
 		ChangeState(PlayerState::Idle);
 		return;
 	}
@@ -245,11 +246,18 @@ void Player::DamagingUpdate(float _Delta)
 
 void Player::DeathStart()
 {
-
+	ChangeAnimationState("Death");
 }
 void Player::DeathUpdate(float _Delta)
 {
-	
+	if(MainRenderer->IsAnimationEnd())
+	{
+		ChangeState(PlayerState::DeathEnd);
+	}
+}
+void Player::DeathEnd()
+{
+	Death();
 }
 
 void Player::BazookaOnStart()
