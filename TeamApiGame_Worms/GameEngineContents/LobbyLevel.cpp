@@ -13,12 +13,17 @@
 #include "UI_Mouse.h"
 #include "UI_Lobby_SelectTitle.h"
 #include "UI_Button.h"
+#include "UI_Meteor.h"
+
 #include "ContentsDefine.h"
 #include "MouseObject.h"
 #include <GameEngineCore/GameEngineCore.h>
+#include <GameEngineBase/GameEngineRandom.h>
+
 
 void QuitGame(DWORD_PTR, DWORD_PTR);
 void ChangeLevel(DWORD_PTR, DWORD_PTR);
+void EnterLobby(DWORD_PTR, DWORD_PTR);
 #pragma endregion
 
 LobbyLevel::LobbyLevel()
@@ -35,6 +40,8 @@ void LobbyLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	CreateActor<UI_Mouse>();
 
 	UI_Lobby_SelectTitle* SelectTitle = CreateActor<UI_Lobby_SelectTitle>();
+	
+
 
 	UI_Button* Btn_QuitGame = CreateActor<UI_Button>();
 	Btn_QuitGame->InitButtonData("UI_Button_Quit", float4{ 250, 60 });
@@ -81,6 +88,26 @@ void LobbyLevel::Start()
 
 void LobbyLevel::Update(float _Delta)
 {
+
+	float MeteorPosX = GameEngineRandom::MainRandom.RandomFloat(-800, 1400);
+	float MeteorPosY = GameEngineRandom::MainRandom.RandomFloat(-400, 0);
+
+	MeteorCreateTimer += _Delta;
+
+	if (MeteorCreateTimer > 0.2f)
+	{
+		UI_Meteor* Meteor = CreateActor<UI_Meteor>();
+		Meteor->SetPos({ MeteorPosX, MeteorPosY });
+		MeteorCreateTimer = 0.0f;
+	}
+
+
+	// 설정 진입
+	if (true == IsSelectOver)
+	{
+
+	}
+
 }
 
 void LobbyLevel::Release()
@@ -97,6 +124,11 @@ void QuitGame(DWORD_PTR, DWORD_PTR)
 void ChangeLevel(DWORD_PTR, DWORD_PTR)
 {
 	GameEngineCore::ChangeLevel("PlayLevel");
+}
+
+void LobbyLevel::EnterLobby(DWORD_PTR, DWORD_PTR)
+{
+	SetSelectOver();
 }
 
 

@@ -208,6 +208,7 @@
     <ClInclude Include="UI_IntroLogo.h" />
     <ClInclude Include="UI_Lobby_SelectTitle.h" />
     <ClInclude Include="UI_MainLogo.h" />
+    <ClInclude Include="UI_Meteor.h" />
     <ClInclude Include="UI_Mouse.h" />
     <ClInclude Include="Weapon.h">
       <SubType>
@@ -267,6 +268,7 @@
     <ClCompile Include="UI_IntroLogo.cpp" />
     <ClCompile Include="UI_Lobby_SelectTitle.cpp" />
     <ClCompile Include="UI_MainLogo.cpp" />
+    <ClCompile Include="UI_Meteor.cpp" />
     <ClCompile Include="UI_Mouse.cpp" />
     <ClCompile Include="Weapon.cpp">
       <SubType>
