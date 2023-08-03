@@ -119,10 +119,10 @@ void Bazooka::Start()
 	
 	//SetGravityVector(AngleVec.GetRotationToDegZ(Master->GetAngle()) * 700.0f);
 
-	BombCollision = CreateCollision(CollisionOrder::Boom);
-	BombCollision->SetCollisionScale({ 128, 128 });
-	BombCollision->SetCollisionType(CollisionType::CirCle);
-	BombCollision->SetCollisionPos({ 0, 0 });
+	//BombCollision = CreateCollision(CollisionOrder::Boom);
+	//BombCollision->SetCollisionScale({ 128, 128 });
+	//BombCollision->SetCollisionType(CollisionType::CirCle);
+	//BombCollision->SetCollisionPos({ 0, 0 });
 
 	ChangeState(BazookaState::Max);
 
@@ -332,6 +332,7 @@ void Bazooka::BombUpdate(float _Delta)
 
 	PlayLevel* CurPlayLevel = dynamic_cast<PlayLevel*>(GetLevel());
 	CurPlayLevel->GetGround()->ContactGround(GetPos(), {100.0f,100.0f});
+	BombCollision->Death();
 
 	if (true == Renderer->IsAnimationEnd())
 	{

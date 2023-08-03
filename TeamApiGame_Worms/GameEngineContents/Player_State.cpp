@@ -27,7 +27,7 @@ void Player::IdleUpdate(float _Delta)
 
 			GameEngineActor* Actor = Collison->GetActor();
 		}
-		// ChangeState(PlayerState::Damaging);
+		ChangeState(PlayerState::Damaging);
 
 	}
 
@@ -203,10 +203,44 @@ void Player::FallingUpdate(float _Delta)
 void Player::DamagingStart()
 {
 	ChangeAnimationState("Damaging");
+
+	std::vector<GameEngineCollision*> _Col;
+	if (true == PlayerBodyCollision->Collision(CollisionOrder::Boom, _Col
+		, CollisionType::Rect
+		, CollisionType::CirCle
+	))
+	{
+		float4 WeaponPos = float4::ZERO;
+		float4 GravityDir = float4::ZERO;
+
+		for (size_t i = 0; i < _Col.size(); i++)
+		{
+			GameEngineCollision* Collison = _Col[i];
+
+			GameEngineActor* Actor = Collison->GetActor();
+
+			WeaponPos = Actor->GetPos();
+		}
+		GravityDir = GetPos() - WeaponPos;
+		GravityDir.Normalize();
+		GravityDir += float4::UP;
+
+		SetGravityVector(GravityDir * 250.0f);
+	}
+
 }
 void Player::DamagingUpdate(float _Delta)
 {
 	GroundCheck(_Delta);
+
+	unsigned int Color = GetGroundColor(RGB(255, 255, 255));
+
+	if (RGB(255, 255, 255) != Color)
+	{
+		GravityReset();
+		ChangeState(PlayerState::Idle);
+		return;
+	}
 }
 
 void Player::DeathStart()
