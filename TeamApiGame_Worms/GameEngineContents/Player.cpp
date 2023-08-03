@@ -517,17 +517,16 @@ void Player::Movement(float _Delta)
 		if (Color == RGB(255, 255, 255))
 		{
 			// 움직일 예정의 곳도 공중인지 체크한다.
-			if (RGB(255, 255, 255) == GetGroundColor(RGB(255, 255, 255), MovePos1))
+			if (RGB(255, 255, 255) == GetGroundColor(RGB(255, 255, 255), MovePos1))   
 			{
 				// 움직일 곳 또한 공중이라면
 				float4 XPos = float4::ZERO;
-				float4 Dir = MovePos1.X <= 0.0f ? float4::RIGHT : float4::LEFT;
-
+				float4 Dir = MovePos1.X >= 0.0f ? float4::RIGHT : float4::LEFT;
 				while (RGB(0, 0, 255) != GetGroundColor(RGB(255, 255, 255), MovePos1 + XPos))
 				{
 					XPos += Dir;
-
-					if (abs(XPos.X) > 50.0f)
+					
+					if (abs(XPos.X) > 20.0f)
 					{
 						break;
 					}
@@ -536,9 +535,9 @@ void Player::Movement(float _Delta)
 				float4 YPos = float4::ZERO;
 				while (RGB(0, 0, 255) != GetGroundColor(RGB(255, 255, 255), MovePos1 + YPos))
 				{
-					YPos.Y += 2;
+					YPos.Y += 1;
 
-					if (YPos.Y > 60.0f)
+					if (YPos.Y > 30.0f)
 					{
 						break;
 					}
@@ -548,7 +547,7 @@ void Player::Movement(float _Delta)
 				{
 					while (RGB(0, 0, 255) != GetGroundColor(RGB(255, 255, 255), MovePos1))
 					{
-						MovePos1.Y += 2;
+						MovePos1.Y += 1;
 					}
 				}
 

@@ -33,7 +33,15 @@ void Player::IdleUpdate(float _Delta)
 			GameEngineActor* Actor = Collison->GetActor();
 		}
 		ChangeState(PlayerState::Damaging);
+	}
 
+
+	unsigned int Color = GetGroundColor(RGB(255, 255, 255), float4::DOWN);
+
+	if ((RGB(255, 255, 255) == Color))
+	{
+		ChangeState(PlayerState::Falling);
+		return;
 	}
 
 	if (true != IsTurnPlayer)
@@ -83,7 +91,7 @@ void Player::MoveUpdate(float _Delta)
 		ChangeState(PlayerState::Idle);
 	}
 
-	unsigned int Color = GetGroundColor(RGB(255, 255, 255), float4::DOWN * 20.0f);
+	unsigned int Color = GetGroundColor(RGB(255, 255, 255), float4::DOWN);
 
 	if ((RGB(255, 255, 255) == Color))
 	{
