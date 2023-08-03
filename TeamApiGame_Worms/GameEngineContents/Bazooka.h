@@ -5,6 +5,7 @@ enum class BazookaState
 {
 	Fly,
 	Bomb,
+	Damage, //플레이어가 대미지입고 정리되는 단계
 	Max,
 };
 
@@ -38,6 +39,8 @@ protected:
 	void FlyUpdate(float _Delta);
 	void BombStart();
 	void BombUpdate(float _Delta);
+	void DamageStart();
+	void DamageUpdate(float _Delta);
 	void MaxStart();
 	void MaxUpdate(float _Delta);
 

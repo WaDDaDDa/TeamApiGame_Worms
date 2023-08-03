@@ -7,6 +7,11 @@
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEngineCore/GameEngineCollision.h>
 
+#define RIGHT_UP_MAXANGEL  -90
+#define RIGHT_DOWN_MAXANGEL  90
+#define LEFT_UP_MAXANGEL 270
+#define LEFT_DOWN_MAXANGEL 90
+
 void Player::IdleStart()
 {
 	ChangeAnimationState("Idle");
@@ -41,12 +46,6 @@ void Player::IdleUpdate(float _Delta)
 	{
 		DirCheck();
 		ChangeState(PlayerState::Move);
-		return;
-	}
-
-	if (true == GameEngineInput::IsDown('A'))
-	{
-		ChangeState(PlayerState::Fire);
 		return;
 	}
 
@@ -92,22 +91,6 @@ void Player::MoveUpdate(float _Delta)
 		return;
 	}
 
-}
-
-void Player::FireStart()
-{
-	// 무기사용으로 
-	Weapon* NewWeapon = GetLevel()->CreateActor<Bazooka>();
-	// 플레이어의 제어권을 끄고
-	SwitchIsTurnPlayer();
-	// 무기에 카메라 포커싱 하기위해 제어권을 킨다.
-	NewWeapon->SwitchIsTurnPlayer();
-	NewWeapon->SetGroundTexture(GetGroundTexture());
-	NewWeapon->SetMaster(this);
-}
-void Player::FireUpdate(float _Delta)
-{
-	ChangeState(PlayerState::Idle);
 }
 
 void Player::JumpReadyStart()
@@ -285,30 +268,80 @@ void Player::BazookaStart()
 }
 void Player::BazookaUpdate(float _Delta)
 {
+	DirCheck();
+
+	if (true != IsTurnPlayer)
+	{
+		ChangeState(PlayerState::BazookaOff);
+		return;
+	}
+
 	if (true == GameEngineInput::IsDown('1'))
 	{
 		ChangeState(PlayerState::BazookaOff);
 		return;
 	}
 
-	if (true == GameEngineInput::IsPress(VK_UP))
+	// 오른쪽 각도조절
+	if (PlayerDir::Right == Dir)
 	{
-		CurAngle -= (5.625f * _Delta * 4.0f);
-		if (CurAngle <= -90.0f)
+		if (true == GameEngineInput::IsPress(VK_UP))
 		{
-			CurAngle = -90.0f;
+			CurAngle -= (5.625f * _Delta * 4.0f);
+
+
+			if (CurAngle <= RIGHT_UP_MAXANGEL)
+			{
+				CurAngle = RIGHT_UP_MAXANGEL;
+			}
 		}
-	}
-	if (true == GameEngineInput::IsPress(VK_DOWN))
-	{
-		CurAngle += (5.625f * _Delta * 4.0f);
-		if (CurAngle >= +90.0f)
+		if (true == GameEngineInput::IsPress(VK_DOWN))
 		{
-			CurAngle = 90.0f;
+			CurAngle += (5.625f * _Delta * 4.0f);
+			if (CurAngle >= RIGHT_DOWN_MAXANGEL)
+			{
+				CurAngle = RIGHT_DOWN_MAXANGEL;
+			}
 		}
 	}
 
+	// 왼쪽 각도조절
+	if (PlayerDir::Left == Dir)
+	{
+		if (true == GameEngineInput::IsPress(VK_UP))
+		{
+			CurAngle += (5.625f * _Delta * 4.0f);
+
+
+			if (CurAngle >= LEFT_UP_MAXANGEL)
+			{
+				CurAngle = LEFT_UP_MAXANGEL;
+			}
+		}
+		if (true == GameEngineInput::IsPress(VK_DOWN))
+		{
+			CurAngle -= (5.625f * _Delta * 4.0f);
+			if (CurAngle <= LEFT_DOWN_MAXANGEL)
+			{
+				CurAngle = LEFT_DOWN_MAXANGEL;
+			}
+		}
+	}
+
+	if (true == GameEngineInput::IsDown('A'))
+	{
+		ChangeState(PlayerState::BazookaFire);
+		return;
+	}
+
 	int iCurAngle = static_cast<int>(CurAngle);
+	// 애니메이션과 무기각도를 맞추기위한 중간 계산식.
+	// 무기각도가 -90에서 +되면서 270도까지로 되어있음.
+	if (PlayerDir::Left == Dir)
+	{
+		iCurAngle = 180 - iCurAngle;
+	}
+
 	switch (iCurAngle)
 	{
 	case -90:
@@ -410,10 +443,21 @@ void Player::BazookaUpdate(float _Delta)
 	}
 }
 
+void Player::BazookaFireStart()
+{
+	CreateWeapon<Bazooka>();
+}
+
+void Player::BazookaFireUpdate(float _Delta)
+{
+	ChangeState(PlayerState::Idle);
+}
+
 void Player::BazookaOffStart()
 {
 	ChangeAnimationState("BazookaOff");
 }
+
 void Player::BazookaOffUpdate(float _Delta)
 {
 	if (true == MainRenderer->IsAnimationEnd())

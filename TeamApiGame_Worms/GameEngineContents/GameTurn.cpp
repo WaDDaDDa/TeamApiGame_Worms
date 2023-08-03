@@ -83,7 +83,6 @@ void GameTurn::Render(float _Delta)
 
 void GameTurn::ChangeTurnPlayer()
 {
-	ResetLiveTime();
 	//원래 플레이어bool값 false로 변경
 	TurnPlayer->SwitchIsTurnPlayer();
 
@@ -96,4 +95,6 @@ void GameTurn::ChangeTurnPlayer()
 	TurnPlayer = Player::GetAllPlayer()[StartValue];
 	// 현재 플레이어 bool값 true로 변경
 	TurnPlayer->SwitchIsTurnPlayer();
+
+	ResetLiveTime();
 }

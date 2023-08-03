@@ -1,12 +1,12 @@
 #pragma once
 #include "GravityActor.h"
+#include <GameEngineCore/GameEngineLevel.h>
 #include <vector>
 
 enum class PlayerState
 {
 	Idle,
 	Move,
-	Fire,
 	JumpReady,
 	Jump,
 	Falling,
@@ -14,6 +14,7 @@ enum class PlayerState
 	Death,
 	BazookaOn,
 	Bazooka,
+	BazookaFire,
 	BazookaOff,
 
 	DeathEnd,
@@ -60,6 +61,24 @@ public:
 
 	void Movement(float _Delta);
 
+	template <typename WeaponType>
+	void CreateWeapon()
+	{
+		// 무기사용으로 
+		class Weapon* NewWeapon = GetLevel()->CreateActor<WeaponType>();
+		// 플레이어의 제어권을 끄고
+		SwitchIsTurnPlayer();
+		// 무기에 카메라 포커싱 하기위해 제어권을 킨다.
+		NewWeapon->SwitchIsTurnPlayer();
+		NewWeapon->SetGroundTexture(GetGroundTexture());
+		NewWeapon->SetMaster(this);
+	}
+
+	PlayerState GetState()
+	{
+		return State;
+	}
+
 protected:
 	PlayerState State = PlayerState::Max;
 	PlayerDir Dir = PlayerDir::Left;
@@ -76,9 +95,6 @@ protected:
 
 	void MoveStart();
 	void MoveUpdate(float _Delta);
-
-	void FireStart();
-	void FireUpdate(float _Delta);
 
 	void JumpReadyStart();
 	void JumpReadyUpdate(float _Delta);
@@ -101,6 +117,9 @@ protected:
 
 	void BazookaStart();
 	void BazookaUpdate(float _Delta);
+
+	void BazookaFireStart();
+	void BazookaFireUpdate(float _Delta);
 
 	void BazookaOffStart();
 	void BazookaOffUpdate(float _Delta);

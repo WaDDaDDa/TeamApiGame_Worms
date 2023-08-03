@@ -148,6 +148,8 @@ void Bazooka::StateUpdate(float _Delta)
 		return FlyUpdate(_Delta);
 	case BazookaState::Bomb:
 		return BombUpdate(_Delta);
+	case BazookaState::Damage:
+		return DamageUpdate(_Delta);
 	case BazookaState::Max:
 		return MaxUpdate(_Delta);
 	default:
@@ -166,6 +168,9 @@ void Bazooka::ChangeState(BazookaState _State)
 			break;
 		case BazookaState::Bomb:
 			BombStart();
+			break;
+		case BazookaState::Damage:
+			DamageStart();
 			break;
 		case BazookaState::Max:
 			MaxStart();
@@ -335,6 +340,30 @@ void Bazooka::BombUpdate(float _Delta)
 	BombCollision->Death();
 
 	if (true == Renderer->IsAnimationEnd())
+	{
+		ChangeState(BazookaState::Damage);
+		return;
+	}
+}
+
+void Bazooka::DamageStart()
+{
+
+}
+
+void Bazooka::DamageUpdate(float _Delta)
+{
+	int PlayerCount = Player::GetAllPlayer().size();
+	int PlayerStateCount = 0;
+	for (size_t i = 0; i < PlayerCount; i++)
+	{
+		if (PlayerState::Idle == Player::GetAllPlayer()[i]->GetState()/* || PlayerState::Die == Player::GetAllPlayer()[i]->GetState()*/)
+		{
+			PlayerStateCount++;
+		}
+	}
+
+	if (PlayerStateCount == PlayerCount)
 	{
 		// 무기사용이 종료되면 다시 플레이어로 돌아간다.
 		Master->SwitchIsTurnPlayer();

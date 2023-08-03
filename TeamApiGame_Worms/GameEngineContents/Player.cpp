@@ -343,9 +343,6 @@ void Player::ChangeState(PlayerState _State)
 		case PlayerState::Move:
 			MoveStart();
 			break;
-		case PlayerState::Fire:
-			FireStart();
-			break;
 		case PlayerState::JumpReady:
 			JumpReadyStart();
 			break;
@@ -370,6 +367,9 @@ void Player::ChangeState(PlayerState _State)
 		case PlayerState::Bazooka:
 			BazookaStart();
 			break;
+		case PlayerState::BazookaFire:
+			BazookaFireStart();
+			break;
 		case PlayerState::BazookaOff:
 			BazookaOffStart();
 			break;
@@ -387,8 +387,6 @@ void Player::StateUpdate(float _Delta)
 		return IdleUpdate(_Delta);
 	case PlayerState::Move:
 		return MoveUpdate(_Delta);
-	case PlayerState::Fire:
-		return FireUpdate(_Delta);
 	case PlayerState::JumpReady:
 		return JumpReadyUpdate(_Delta);
 	case PlayerState::Jump:
@@ -403,6 +401,8 @@ void Player::StateUpdate(float _Delta)
 		return BazookaOnUpdate(_Delta);
 	case PlayerState::Bazooka:
 		return BazookaUpdate(_Delta);
+	case PlayerState::BazookaFire:
+		return BazookaFireUpdate(_Delta);
 	case PlayerState::BazookaOff:
 		return BazookaOffUpdate(_Delta);
 	default:
