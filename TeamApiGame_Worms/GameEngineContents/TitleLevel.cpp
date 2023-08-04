@@ -35,7 +35,7 @@ void TitleLevel::Update(float _DeltaTime)
 {
 	if (true == GameEngineInput::IsDown('P'))
 	{
-		GameEngineCore::ChangeLevel("LobbyLevel");
+		GameEngineCore::ChangeLevel("ModeSelectLevel");
 	}
 
 	StateUpdate(_DeltaTime);
@@ -155,7 +155,7 @@ void TitleLevel::Title_Main_Update(float _Delta)
 
 	if (true == GameEngineInput::IsDown(VK_SPACE))
 	{
-		GameEngineCore::ChangeLevel("LobbyLevel");
+		GameEngineCore::ChangeLevel("ModeSelectLevel");
 	}
 
 }

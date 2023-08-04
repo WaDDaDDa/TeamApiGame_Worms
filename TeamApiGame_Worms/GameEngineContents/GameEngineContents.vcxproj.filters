@@ -66,6 +66,9 @@
     <ClInclude Include="UI_Meteor.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="ModeSelectLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -132,6 +135,9 @@
     </ClCompile>
     <ClCompile Include="UI_Meteor.cpp">
       <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ModeSelectLevel.cpp">
+      <Filter>Level</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
