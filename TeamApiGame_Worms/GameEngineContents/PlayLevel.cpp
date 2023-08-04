@@ -86,7 +86,7 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 		GroundPtr->Init(GroundFileName, GroundPixelFileName);
 
 		BackGroundPtr = CreateActor<BackGround>();
-		BackGroundPtr->Init("Back.bmp",GroundPtr->GetGroundTexture()->GetScale());
+		BackGroundPtr->Init("Back.bmp", PLAY_BACKGROUND_SCALE);
 		
 	}
 

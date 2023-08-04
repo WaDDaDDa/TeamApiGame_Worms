@@ -1,6 +1,7 @@
 #include "Ground.h"
 #include "Hole.h"
 #include "ContentsEnum.h"
+#include "ContentsDefine.h"
 
 #include <GameEngineCore/ResourcesManager.h>
 #include <GameEngineCore/GameEngineRenderer.h>
@@ -37,6 +38,20 @@ void Ground::Init(const std::string& _FileName, const std::string& _DebugFileNam
 	}
 
 
+	{
+	GameEngineWindowTexture* Texture = ResourcesManager::GetInst().TextureCreate("StageTexture", PLAY_BACKGROUND_SCALE);
+	Texture->FillTexture(RGB(255, 0, 255));
+	Renderer->SetTexture("StageTexture");
+
+	}
+	{
+		GameEngineWindowTexture* Texture = ResourcesManager::GetInst().TextureCreate("StagePixelTexture", PLAY_BACKGROUND_SCALE);
+		Texture->FillTexture(RGB(255, 255, 255));
+
+		DebugRenderer->SetTexture("StagePixelTexture");
+	}
+
+
 	GameEngineWindowTexture* NewTexture = ResourcesManager::GetInst().FindTexture(_FileName);
 	GameEngineWindowTexture* NewDebugTexture = ResourcesManager::GetInst().FindTexture(_DebugFileName);
 
@@ -55,9 +70,12 @@ void Ground::Init(const std::string& _FileName, const std::string& _DebugFileNam
 
 
 	
-	Texture->BitCopy(NewTexture, Texture->GetScale().Half());
+	//Texture->BitCopy(NewTexture, Texture->GetScale().Half());
+	Texture->TransCopy(NewTexture, PLAY_BACKGROUND_SCALE.Half(), NewTexture->GetScale().Half(), float4::ZERO, NewTexture->GetScale());
 	//Renderer->SetRenderScale(STAGE_SCALE);
-	DebugTexture->BitCopy(NewDebugTexture, DebugTexture->GetScale().Half() );
+	//DebugTexture->BitCopy(NewDebugTexture, DebugTexture->GetScale().Half() );
+	DebugTexture->TransCopy(NewDebugTexture, PLAY_BACKGROUND_SCALE.Half(), NewTexture->GetScale().Half(), float4::ZERO, NewTexture->GetScale(),NULL);
+
 	//DebugRenderer->SetRenderScale(STAGE_SCALE);
 
 
@@ -109,21 +127,17 @@ void Ground::Start()
 	
 
 	{
-		GameEngineWindowTexture* Magenta = ResourcesManager::GetInst().FindTexture("Magenta.bmp");
+		//GameEngineWindowTexture* Magenta = ResourcesManager::GetInst().FindTexture("Magenta.bmp");
 		Renderer = CreateRenderer(RenderOrder::Ground);
-		GameEngineWindowTexture* Texture = ResourcesManager::GetInst().TextureCreate("StageTexture",STAGE_SCALE);
-		Texture->FillTexture(RGB(255, 0, 255));
-		Renderer->SetTexture("StageTexture");
+		
 
 	}
 
 	{
-		GameEngineWindowTexture* White = ResourcesManager::GetInst().FindTexture("White.bmp");
+		//GameEngineWindowTexture* White = ResourcesManager::GetInst().FindTexture("White.bmp");
 
 		DebugRenderer = CreateRenderer(RenderOrder::Ground);
-		GameEngineWindowTexture* Texture = ResourcesManager::GetInst().TextureCreate("StagePixelTexture", STAGE_SCALE);
-		Texture->FillTexture(RGB(255, 255, 255));
-		DebugRenderer->SetTexture("StagePixelTexture");
+		
 	}
 
 
