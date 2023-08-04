@@ -9,7 +9,7 @@
 #include <GameEnginePlatform/GameEngineWindowTexture.h>
 #include <GameEnginePlatform/GameEngineInput.h>
 
-#define STAGE_SCALE float4{4000.0f,3000.0f}
+
 
 Ground::Ground()
 {
@@ -68,13 +68,13 @@ void Ground::Init(const std::string& _FileName, const std::string& _DebugFileNam
 	DebugRenderer->SetTexture(_DebugFileName);
 	DebugRenderer->SetRenderScale(Scale);*/
 
-
+	float4 GroundCopyPos = { PLAY_BACKGROUND_SCALE.Half().X,PLAY_BACKGROUND_SCALE.Half().Y + PLAY_BACKGROUND_SCALE.Half().Half().Y } ;
 	
 	//Texture->BitCopy(NewTexture, Texture->GetScale().Half());
-	Texture->TransCopy(NewTexture, PLAY_BACKGROUND_SCALE.Half(), NewTexture->GetScale().Half(), float4::ZERO, NewTexture->GetScale());
+	Texture->TransCopy(NewTexture, GroundCopyPos, NewTexture->GetScale().Half(), float4::ZERO, NewTexture->GetScale());
 	//Renderer->SetRenderScale(STAGE_SCALE);
 	//DebugTexture->BitCopy(NewDebugTexture, DebugTexture->GetScale().Half() );
-	DebugTexture->TransCopy(NewDebugTexture, PLAY_BACKGROUND_SCALE.Half(), NewTexture->GetScale().Half(), float4::ZERO, NewTexture->GetScale(),NULL);
+	DebugTexture->TransCopy(NewDebugTexture, GroundCopyPos, NewTexture->GetScale().Half(), float4::ZERO, NewTexture->GetScale(), NULL);
 
 	//DebugRenderer->SetRenderScale(STAGE_SCALE);
 
