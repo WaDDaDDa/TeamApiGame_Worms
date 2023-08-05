@@ -38,7 +38,7 @@ void Range75::Start()
 
 	Renderer->SetTexture("Blank.bmp");
 
-	SetBombRange({ 75.0f,75.0f });
+	SetBombRange({ 150.0f,150.0f });
 
 	Renderer->CreateAnimation("BombRange_75", "circle75.bmp", 0, 3, 0.05f, false);
 
