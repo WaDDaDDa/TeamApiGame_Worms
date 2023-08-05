@@ -120,9 +120,9 @@ void Bazooka::Start()
 	//Renderer->CreateAnimation("Bazooka_Fly", "bazooka.bmp", 32, 32, 0.05f, false);
 
 	SetWeaponDamage(50);
+	SetWeaponSpeed(1000);
 
 	ChangeState(BazookaState::Max);
-
 }
 
 void Bazooka::LevelStart()
@@ -296,7 +296,7 @@ void Bazooka::DirCheck()
 
 void Bazooka::FlyStart()
 {
-	SetGravityVector(AngleVec.GetRotationToDegZ(Master->GetCurAngle()) * 700.0f);
+	SetGravityVector(AngleVec.GetRotationToDegZ(Master->GetCurAngle()) * GetChargingSpeed());
 	Renderer->ChangeAnimation("0_Bazooka_Fly");
 }
 
@@ -340,9 +340,9 @@ void Bazooka::BombUpdate(float _Delta)
 void Bazooka::DamageStart()
 {
 	//CreateBombEffect<Range25>();
-	//CreateBombEffect<Range50>();
+	CreateBombEffect<Range50>();
 	//CreateBombEffect<Range75>();
-	CreateBombEffect<Range100>();
+	//CreateBombEffect<Range100>();
 }
 
 void Bazooka::DamageUpdate(float _Delta)

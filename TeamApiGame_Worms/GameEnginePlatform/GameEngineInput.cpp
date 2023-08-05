@@ -132,7 +132,6 @@ void GameEngineInput::GameEngineKey::Update(float _DeltaTime)
 	if (true == KeyCheck())
 	{
 		// 키가 눌렸다.
-
 		PressTime += _DeltaTime;
 
 		// 여태까지 키가 눌렸던적이 없다는 거죠.
@@ -154,7 +153,7 @@ void GameEngineInput::GameEngineKey::Update(float _DeltaTime)
 	}
 	else
 	{
-		PressTime = 0.0f;
+		//PressTime = 0.0f;
 		// 키가 눌리지 않았다.
 		if (true == Press)
 		{
@@ -234,3 +233,23 @@ bool GameEngineInput::IsFree(int _Key)
 	return AllKeys[_Key].Free;
 }
 
+
+float GameEngineInput::GetPressTime(int _Key)
+{
+	if (AllKeys.end() == AllKeys.find(_Key))
+	{
+		MsgBoxAssert("아직 처리하지 못하는 키입니다." + std::to_string(_Key));
+	}
+
+	return AllKeys[_Key].PressTime;
+}
+
+void GameEngineInput::ResetPressTime(int _Key)
+{
+	if (AllKeys.end() == AllKeys.find(_Key))
+	{
+		MsgBoxAssert("아직 처리하지 못하는 키입니다." + std::to_string(_Key));
+	}
+
+	AllKeys[_Key].PressTime = 0;
+}

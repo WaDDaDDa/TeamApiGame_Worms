@@ -35,10 +35,32 @@ public:
 		WeaponDamage = _Value;
 	}
 
+	void SetWeaponSpeed(float _Value)
+	{
+		WeaponSpeed = _Value;
+	}
+
+	void SetChargingSpeed(float _ChargeRatio)
+	{
+		WeaponChargeSpeed = WeaponSpeed * _ChargeRatio;
+	}
+
+	float GetChargingSpeed()
+	{
+		return WeaponChargeSpeed;
+	}
+
 protected:
 	Player* Master = nullptr;
 
+	// 무기의 대미지
 	int WeaponDamage = 0;
+
+	// 무기의 고유의 날라가는 세기
+	float WeaponSpeed = 0.0f;
+
+	// 플레이어의 키다운 시간과 무기 고유의 날라가는 세기가 계산된 크기
+	float WeaponChargeSpeed = 0.0f;
 
 private:
 

@@ -66,6 +66,8 @@ public:
 	{
 		// 무기사용으로 
 		class Weapon* NewWeapon = GetLevel()->CreateActor<WeaponType>();
+		float ChargeRatio = ChargingTime / MaxChargingTime;
+		NewWeapon->SetChargingSpeed(ChargeRatio);
 		// 플레이어의 제어권을 끄고
 		SwitchIsTurnPlayer();
 		// 무기에 카메라 포커싱 하기위해 제어권을 킨다.
@@ -153,6 +155,9 @@ private:
 	float4 LeftCheckPos = float4{ -5.0f, -10.0f };
 	float4 RightCheckPos = float4{ 5.0f, -10.0f };
 	float4 UpCheckPos = float4{ 0 , -20.0f };
+
+	float ChargingTime = 0.0f;
+	float MaxChargingTime = 3.0f;
 
 };
 

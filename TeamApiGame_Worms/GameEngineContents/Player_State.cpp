@@ -336,8 +336,17 @@ void Player::BazookaUpdate(float _Delta)
 		}
 	}
 
-	if (true == GameEngineInput::IsDown('A'))
+
+	if (true == GameEngineInput::IsUp('A') || GameEngineInput::GetPressTime('A') >= MaxChargingTime)
 	{
+		ChargingTime = GameEngineInput::GetPressTime('A');
+
+		if (ChargingTime >= MaxChargingTime)
+		{
+			ChargingTime = MaxChargingTime;
+		}
+		GameEngineInput::ResetPressTime('A');
+
 		ChangeState(PlayerState::BazookaFire);
 		return;
 	}
