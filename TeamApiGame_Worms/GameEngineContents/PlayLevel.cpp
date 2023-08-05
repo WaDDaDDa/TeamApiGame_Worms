@@ -84,26 +84,26 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 
 	{
 
-		GroundPtr = CreateActor<Ground>();
+		GroundPtr = CreateActor<Ground>(RenderOrder::Ground);
 		GroundPtr->Init(GroundFileName, GroundPixelFileName);
 
 		
 
-		BackGroundPtr = CreateActor<BackGround>();
+		BackGroundPtr = CreateActor<BackGround>(RenderOrder::BackGround);
 		BackGroundPtr->Init("Back.bmp", PLAY_BACKGROUND_SCALE);
 
-		Wave* Wave1 = CreateActor<Wave>(RenderOrder::UI);
-		Wave1->SetPos({ 0.0f,1775.0f });
 
 		
-		GameEngineActor* Wave2 = CreateActor<Wave>(RenderOrder::UI);
-		//Wave2->SetOrder(RenderOrder::BackWave);
+		Wave* Wave1 = CreateActor<Wave>(RenderOrder::BackWave);
+		Wave1->SetPos({ 0.0f,1775.0f });
+		GameEngineActor* Wave2 = CreateActor<Wave>(RenderOrder::BackWave);
+		
 		Wave2->SetPos({ -30.0f,1800.0f });
-		GameEngineActor* Wave3 = CreateActor<Wave>(RenderOrder::UI);
+		GameEngineActor* Wave3 = CreateActor<Wave>(RenderOrder::BackWave);
 		Wave3->SetPos({ -60.0f,1825.0f});
-		GameEngineActor* Wave4 = CreateActor<Wave>(RenderOrder::UI);
+		GameEngineActor* Wave4 = CreateActor<Wave>(RenderOrder::FrontWave);
 		Wave4->SetPos({ -90.0f,1850.0f});
-		GameEngineActor* Wave5 = CreateActor<Wave>(RenderOrder::UI);
+		GameEngineActor* Wave5 = CreateActor<Wave>(RenderOrder::FrontWave);
 		Wave5->SetPos({ -120.0f,1875.0f });
 		
 	}
@@ -111,25 +111,25 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 
 
 	{
-		Player* TestPlayer = CreateActor<Player>();
+		Player* TestPlayer = CreateActor<Player>(RenderOrder::Player);
 		TestPlayer->SetGroundTexture(GroundPtr->GetPixelGroundTexture());
 		TestPlayer->SetPos(float4{ 100, 100 });
 	}
 
 	{
-		Player* TestPlayer = CreateActor<Player>();
+		Player* TestPlayer = CreateActor<Player>(RenderOrder::Player);
 		TestPlayer->SetGroundTexture(GroundPtr->GetPixelGroundTexture());
 		TestPlayer->SetPos(float4{ 400, 100 });
 	}
 
 	{
-		Player* TestPlayer = CreateActor<Player>();
+		Player* TestPlayer = CreateActor<Player>(RenderOrder::Player);
 		TestPlayer->SetGroundTexture(GroundPtr->GetPixelGroundTexture());
 		TestPlayer->SetPos(float4{ 700, 100 });
 	}
 
 	{
-		Player* TestPlayer = CreateActor<Player>();
+		Player* TestPlayer = CreateActor<Player>(RenderOrder::Player);
 		TestPlayer->SetGroundTexture(GroundPtr->GetPixelGroundTexture());
 		TestPlayer->SetPos(float4{ 1000, 100 });
 	}

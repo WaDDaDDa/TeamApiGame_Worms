@@ -12,9 +12,9 @@ enum class RenderOrder
 	BackGroundEffect,
 	BackWave,
 	Ground,
-	FrountWave,
 	Player,
 	Weapon,
+	FrontWave,
 	Effect,
 	UI,
 
