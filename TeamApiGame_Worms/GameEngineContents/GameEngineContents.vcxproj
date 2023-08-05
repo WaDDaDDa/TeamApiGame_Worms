@@ -211,6 +211,10 @@
     <ClInclude Include="UI_MainLogo.h" />
     <ClInclude Include="UI_Meteor.h" />
     <ClInclude Include="UI_Mouse.h" />
+    <ClInclude Include="Wave.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Weapon.h">
       <SubType>
       </SubType>
@@ -272,6 +276,10 @@
     <ClCompile Include="UI_MainLogo.cpp" />
     <ClCompile Include="UI_Meteor.cpp" />
     <ClCompile Include="UI_Mouse.cpp" />
+    <ClCompile Include="Wave.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Weapon.cpp">
       <SubType>
       </SubType>

@@ -6,8 +6,10 @@
 #include <GameEngineCore/GameEngineCore.h>
 #include <GameEngineCore/ResourcesManager.h>
 
+#include "ContentsEnum.h"
 #include "BackGround.h"
 #include "Ground.h"
+#include "Wave.h"
 #include "Player.h"
 #include "GameTurn.h"
 #include "MouseObject.h"
@@ -85,8 +87,24 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 		GroundPtr = CreateActor<Ground>();
 		GroundPtr->Init(GroundFileName, GroundPixelFileName);
 
+		
+
 		BackGroundPtr = CreateActor<BackGround>();
 		BackGroundPtr->Init("Back.bmp", PLAY_BACKGROUND_SCALE);
+
+		Wave* Wave1 = CreateActor<Wave>(RenderOrder::UI);
+		Wave1->SetPos({ 0.0f,1775.0f });
+
+		
+		GameEngineActor* Wave2 = CreateActor<Wave>(RenderOrder::UI);
+		//Wave2->SetOrder(RenderOrder::BackWave);
+		Wave2->SetPos({ -30.0f,1800.0f });
+		GameEngineActor* Wave3 = CreateActor<Wave>(RenderOrder::UI);
+		Wave3->SetPos({ -60.0f,1825.0f});
+		GameEngineActor* Wave4 = CreateActor<Wave>(RenderOrder::UI);
+		Wave4->SetPos({ -90.0f,1850.0f});
+		GameEngineActor* Wave5 = CreateActor<Wave>(RenderOrder::UI);
+		Wave5->SetPos({ -120.0f,1875.0f });
 		
 	}
 
