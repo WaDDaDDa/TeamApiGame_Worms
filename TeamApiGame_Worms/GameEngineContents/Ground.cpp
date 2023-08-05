@@ -83,7 +83,7 @@ void Ground::Init(const std::string& _FileName, const std::string& _DebugFileNam
 
 	SetPos({ Scale.hX(), Scale.hY() });
 
-	SetOrder(RenderOrder::Ground);
+	//SetOrder(RenderOrder::Ground);
 }
 
 void Ground::SwitchRender()

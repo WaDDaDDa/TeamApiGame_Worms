@@ -37,6 +37,9 @@ void Wave::Start()
 	Renderer2->ChangeAnimation("Wave");
 
 	Renderer2->SetRenderPos({ Texture->GetScale().X,0.0f });
+	Renderer1->SetOrder(GetOrder());
+	Renderer2->SetOrder(GetOrder());
+
 }
 
 void Wave::Update(float _Delta)
