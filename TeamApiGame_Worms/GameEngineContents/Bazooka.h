@@ -22,7 +22,7 @@ public:
 	Bazooka& operator=(const Bazooka& _Other) = delete;
 	Bazooka& operator=(Bazooka&& _Other) noexcept = delete;
 
-	class GameEngineRenderer* Renderer;
+	class GameEngineRenderer* Renderer = nullptr;
 
 	GameEngineCollision* BombCollision = nullptr;
 

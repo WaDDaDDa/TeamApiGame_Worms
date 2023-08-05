@@ -23,6 +23,13 @@ public:
 		SetPos(Master->GetPos() + float4{0, -15});
 	}
 
+	template <typename EffectType>
+	void CreateBombEffect()
+	{
+		class BombEffect* NewEffect = GetLevel()->CreateActor<EffectType>();
+		NewEffect->SetMaster(this);
+	}
+
 protected:
 	Player* Master = nullptr;
 

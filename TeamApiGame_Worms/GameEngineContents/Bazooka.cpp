@@ -4,6 +4,10 @@
 #include "Player.h"
 #include "PlayLevel.h"
 #include "GameTurn.h"
+#include "Range25.h"
+#include "Range50.h"
+#include "Range75.h"
+#include "Range100.h"
 
 #include <GameEngineBase/GameEnginePath.h>
 #include <GameEngineCore/GameEngineLevel.h>
@@ -39,7 +43,10 @@ void Bazooka::Start()
 		// ÀÌÆåÆ® ·Îµå
 		FilePath.MoveParentToExistsChild("Image");
 		FilePath.MoveChild("Image\\Effects\\");
-		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("circle25.bmp"), 1, 8);
+		//ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("circle25.bmp"), 1, 8);
+		//ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("circle50.bmp"), 1, 8);
+		//ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("circle75.bmp"), 1, 4);
+		//ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("circle100.bmp"), 1, 4);
 	}
 
 	
@@ -111,8 +118,6 @@ void Bazooka::Start()
 	Renderer->CreateAnimation("9_Bazooka_Fly", "bazooka.bmp", 31, 31, 0.05f, false);
 	//// -270
 	//Renderer->CreateAnimation("Bazooka_Fly", "bazooka.bmp", 32, 32, 0.05f, false);
-
-	Renderer->CreateAnimation("Bazooka_Bomb", "circle25.bmp", 0, 7, 0.1f, false);
 
 	float Angle = -45.0f;
 	//SetGravityVector(AngleVec.GetRotationToDegZ(Angle) * 700.0f);
@@ -300,7 +305,6 @@ void Bazooka::DirCheck()
 void Bazooka::FlyStart()
 {
 	SetGravityVector(AngleVec.GetRotationToDegZ(Master->GetCurAngle()) * 700.0f);
-
 	Renderer->ChangeAnimation("0_Bazooka_Fly");
 }
 
@@ -314,7 +318,7 @@ void Bazooka::FlyUpdate(float _Delta)
 		if (Color != RGB(255, 255, 255))
 		{
 
-			ChangeState(BazookaState::Bomb);
+			ChangeState(BazookaState::Damage);
 			return;
 
 		}
@@ -324,20 +328,15 @@ void Bazooka::FlyUpdate(float _Delta)
 
 void Bazooka::BombStart()
 {
-	BombCollision = CreateCollision(CollisionOrder::Boom);
-	BombCollision->SetCollisionScale({ 128, 128 });
-	BombCollision->SetCollisionType(CollisionType::CirCle);
-	BombCollision->SetCollisionPos({ 0, 0 });
-
-	Renderer->ChangeAnimation("Bazooka_Bomb");
+	CreateBombEffect<Range25>();
 }
 
 void Bazooka::BombUpdate(float _Delta)
 {
 
-	PlayLevel* CurPlayLevel = dynamic_cast<PlayLevel*>(GetLevel());
-	CurPlayLevel->GetGround()->ContactGround(GetPos(), {100.0f,100.0f});
-	BombCollision->Death();
+	//PlayLevel* CurPlayLevel = dynamic_cast<PlayLevel*>(GetLevel());
+	//CurPlayLevel->GetGround()->ContactGround(GetPos(), {100.0f,100.0f});
+	//BombCollision->Death();
 
 	if (true == Renderer->IsAnimationEnd())
 	{
@@ -348,7 +347,10 @@ void Bazooka::BombUpdate(float _Delta)
 
 void Bazooka::DamageStart()
 {
-
+	//CreateBombEffect<Range25>();
+	//CreateBombEffect<Range50>();
+	//CreateBombEffect<Range75>();
+	CreateBombEffect<Range100>();
 }
 
 void Bazooka::DamageUpdate(float _Delta)

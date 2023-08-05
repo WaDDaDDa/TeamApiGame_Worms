@@ -15,6 +15,7 @@ enum class RenderOrder
 	FrountWave,
 	Player,
 	Weapon,
+	Effect,
 	UI,
 
 	Mouse,
@@ -25,5 +26,5 @@ enum class CollisionOrder
 	PlayerBody,
 	UI,
 	Mouse,
-	Boom,
+	Bomb,
 };

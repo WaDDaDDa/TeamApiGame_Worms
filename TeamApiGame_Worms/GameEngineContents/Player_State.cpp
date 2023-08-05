@@ -21,7 +21,7 @@ void Player::IdleUpdate(float _Delta)
 	GroundCheck(_Delta);
 
 	std::vector<GameEngineCollision*> _Col;
-	if (true == PlayerBodyCollision->Collision(CollisionOrder::Boom, _Col
+	if (true == PlayerBodyCollision->Collision(CollisionOrder::Bomb, _Col
 		, CollisionType::Rect
 		, CollisionType::CirCle
 	))
@@ -196,7 +196,7 @@ void Player::DamagingStart()
 	ChangeAnimationState("Damaging");
 
 	std::vector<GameEngineCollision*> _Col;
-	if (true == PlayerBodyCollision->Collision(CollisionOrder::Boom, _Col
+	if (true == PlayerBodyCollision->Collision(CollisionOrder::Bomb, _Col
 		, CollisionType::Rect
 		, CollisionType::CirCle
 	))

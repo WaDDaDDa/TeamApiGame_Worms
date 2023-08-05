@@ -33,7 +33,7 @@ void Hole::AddHoleAtGround(GameEngineRenderer* _GroundTexture, GameEngineRendere
 	float4 TexturePos = GetPos();
 	float4 TextureScale =Texture->GetScale();
 	
-	 GroundTexture->TransCopy(Texture, TexturePos, {128.0f,128.0f}, float4::ZERO, TextureScale, RGB(255,255,255));
+	GroundTexture->TransCopy(Texture, TexturePos, {128.0f,128.0f}, float4::ZERO, TextureScale, RGB(255,255,255));
 	GroundPixelTexture->TransCopy(PixelTexture, TexturePos, { 128.0f,128.0f }, float4::ZERO, TextureScale);
 
 
@@ -78,7 +78,7 @@ void Hole::Start()
 
 
 	{
-		GameEngineCollision* Collision = CreateCollision(CollisionOrder::Boom);
+		GameEngineCollision* Collision = CreateCollision(CollisionOrder::Bomb);
 		Collision->SetCollisionType(CollisionType::CirCle);
 		Collision->SetCollisionScale(Scale);
 
