@@ -33,8 +33,8 @@ void Hole::AddHoleAtGround(GameEngineRenderer* _GroundTexture, GameEngineRendere
 	float4 TexturePos = GetPos();
 	float4 TextureScale =Texture->GetScale();
 	
-	GroundTexture->TransCopy(Texture, TexturePos, {128.0f,128.0f}, float4::ZERO, TextureScale, RGB(255,255,255));
-	GroundPixelTexture->TransCopy(PixelTexture, TexturePos, { 128.0f,128.0f }, float4::ZERO, TextureScale);
+	GroundTexture->TransCopy(Texture, TexturePos, Scale, float4::ZERO, TextureScale, RGB(255,255,255));
+	GroundPixelTexture->TransCopy(PixelTexture, TexturePos, Scale, float4::ZERO, TextureScale);
 
 
 
