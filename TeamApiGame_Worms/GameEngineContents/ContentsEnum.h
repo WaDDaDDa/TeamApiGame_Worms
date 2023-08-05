@@ -13,6 +13,7 @@ enum class RenderOrder
 	Ground,
 	Player,
 	Weapon,
+	Effect,
 	UI,
 
 	Mouse,
@@ -23,5 +24,5 @@ enum class CollisionOrder
 	PlayerBody,
 	UI,
 	Mouse,
-	Boom,
+	Bomb,
 };

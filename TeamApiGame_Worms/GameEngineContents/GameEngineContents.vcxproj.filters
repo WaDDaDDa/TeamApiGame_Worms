@@ -69,6 +69,21 @@
     <ClInclude Include="ModeSelectLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
+    <ClInclude Include="BombEffect.h">
+      <Filter>Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Range25.h">
+      <Filter>Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Range50.h">
+      <Filter>Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Range75.h">
+      <Filter>Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Range100.h">
+      <Filter>Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -139,6 +154,21 @@
     <ClCompile Include="ModeSelectLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
+    <ClCompile Include="BombEffect.cpp">
+      <Filter>Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Range25.cpp">
+      <Filter>Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Range50.cpp">
+      <Filter>Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Range75.cpp">
+      <Filter>Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Range100.cpp">
+      <Filter>Effect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
@@ -158,6 +188,9 @@
     </Filter>
     <Filter Include="Weapon">
       <UniqueIdentifier>{0b251b90-6daf-447e-9ae7-64f9da354a82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Effect">
+      <UniqueIdentifier>{9f1788e5-a549-4623-b931-7e650b32ad31}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
