@@ -119,15 +119,7 @@ void Bazooka::Start()
 	//// -270
 	//Renderer->CreateAnimation("Bazooka_Fly", "bazooka.bmp", 32, 32, 0.05f, false);
 
-	float Angle = -45.0f;
-	//SetGravityVector(AngleVec.GetRotationToDegZ(Angle) * 700.0f);
-	
-	//SetGravityVector(AngleVec.GetRotationToDegZ(Master->GetAngle()) * 700.0f);
-
-	//BombCollision = CreateCollision(CollisionOrder::Boom);
-	//BombCollision->SetCollisionScale({ 128, 128 });
-	//BombCollision->SetCollisionType(CollisionType::CirCle);
-	//BombCollision->SetCollisionPos({ 0, 0 });
+	SetWeaponDamage(50);
 
 	ChangeState(BazookaState::Max);
 

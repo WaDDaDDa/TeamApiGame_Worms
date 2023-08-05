@@ -30,8 +30,15 @@ public:
 		NewEffect->SetMaster(this);
 	}
 
+	void SetWeaponDamage(int _Value)
+	{
+		WeaponDamage = _Value;
+	}
+
 protected:
 	Player* Master = nullptr;
+
+	int WeaponDamage = 0;
 
 private:
 
