@@ -53,7 +53,7 @@ void GravityActor::CameraFocus()
 
 
 	// 카메라가 맵의 왼쪽으로 못나가게.
-	if (0 >= GetLevel()->GetMainCamera()->GetPos().X)
+	if (0.0f >= GetLevel()->GetMainCamera()->GetPos().X)
 	{
 		GetLevel()->GetMainCamera()->SetPos({ 0.0f, GetLevel()->GetMainCamera()->GetPos().Y });
 	}
@@ -62,10 +62,15 @@ void GravityActor::CameraFocus()
 	{
 		GetLevel()->GetMainCamera()->SetPos({ ImageX, GetLevel()->GetMainCamera()->GetPos().Y });
 	}
-
+	// 카메라가 맵의 아래 최대치를 못나가게.
 	if (ImageY <= GetLevel()->GetMainCamera()->GetPos().Y)
 	{
 		GetLevel()->GetMainCamera()->SetPos({ GetLevel()->GetMainCamera()->GetPos().X, ImageY });
+	}
+	// 카메라가 맵의 위 최대치를 못나가게.
+	if (0.0f >= GetLevel()->GetMainCamera()->GetPos().Y)
+	{
+		GetLevel()->GetMainCamera()->SetPos({ GetLevel()->GetMainCamera()->GetPos().X, 0.0f });
 	}
 }
 
