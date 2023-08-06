@@ -24,10 +24,11 @@ public:
 	}
 
 	template <typename EffectType>
-	void CreateBombEffect()
+	EffectType* CreateBombEffect()
 	{
 		class BombEffect* NewEffect = GetLevel()->CreateActor<EffectType>();
 		NewEffect->SetMaster(this);
+		return dynamic_cast<EffectType*>(NewEffect);
 	}
 
 	void SetWeaponDamage(int _Value)

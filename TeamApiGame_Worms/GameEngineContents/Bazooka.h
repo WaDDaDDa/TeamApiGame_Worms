@@ -45,13 +45,16 @@ protected:
 	void MaxUpdate(float _Delta);
 
 private:
-	float Speed = 200.0f;
+	int BazookaDamage = 50;
+	float BazookaSpeed = 3000.0f;
+
 	float4 Dir = float4::ZERO;
 	float4 GravityDir = float4::ZERO;
 	float4 AngleVec = float4::RIGHT;
 
 	BazookaState State = BazookaState::Max;
 
+	class BombEffect* BazookaBomb = nullptr;
 
 	void DirCheck();
 

@@ -24,9 +24,14 @@ public:
 		SetPos(Master->GetPos());
 	}
 
+	class GameEngineRenderer* GetRenderer()
+	{
+		return Renderer;
+	}
+
 protected:
-	class GameEngineRenderer* Renderer = nullptr;
 	class GameEngineCollision* BombCollision = nullptr;
+	GameEngineRenderer* Renderer = nullptr;
 
 	float4 BombRange = float4::ZERO;
 

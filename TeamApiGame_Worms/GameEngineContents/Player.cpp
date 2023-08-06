@@ -278,7 +278,7 @@ void Player::Update(float _Delta)
 
 	if (IsTurnPlayer == false)
 	{
-		GameEngineInput::Reset;
+		// GameEngineInput::Reset;
 	}
 
 	SetDirPosNormalize();

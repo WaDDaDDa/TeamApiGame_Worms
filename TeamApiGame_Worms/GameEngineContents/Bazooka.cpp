@@ -119,8 +119,9 @@ void Bazooka::Start()
 	//// -270
 	//Renderer->CreateAnimation("Bazooka_Fly", "bazooka.bmp", 32, 32, 0.05f, false);
 
-	SetWeaponDamage(50);
-	SetWeaponSpeed(1000);
+	SetWeaponDamage(BazookaDamage);
+	SetWeaponSpeed(BazookaSpeed);
+
 
 	ChangeState(BazookaState::Max);
 }
@@ -306,11 +307,11 @@ void Bazooka::FlyUpdate(float _Delta)
 	Gravity(_Delta);
 
 	{
-		unsigned int Color = GetGroundColor(RGB(255, 255, 255));
+		unsigned int Color = GetGroundColor(RGB(255, 255, 255) || GetLiveTime() >= 5.0f);
 		if (Color != RGB(255, 255, 255))
 		{
 
-			ChangeState(BazookaState::Damage);
+			ChangeState(BazookaState::Bomb);
 			return;
 
 		}
@@ -320,17 +321,13 @@ void Bazooka::FlyUpdate(float _Delta)
 
 void Bazooka::BombStart()
 {
-	CreateBombEffect<Range25>();
+	BazookaBomb = CreateBombEffect<Range50>();
+	Renderer->Off();
 }
 
 void Bazooka::BombUpdate(float _Delta)
 {
-
-	//PlayLevel* CurPlayLevel = dynamic_cast<PlayLevel*>(GetLevel());
-	//CurPlayLevel->GetGround()->ContactGround(GetPos(), {100.0f,100.0f});
-	//BombCollision->Death();
-
-	if (true == Renderer->IsAnimationEnd())
+	if (true == BazookaBomb->GetRenderer()->IsAnimationEnd())
 	{
 		ChangeState(BazookaState::Damage);
 		return;
@@ -339,15 +336,12 @@ void Bazooka::BombUpdate(float _Delta)
 
 void Bazooka::DamageStart()
 {
-	//CreateBombEffect<Range25>();
-	CreateBombEffect<Range50>();
-	//CreateBombEffect<Range75>();
-	//CreateBombEffect<Range100>();
+
 }
 
 void Bazooka::DamageUpdate(float _Delta)
 {
-	int PlayerCount = Player::GetAllPlayer().size();
+	size_t PlayerCount = Player::GetAllPlayer().size();
 	int PlayerStateCount = 0;
 	for (size_t i = 0; i < PlayerCount; i++)
 	{
@@ -373,4 +367,5 @@ void Bazooka::MaxStart()
 void Bazooka::MaxUpdate(float _Delta)
 {
 	ChangeState(BazookaState::Fly);
+	return;
 }

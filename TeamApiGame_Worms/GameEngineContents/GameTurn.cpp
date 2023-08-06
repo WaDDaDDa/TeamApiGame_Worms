@@ -87,7 +87,7 @@ void GameTurn::ChangeTurnPlayer()
 	TurnPlayer->SwitchIsTurnPlayer();
 
 	++StartValue;
-	int SIZE = Player::GetAllPlayer().size();
+	size_t SIZE = Player::GetAllPlayer().size();
 	if (StartValue >= SIZE)
 	{
 		StartValue = 0;
