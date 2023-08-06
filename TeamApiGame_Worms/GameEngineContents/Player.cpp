@@ -35,6 +35,7 @@ void Player::Start()
 			FilePath.SetCurrentPath();
 			FilePath.MoveParentToExistsChild("ContentsResources");
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("Blank.bmp"));
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("idleLeft.bmp"), 1, 6);
 		}
 		if (false == ResourcesManager::GetInst().IsLoadTexture("idleRight.bmp"))

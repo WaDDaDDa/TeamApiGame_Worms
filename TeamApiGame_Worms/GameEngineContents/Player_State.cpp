@@ -1,7 +1,10 @@
 #include "Player.h"
 #include "Weapon.h"
 #include "Bazooka.h"
+#include "HomingMissile.h"
 #include "ContentsEnum.h"
+
+
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/GameEngineRenderer.h>
@@ -462,7 +465,8 @@ void Player::BazookaUpdate(float _Delta)
 
 void Player::BazookaFireStart()
 {
-	CreateWeapon<Bazooka>();
+	//CreateWeapon<Bazooka>();
+	CreateWeapon<HomingMissile>();
 }
 
 void Player::BazookaFireUpdate(float _Delta)

@@ -35,18 +35,7 @@ void Bazooka::Start()
 		FilePath.SetCurrentPath();
 		FilePath.MoveParentToExistsChild("ContentsResources");
 		FilePath.MoveChild("ContentsResources\\Image\\Weapons\\");
-		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("Blank.bmp"));
 		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("bazooka.bmp"), 1, 32);
-
-
-
-		// ¿Ã∆Â∆Æ ∑ŒµÂ
-		FilePath.MoveParentToExistsChild("Image");
-		FilePath.MoveChild("Image\\Effects\\");
-		//ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("circle25.bmp"), 1, 8);
-		//ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("circle50.bmp"), 1, 8);
-		//ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("circle75.bmp"), 1, 4);
-		//ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("circle100.bmp"), 1, 4);
 	}
 
 	

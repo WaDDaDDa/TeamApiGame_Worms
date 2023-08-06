@@ -87,6 +87,9 @@
     <ClInclude Include="Wave.h">
       <Filter>Map</Filter>
     </ClInclude>
+    <ClInclude Include="HomingMissile.h">
+      <Filter>Weapon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -174,6 +177,9 @@
     </ClCompile>
     <ClCompile Include="Wave.cpp">
       <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="HomingMissile.cpp">
+      <Filter>Weapon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

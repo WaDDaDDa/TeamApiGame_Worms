@@ -186,6 +186,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="HomingMissile.h" />
     <ClInclude Include="LobbyLevel.h" />
     <ClInclude Include="ModeSelectLevel.h" />
     <ClInclude Include="MouseObject.h" />
@@ -255,6 +256,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="HomingMissile.cpp" />
     <ClCompile Include="LobbyLevel.cpp" />
     <ClCompile Include="ModeSelectLevel.cpp" />
     <ClCompile Include="MouseObject.cpp" />
