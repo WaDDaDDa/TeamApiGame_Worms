@@ -1,9 +1,12 @@
 #include "Player.h"
+#include "ContentsEnum.h"
+
+//무기
 #include "Weapon.h"
 #include "Bazooka.h"
 #include "HomingMissile.h"
 #include "Sheep.h"
-#include "ContentsEnum.h"
+#include "Uzi.h"
 
 
 #include <GameEnginePlatform/GameEngineInput.h>
@@ -586,10 +589,10 @@ void Player::UziUpdate(float _Delta)
 		}
 	}
 
-	/*if (GameEngineInput::IsDown('A'))
+	if (GameEngineInput::IsDown('A'))
 	{
 		ChangeState(PlayerState::UziFire);
-	}*/
+	}
 
 	int iCurAngle = static_cast<int>(CurAngle);
 	// 애니메이션과 무기각도를 맞추기위한 중간 계산식.
@@ -702,10 +705,12 @@ void Player::UziUpdate(float _Delta)
 void Player::UziFireStart()
 {
 	ChangeAnimationState("UziFire15");
+
+	CreateWeapon<Uzi>();
 }
 void Player::UziFireUpdate(float _Delta)
 {
-
+	ChangeState(PlayerState::UziOff);
 }
 
 void Player::UziOffStart()

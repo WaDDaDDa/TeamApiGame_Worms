@@ -108,6 +108,9 @@
     <ClInclude Include="Sheep.h">
       <Filter>Weapon</Filter>
     </ClInclude>
+    <ClInclude Include="Uzi.h">
+      <Filter>Weapon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -215,6 +218,9 @@
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="Sheep.cpp">
+      <Filter>Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Uzi.cpp">
       <Filter>Weapon</Filter>
     </ClCompile>
   </ItemGroup>
