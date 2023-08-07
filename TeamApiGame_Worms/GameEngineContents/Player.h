@@ -16,6 +16,18 @@ enum class PlayerState
 	Bazooka,
 	BazookaFire,
 	BazookaOff,
+	UziOn,
+	Uzi,
+	UziFire,
+	UziOff,
+	HomingMissileOn,
+	HomingMissile,
+	HomingMissileFire,
+	HomingMissileOff,
+	SheepOn,
+	Sheep,
+	SheepFire,
+	SheepOff,
 
 	DeathEnd,
 	Max
@@ -130,6 +142,42 @@ protected:
 
 	void BazookaOffStart();
 	void BazookaOffUpdate(float _Delta);
+
+	void UziOnStart();
+	void UziOnUpdate(float _Delta);
+
+	void UziStart();
+	void UziUpdate(float _Delta);
+
+	void UziFireStart();
+	void UziFireUpdate(float _Delta);
+
+	void UziOffStart();
+	void UziOffUpdate(float _Delta);
+
+	void HomingMissileOnStart();
+	void HomingMissileOnUpdate(float _Delta);
+
+	void HomingMissileStart();
+	void HomingMissileUpdate(float _Delta);
+
+	void HomingMissileFireStart();
+	void HomingMissileFireUpdate(float _Delta);
+
+	void HomingMissileOffStart();
+	void HomingMissileOffUpdate(float _Delta);
+
+	void SheepOnStart();
+	void SheepOnUpdate(float _Delta);
+
+	void SheepStart();
+	void SheepUpdate(float _Delta);
+
+	void SheepFireStart();
+	void SheepFireUpdate(float _Delta);
+
+	void SheepOffStart();
+	void SheepOffUpdate(float _Delta);
 
 	void SetDirPosNormalize();
 

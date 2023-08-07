@@ -73,6 +73,24 @@ void Player::IdleUpdate(float _Delta)
 		return;
 	}
 
+	if (true == GameEngineInput::IsDown('3'))
+	{
+		ChangeState(PlayerState::UziOn);
+		return;
+	}
+
+	if (true == GameEngineInput::IsDown('4'))
+	{
+		ChangeState(PlayerState::HomingMissileOn);
+		return;
+	}
+	
+	if (true == GameEngineInput::IsDown('5'))
+	{
+		ChangeState(PlayerState::SheepOn);
+		return;
+	}
+
 	
 
 }
@@ -260,12 +278,6 @@ void Player::BazookaOnStart()
 }
 void Player::BazookaOnUpdate(float _Delta)
 {
-	//if (true == GameEngineInput::IsDown('1'))
-	//{
-	//	ChangeState(PlayerState::BazookaOff);
-	//	return;
-	//}
-
 	if (true == MainRenderer->IsAnimationEnd())
 	{
 		ChangeState(PlayerState::Bazooka);
@@ -485,5 +497,497 @@ void Player::BazookaOffUpdate(float _Delta)
 	{
 		ChangeState(PlayerState::Idle);
 		return;
+	}
+}
+
+void Player::UziOnStart()
+{
+	ChangeAnimationState("UziOn");
+}
+void Player::UziOnUpdate(float _Delta)
+{
+	if (true == MainRenderer->IsAnimationEnd())
+	{
+		ChangeState(PlayerState::Uzi);
+		return;
+	}
+
+}
+
+void Player::UziStart()
+{
+	ChangeAnimationState("Uzi15");
+}
+void Player::UziUpdate(float _Delta)
+{
+	DirCheck();
+
+	if (true != IsTurnPlayer)
+	{
+		ChangeState(PlayerState::UziOff);
+		return;
+	}
+
+	if (true == GameEngineInput::IsDown('1'))
+	{
+		ChangeState(PlayerState::UziOff);
+		return;
+	}
+
+	// 오른쪽 각도조절
+	if (PlayerDir::Right == Dir)
+	{
+		if (true == GameEngineInput::IsPress(VK_UP))
+		{
+			CurAngle -= (5.625f * _Delta * 4.0f);
+
+			if (CurAngle <= RIGHT_UP_MAXANGEL)
+			{
+				CurAngle = RIGHT_UP_MAXANGEL;
+			}
+		}
+		if (true == GameEngineInput::IsPress(VK_DOWN))
+		{
+			CurAngle += (5.625f * _Delta * 4.0f);
+
+			if (CurAngle >= RIGHT_DOWN_MAXANGEL)
+			{
+				CurAngle = RIGHT_DOWN_MAXANGEL;
+			}
+		}
+	}
+
+	// 왼쪽 각도조절
+	if (PlayerDir::Left == Dir)
+	{
+		if (true == GameEngineInput::IsPress(VK_UP))
+		{
+			CurAngle += (5.625f * _Delta * 4.0f);
+
+			if (CurAngle >= LEFT_UP_MAXANGEL)
+			{
+				CurAngle = LEFT_UP_MAXANGEL;
+			}
+		}
+		if (true == GameEngineInput::IsPress(VK_DOWN))
+		{
+			CurAngle -= (5.625f * _Delta * 4.0f);
+
+			if (CurAngle <= LEFT_DOWN_MAXANGEL)
+			{
+				CurAngle = LEFT_DOWN_MAXANGEL;
+			}
+		}
+	}
+
+	/*if (GameEngineInput::IsDown('A'))
+	{
+		ChangeState(PlayerState::UziFire);
+	}*/
+
+	int iCurAngle = static_cast<int>(CurAngle);
+	// 애니메이션과 무기각도를 맞추기위한 중간 계산식.
+	// 무기각도가 -90에서 +되면서 270도까지로 되어있음.
+	if (PlayerDir::Left == Dir)
+	{
+		iCurAngle = 180 - iCurAngle;
+	}
+
+	switch (iCurAngle)
+	{
+	case -90:
+		ChangeAnimationState("Uzi31");
+		break;
+	case -84:
+		ChangeAnimationState("Uzi30");
+		break;
+	case -78:
+		ChangeAnimationState("Uzi29");
+		break;
+	case -73:
+		ChangeAnimationState("Uzi28");
+		break;
+	case -67:
+		ChangeAnimationState("Uzi27");
+		break;
+	case -61:
+		ChangeAnimationState("Uzi26");
+		break;
+	case -56:
+		ChangeAnimationState("Uzi25");
+		break;
+	case -50:
+		ChangeAnimationState("Uzi24");
+		break;
+	case -45:
+		ChangeAnimationState("Uzi23");
+		break;
+	case -39:
+		ChangeAnimationState("Uzi22");
+		break;
+	case -33:
+		ChangeAnimationState("Uzi21");
+		break;
+	case -28:
+		ChangeAnimationState("Uzi20");
+		break;
+	case -22:
+		ChangeAnimationState("Uzi19");
+		break;
+	case -16:
+		ChangeAnimationState("Uzi18");
+		break;
+	case -11:
+		ChangeAnimationState("Uzi17");
+		break;
+	case -5:
+		ChangeAnimationState("Uzi16");
+		break;
+	case 0:
+		ChangeAnimationState("Uzi15");
+		break;
+	case 5:
+		ChangeAnimationState("Uzi14");
+		break;
+	case 11:
+		ChangeAnimationState("Uzi13");
+		break;
+	case 16:
+		ChangeAnimationState("Uzi12");
+		break;
+	case 22:
+		ChangeAnimationState("Uzi11");
+		break;
+	case 28:
+		ChangeAnimationState("Uzi10");
+		break;
+	case 33:
+		ChangeAnimationState("Uzi9");
+		break;
+	case 39:
+		ChangeAnimationState("Uzi8");
+		break;
+	case 45:
+		ChangeAnimationState("Uzi7");
+		break;
+	case 50:
+		ChangeAnimationState("Uzi6");
+		break;
+	case 56:
+		ChangeAnimationState("Uzi5");
+		break;
+	case 61:
+		ChangeAnimationState("Uzi4");
+		break;
+	case 67:
+		ChangeAnimationState("Uzi3");
+		break;
+	case 73:
+		ChangeAnimationState("Uzi2");
+		break;
+	case 78:
+		ChangeAnimationState("Uzi1");
+		break;
+	case 84:
+		ChangeAnimationState("Uzi0");
+		break;
+	}
+}
+void Player::UziFireStart()
+{
+	ChangeAnimationState("UziFire15");
+}
+void Player::UziFireUpdate(float _Delta)
+{
+
+}
+
+void Player::UziOffStart()
+{
+	ChangeAnimationState("UziOff");
+}
+void Player::UziOffUpdate(float _Delta)
+{
+	if (true == MainRenderer->IsAnimationEnd())
+	{
+		ChangeState(PlayerState::Idle);
+		return;
+	}
+}
+
+void Player::HomingMissileOnStart()
+{
+	ChangeAnimationState("HomingMissileOn");
+}
+void Player::HomingMissileOnUpdate(float _Delta)
+{
+	if (true == MainRenderer->IsAnimationEnd())
+	{
+		ChangeState(PlayerState::HomingMissile);
+		return;
+	}
+}
+
+void Player::HomingMissileStart()
+{
+	ChangeAnimationState("HomingMissile15");
+}
+void Player::HomingMissileUpdate(float _Delta)
+{
+	DirCheck();
+
+	if (true != IsTurnPlayer)
+	{
+		ChangeState(PlayerState::HomingMissileOff);
+		return;
+	}
+
+	if (true == GameEngineInput::IsDown('1'))
+	{
+		ChangeState(PlayerState::HomingMissileOff);
+		return;
+	}
+
+	// 오른쪽 각도조절
+	if (PlayerDir::Right == Dir)
+	{
+		if (true == GameEngineInput::IsPress(VK_UP))
+		{
+			CurAngle -= (5.625f * _Delta * 4.0f);
+
+
+			if (CurAngle <= RIGHT_UP_MAXANGEL)
+			{
+				CurAngle = RIGHT_UP_MAXANGEL;
+			}
+		}
+		if (true == GameEngineInput::IsPress(VK_DOWN))
+		{
+			CurAngle += (5.625f * _Delta * 4.0f);
+			if (CurAngle >= RIGHT_DOWN_MAXANGEL)
+			{
+				CurAngle = RIGHT_DOWN_MAXANGEL;
+			}
+		}
+	}
+
+	// 왼쪽 각도조절
+	if (PlayerDir::Left == Dir)
+	{
+		if (true == GameEngineInput::IsPress(VK_UP))
+		{
+			CurAngle += (5.625f * _Delta * 4.0f);
+
+
+			if (CurAngle >= LEFT_UP_MAXANGEL)
+			{
+				CurAngle = LEFT_UP_MAXANGEL;
+			}
+		}
+		if (true == GameEngineInput::IsPress(VK_DOWN))
+		{
+			CurAngle -= (5.625f * _Delta * 4.0f);
+			if (CurAngle <= LEFT_DOWN_MAXANGEL)
+			{
+				CurAngle = LEFT_DOWN_MAXANGEL;
+			}
+		}
+	}
+
+
+	if (true == GameEngineInput::IsUp('A') || GameEngineInput::GetPressTime('A') >= MaxChargingTime)
+	{
+		ChargingTime = GameEngineInput::GetPressTime('A');
+
+		if (ChargingTime >= MaxChargingTime)
+		{
+			ChargingTime = MaxChargingTime;
+		}
+		GameEngineInput::ResetPressTime('A');
+
+		ChangeState(PlayerState::HomingMissileFire);
+		return;
+	}
+
+	int iCurAngle = static_cast<int>(CurAngle);
+	// 애니메이션과 무기각도를 맞추기위한 중간 계산식.
+	// 무기각도가 -90에서 +되면서 270도까지로 되어있음.
+	if (PlayerDir::Left == Dir)
+	{
+		iCurAngle = 180 - iCurAngle;
+	}
+
+	switch (iCurAngle)
+	{
+	case -90:
+		ChangeAnimationState("HomingMissile31");
+		break;
+	case -84:
+		ChangeAnimationState("HomingMissile30");
+		break;
+	case -78:
+		ChangeAnimationState("HomingMissile29");
+		break;
+	case -73:
+		ChangeAnimationState("HomingMissile28");
+		break;
+	case -67:
+		ChangeAnimationState("HomingMissile27");
+		break;
+	case -61:
+		ChangeAnimationState("HomingMissile26");
+		break;
+	case -56:
+		ChangeAnimationState("HomingMissile25");
+		break;
+	case -50:
+		ChangeAnimationState("HomingMissile24");
+		break;
+	case -45:
+		ChangeAnimationState("HomingMissile23");
+		break;
+	case -39:
+		ChangeAnimationState("HomingMissile22");
+		break;
+	case -33:
+		ChangeAnimationState("HomingMissile21");
+		break;
+	case -28:
+		ChangeAnimationState("HomingMissile20");
+		break;
+	case -22:
+		ChangeAnimationState("HomingMissile19");
+		break;
+	case -16:
+		ChangeAnimationState("HomingMissile18");
+		break;
+	case -11:
+		ChangeAnimationState("HomingMissile17");
+		break;
+	case -5:
+		ChangeAnimationState("HomingMissile16");
+		break;
+	case 0:
+		ChangeAnimationState("HomingMissile15");
+		break;
+	case 5:
+		ChangeAnimationState("HomingMissile14");
+		break;
+	case 11:
+		ChangeAnimationState("HomingMissile13");
+		break;
+	case 16:
+		ChangeAnimationState("HomingMissile12");
+		break;
+	case 22:
+		ChangeAnimationState("HomingMissile11");
+		break;
+	case 28:
+		ChangeAnimationState("HomingMissile10");
+		break;
+	case 33:
+		ChangeAnimationState("HomingMissile9");
+		break;
+	case 39:
+		ChangeAnimationState("HomingMissile8");
+		break;
+	case 45:
+		ChangeAnimationState("HomingMissile7");
+		break;
+	case 50:
+		ChangeAnimationState("HomingMissile6");
+		break;
+	case 56:
+		ChangeAnimationState("HomingMissile5");
+		break;
+	case 61:
+		ChangeAnimationState("HomingMissile4");
+		break;
+	case 67:
+		ChangeAnimationState("HomingMissile3");
+		break;
+	case 73:
+		ChangeAnimationState("HomingMissile2");
+		break;
+	case 78:
+		ChangeAnimationState("HomingMissile1");
+		break;
+	case 84:
+		ChangeAnimationState("HomingMissile0");
+		break;
+	}
+}
+
+void Player::HomingMissileFireStart()
+{
+	CreateWeapon<HomingMissile>();
+}
+void Player::HomingMissileFireUpdate(float _Delta)
+{
+	ChangeState(PlayerState::Idle);
+}
+
+void Player::HomingMissileOffStart()
+{
+	ChangeAnimationState("HomingMissileOff");
+}
+void Player::HomingMissileOffUpdate(float _Delta)
+{
+	if (true == MainRenderer->IsAnimationEnd())
+	{
+		ChangeState(PlayerState::Idle);
+		return;
+	}
+}
+
+void Player::SheepOnStart()
+{
+	ChangeAnimationState("SheepOn");
+}
+void Player::SheepOnUpdate(float _Delta)
+{
+	if (MainRenderer->IsAnimationEnd())
+	{
+		ChangeState(PlayerState::Sheep);
+	}
+}
+
+void Player::SheepStart()
+{
+	ChangeAnimationState("Sheep");
+}
+void Player::SheepUpdate(float _Delta)
+{
+	if (GameEngineInput::IsDown('1'))
+	{
+		ChangeState(PlayerState::SheepOff);
+	}
+
+	if (GameEngineInput::IsDown('A'))
+	{
+		ChangeState(PlayerState::SheepFire);
+	}
+
+	
+}
+
+void Player::SheepFireStart()
+{
+
+}
+void Player::SheepFireUpdate(float _Delta)
+{
+	
+}
+
+void Player::SheepOffStart()
+{
+	ChangeAnimationState("SheepOff");
+}
+void Player::SheepOffUpdate(float _Delta)
+{
+	if (MainRenderer->IsAnimationEnd())
+	{
+		ChangeState(PlayerState::Idle);
 	}
 }
