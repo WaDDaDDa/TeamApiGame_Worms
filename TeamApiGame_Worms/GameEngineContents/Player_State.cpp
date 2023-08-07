@@ -84,6 +84,12 @@ void Player::IdleUpdate(float _Delta)
 		ChangeState(PlayerState::HomingMissileOn);
 		return;
 	}
+	
+	if (true == GameEngineInput::IsDown('5'))
+	{
+		ChangeState(PlayerState::SheepOn);
+		return;
+	}
 
 	
 
@@ -931,5 +937,57 @@ void Player::HomingMissileOffUpdate(float _Delta)
 	{
 		ChangeState(PlayerState::Idle);
 		return;
+	}
+}
+
+void Player::SheepOnStart()
+{
+	ChangeAnimationState("SheepOn");
+}
+void Player::SheepOnUpdate(float _Delta)
+{
+	if (MainRenderer->IsAnimationEnd())
+	{
+		ChangeState(PlayerState::Sheep);
+	}
+}
+
+void Player::SheepStart()
+{
+	ChangeAnimationState("Sheep");
+}
+void Player::SheepUpdate(float _Delta)
+{
+	if (GameEngineInput::IsDown('1'))
+	{
+		ChangeState(PlayerState::SheepOff);
+	}
+
+	if (GameEngineInput::IsDown('A'))
+	{
+		ChangeState(PlayerState::SheepFire);
+	}
+
+	
+}
+
+void Player::SheepFireStart()
+{
+
+}
+void Player::SheepFireUpdate(float _Delta)
+{
+	
+}
+
+void Player::SheepOffStart()
+{
+	ChangeAnimationState("SheepOff");
+}
+void Player::SheepOffUpdate(float _Delta)
+{
+	if (MainRenderer->IsAnimationEnd())
+	{
+		ChangeState(PlayerState::Idle);
 	}
 }

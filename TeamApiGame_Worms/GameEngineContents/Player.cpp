@@ -295,6 +295,41 @@ void Player::Start()
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("homingOffRight.bmp"), 1, 7);
 		}
+
+		//Sheep
+		if (false == ResourcesManager::GetInst().IsLoadTexture("sheepOnLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("sheepOnLeft.bmp"), 1, 10);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("sheepOnRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("sheepOnRight.bmp"), 1, 10);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("sheepOffLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("sheepOffLeft.bmp"), 1, 10);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("sheepOffRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("sheepOffRight.bmp"), 1, 10);
+		}
+		
 		
 		// DamageFly
 		if (false == ResourcesManager::GetInst().IsLoadTexture("wfly1_L.bmp"))
@@ -354,6 +389,9 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Left_UziOff", "uziOffLeft.bmp", 0, 9, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_HomingMissileOn", "homingOnLeft.bmp", 0, 6, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_HomingMissileOff", "homingOffLeft.bmp", 0, 6, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_SheepOn", "sheepOnLeft.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_Sheep", "sheepOnLeft.bmp", 9, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_SheepOff", "sheepOffLeft.bmp", 0, 9, 0.1f, false);
 
 
 		// Right
@@ -372,6 +410,9 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Right_UziOff", "uziOffRight.bmp", 0, 9, 0.1f, false);
 		MainRenderer->CreateAnimation("Right_HomingMissileOn", "homingOnRight.bmp", 0, 6, 0.1f, false);
 		MainRenderer->CreateAnimation("Right_HomingMissileOff", "homingOffRight.bmp", 0, 6, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_SheepOn", "sheepOnRight.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_Sheep", "sheepOnRight.bmp", 9, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_SheepOff", "sheepOffRight.bmp", 0, 9, 0.1f, false);
 
 		// BazookaAnimation
 		for (int i = 0; i < 32; i++)
@@ -540,6 +581,18 @@ void Player::ChangeState(PlayerState _State)
 		case PlayerState::HomingMissileOff:
 			HomingMissileOffStart();
 			break;
+		case PlayerState::SheepOn:
+			SheepOnStart();
+			break;
+		case PlayerState::Sheep:
+			SheepStart();
+			break;
+		case PlayerState::SheepFire:
+			SheepFireStart();
+			break;
+		case PlayerState::SheepOff:
+			SheepOffStart();
+			break;
 		default:
 			break;
 		}
@@ -588,6 +641,14 @@ void Player::StateUpdate(float _Delta)
 		return HomingMissileFireUpdate(_Delta);
 	case PlayerState::HomingMissileOff:
 		return HomingMissileOffUpdate(_Delta);
+	case PlayerState::SheepOn:
+		return SheepOnUpdate(_Delta);
+	case PlayerState::Sheep:
+		return SheepUpdate(_Delta);
+	case PlayerState::SheepFire:
+		return SheepFireUpdate(_Delta);
+	case PlayerState::SheepOff:
+		return SheepOffUpdate(_Delta);
 	default:
 		break;
 	}

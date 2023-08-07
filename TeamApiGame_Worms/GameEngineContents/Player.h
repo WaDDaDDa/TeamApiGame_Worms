@@ -24,6 +24,10 @@ enum class PlayerState
 	HomingMissile,
 	HomingMissileFire,
 	HomingMissileOff,
+	SheepOn,
+	Sheep,
+	SheepFire,
+	SheepOff,
 
 	DeathEnd,
 	Max
@@ -162,6 +166,18 @@ protected:
 
 	void HomingMissileOffStart();
 	void HomingMissileOffUpdate(float _Delta);
+
+	void SheepOnStart();
+	void SheepOnUpdate(float _Delta);
+
+	void SheepStart();
+	void SheepUpdate(float _Delta);
+
+	void SheepFireStart();
+	void SheepFireUpdate(float _Delta);
+
+	void SheepOffStart();
+	void SheepOffUpdate(float _Delta);
 
 	void SetDirPosNormalize();
 
