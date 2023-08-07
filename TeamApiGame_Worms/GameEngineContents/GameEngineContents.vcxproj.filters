@@ -93,6 +93,18 @@
     <ClInclude Include="UnderWater.h">
       <Filter>Map</Filter>
     </ClInclude>
+    <ClInclude Include="UI_Box_Barracks.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Box_Teams.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Box_Terrain.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Box_SchemeOption.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -186,6 +198,18 @@
     </ClCompile>
     <ClCompile Include="UnderWater.cpp">
       <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Box_Barracks.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Box_Teams.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Box_Terrain.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Box_SchemeOption.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

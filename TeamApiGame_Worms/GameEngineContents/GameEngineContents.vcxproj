@@ -206,6 +206,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="UI_Box_Barracks.h" />
+    <ClInclude Include="UI_Box_SchemeOption.h" />
+    <ClInclude Include="UI_Box_Teams.h" />
+    <ClInclude Include="UI_Box_Terrain.h" />
     <ClInclude Include="UI_Button.h" />
     <ClInclude Include="UI_Button_StartGame.h">
       <SubType>
@@ -281,6 +285,10 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="UI_Box_Barracks.cpp" />
+    <ClCompile Include="UI_Box_SchemeOption.cpp" />
+    <ClCompile Include="UI_Box_Teams.cpp" />
+    <ClCompile Include="UI_Box_Terrain.cpp" />
     <ClCompile Include="UI_Button.cpp" />
     <ClCompile Include="UI_Button_StartGame.cpp">
       <SubType>
