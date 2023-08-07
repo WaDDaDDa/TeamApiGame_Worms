@@ -28,9 +28,9 @@ void UnderWater::DrawAtStage(GameEngineLevel* _Level)
 
 	float4 RenderScale = UNDER_WATER_COPY_POS_END - UNDER_WATER_COPY_POS_START;
 	float4 RenderPos = { UNDER_WATER_COPY_POS_END.hX(),(UNDER_WATER_COPY_POS_END.Y + UNDER_WATER_COPY_POS_START.Y) / 2};
-	float checkx = RenderPos.iX() - RenderScale.ihX();
+	float checkx = RenderPos.X - RenderScale.hX();
 
-	float checky = RenderPos.iY() - RenderScale.ihY();
+	float checky = RenderPos.Y - RenderScale.hY();
 
 
 	Stage->GetPixelGroundTexture()->TransCopy(Texture, RenderPos, RenderScale, float4::ZERO, Texture->GetScale(), NULL);

@@ -1,4 +1,5 @@
 #include "GravityActor.h"
+#include <math.h>
 
 #include <GameEnginePlatform/GameEngineWindow.h>
 #include <GameEnginePlatform/GameEngineWindowTexture.h>
@@ -34,7 +35,7 @@ int GravityActor::GetGroundColor(unsigned int _DefaultColor, float4 _Pos)
 	return GroundTexture->GetColor(_DefaultColor, GetPos() + _Pos);
 }
 
-void GravityActor::CameraFocus()
+void GravityActor::CameraFocus(float _Delta)
 {
 	if (true != IsTurnPlayer)
 	{
@@ -43,13 +44,27 @@ void GravityActor::CameraFocus()
 
 	float4 WindowScale = GameEngineWindow::MainWindow.GetScale();
 
-	int CameraRangeX = GetLevel()->GetMainCamera()->GetPos().iX();
-	int CameraRangeY = GetLevel()->GetMainCamera()->GetPos().iY();
+	float4 CameraPos = GetLevel()->GetMainCamera()->GetPos();
+	float CameraRangeX = CameraPos.X;
+	float CameraRangeY = CameraPos.Y;
 
 	float ImageX = GetGroundTexture()->GetScale().X - 1280.0f;
 	float ImageY = GetGroundTexture()->GetScale().Y - 720.0f;
 
-	GetLevel()->GetMainCamera()->SetPos(GetPos() + float4{ -WindowScale.hX(), -WindowScale.hY() });
+	float4 CameraTargetPos = GetPos() + float4{ -WindowScale.hX(), -WindowScale.hY() };
+	
+	float4 CameraDir = CameraTargetPos - CameraPos;
+
+	if (abs(CameraDir.X) <= 50.0f && abs(CameraDir.Y) <= 50.0f)
+	{
+		GetLevel()->GetMainCamera()->SetPos(CameraTargetPos);
+	}
+	else
+	{
+		CameraDir.Normalize();
+		GetLevel()->GetMainCamera()->AddPos(CameraDir * CameraSpeed * _Delta);
+	}
+
 
 
 	// 카메라가 맵의 왼쪽으로 못나가게.
