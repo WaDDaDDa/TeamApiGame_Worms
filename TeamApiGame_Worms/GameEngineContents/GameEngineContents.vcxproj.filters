@@ -111,6 +111,9 @@
     <ClInclude Include="Uzi.h">
       <Filter>Weapon</Filter>
     </ClInclude>
+    <ClInclude Include="Grenade.h">
+      <Filter>Weapon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -221,6 +224,9 @@
       <Filter>Weapon</Filter>
     </ClCompile>
     <ClCompile Include="Uzi.cpp">
+      <Filter>Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Grenade.cpp">
       <Filter>Weapon</Filter>
     </ClCompile>
   </ItemGroup>

@@ -178,6 +178,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Grenade.h" />
     <ClInclude Include="Ground.h">
       <SubType>
       </SubType>
@@ -258,6 +259,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Grenade.cpp" />
     <ClCompile Include="Ground.cpp">
       <SubType>
       </SubType>

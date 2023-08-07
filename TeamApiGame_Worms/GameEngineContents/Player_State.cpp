@@ -7,6 +7,7 @@
 #include "HomingMissile.h"
 #include "Sheep.h"
 #include "Uzi.h"
+#include "Grenade.h"
 
 
 #include <GameEnginePlatform/GameEngineInput.h>
@@ -1208,11 +1209,11 @@ void Player::GranadeUpdate(float _Delta)
 
 void Player::GranadeFireStart()
 {
-
+	CreateWeapon<Grenade>();
 }
 void Player::GranadeFireUpdate(float _Delta)
 {
-	ChangeState(PlayerState::Idle);
+	ChangeState(PlayerState::GranadeOff);
 }
 
 void Player::GranadeOffStart()
