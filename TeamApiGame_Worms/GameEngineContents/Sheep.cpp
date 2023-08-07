@@ -37,13 +37,14 @@ void Sheep::Start()
 		FilePath.MoveParentToExistsChild("ContentsResources");
 		FilePath.MoveChild("ContentsResources\\Image\\Weapons\\");
 		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("sheepwlk.bmp"), 1, 8);
+		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("sheepwlk2.bmp"), 1, 8);
 	}
 
 	
 	Renderer->SetTexture("Blank.bmp");
 
 	Renderer->CreateAnimation("Right_Sheep_Fly", "sheepwlk.bmp", 0, 7, 0.1f, false);
-	Renderer->CreateAnimation("Left_Sheep_Fly", "sheepwlk.bmp", 0, 7, 0.1f, false);
+	Renderer->CreateAnimation("Left_Sheep_Fly", "sheepwlk2.bmp", 0, 7, 0.1f, false);
 
 	SetWeaponDamage(SheepDamage);
 	SetWeaponSpeed(SheepSpeed);
