@@ -10,6 +10,7 @@
 #include "BackGround.h"
 #include "Ground.h"
 #include "Wave.h"
+#include "UnderWater.h"
 #include "Player.h"
 #include "GameTurn.h"
 #include "MouseObject.h"
@@ -89,7 +90,7 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 
 		
 
-		BackGroundPtr = CreateActor<BackGround>(RenderOrder::BackGround);
+		BackGroundPtr = CreateActor<BackGround>(RenderOrder::Player);
 		BackGroundPtr->Init("Back.bmp", PLAY_BACKGROUND_SCALE);
 
 
@@ -105,6 +106,10 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 		Wave4->SetPos({ -90.0f,1850.0f});
 		GameEngineActor* Wave5 = CreateActor<Wave>(RenderOrder::FrontWave);
 		Wave5->SetPos({ -120.0f,1875.0f });
+		UnderWater* NewUnderWater = CreateActor<UnderWater>();
+		NewUnderWater->DrawAtStage(this);
+
+
 		
 	}
 
