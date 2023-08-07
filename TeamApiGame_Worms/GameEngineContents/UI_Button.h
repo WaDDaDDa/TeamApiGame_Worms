@@ -31,15 +31,16 @@ public:
 	}
 
 
-	UI_Button& InitButtonData(const std::string _ButtonImage, float4 _ButtonScale);
+	UI_Button& InitButtonData(const std::string _ButtonImage, float4 _ButtonScale, bool _UseHighlighter);
 
+	void HighlighterOn();
+
+	void HighlighterOff();
 
 
 protected:
 	void Start() override;
 	void Update(float _Delta) override;
-
-	
 
 	GameEngineRenderer* GetRenderer()
 	{
@@ -80,5 +81,11 @@ private:
 	void CheckButtonClick();
 
 	bool m_IsActive = true;
+	bool m_UseHighlighter = false;
+
+	std::string ImageName;
+	std::string HighlighterName;
+
+
 
 };

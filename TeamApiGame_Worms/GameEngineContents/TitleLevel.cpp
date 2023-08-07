@@ -8,13 +8,6 @@
 
 #include <GameEnginePlatform/GameEngineWindow.h>
 
-/*
-	타이틀에서 사용할 배경이미지를 애니메이션으로 등록하고
-	상태에 따라 바꿔주기
-
-*/
-
-
 TitleLevel::TitleLevel()
 {
 }

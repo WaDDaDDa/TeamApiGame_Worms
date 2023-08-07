@@ -21,7 +21,7 @@ UI_Button_StartGame::~UI_Button_StartGame()
 
 void UI_Button_StartGame::Start()
 {
-	InitButtonData("UI_Button_StartGame", float4{ UI_BUTTON_START_WITDH, UI_BUTTON_START_HEIGHT });
+	InitButtonData("UI_Button_StartGame", float4{ UI_BUTTON_START_WITDH, UI_BUTTON_START_HEIGHT }, true);
 }
 
 void UI_Button_StartGame::Update(float _Delta)

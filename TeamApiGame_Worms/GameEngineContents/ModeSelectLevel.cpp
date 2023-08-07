@@ -40,28 +40,27 @@ void ModeSelectLevel::LevelStart(GameEngineLevel* _PrevLevel)
 
 		UI_Lobby_SelectTitle* SelectTitle = CreateActor<UI_Lobby_SelectTitle>();
 
-
 		UI_Button* Btn_QuitGame = CreateActor<UI_Button>();
-		Btn_QuitGame->InitButtonData("UI_Button_Quit", float4{ 250, 60 });
+		Btn_QuitGame->InitButtonData("UI_Button_Quit", float4{ 250, 60 }, true);
 		Btn_QuitGame->SetPos({ 915, 670 });
 		Btn_QuitGame->SetClickedCallBack(QuitGame, 0, 0);
 
 
 		UI_Button* Btn_1UpGame = CreateActor<UI_Button>();
-		Btn_1UpGame->InitButtonData("UI_1up", float4{ 400, 200 });
+		Btn_1UpGame->InitButtonData("UI_1up", float4{ 400, 200 }, true);
 		Btn_1UpGame->SetPos({ 420, 300 });
 
 		UI_Button* Btn_MultiGame = CreateActor<UI_Button>();
-		Btn_MultiGame->InitButtonData("UI_multi", float4{ 400, 200 });
+		Btn_MultiGame->InitButtonData("UI_multi", float4{ 400, 200 }, true);
 		Btn_MultiGame->SetPos({ 840, 300 });
 		Btn_MultiGame->SetClickedCallBack(ChangeLevel, 0, 0);
 
 		UI_Button* Btn_NetGame = CreateActor<UI_Button>();
-		Btn_NetGame->InitButtonData("UI_net", float4{ 400, 200 });
+		Btn_NetGame->InitButtonData("UI_net", float4{ 400, 200 }, true);
 		Btn_NetGame->SetPos({ 420, 510 });
 
 		UI_Button* Btn_OptionsGame = CreateActor<UI_Button>();
-		Btn_OptionsGame->InitButtonData("UI_options", float4{ 400, 200 });
+		Btn_OptionsGame->InitButtonData("UI_options", float4{ 400, 200 }, true);
 		Btn_OptionsGame->SetPos({ 840, 510 });
 	}
 

@@ -36,25 +36,37 @@ void UI_Button::Update(float _Delta)
 
 }
 
-UI_Button& UI_Button::InitButtonData(const std::string _ButtonName, float4 _ButtonScale)
+UI_Button& UI_Button::InitButtonData(const std::string _ButtonName, float4 _ButtonScale, bool _UseHighlighter)
 {
 	// 이름 설정
 	std::string ButtonName = _ButtonName;
 	float4 ButtonScale = _ButtonScale;
 
 	// 렌더러 설정
-	std::string ImageName = ButtonName + ".bmp";
+	ImageName = ButtonName + ".bmp";
+
+	GameEnginePath FilePath;
+	FilePath.SetCurrentPath();
+	FilePath.MoveParentToExistsChild("ContentsResources");
+	FilePath.MoveChild("ContentsResources\\UI\\");
 
 	bool IsResource = ResourcesManager::GetInst().IsLoadTexture(ImageName);
-
 	if (false == IsResource)
 	{
-		GameEnginePath FilePath;
-		FilePath.SetCurrentPath();
-		FilePath.MoveParentToExistsChild("ContentsResources");
-		FilePath.MoveChild("ContentsResources\\UI\\");
-
 		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath(ImageName));
+	}
+
+	m_UseHighlighter = _UseHighlighter;
+
+	if (true == _UseHighlighter)
+	{
+		HighlighterName = "H_" + ImageName;
+
+		IsResource = ResourcesManager::GetInst().IsLoadTexture(HighlighterName);
+		if (false == IsResource)
+		{
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath(HighlighterName));
+		}
 	}
 
 	MainRenderer = CreateRenderer(ImageName, static_cast<int>(RenderOrder::UI));
@@ -66,7 +78,30 @@ UI_Button& UI_Button::InitButtonData(const std::string _ButtonName, float4 _Butt
 
 	ChangeState(BUTTON_STATE::BUTTON_STATE_UNHOVERED);
 
+
+
 	return *this;
+}
+
+void UI_Button::HighlighterOn()
+{
+	if (false == m_UseHighlighter)
+	{
+		return;
+	}
+
+	else
+	{
+		MainRenderer->SetTexture(HighlighterName);
+	}
+}
+
+void UI_Button::HighlighterOff()
+{
+	if (0 != ImageName.size())
+	{	
+		MainRenderer->SetTexture(ImageName);
+	}
 }
 
 void UI_Button::StateUpdate()
@@ -74,10 +109,12 @@ void UI_Button::StateUpdate()
 	switch (ButtonState)
 	{
 	case BUTTON_STATE::BUTTON_STATE_HOVERED:
+		HighlighterOn();
 		CheckButtonClick();
 		break;
 
 	case BUTTON_STATE::BUTTON_STATE_UNHOVERED:
+		HighlighterOff();
 		break;
 
 	case BUTTON_STATE::BUTTON_STATE_CLICKED:
