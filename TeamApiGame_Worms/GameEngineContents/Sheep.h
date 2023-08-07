@@ -3,6 +3,7 @@
 
 enum class SheepState
 {
+	Idle,
 	Fly,
 	Jump,
 	Bomb,
@@ -46,6 +47,9 @@ protected:
 	void StateUpdate(float _Delta);
 	void ChangeAnimationState(const std::string& _State);
 
+
+	void IdleStart();
+	void IdleUpdate(float _Delta);
 	void FlyStart();
 	void FlyUpdate(float _Delta);
 	void JumpStart();
@@ -59,14 +63,14 @@ protected:
 
 private:
 	int SheepDamage = 50;
-	float SheepSpeed = 100.0f;
-	float SheepJumpPower = 300.0f;
+	float SheepSpeed = 200.0f;
+	float SheepJumpPower = 600.0f;
 
 	float4 CheckPos = float4::ZERO;
 
 	// Move 중 벽을 판정해서 막히는 지점
-	float4 LeftCheckPos = float4{ -50.0f, -20.0f };
-	float4 RightCheckPos = float4{ 50.0f, -20.0f };
+	float4 LeftCheckPos = float4{ -30.0f, -20.0f };
+	float4 RightCheckPos = float4{ 30.0f, -20.0f };
 	float4 UpCheckPos = float4{ 0 , -20.0f };
 
 	float4 Dir = float4::ZERO;
@@ -79,7 +83,7 @@ private:
 
 	class BombEffect* SheepBomb = nullptr;
 
-	void DirCheck();
+	//void DirCheck();
 
 	void Start() override;
 	void LevelStart() override;

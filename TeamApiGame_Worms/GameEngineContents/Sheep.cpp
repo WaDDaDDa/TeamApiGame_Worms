@@ -42,9 +42,10 @@ void Sheep::Start()
 
 	
 	Renderer->SetTexture("Blank.bmp");
+	Renderer->SetScaleRatio(1.2f);
 
-	Renderer->CreateAnimation("Right_Sheep_Fly", "sheepwlk.bmp", 0, 7, 0.1f, false);
-	Renderer->CreateAnimation("Left_Sheep_Fly", "sheepwlk2.bmp", 0, 7, 0.1f, false);
+	Renderer->CreateAnimation("Right_Sheep_Fly", "sheepwlk.bmp", 0, 7, 0.1f, true);
+	Renderer->CreateAnimation("Left_Sheep_Fly", "sheepwlk2.bmp", 0, 7, 0.1f, true);
 
 	SetWeaponDamage(SheepDamage);
 	SetWeaponSpeed(SheepSpeed);
@@ -68,6 +69,8 @@ void Sheep::StateUpdate(float _Delta)
 {
 	switch (State)
 	{
+	case SheepState::Idle:
+		return IdleUpdate(_Delta);
 	case SheepState::Fly:
 		return FlyUpdate(_Delta);
 	case SheepState::Jump:
@@ -89,6 +92,9 @@ void Sheep::ChangeState(SheepState _State)
 	{
 		switch (_State)
 		{
+		case SheepState::Idle:
+			IdleStart();
+			break;
 		case SheepState::Fly:
 			FlyStart();
 			break;
@@ -109,7 +115,7 @@ void Sheep::ChangeState(SheepState _State)
 		}
 	}
 
-	ResetLiveTime();
+	//ResetLiveTime();
 
 	State = _State;
 }
@@ -138,23 +144,9 @@ void Sheep::ChangeAnimationState(const std::string& _State)
 	Renderer->ChangeAnimation(AnimationName);
 }
 
-void Sheep::DirCheck()
-{
-
-	if (DirState == SheepDir::Right)
-	{
-		DirState = SheepDir::Left;
-	}
-	else if (DirState == SheepDir::Left)
-	{
-		DirState = SheepDir::Right;
-	}
-}
 
 void Sheep::Movement(float _Delta)
 {
-	DirCheck();
-
 	float4 MovePos1 = float4::ZERO;
 	unsigned int Color = 0;
 
@@ -193,46 +185,46 @@ void Sheep::Movement(float _Delta)
 	if (Color == RGB(255, 255, 255))
 	{
 		// 움직일 예정의 곳도 공중인지 체크한다.
-		if (RGB(255, 255, 255) == GetGroundColor(RGB(255, 255, 255), MovePos1))
-		{
-			// 움직일 곳 또한 공중이라면
-			float4 XPos = float4::ZERO;
-			float4 Dir = MovePos1.X >= 0.0f ? float4::RIGHT : float4::LEFT;
-			while (RGB(0, 0, 255) != GetGroundColor(RGB(255, 255, 255), MovePos1 + XPos))
-			{
-				XPos += Dir;
+		//if (RGB(255, 255, 255) == GetGroundColor(RGB(255, 255, 255), MovePos1))
+		//{
+		//	// 움직일 곳 또한 공중이라면
+		//	float4 XPos = float4::ZERO;
+		//	float4 Dir = MovePos1.X >= 0.0f ? float4::RIGHT : float4::LEFT;
+		//	while (RGB(0, 0, 255) != GetGroundColor(RGB(255, 255, 255), MovePos1 + XPos))
+		//	{
+		//		XPos += Dir;
 
-				if (abs(XPos.X) > 20.0f)
-				{
-					break;
-				}
-			}
+		//		if (abs(XPos.X) > 20.0f)
+		//		{
+		//			break;
+		//		}
+		//	}
 
-			float4 YPos = float4::ZERO;
-			while (RGB(0, 0, 255) != GetGroundColor(RGB(255, 255, 255), MovePos1 + YPos))
-			{
-				YPos.Y += 1;
+		//	float4 YPos = float4::ZERO;
+		//	while (RGB(0, 0, 255) != GetGroundColor(RGB(255, 255, 255), MovePos1 + YPos))
+		//	{
+		//		YPos.Y += 1;
 
-				if (YPos.Y > 30.0f)
-				{
-					break;
-				}
-			}
+		//		if (YPos.Y > 30.0f)
+		//		{
+		//			break;
+		//		}
+		//	}
 
-			if (abs(XPos.X) >= YPos.Y)
-			{
-				while (RGB(0, 0, 255) != GetGroundColor(RGB(255, 255, 255), MovePos1))
-				{
-					MovePos1.Y += 1;
-				}
-			}
+		//	if (abs(XPos.X) >= YPos.Y)
+		//	{
+		//		while (RGB(0, 0, 255) != GetGroundColor(RGB(255, 255, 255), MovePos1))
+		//		{
+		//			MovePos1.Y += 1;
+		//		}
+		//	}
 
-		}
+		//}
 		AddPos(MovePos1);
 	}
 }
 
-void Sheep::FlyStart()
+void Sheep::IdleStart()
 {
 	if (Master->GetPlayerDir() == PlayerDir::Right)
 	{
@@ -242,26 +234,24 @@ void Sheep::FlyStart()
 	{
 		DirState = SheepDir::Left;
 	}
+}
 
+void Sheep::IdleUpdate(float _Delta)
+{
+	ChangeState(SheepState::Fly);
+	return;
+}
+
+void Sheep::FlyStart()
+{
 	ChangeAnimationState("Sheep_Fly");
 }
 
 void Sheep::FlyUpdate(float _Delta)
 {
-	DirCheck();
-
 	GroundCheck(_Delta);
 
 	Movement(_Delta);
-
-	//if (SheepDir::Right == DirState)
-	//{
-	//	AddPos(float4::RIGHT * SheepSpeed * _Delta);
-	//}
-	//else if (SheepDir::Left == DirState)
-	//{
-	//	AddPos(float4::LEFT * SheepSpeed * _Delta);
-	//}
 
 	unsigned int Color = GetGroundColor(RGB(255, 255, 255));
 	if (RGB(255, 255, 255) != Color)
@@ -270,12 +260,13 @@ void Sheep::FlyUpdate(float _Delta)
 		return;
 	}
 
+	float Test = GetLiveTime();
+	bool Test1 = GameEngineInput::IsDown('A');
 
-	if (GetLiveTime() >= 15.0f || true == GameEngineInput::IsDown('A'));
+	if (Test >= 15.0f || true == Test1)
 	{
-		//ChangeState(SheepState::Bomb);
+		ChangeState(SheepState::Bomb);
 		return;
-
 	}
 
 }
@@ -297,6 +288,7 @@ void Sheep::JumpUpdate(float _Delta)
 	Gravity(_Delta);
 
 	unsigned int Color = GetGroundColor(RGB(255, 255, 255));
+	unsigned int ColorCheck = GetGroundColor(RGB(255, 255, 255), UpCheckPos);
 
 	if (RGB(255, 255, 255) != Color)
 	{
@@ -304,11 +296,30 @@ void Sheep::JumpUpdate(float _Delta)
 		ChangeState(SheepState::Fly);
 		return;
 	}
+
+	//천장에 머리 부딪힘 -> Falling으로 전환
+	if (ColorCheck != RGB(255, 255, 255))
+	{
+		GravityReset();
+		ChangeState(SheepState::Fly);
+		return;
+	}
+
+	float Test = GetLiveTime();
+	bool Test1 = GameEngineInput::IsDown('A');
+
+	if (Test >= 15.0f || true == Test1)
+	{
+		ChangeState(SheepState::Bomb);
+		return;
+	}
+
+
 }
 
 void Sheep::BombStart()
 {
-	SheepBomb = CreateBombEffect<Range50>();
+	SheepBomb = CreateBombEffect<Range75>();
 	Renderer->Off();
 }
 
@@ -353,6 +364,6 @@ void Sheep::MaxStart()
 
 void Sheep::MaxUpdate(float _Delta)
 {
-	ChangeState(SheepState::Fly);
+	ChangeState(SheepState::Idle);
 	return;
 }

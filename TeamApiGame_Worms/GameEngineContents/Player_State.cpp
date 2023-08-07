@@ -809,6 +809,7 @@ void Player::HomingMissileUpdate(float _Delta)
 		{
 			ChargingTime = MaxChargingTime;
 		}
+
 		GameEngineInput::ResetPressTime('A');
 
 		ChangeState(PlayerState::HomingMissileFire);
