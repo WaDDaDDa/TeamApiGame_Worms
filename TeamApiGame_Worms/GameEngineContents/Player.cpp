@@ -179,6 +179,122 @@ void Player::Start()
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("bazOffRight.bmp"), 1, 7);
 		}
+
+		// Uzi
+		if (false == ResourcesManager::GetInst().IsLoadTexture("uziOnLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("uziOnLeft.bmp"), 1, 10);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("uziOnRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("uziOnRight.bmp"), 1, 10);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("uziAimLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("uziAimLeft.bmp"), 1, 32);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("uziAimRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("uziAimRight.bmp"), 1, 32);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("uziFireLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("uziFireLeft.bmp"), 1, 32);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("uziFireRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("uziFireRight.bmp"), 1, 32);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("uziOffLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("uziOffLeft.bmp"), 1, 10);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("uziOffRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("uziOffRight.bmp"), 1, 10);
+		}
+
+		// HomingMissile
+		if (false == ResourcesManager::GetInst().IsLoadTexture("homingOnLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("homingOnLeft.bmp"), 1, 7);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("homingOnRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("homingOnRight.bmp"), 1, 7);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("homingAimLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("homingAimLeft.bmp"), 1, 32);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("homingAimRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("homingAimRight.bmp"), 1, 32);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("homingOffLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("homingOffLeft.bmp"), 1, 7);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("homingOffRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("homingOffRight.bmp"), 1, 7);
+		}
 		
 		// DamageFly
 		if (false == ResourcesManager::GetInst().IsLoadTexture("wfly1_L.bmp"))
@@ -234,6 +350,10 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Left_Death", "wdieLeft.bmp", 0, 59, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_BazookaOn", "bazOnLeft.bmp", 0, 6, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_BazookaOff", "bazOffLeft.bmp", 0, 6, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_UziOn", "uziOnLeft.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_UziOff", "uziOffLeft.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_HomingMissileOn", "homingOnLeft.bmp", 0, 6, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_HomingMissileOff", "homingOffLeft.bmp", 0, 6, 0.1f, false);
 
 
 		// Right
@@ -248,12 +368,34 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Right_Death", "wdieRight.bmp", 0, 59, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_BazookaOn", "bazOnRight.bmp", 0, 6, 0.1f, false);
 		MainRenderer->CreateAnimation("Right_BazookaOff", "bazOffRight.bmp", 0, 6, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_UziOn", "uziOnRight.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_UziOff", "uziOffRight.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_HomingMissileOn", "homingOnRight.bmp", 0, 6, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_HomingMissileOff", "homingOffRight.bmp", 0, 6, 0.1f, false);
 
 		// BazookaAnimation
 		for (int i = 0; i < 32; i++)
 		{
 			MainRenderer->CreateAnimation("Left_Bazooka" + std::to_string(i), "bazAimLeft.bmp", i, i, 0.1f, false);
 			MainRenderer->CreateAnimation("Right_Bazooka" + std::to_string(i), "bazAimRight.bmp", i, i, 0.1f, false);
+		}
+		// UziAnimation
+		for (int i = 0; i < 32; i++)
+		{
+			MainRenderer->CreateAnimation("Left_Uzi" + std::to_string(i), "uziAimLeft.bmp", i, i, 0.1f, false);
+			MainRenderer->CreateAnimation("Right_Uzi" + std::to_string(i), "uziAimRight.bmp", i, i, 0.1f, false);
+		}
+		//UziFireAnimation
+		for (int i = 0; i < 32; i++)
+		{
+			MainRenderer->CreateAnimation("Left_UziFire" + std::to_string(i), "uziFireLeft.bmp", i, i, 0.1f, false);
+			MainRenderer->CreateAnimation("Right_UziFire" + std::to_string(i), "uziFireRight.bmp", i, i, 0.1f, false);
+		}
+		// HomingMissileAnimation
+		for (int i = 0; i < 32; i++)
+		{
+			MainRenderer->CreateAnimation("Left_HomingMissile" + std::to_string(i), "homingAimLeft.bmp", i, i, 0.1f, false);
+			MainRenderer->CreateAnimation("Right_HomingMissile" + std::to_string(i), "homingAimRight.bmp", i, i, 0.1f, false);
 		}
 	}
 	
@@ -374,6 +516,30 @@ void Player::ChangeState(PlayerState _State)
 		case PlayerState::BazookaOff:
 			BazookaOffStart();
 			break;
+		case PlayerState::UziOn:
+			UziOnStart();
+			break;
+		case PlayerState::Uzi:
+			UziStart();
+			break;
+		case PlayerState::UziFire:
+			UziFireStart();
+			break;
+		case PlayerState::UziOff:
+			UziOffStart();
+			break;
+		case PlayerState::HomingMissileOn:
+			HomingMissileOnStart();
+			break;
+		case PlayerState::HomingMissile:
+			HomingMissileStart();
+			break;
+		case PlayerState::HomingMissileFire:
+			HomingMissileFireStart();
+			break;
+		case PlayerState::HomingMissileOff:
+			HomingMissileOffStart();
+			break;
 		default:
 			break;
 		}
@@ -406,6 +572,22 @@ void Player::StateUpdate(float _Delta)
 		return BazookaFireUpdate(_Delta);
 	case PlayerState::BazookaOff:
 		return BazookaOffUpdate(_Delta);
+	case PlayerState::UziOn:
+		return UziOnUpdate(_Delta);
+	case PlayerState::Uzi:
+		return UziUpdate(_Delta);
+	case PlayerState::UziFire:
+		return UziFireUpdate(_Delta);
+	case PlayerState::UziOff:
+		return UziOffUpdate(_Delta);
+	case PlayerState::HomingMissileOn:
+		return HomingMissileOnUpdate(_Delta);
+	case PlayerState::HomingMissile:
+		return HomingMissileUpdate(_Delta);
+	case PlayerState::HomingMissileFire:
+		return HomingMissileFireUpdate(_Delta);
+	case PlayerState::HomingMissileOff:
+		return HomingMissileOffUpdate(_Delta);
 	default:
 		break;
 	}
