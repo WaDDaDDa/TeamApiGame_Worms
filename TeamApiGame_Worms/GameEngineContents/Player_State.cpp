@@ -91,6 +91,11 @@ void Player::IdleUpdate(float _Delta)
 		return;
 	}
 
+	if (true == GameEngineInput::IsDown('6'))
+	{
+		ChangeState(PlayerState::GranadeOn);
+		return;
+	}
 	
 
 }
@@ -977,7 +982,7 @@ void Player::SheepFireStart()
 }
 void Player::SheepFireUpdate(float _Delta)
 {
-	
+	ChangeState(PlayerState::Idle);
 }
 
 void Player::SheepOffStart()
@@ -985,6 +990,229 @@ void Player::SheepOffStart()
 	ChangeAnimationState("SheepOff");
 }
 void Player::SheepOffUpdate(float _Delta)
+{
+	if (MainRenderer->IsAnimationEnd())
+	{
+		ChangeState(PlayerState::Idle);
+	}
+}
+
+void Player::GranadeOnStart()
+{
+	ChangeAnimationState("GranadeOn");
+}
+void Player::GranadeOnUpdate(float _Delta)
+{
+	if (MainRenderer->IsAnimationEnd())
+	{
+		ChangeState(PlayerState::Granade);
+	}
+}
+
+void Player::GranadeStart()
+{
+	ChangeAnimationState("Granade15");
+}
+void Player::GranadeUpdate(float _Delta)
+{
+	DirCheck();
+
+	if (true != IsTurnPlayer)
+	{
+		ChangeState(PlayerState::GranadeOff);
+		return;
+	}
+
+	if (true == GameEngineInput::IsDown('1'))
+	{
+		ChangeState(PlayerState::GranadeOff);
+		return;
+	}
+
+	// 오른쪽 각도조절
+	if (PlayerDir::Right == Dir)
+	{
+		if (true == GameEngineInput::IsPress(VK_UP))
+		{
+			CurAngle -= (5.625f * _Delta * 4.0f);
+
+
+			if (CurAngle <= RIGHT_UP_MAXANGEL)
+			{
+				CurAngle = RIGHT_UP_MAXANGEL;
+			}
+		}
+		if (true == GameEngineInput::IsPress(VK_DOWN))
+		{
+			CurAngle += (5.625f * _Delta * 4.0f);
+			if (CurAngle >= RIGHT_DOWN_MAXANGEL)
+			{
+				CurAngle = RIGHT_DOWN_MAXANGEL;
+			}
+		}
+	}
+
+	// 왼쪽 각도조절
+	if (PlayerDir::Left == Dir)
+	{
+		if (true == GameEngineInput::IsPress(VK_UP))
+		{
+			CurAngle += (5.625f * _Delta * 4.0f);
+
+
+			if (CurAngle >= LEFT_UP_MAXANGEL)
+			{
+				CurAngle = LEFT_UP_MAXANGEL;
+			}
+		}
+		if (true == GameEngineInput::IsPress(VK_DOWN))
+		{
+			CurAngle -= (5.625f * _Delta * 4.0f);
+			if (CurAngle <= LEFT_DOWN_MAXANGEL)
+			{
+				CurAngle = LEFT_DOWN_MAXANGEL;
+			}
+		}
+	}
+
+
+	if (true == GameEngineInput::IsUp('A') || GameEngineInput::GetPressTime('A') >= MaxChargingTime)
+	{
+		ChargingTime = GameEngineInput::GetPressTime('A');
+
+		if (ChargingTime >= MaxChargingTime)
+		{
+			ChargingTime = MaxChargingTime;
+		}
+		GameEngineInput::ResetPressTime('A');
+
+		ChangeState(PlayerState::GranadeFire);
+		return;
+	}
+
+	int iCurAngle = static_cast<int>(CurAngle);
+	// 애니메이션과 무기각도를 맞추기위한 중간 계산식.
+	// 무기각도가 -90에서 +되면서 270도까지로 되어있음.
+	if (PlayerDir::Left == Dir)
+	{
+		iCurAngle = 180 - iCurAngle;
+	}
+
+	switch (iCurAngle)
+	{
+	case -90:
+		ChangeAnimationState("Granade31");
+		break;
+	case -84:
+		ChangeAnimationState("Granade30");
+		break;
+	case -78:
+		ChangeAnimationState("Granade29");
+		break;
+	case -73:
+		ChangeAnimationState("Granade28");
+		break;
+	case -67:
+		ChangeAnimationState("Granade27");
+		break;
+	case -61:
+		ChangeAnimationState("Granade26");
+		break;
+	case -56:
+		ChangeAnimationState("Granade25");
+		break;
+	case -50:
+		ChangeAnimationState("Granade24");
+		break;
+	case -45:
+		ChangeAnimationState("Granade23");
+		break;
+	case -39:
+		ChangeAnimationState("Granade22");
+		break;
+	case -33:
+		ChangeAnimationState("Granade21");
+		break;
+	case -28:
+		ChangeAnimationState("Granade20");
+		break;
+	case -22:
+		ChangeAnimationState("Granade19");
+		break;
+	case -16:
+		ChangeAnimationState("Granade18");
+		break;
+	case -11:
+		ChangeAnimationState("Granade17");
+		break;
+	case -5:
+		ChangeAnimationState("Granade16");
+		break;
+	case 0:
+		ChangeAnimationState("Granade15");
+		break;
+	case 5:
+		ChangeAnimationState("Granade14");
+		break;
+	case 11:
+		ChangeAnimationState("Granade13");
+		break;
+	case 16:
+		ChangeAnimationState("Granade12");
+		break;
+	case 22:
+		ChangeAnimationState("Granade11");
+		break;
+	case 28:
+		ChangeAnimationState("Granade10");
+		break;
+	case 33:
+		ChangeAnimationState("Granade9");
+		break;
+	case 39:
+		ChangeAnimationState("Granade8");
+		break;
+	case 45:
+		ChangeAnimationState("Granade7");
+		break;
+	case 50:
+		ChangeAnimationState("Granade6");
+		break;
+	case 56:
+		ChangeAnimationState("Granade5");
+		break;
+	case 61:
+		ChangeAnimationState("Granade4");
+		break;
+	case 67:
+		ChangeAnimationState("Granade3");
+		break;
+	case 73:
+		ChangeAnimationState("Granade2");
+		break;
+	case 78:
+		ChangeAnimationState("Granade1");
+		break;
+	case 84:
+		ChangeAnimationState("Granade0");
+		break;
+	}
+}
+
+void Player::GranadeFireStart()
+{
+
+}
+void Player::GranadeFireUpdate(float _Delta)
+{
+	ChangeState(PlayerState::Idle);
+}
+
+void Player::GranadeOffStart()
+{
+	ChangeAnimationState("GranadeOff");
+}
+void Player::GranadeOffUpdate(float _Delta)
 {
 	if (MainRenderer->IsAnimationEnd())
 	{

@@ -28,6 +28,10 @@ enum class PlayerState
 	Sheep,
 	SheepFire,
 	SheepOff,
+	GranadeOn,
+	Granade,
+	GranadeFire,
+	GranadeOff,
 
 	DeathEnd,
 	Max
@@ -178,6 +182,18 @@ protected:
 
 	void SheepOffStart();
 	void SheepOffUpdate(float _Delta);
+
+	void GranadeOnStart();
+	void GranadeOnUpdate(float _Delta);
+
+	void GranadeStart();
+	void GranadeUpdate(float _Delta);
+
+	void GranadeFireStart();
+	void GranadeFireUpdate(float _Delta);
+
+	void GranadeOffStart();
+	void GranadeOffUpdate(float _Delta);
 
 	void SetDirPosNormalize();
 

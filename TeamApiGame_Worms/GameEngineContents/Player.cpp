@@ -329,6 +329,56 @@ void Player::Start()
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("sheepOffRight.bmp"), 1, 10);
 		}
+
+		// Granade
+		if (false == ResourcesManager::GetInst().IsLoadTexture("grnOnLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("grnOnLeft.bmp"), 1, 10);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("grnOnRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("grnOnRight.bmp"), 1, 10);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("grnAimLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("grnAimLeft.bmp"), 1, 32);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("grnAimRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("grnAimRight.bmp"), 1, 32);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("grnOffLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("grnOffLeft.bmp"), 1, 10);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("grnOffRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("grnOffRight.bmp"), 1, 10);
+		}
 		
 		
 		// DamageFly
@@ -392,6 +442,8 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Left_SheepOn", "sheepOnLeft.bmp", 0, 9, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_Sheep", "sheepOnLeft.bmp", 9, 9, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_SheepOff", "sheepOffLeft.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_GranadeOn", "grnOnLeft.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_GranadeOff", "grnOffLeft.bmp", 0, 9, 0.1f, false);
 
 
 		// Right
@@ -413,6 +465,8 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Right_SheepOn", "sheepOnRight.bmp", 0, 9, 0.1f, false);
 		MainRenderer->CreateAnimation("Right_Sheep", "sheepOnRight.bmp", 9, 9, 0.1f, false);
 		MainRenderer->CreateAnimation("Right_SheepOff", "sheepOffRight.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_GranadeOn", "grnOnRight.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_GranadeOff", "grnOffRight.bmp", 0, 9, 0.1f, false);
 
 		// BazookaAnimation
 		for (int i = 0; i < 32; i++)
@@ -437,6 +491,12 @@ void Player::Start()
 		{
 			MainRenderer->CreateAnimation("Left_HomingMissile" + std::to_string(i), "homingAimLeft.bmp", i, i, 0.1f, false);
 			MainRenderer->CreateAnimation("Right_HomingMissile" + std::to_string(i), "homingAimRight.bmp", i, i, 0.1f, false);
+		}
+		// GranadeAnimation
+		for (int i = 0; i < 32; i++)
+		{
+			MainRenderer->CreateAnimation("Left_Granade" + std::to_string(i), "grnAimLeft.bmp", i, i, 0.1f, false);
+			MainRenderer->CreateAnimation("Right_Granade" + std::to_string(i), "grnAimRight.bmp", i, i, 0.1f, false);
 		}
 	}
 	
@@ -593,6 +653,18 @@ void Player::ChangeState(PlayerState _State)
 		case PlayerState::SheepOff:
 			SheepOffStart();
 			break;
+		case PlayerState::GranadeOn:
+			GranadeOnStart();
+			break;
+		case PlayerState::Granade:
+			GranadeStart();
+			break;
+		case PlayerState::GranadeFire:
+			GranadeFireStart();
+			break;
+		case PlayerState::GranadeOff:
+			GranadeOffStart();
+			break;
 		default:
 			break;
 		}
@@ -649,6 +721,14 @@ void Player::StateUpdate(float _Delta)
 		return SheepFireUpdate(_Delta);
 	case PlayerState::SheepOff:
 		return SheepOffUpdate(_Delta);
+	case PlayerState::GranadeOn:
+		return GranadeOnUpdate(_Delta);
+	case PlayerState::Granade:
+		return GranadeUpdate(_Delta);
+	case PlayerState::GranadeFire:
+		return GranadeFireUpdate(_Delta);
+	case PlayerState::GranadeOff:
+		return GranadeOffUpdate(_Delta);
 	default:
 		break;
 	}
