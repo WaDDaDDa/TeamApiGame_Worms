@@ -129,7 +129,7 @@ void HomingMissile::LevelStart()
 
 void HomingMissile::Update(float _Delta)
 {
-	CameraFocus();
+	CameraFocus(_Delta);
 	StateUpdate(_Delta);
 }
 

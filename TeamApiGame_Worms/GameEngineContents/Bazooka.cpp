@@ -122,7 +122,7 @@ void Bazooka::LevelStart()
 
 void Bazooka::Update(float _Delta)
 {
-	CameraFocus();
+	CameraFocus(_Delta);
 	StateUpdate(_Delta);
 }
 

@@ -42,7 +42,7 @@ public:
 	bool IsTurnPlayer = false;
 
 protected:
-	void CameraFocus();
+	void CameraFocus(float _Delta);
 
 
 
@@ -71,7 +71,7 @@ public:
 
 private:
 	bool IsGravity = true;
-
+	float CameraSpeed = 2500.0f;
 	float GravityPower = 1000.0f;
 	float4 GravityVector = float4::ZERO;
 };

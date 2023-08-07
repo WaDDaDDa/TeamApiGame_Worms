@@ -19,10 +19,8 @@ public:
 protected:
 
 private:
-	class GameEngineWindowTexture* Texture;
-	class GameEngineRenderer* Renderer;
-
-	
+	class GameEngineWindowTexture* Texture = nullptr;
+	class GameEngineRenderer* Renderer = nullptr;
 
 	void Start() override;
 	void Update(float _Delta) override;

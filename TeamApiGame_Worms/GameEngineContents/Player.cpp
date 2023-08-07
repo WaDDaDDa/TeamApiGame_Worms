@@ -518,7 +518,7 @@ void Player::Start()
 
 void Player::Update(float _Delta)
 {	
-	CameraFocus();
+	CameraFocus(_Delta);
 
 	if (IsTurnPlayer == false)
 	{
