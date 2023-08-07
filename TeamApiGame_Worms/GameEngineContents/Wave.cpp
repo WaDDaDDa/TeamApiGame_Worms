@@ -4,6 +4,7 @@
 #include<GameEnginePlatform/GameEngineWindowTexture.h>
 #include <GameEngineCore/ResourcesManager.h>
 #include <GameEngineCore/GameEngineRenderer.h>
+#include <GameEnginePlatform/GameEngineInput.h>
 
 Wave::Wave()
 {
@@ -27,8 +28,8 @@ void Wave::Start()
 	}
 	GameEngineWindowTexture* Texture = ResourcesManager::GetInst().FindTexture("Water_sprite.bmp");
 
-	GameEngineRenderer* Renderer1 = CreateRenderer();
-	GameEngineRenderer* Renderer2 = CreateRenderer();
+	Renderer1 = CreateRenderer();
+	Renderer2 = CreateRenderer();
 	
 	Renderer1->CreateAnimation("Wave", "Water_sprite.Bmp", 0, 10, 0.05f, true);
 	Renderer1->ChangeAnimation("Wave");
@@ -44,4 +45,19 @@ void Wave::Start()
 
 void Wave::Update(float _Delta)
 {
+	if (true == GameEngineInput::IsDown('J'))
+	{
+		if (Renderer1->IsUpdate())
+		{
+			Renderer1->Off();
+			Renderer2->Off();
+		}
+		else
+		{
+			Renderer1->On();
+			Renderer2->On();
+		}
+		
+	}
+
 }

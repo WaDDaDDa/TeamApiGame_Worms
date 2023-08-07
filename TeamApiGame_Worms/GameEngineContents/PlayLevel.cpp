@@ -52,18 +52,6 @@ void PlayLevel::Start()
 	}
 
 
-	//if (false == ResourcesManager::GetInst().IsLoadTexture(GroundFileName))
-	//{
-	//	GameEnginePath FilePath;
-	//	FilePath.SetCurrentPath();
-	//	FilePath.MoveParentToExistsChild("ContentsResources");
-
-	//	GameEnginePath FolderPath = FilePath;
-
-	//	FilePath.MoveChild("ContentsResources\\Texture\\Map\\");
-	//	ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath(GroundFileName));
-	//	ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath(GroundPixelFileName));
-	//}
 
 	CreateActor<MouseObject>();
 }
