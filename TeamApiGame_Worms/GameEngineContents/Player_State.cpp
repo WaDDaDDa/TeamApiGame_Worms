@@ -2,6 +2,7 @@
 #include "Weapon.h"
 #include "Bazooka.h"
 #include "HomingMissile.h"
+#include "Sheep.h"
 #include "ContentsEnum.h"
 
 
@@ -482,13 +483,13 @@ void Player::BazookaUpdate(float _Delta)
 
 void Player::BazookaFireStart()
 {
-	//CreateWeapon<Bazooka>();
-	CreateWeapon<HomingMissile>();
+	CreateWeapon<Bazooka>();
 }
 
 void Player::BazookaFireUpdate(float _Delta)
 {
-	ChangeState(PlayerState::Idle);
+	ChangeState(PlayerState::BazookaOff);
+	return;
 }
 
 void Player::BazookaOffStart()
@@ -929,7 +930,7 @@ void Player::HomingMissileFireStart()
 }
 void Player::HomingMissileFireUpdate(float _Delta)
 {
-	ChangeState(PlayerState::Idle);
+	ChangeState(PlayerState::HomingMissileOff);
 }
 
 void Player::HomingMissileOffStart()
@@ -978,11 +979,11 @@ void Player::SheepUpdate(float _Delta)
 
 void Player::SheepFireStart()
 {
-
+	CreateWeapon<Sheep>();
 }
 void Player::SheepFireUpdate(float _Delta)
 {
-	ChangeState(PlayerState::Idle);
+	ChangeState(PlayerState::SheepOff);
 }
 
 void Player::SheepOffStart()

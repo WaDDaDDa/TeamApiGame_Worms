@@ -105,6 +105,9 @@
     <ClInclude Include="UI_Box_SchemeOption.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="Sheep.h">
+      <Filter>Weapon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -210,6 +213,9 @@
     </ClCompile>
     <ClCompile Include="UI_Box_SchemeOption.cpp">
       <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Sheep.cpp">
+      <Filter>Weapon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -102,6 +102,11 @@ public:
 		return TargetPos;
 	}
 
+	PlayerDir GetPlayerDir()
+	{
+		return Dir;
+	}
+
 protected:
 	PlayerState State = PlayerState::Max;
 	PlayerDir Dir = PlayerDir::Left;

@@ -202,6 +202,7 @@
     <ClInclude Include="Range25.h" />
     <ClInclude Include="Range50.h" />
     <ClInclude Include="Range75.h" />
+    <ClInclude Include="Sheep.h" />
     <ClInclude Include="TitleLevel.h">
       <SubType>
       </SubType>
@@ -281,6 +282,7 @@
     <ClCompile Include="Range25.cpp" />
     <ClCompile Include="Range50.cpp" />
     <ClCompile Include="Range75.cpp" />
+    <ClCompile Include="Sheep.cpp" />
     <ClCompile Include="TitleLevel.cpp">
       <SubType>
       </SubType>

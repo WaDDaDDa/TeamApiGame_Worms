@@ -295,15 +295,13 @@ void Bazooka::FlyUpdate(float _Delta)
 	DirCheck();
 	Gravity(_Delta);
 
+	unsigned int Color = GetGroundColor(RGB(255, 255, 255));
+	if (Color != RGB(255, 255, 255) || GetLiveTime() >= 5.0f)
 	{
-		unsigned int Color = GetGroundColor(RGB(255, 255, 255) || GetLiveTime() >= 5.0f);
-		if (Color != RGB(255, 255, 255))
-		{
 
-			ChangeState(BazookaState::Bomb);
-			return;
+		ChangeState(BazookaState::Bomb);
+		return;
 
-		}
 	}
 
 }
