@@ -32,7 +32,7 @@ public:
 
 	float4 ActorCameraPos();
 
-	void GroundCheck(float _Delta);
+	virtual void GroundCheck(float _Delta);
 
 	void SwitchIsTurnPlayer()
 	{
