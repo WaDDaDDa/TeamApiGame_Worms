@@ -32,6 +32,10 @@ enum class PlayerState
 	Granade,
 	GranadeFire,
 	GranadeOff,
+	TeleportOn,
+	TeleportFire,
+	TeleportMove,
+	TeleportOff,
 
 	DeathEnd,
 	Max
@@ -199,6 +203,18 @@ protected:
 
 	void GranadeOffStart();
 	void GranadeOffUpdate(float _Delta);
+
+	void TeleportOnStart();
+	void TeleportOnUpdate(float _Delta);
+
+	void TeleportFireStart();
+	void TeleportFireUpdate(float _Delta);
+
+	void TeleportMoveStart();
+	void TeleportMoveUpdate(float _Delta);
+
+	void TeleportOffStart();
+	void TeleportOffUpdate(float _Delta);
 
 	void SetDirPosNormalize();
 

@@ -379,6 +379,72 @@ void Player::Start()
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("grnOffRight.bmp"), 1, 10);
 		}
+
+		// Teleport
+		if (false == ResourcesManager::GetInst().IsLoadTexture("teleportOnLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("teleportOnLeft.bmp"), 1, 10);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("teleportOnRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("teleportOnRight.bmp"), 1, 10);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("teleportFireLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("teleportFireLeft.bmp"), 1, 10);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("teleportFireRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("teleportFireRight.bmp"), 1, 10);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("teleportMoveLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("teleportMoveLeft.bmp"), 1, 48);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("teleportMoveRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("teleportMoveRight.bmp"), 1, 48);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("teleportOffLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("teleportOffLeft.bmp"), 1, 10);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("teleportOffRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("teleportOffRight.bmp"), 1, 10);
+		}
 		
 		
 		// DamageFly
@@ -444,6 +510,11 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Left_SheepOff", "sheepOffLeft.bmp", 0, 9, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_GranadeOn", "grnOnLeft.bmp", 0, 9, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_GranadeOff", "grnOffLeft.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_TeleportOn", "teleportOnLeft.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_TeleportFire", "teleportFireLeft.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_TeleportMoveOn", "teleportMoveLeft.bmp", 0, 47, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_TeleportMoveOff", "teleportMoveLeft.bmp", 47, 0, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_TeleportOff", "teleportOffLeft.bmp", 0, 9, 0.1f, false);
 
 
 		// Right
@@ -467,6 +538,12 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Right_SheepOff", "sheepOffRight.bmp", 0, 9, 0.1f, false);
 		MainRenderer->CreateAnimation("Right_GranadeOn", "grnOnRight.bmp", 0, 9, 0.1f, false);
 		MainRenderer->CreateAnimation("Right_GranadeOff", "grnOffRight.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_TeleportOn", "teleportOnRight.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_TeleportFire", "teleportFireRight.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_TeleportMoveOn", "teleportMoveRight.bmp", 0, 47, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_TeleportMoveOff", "teleportMoveRight.bmp", 47, 0, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_TeleportOff", "teleportOffRight.bmp", 0, 9, 0.1f, false);
+
 
 		// BazookaAnimation
 		for (int i = 0; i < 32; i++)
@@ -665,6 +742,18 @@ void Player::ChangeState(PlayerState _State)
 		case PlayerState::GranadeOff:
 			GranadeOffStart();
 			break;
+		case PlayerState::TeleportOn:
+			TeleportOnStart();
+			break;
+		case PlayerState::TeleportFire:
+			TeleportFireStart();
+			break;
+		case PlayerState::TeleportMove:
+			TeleportMoveStart();
+			break;
+		case PlayerState::TeleportOff:
+			TeleportOffStart();
+			break;
 		default:
 			break;
 		}
@@ -729,6 +818,14 @@ void Player::StateUpdate(float _Delta)
 		return GranadeFireUpdate(_Delta);
 	case PlayerState::GranadeOff:
 		return GranadeOffUpdate(_Delta);
+	case PlayerState::TeleportOn:
+		return TeleportOnUpdate(_Delta);
+	case PlayerState::TeleportFire:
+		return TeleportFireUpdate(_Delta);
+	case PlayerState::TeleportMove:
+		return TeleportMoveUpdate(_Delta);
+	case PlayerState::TeleportOff:
+		return TeleportOffUpdate(_Delta);
 	default:
 		break;
 	}

@@ -1227,3 +1227,59 @@ void Player::GranadeOffUpdate(float _Delta)
 		ChangeState(PlayerState::Idle);
 	}
 }
+
+void Player::TeleportOnStart()
+{
+	ChangeAnimationState("TeleportOn");
+}
+void Player::TeleportOnUpdate(float _Delta)
+{
+	// 마우스 이용, 마우스 좌클릭시 애니메이션 전환
+}
+
+void Player::TeleportFireStart()
+{
+	ChangeAnimationState("TeleportFire");
+}
+void Player::TeleportFireUpdate(float _Delta)
+{
+	if(MainRenderer->IsAnimationEnd())
+	{
+		ChangeState(PlayerState::TeleportMove);
+	}
+}
+
+void Player::TeleportMoveStart()
+{
+	ChangeAnimationState("TeleportMoveOn");
+}
+void Player::TeleportMoveUpdate(float _Delta)
+{
+	if (MainRenderer->IsAnimationEnd())
+	{
+		if (MainRenderer->IsAnimation("Left_TeleportMoveOn") || MainRenderer->IsAnimation("Right_TeleportMoveOn"))
+		{
+			// 이동 코드
+
+
+			// 애니메이션 전환
+			ChangeAnimationState("TeleportMoveOff");
+		}
+		else if (MainRenderer->IsAnimation("Left_TeleportMoveOff") || MainRenderer->IsAnimation("Right_TeleportMoveOff"))
+		{
+			ChangeState(PlayerState::TeleportOff);
+		}
+	}
+}
+
+void Player::TeleportOffStart()
+{
+	ChangeAnimationState("TeleportOff");
+}
+void Player::TeleportOffUpdate(float _Delta)
+{
+	if(MainRenderer->IsAnimationEnd())
+	{
+		ChangeState(PlayerState::Idle);
+	}
+}
