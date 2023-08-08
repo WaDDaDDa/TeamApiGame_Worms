@@ -114,6 +114,9 @@
     <ClInclude Include="Grenade.h">
       <Filter>Weapon</Filter>
     </ClInclude>
+    <ClInclude Include="UI_Terrain_Button.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -228,6 +231,9 @@
     </ClCompile>
     <ClCompile Include="Grenade.cpp">
       <Filter>Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Terrain_Button.cpp">
+      <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

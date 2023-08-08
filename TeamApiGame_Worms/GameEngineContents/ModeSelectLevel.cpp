@@ -106,7 +106,7 @@ void QuitGame(DWORD_PTR, DWORD_PTR)
 
 void ChangeLevel(DWORD_PTR, DWORD_PTR)
 {
-	GameEngineCore::ChangeLevel("PlayLevel");
+	GameEngineCore::ChangeLevel("LobbyLevel");
 }
 
 

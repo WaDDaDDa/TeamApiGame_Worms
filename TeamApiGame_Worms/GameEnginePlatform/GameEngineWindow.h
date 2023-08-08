@@ -28,7 +28,7 @@ public:
 		return Hdc;
 	}
 
-	HWND GetHWND()
+	HWND GetHWND() const
 	{
 		return hWnd;
 	}

@@ -15,11 +15,13 @@
 #include "UI_Box_Teams.h"
 #include "UI_Box_Terrain.h"
 #include "UI_Box_SchemeOption.h"
+#include "UI_Terrain_Button.h"
 
 #include "ContentsDefine.h"
 #include "MouseObject.h"
 #include <GameEngineCore/GameEngineCore.h>
 #include <GameEngineBase/GameEngineRandom.h>
+#include <GameEnginePlatform/GameEngineInput.h>
 
 
 void ExitLobby(DWORD_PTR, DWORD_PTR);
@@ -41,20 +43,23 @@ void LobbyLevel::LevelStart(GameEngineLevel* _PrevLevel)
 
 
 	// 레이아웃 세팅
-
 	UI_Box_Terrain* Box_Terrain = CreateActor<UI_Box_Terrain>();
-	Box_Terrain->SetPos({ 350, 140 });
+	Box_Terrain->SetPos({ 370, 140 });
 
 	UI_Box_Teams* Box_Teams = CreateActor<UI_Box_Teams>();
-	Box_Teams->SetPos({ 950, 140 });
+	Box_Teams->SetPos({ 920, 140 });
 
 	UI_Box_SchemeOption* Box_SchemeOption = CreateActor<UI_Box_SchemeOption>();
-	Box_SchemeOption->SetPos({ 350, 400 });
+	Box_SchemeOption->SetPos({ 370, 400 });
 
 	UI_Box_Barracks* Box_Barracks = CreateActor<UI_Box_Barracks>();
-	Box_Barracks->SetPos({ 950, 395 });
+	Box_Barracks->SetPos({ 920, 395 });
 
 	// Button 세팅
+	Btn_Terrain = CreateActor<UI_Terrain_Button>();
+	Btn_Terrain->SetPos({ 380, 140 });
+
+
 	UI_Button* Btn_StartGame = CreateActor<UI_Button>();
 	Btn_StartGame->InitButtonData("UI_Button_StartGame", float4{ 400, 80 }, true);
 	Btn_StartGame->SetPos({ 1065, 570 });
@@ -83,6 +88,17 @@ void LobbyLevel::Start()
 
 void LobbyLevel::Update(float _Delta)
 {
+	if (true == GameEngineInput::IsDown('J'))
+	{
+		GameEngineLevel::CollisionDebugRenderSwitch();
+	}
+
+
+
+
+
+
+
 
 	// 유성우 효과 적용
 	float MeteorPosX = GameEngineRandom::MainRandom.RandomFloat(-800, 1400);
