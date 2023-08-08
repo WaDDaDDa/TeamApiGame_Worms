@@ -411,11 +411,11 @@ void Grenade::FlyUpdate(float _Delta)
 		return;
 	}
 
-	if (Color != RGB(255, 255, 255))
-	{
-		ChangeState(GrenadeState::Idle);
-		return;
-	}
+	//if (Color != RGB(255, 255, 255))
+	//{
+	//	ChangeState(GrenadeState::Idle);
+	//	return;
+	//}
 
 	//땅에 닿았을때.
 	if (DownColor != RGB(255, 255, 255))
@@ -426,7 +426,7 @@ void Grenade::FlyUpdate(float _Delta)
 		return;
 	}
 	// 위에 판정
-	if (UpColor != RGB(255, 255, 255))
+	else if (UpColor != RGB(255, 255, 255))
 	{
 		CurCravityVector.Y = -CurCravityVector.Y;
 
@@ -434,28 +434,28 @@ void Grenade::FlyUpdate(float _Delta)
 		return;
 	}
 	// 왼쪽 판정
-	if (LeftColor != RGB(255, 255, 255))
+	else if (LeftColor != RGB(255, 255, 255))
 	{
 
 		CurCravityVector.X = -CurCravityVector.X;
 
-		SetGravityVector(CurCravityVector * 0.6f);
+		SetGravityVector(CurCravityVector * 0.4f);
 		return;
 	}
 	// 오른쪽 판정
-	if (RightColor != RGB(255, 255, 255))
+	else if (RightColor != RGB(255, 255, 255))
 	{
 
 		CurCravityVector.X = -CurCravityVector.X;
 
-		SetGravityVector(CurCravityVector * 0.6f);
+		SetGravityVector(CurCravityVector * 0.4f);
 		return;
 	}
 }
 
 void Grenade::BombStart()
 {
-	GrenadeBomb = CreateBombEffect<Range50>();
+	GrenadeBomb = CreateBombEffect<Range75>();
 	Renderer->Off();
 }
 
