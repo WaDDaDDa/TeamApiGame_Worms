@@ -36,6 +36,10 @@ enum class PlayerState
 	TeleportFire,
 	TeleportMove,
 	TeleportOff,
+	AirStrikeOn,
+	AirStrikeOff,
+	GirderOn,
+	GirderOff,
 
 	DeathEnd,
 	Max
@@ -215,6 +219,18 @@ protected:
 
 	void TeleportOffStart();
 	void TeleportOffUpdate(float _Delta);
+
+	void AirStrikeOnStart();
+	void AirStrikeOnUpdate(float _Delta);
+
+	void AirStrikeOffStart();
+	void AirStrikeOffUpdate(float _Delta);
+
+	void GirderOnStart();
+	void GirderOnUpdate(float _Delta);
+
+	void GirderOffStart();
+	void GirderOffUpdate(float _Delta);
 
 	void SetDirPosNormalize();
 

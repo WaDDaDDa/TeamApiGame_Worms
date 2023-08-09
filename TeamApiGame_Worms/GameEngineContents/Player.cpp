@@ -445,6 +445,74 @@ void Player::Start()
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("teleportOffRight.bmp"), 1, 10);
 		}
+
+		//AirStrike
+		if (false == ResourcesManager::GetInst().IsLoadTexture("AirStrikeOnLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("AirStrikeOnLeft.bmp"), 1, 10);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("AirStrikeOnRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("AirStrikeOnRight.bmp"), 1, 10);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("AirStrikeOffLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("AirStrikeOffLeft.bmp"), 1, 10);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("AirStrikeOffRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("AirStrikeOffRight.bmp"), 1, 10);
+		}
+
+		// grider
+		if (false == ResourcesManager::GetInst().IsLoadTexture("girderOnLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("girderOnLeft.bmp"), 1, 15);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("girderOnRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("girderOnRight.bmp"), 1, 15);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("girderOffLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("girderOffLeft.bmp"), 1, 15);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("girderOffRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("girderOffRight.bmp"), 1, 15);
+		}
 		
 		
 		// DamageFly
@@ -515,6 +583,10 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Left_TeleportMoveOn", "teleportMoveLeft.bmp", 0, 47, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_TeleportMoveOff", "teleportMoveLeft.bmp", 47, 0, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_TeleportOff", "teleportOffLeft.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_AirStrikeOn", "AirStrikeOnLeft.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_AirStrikeOff", "AirStrikeOffLeft.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_GirderOn", "girderOnLeft.bmp", 0, 14, false);
+		MainRenderer->CreateAnimation("Left_GirderOff", "girderOffLeft.bmp", 0, 14, false);
 
 
 		// Right
@@ -543,7 +615,10 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Right_TeleportMoveOn", "teleportMoveRight.bmp", 0, 47, 0.01f, false);
 		MainRenderer->CreateAnimation("Right_TeleportMoveOff", "teleportMoveRight.bmp", 47, 0, 0.01f, false);
 		MainRenderer->CreateAnimation("Right_TeleportOff", "teleportOffRight.bmp", 0, 9, 0.1f, false);
-
+		MainRenderer->CreateAnimation("Right_AirStrikeOn", "AirStrikeOnRight.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_AirStrikeOff", "AirStrikeOffRight.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_GirderOn", "girderOnRight.bmp", 0, 14, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_GirderOff", "girderOffRight.bmp", 0, 14, 0.1f, false);
 
 		// BazookaAnimation
 		for (int i = 0; i < 32; i++)
@@ -754,6 +829,18 @@ void Player::ChangeState(PlayerState _State)
 		case PlayerState::TeleportOff:
 			TeleportOffStart();
 			break;
+		case PlayerState::AirStrikeOn:
+			AirStrikeOnStart();
+			break;
+		case PlayerState::AirStrikeOff:
+			AirStrikeOffStart();
+			break;
+		case PlayerState::GirderOn:
+			GirderOnStart();
+			break;
+		case PlayerState::GirderOff:
+			GirderOffStart();
+			break;
 		default:
 			break;
 		}
@@ -826,6 +913,14 @@ void Player::StateUpdate(float _Delta)
 		return TeleportMoveUpdate(_Delta);
 	case PlayerState::TeleportOff:
 		return TeleportOffUpdate(_Delta);
+	case PlayerState::AirStrikeOn:
+		return AirStrikeOnUpdate(_Delta);
+	case PlayerState::AirStrikeOff:
+		return AirStrikeOffUpdate(_Delta);
+	case PlayerState::GirderOn:
+		return GirderOnUpdate(_Delta);
+	case PlayerState::GirderOff:
+		return GirderOffUpdate(_Delta);
 	default:
 		break;
 	}

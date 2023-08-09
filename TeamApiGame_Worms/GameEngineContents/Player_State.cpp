@@ -108,6 +108,16 @@ void Player::IdleUpdate(float _Delta)
 		ChangeState(PlayerState::TeleportOn);
 		return;
 	}
+
+	if (true == GameEngineInput::IsDown('8'))
+	{
+		ChangeState(PlayerState::AirStrikeOn);
+	}
+
+	if (true == GameEngineInput::IsDown('9'))
+	{
+		ChangeState(PlayerState::GirderOn);
+	}
 	
 
 }
@@ -1300,6 +1310,60 @@ void Player::TeleportOffStart()
 void Player::TeleportOffUpdate(float _Delta)
 {
 	if(MainRenderer->IsAnimationEnd())
+	{
+		ChangeState(PlayerState::Idle);
+	}
+}
+
+void Player::AirStrikeOnStart()
+{
+	ChangeAnimationState("AirStrikeOn");
+}
+void Player::AirStrikeOnUpdate(float _Delta)
+{
+	// 마우스 위치 이용해서 목표 설정
+	// 하늘에서 미사일 5개 스폰
+
+	if (GameEngineInput::IsDown('1'))
+	{
+		ChangeState(PlayerState::AirStrikeOff);
+	}
+}
+
+void Player::AirStrikeOffStart()
+{
+	ChangeAnimationState("AirStrikeOff");
+}
+void Player::AirStrikeOffUpdate(float _Delta)
+{
+	if (MainRenderer->IsAnimationEnd())
+	{
+		ChangeState(PlayerState::Idle);
+	}
+}
+
+void Player::GirderOnStart()
+{
+	ChangeAnimationState("GirderOn");
+}
+void Player::GirderOnUpdate(float _Delta)
+{
+	// 보류
+	// 마우스 포인터 바꾸고 철근 좌우방향키로 회전, 180도 돌면은 크기 변환
+
+	if (GameEngineInput::IsDown('1'))
+	{
+		ChangeState(PlayerState::GirderOff);
+	}
+}
+
+void Player::GirderOffStart()
+{
+	ChangeAnimationState("GirderOff");
+}
+void Player::GirderOffUpdate(float _Delta)
+{
+	if (MainRenderer->IsAnimationEnd())
 	{
 		ChangeState(PlayerState::Idle);
 	}
