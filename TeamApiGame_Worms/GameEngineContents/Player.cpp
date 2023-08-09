@@ -579,13 +579,16 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Left_GranadeOn", "grnOnLeft.bmp", 0, 9, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_GranadeOff", "grnOffLeft.bmp", 0, 9, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_TeleportOn", "teleportOnLeft.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_Teleport", "teleportOnLeft.bmp", 9, 9, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_TeleportFire", "teleportFireLeft.bmp", 0, 9, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_TeleportMoveOn", "teleportMoveLeft.bmp", 0, 47, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_TeleportMoveOff", "teleportMoveLeft.bmp", 47, 0, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_TeleportOff", "teleportOffLeft.bmp", 0, 9, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_AirStrikeOn", "AirStrikeOnLeft.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_AirStrike", "AirStrikeOnLeft.bmp", 9, 9, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_AirStrikeOff", "AirStrikeOffLeft.bmp", 0, 9, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_GirderOn", "girderOnLeft.bmp", 0, 14, false);
+		MainRenderer->CreateAnimation("Left_Girder", "girderOnLeft.bmp", 14, 14, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_GirderOff", "girderOffLeft.bmp", 0, 14, false);
 
 
@@ -611,13 +614,16 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Right_GranadeOn", "grnOnRight.bmp", 0, 9, 0.1f, false);
 		MainRenderer->CreateAnimation("Right_GranadeOff", "grnOffRight.bmp", 0, 9, 0.1f, false);
 		MainRenderer->CreateAnimation("Right_TeleportOn", "teleportOnRight.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_Teleport", "teleportOnRight.bmp", 9, 9, 0.1f, false);
 		MainRenderer->CreateAnimation("Right_TeleportFire", "teleportFireRight.bmp", 0, 9, 0.1f, false);
 		MainRenderer->CreateAnimation("Right_TeleportMoveOn", "teleportMoveRight.bmp", 0, 47, 0.01f, false);
 		MainRenderer->CreateAnimation("Right_TeleportMoveOff", "teleportMoveRight.bmp", 47, 0, 0.01f, false);
 		MainRenderer->CreateAnimation("Right_TeleportOff", "teleportOffRight.bmp", 0, 9, 0.1f, false);
 		MainRenderer->CreateAnimation("Right_AirStrikeOn", "AirStrikeOnRight.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_AirStrike", "AirStrikeOnRight.bmp", 9, 9, 0.1f, false);
 		MainRenderer->CreateAnimation("Right_AirStrikeOff", "AirStrikeOffRight.bmp", 0, 9, 0.1f, false);
 		MainRenderer->CreateAnimation("Right_GirderOn", "girderOnRight.bmp", 0, 14, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_Girder", "girderOnRight.bmp", 14, 14, 0.1f, false);
 		MainRenderer->CreateAnimation("Right_GirderOff", "girderOffRight.bmp", 0, 14, 0.1f, false);
 
 		// BazookaAnimation
@@ -820,6 +826,9 @@ void Player::ChangeState(PlayerState _State)
 		case PlayerState::TeleportOn:
 			TeleportOnStart();
 			break;
+		case PlayerState::Teleport:
+			TeleportStart();
+			break;
 		case PlayerState::TeleportFire:
 			TeleportFireStart();
 			break;
@@ -832,11 +841,17 @@ void Player::ChangeState(PlayerState _State)
 		case PlayerState::AirStrikeOn:
 			AirStrikeOnStart();
 			break;
+		case PlayerState::AirStrike:
+			AirStrikeStart();
+			break;
 		case PlayerState::AirStrikeOff:
 			AirStrikeOffStart();
 			break;
 		case PlayerState::GirderOn:
 			GirderOnStart();
+			break;
+		case PlayerState::Girder:
+			GirderStart();
 			break;
 		case PlayerState::GirderOff:
 			GirderOffStart();
@@ -907,6 +922,8 @@ void Player::StateUpdate(float _Delta)
 		return GranadeOffUpdate(_Delta);
 	case PlayerState::TeleportOn:
 		return TeleportOnUpdate(_Delta);
+	case PlayerState::Teleport:
+		return TeleportUpdate(_Delta);
 	case PlayerState::TeleportFire:
 		return TeleportFireUpdate(_Delta);
 	case PlayerState::TeleportMove:
@@ -915,10 +932,14 @@ void Player::StateUpdate(float _Delta)
 		return TeleportOffUpdate(_Delta);
 	case PlayerState::AirStrikeOn:
 		return AirStrikeOnUpdate(_Delta);
+	case PlayerState::AirStrike:
+		return AirStrikeUpdate(_Delta);
 	case PlayerState::AirStrikeOff:
 		return AirStrikeOffUpdate(_Delta);
 	case PlayerState::GirderOn:
 		return GirderOnUpdate(_Delta);
+	case PlayerState::Girder:
+		return GirderUpdate(_Delta);
 	case PlayerState::GirderOff:
 		return GirderOffUpdate(_Delta);
 	default:
@@ -1071,4 +1092,53 @@ void Player::Movement(float _Delta)
 			AddPos(MovePos1);
 		}
 	}
+}
+
+void Player::ChangeWeapon()
+{
+	if (true == GameEngineInput::IsDown('2'))
+	{
+		ChangeState(PlayerState::BazookaOn);
+	}
+	
+	if (true == GameEngineInput::IsDown('3'))
+	{
+		ChangeState(PlayerState::UziOn);
+		return;
+	}
+
+	if (true == GameEngineInput::IsDown('4'))
+	{
+		ChangeState(PlayerState::HomingMissileOn);
+		return;
+	}
+
+	if (true == GameEngineInput::IsDown('5'))
+	{
+		ChangeState(PlayerState::SheepOn);
+		return;
+	}
+
+	if (true == GameEngineInput::IsDown('6'))
+	{
+		ChangeState(PlayerState::GranadeOn);
+		return;
+	}
+
+	if (true == GameEngineInput::IsDown('7'))
+	{
+		ChangeState(PlayerState::TeleportOn);
+		return;
+	}
+
+	if (true == GameEngineInput::IsDown('8'))
+	{
+		ChangeState(PlayerState::AirStrikeOn);
+	}
+
+	if (true == GameEngineInput::IsDown('9'))
+	{
+		ChangeState(PlayerState::GirderOn);
+	}
+
 }

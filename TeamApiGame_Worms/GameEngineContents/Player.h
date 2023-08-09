@@ -33,12 +33,15 @@ enum class PlayerState
 	GranadeFire,
 	GranadeOff,
 	TeleportOn,
+	Teleport,
 	TeleportFire,
 	TeleportMove,
 	TeleportOff,
 	AirStrikeOn,
+	AirStrike,
 	AirStrikeOff,
 	GirderOn,
+	Girder,
 	GirderOff,
 
 	DeathEnd,
@@ -211,6 +214,9 @@ protected:
 	void TeleportOnStart();
 	void TeleportOnUpdate(float _Delta);
 
+	void TeleportStart();
+	void TeleportUpdate(float _Delta);
+
 	void TeleportFireStart();
 	void TeleportFireUpdate(float _Delta);
 
@@ -223,16 +229,24 @@ protected:
 	void AirStrikeOnStart();
 	void AirStrikeOnUpdate(float _Delta);
 
+	void AirStrikeStart();
+	void AirStrikeUpdate(float _Delta);
+
 	void AirStrikeOffStart();
 	void AirStrikeOffUpdate(float _Delta);
 
 	void GirderOnStart();
 	void GirderOnUpdate(float _Delta);
 
+	void GirderStart();
+	void GirderUpdate(float _Delta);
+
 	void GirderOffStart();
 	void GirderOffUpdate(float _Delta);
 
 	void SetDirPosNormalize();
+
+	void ChangeWeapon();
 
 	// Collision
 	GameEngineCollision* PlayerBodyCollision = nullptr;
