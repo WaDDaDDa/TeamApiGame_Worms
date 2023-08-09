@@ -17,38 +17,37 @@ UI_Terrain_Button::~UI_Terrain_Button()
 
 void UI_Terrain_Button::Start()
 {
-
 	// 리소스 로딩
 	GameEnginePath FilePath;
 	FilePath.SetCurrentPath();
 	FilePath.MoveParentToExistsChild("ContentsResources");
-	FilePath.MoveChild("ContentsResources\\UI\\Lobby\\");
+	FilePath.MoveChild("ContentsResources\\UI\\Lobby\\SelectMap\\");
 
-	if (false == ResourcesManager::GetInst().IsLoadTexture("Preview_MapBooks_Ground.bmp"))
+	if (false == ResourcesManager::GetInst().IsLoadTexture("LobbyMap_MapBooks.bmp"))
 	{
-		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("Preview_MapBooks_Ground.bmp"));
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("LobbyMap_MapBooks.bmp"));
 	}
 
-	if (false == ResourcesManager::GetInst().IsLoadTexture("Preview_MapCars_Ground.bmp"))
+	if (false == ResourcesManager::GetInst().IsLoadTexture("LobbyMap_MapCars.bmp"))
 	{
-		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("Preview_MapCars_Ground.bmp"));
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("LobbyMap_MapCars.bmp"));
 	}
 
-	if (false == ResourcesManager::GetInst().IsLoadTexture("Preview_MapCity_Ground.bmp"))
+	if (false == ResourcesManager::GetInst().IsLoadTexture("LobbyMap_MapCity.bmp"))
 	{
-		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("Preview_MapCity_Ground.bmp"));
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("LobbyMap_MapCity.bmp"));
 	}
 
-	if (false == ResourcesManager::GetInst().IsLoadTexture("Preview_MapTrain_Ground.bmp"))
+	if (false == ResourcesManager::GetInst().IsLoadTexture("LobbyMap_MapTrain.bmp"))
 	{
-		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("Preview_MapTrain_Ground.bmp"));
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("LobbyMap_MapTrain.bmp"));
 	}
 
 	MainRenderer = CreateRenderer(RenderOrder::UI);
 
 	MainRenderer->SetRenderScale({ 400, 200 });
 
-	MainRenderer->SetTexture("Preview_MapBooks_Ground.bmp");
+	MainRenderer->SetTexture("LobbyMap_MapBooks.bmp");
 
 	MainCollision = CreateCollision(CollisionOrder::UI);
 	MainCollision->SetCollisionType(CollisionType::Rect);
@@ -79,19 +78,19 @@ void UI_Terrain_Button::ChangeSelectMap()
 	switch (m_SelectIndex)
 	{
 	case 0:
-		MainRenderer->SetTexture("Preview_MapBooks_Ground.bmp");
+		MainRenderer->SetTexture("LobbyMap_MapBooks.bmp");
 		break;
 
 	case 1:
-		MainRenderer->SetTexture("Preview_MapCars_Ground.bmp");
+		MainRenderer->SetTexture("LobbyMap_MapCars.bmp");
 		break;
 
 	case 2:
-		MainRenderer->SetTexture("Preview_MapCity_Ground.bmp");
+		MainRenderer->SetTexture("LobbyMap_MapCity.bmp");
 		break;
 
 	case 3:
-		MainRenderer->SetTexture("Preview_MapTrain_Ground.bmp");
+		MainRenderer->SetTexture("LobbyMap_MapTrain.bmp");
 		break;
 
 	default:
