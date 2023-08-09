@@ -12,8 +12,6 @@ public:
 	UI_Terrain_Button& operator=(const UI_Terrain_Button& _Other) = delete;
 	UI_Terrain_Button& operator=(UI_Terrain_Button&& _Other) noexcept = delete;
 
-	
-
 	GameEngineRenderer* GetMainRenderer()
 	{
 		return MainRenderer;

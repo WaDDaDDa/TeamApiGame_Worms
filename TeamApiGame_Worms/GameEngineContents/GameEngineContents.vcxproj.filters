@@ -117,6 +117,18 @@
     <ClInclude Include="UI_Terrain_Button.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="UI_TurnTime_Button.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_RoundTime_Button.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Win_Button.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStateManager.h">
+      <Filter>Global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -234,6 +246,18 @@
     </ClCompile>
     <ClCompile Include="UI_Terrain_Button.cpp">
       <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_TurnTime_Button.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_RoundTime_Button.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Win_Button.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStateManager.cpp">
+      <Filter>Global</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

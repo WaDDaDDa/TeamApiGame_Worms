@@ -16,6 +16,9 @@
 #include "UI_Box_Terrain.h"
 #include "UI_Box_SchemeOption.h"
 #include "UI_Terrain_Button.h"
+#include "UI_TurnTime_Button.h"
+#include "UI_RoundTime_Button.h"
+#include "UI_Win_Button.h"
 
 #include "ContentsDefine.h"
 #include "MouseObject.h"
@@ -60,9 +63,18 @@ void LobbyLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	Btn_Terrain->SetPos({ 380, 140 });
 
 
+	UI_TurnTime_Button* Btn_TurnTime = CreateActor<UI_TurnTime_Button>();
+	Btn_TurnTime->SetPos({ 160, 580 });
+
+	UI_RoundTime_Button* Btn_RoundTime = CreateActor<UI_RoundTime_Button>();
+	Btn_RoundTime->SetPos({ 240, 580 });
+
+	UI_Win_Button* Btn_Win = CreateActor<UI_Win_Button>();
+	Btn_Win->SetPos({ 320, 580 });
+
 	UI_Button* Btn_StartGame = CreateActor<UI_Button>();
 	Btn_StartGame->InitButtonData("UI_Button_StartGame", float4{ 400, 80 }, true);
-	Btn_StartGame->SetPos({ 1065, 570 });
+	Btn_StartGame->SetPos({ 1065, 580 });
 	Btn_StartGame->SetClickedCallBack(StartGame, 0, 0);
 
 	UI_Button* Btn_ExitGame = CreateActor<UI_Button>();

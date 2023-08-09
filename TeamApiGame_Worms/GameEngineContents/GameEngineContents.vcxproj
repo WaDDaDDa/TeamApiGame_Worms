@@ -170,6 +170,7 @@
     </ClInclude>
     <ClInclude Include="ContentsDefine.h" />
     <ClInclude Include="ContentsEnum.h" />
+    <ClInclude Include="GameStateManager.h" />
     <ClInclude Include="GameTurn.h">
       <SubType>
       </SubType>
@@ -223,7 +224,10 @@
     <ClInclude Include="UI_MainLogo.h" />
     <ClInclude Include="UI_Meteor.h" />
     <ClInclude Include="UI_Mouse.h" />
+    <ClInclude Include="UI_RoundTime_Button.h" />
     <ClInclude Include="UI_Terrain_Button.h" />
+    <ClInclude Include="UI_TurnTime_Button.h" />
+    <ClInclude Include="UI_Win_Button.h" />
     <ClInclude Include="UnderWater.h">
       <SubType>
       </SubType>
@@ -252,6 +256,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="GameStateManager.cpp" />
     <ClCompile Include="GameTurn.cpp">
       <SubType>
       </SubType>
@@ -306,7 +311,10 @@
     <ClCompile Include="UI_MainLogo.cpp" />
     <ClCompile Include="UI_Meteor.cpp" />
     <ClCompile Include="UI_Mouse.cpp" />
+    <ClCompile Include="UI_RoundTime_Button.cpp" />
     <ClCompile Include="UI_Terrain_Button.cpp" />
+    <ClCompile Include="UI_TurnTime_Button.cpp" />
+    <ClCompile Include="UI_Win_Button.cpp" />
     <ClCompile Include="UnderWater.cpp">
       <SubType>
       </SubType>
