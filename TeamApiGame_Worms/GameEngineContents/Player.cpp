@@ -558,8 +558,8 @@ void Player::Start()
 	// Animation
 	{
 		// Left
-		MainRenderer->CreateAnimation("Left_Idle", "idleLeft.bmp", 0, 5, 0.2f, true);
-		MainRenderer->CreateAnimation("Left_Move", "walkLeft.bmp", 0, 14, 0.2f, true);
+		MainRenderer->CreateAnimation("Left_Idle", "idleLeft.bmp", 0, 5, 0.1f, true);
+		MainRenderer->CreateAnimation("Left_Move", "walkLeft.bmp", 0, 14, 0.1f, true);
 		MainRenderer->CreateAnimation("Left_JumpReady", "jumpReadyLeft.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_JumpUp", "flyUpLeft.bmp", 0, 1, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_Jump", "flyLinkLeft.bmp", 0, 6, 0.1f, false);
@@ -567,29 +567,29 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Left_Falling", "flyDownLeft.bmp", 0, 1, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_Damaging", "wfly1_L.bmp", 0, 31, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_Death", "wdieLeft.bmp", 0, 59, 0.05f, false);
-		MainRenderer->CreateAnimation("Left_BazookaOn", "bazOnLeft.bmp", 0, 6, 0.1f, false);
-		MainRenderer->CreateAnimation("Left_BazookaOff", "bazOffLeft.bmp", 0, 6, 0.1f, false);
-		MainRenderer->CreateAnimation("Left_UziOn", "uziOnLeft.bmp", 0, 9, 0.1f, false);
-		MainRenderer->CreateAnimation("Left_UziOff", "uziOffLeft.bmp", 0, 9, 0.1f, false);
-		MainRenderer->CreateAnimation("Left_HomingMissileOn", "homingOnLeft.bmp", 0, 6, 0.1f, false);
-		MainRenderer->CreateAnimation("Left_HomingMissileOff", "homingOffLeft.bmp", 0, 6, 0.1f, false);
-		MainRenderer->CreateAnimation("Left_SheepOn", "sheepOnLeft.bmp", 0, 9, 0.1f, false);
-		MainRenderer->CreateAnimation("Left_Sheep", "sheepOnLeft.bmp", 9, 9, 0.1f, false);
-		MainRenderer->CreateAnimation("Left_SheepOff", "sheepOffLeft.bmp", 0, 9, 0.1f, false);
-		MainRenderer->CreateAnimation("Left_GranadeOn", "grnOnLeft.bmp", 0, 9, 0.1f, false);
-		MainRenderer->CreateAnimation("Left_GranadeOff", "grnOffLeft.bmp", 0, 9, 0.1f, false);
-		MainRenderer->CreateAnimation("Left_TeleportOn", "teleportOnLeft.bmp", 0, 9, 0.1f, false);
-		MainRenderer->CreateAnimation("Left_Teleport", "teleportOnLeft.bmp", 9, 9, 0.1f, false);
-		MainRenderer->CreateAnimation("Left_TeleportFire", "teleportFireLeft.bmp", 0, 9, 0.1f, false);
-		MainRenderer->CreateAnimation("Left_TeleportMoveOn", "teleportMoveLeft.bmp", 0, 47, 0.1f, false);
-		MainRenderer->CreateAnimation("Left_TeleportMoveOff", "teleportMoveLeft.bmp", 47, 0, 0.1f, false);
-		MainRenderer->CreateAnimation("Left_TeleportOff", "teleportOffLeft.bmp", 0, 9, 0.1f, false);
-		MainRenderer->CreateAnimation("Left_AirStrikeOn", "AirStrikeOnLeft.bmp", 0, 9, 0.1f, false);
-		MainRenderer->CreateAnimation("Left_AirStrike", "AirStrikeOnLeft.bmp", 9, 9, 0.1f, false);
-		MainRenderer->CreateAnimation("Left_AirStrikeOff", "AirStrikeOffLeft.bmp", 0, 9, 0.1f, false);
-		MainRenderer->CreateAnimation("Left_GirderOn", "girderOnLeft.bmp", 0, 14, false);
-		MainRenderer->CreateAnimation("Left_Girder", "girderOnLeft.bmp", 14, 14, 0.1f, false);
-		MainRenderer->CreateAnimation("Left_GirderOff", "girderOffLeft.bmp", 0, 14, false);
+		MainRenderer->CreateAnimation("Left_BazookaOn", "bazOnLeft.bmp", 0, 6, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_BazookaOff", "bazOffLeft.bmp", 0, 6, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_UziOn", "uziOnLeft.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_UziOff", "uziOffLeft.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_HomingMissileOn", "homingOnLeft.bmp", 0, 6, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_HomingMissileOff", "homingOffLeft.bmp", 0, 6, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_SheepOn", "sheepOnLeft.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_Sheep", "sheepOnLeft.bmp", 9, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_SheepOff", "sheepOffLeft.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_GranadeOn", "grnOnLeft.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_GranadeOff", "grnOffLeft.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_TeleportOn", "teleportOnLeft.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_Teleport", "teleportOnLeft.bmp", 9, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_TeleportFire", "teleportFireLeft.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_TeleportMoveOn", "teleportMoveLeft.bmp", 0, 47, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_TeleportMoveOff", "teleportMoveLeft.bmp", 47, 0, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_TeleportOff", "teleportOffLeft.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_AirStrikeOn", "AirStrikeOnLeft.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_AirStrike", "AirStrikeOnLeft.bmp", 9, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_AirStrikeOff", "AirStrikeOffLeft.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_GirderOn", "girderOnLeft.bmp", 0, 14, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_Girder", "girderOnLeft.bmp", 14, 14, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_GirderOff", "girderOffLeft.bmp", 0, 14, 0.05f, false);
 
 
 		// Right
@@ -602,29 +602,29 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Right_Falling", "flyDownRight.bmp", 0, 1, 0.1f, false);
 		MainRenderer->CreateAnimation("Right_Damaging", "wfly1_R.bmp", 0, 31, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_Death", "wdieRight.bmp", 0, 59, 0.05f, false);
-		MainRenderer->CreateAnimation("Right_BazookaOn", "bazOnRight.bmp", 0, 6, 0.1f, false);
-		MainRenderer->CreateAnimation("Right_BazookaOff", "bazOffRight.bmp", 0, 6, 0.1f, false);
-		MainRenderer->CreateAnimation("Right_UziOn", "uziOnRight.bmp", 0, 9, 0.1f, false);
-		MainRenderer->CreateAnimation("Right_UziOff", "uziOffRight.bmp", 0, 9, 0.1f, false);
-		MainRenderer->CreateAnimation("Right_HomingMissileOn", "homingOnRight.bmp", 0, 6, 0.1f, false);
-		MainRenderer->CreateAnimation("Right_HomingMissileOff", "homingOffRight.bmp", 0, 6, 0.1f, false);
-		MainRenderer->CreateAnimation("Right_SheepOn", "sheepOnRight.bmp", 0, 9, 0.1f, false);
-		MainRenderer->CreateAnimation("Right_Sheep", "sheepOnRight.bmp", 9, 9, 0.1f, false);
-		MainRenderer->CreateAnimation("Right_SheepOff", "sheepOffRight.bmp", 0, 9, 0.1f, false);
-		MainRenderer->CreateAnimation("Right_GranadeOn", "grnOnRight.bmp", 0, 9, 0.1f, false);
-		MainRenderer->CreateAnimation("Right_GranadeOff", "grnOffRight.bmp", 0, 9, 0.1f, false);
-		MainRenderer->CreateAnimation("Right_TeleportOn", "teleportOnRight.bmp", 0, 9, 0.1f, false);
-		MainRenderer->CreateAnimation("Right_Teleport", "teleportOnRight.bmp", 9, 9, 0.1f, false);
-		MainRenderer->CreateAnimation("Right_TeleportFire", "teleportFireRight.bmp", 0, 9, 0.1f, false);
-		MainRenderer->CreateAnimation("Right_TeleportMoveOn", "teleportMoveRight.bmp", 0, 47, 0.01f, false);
-		MainRenderer->CreateAnimation("Right_TeleportMoveOff", "teleportMoveRight.bmp", 47, 0, 0.01f, false);
-		MainRenderer->CreateAnimation("Right_TeleportOff", "teleportOffRight.bmp", 0, 9, 0.1f, false);
-		MainRenderer->CreateAnimation("Right_AirStrikeOn", "AirStrikeOnRight.bmp", 0, 9, 0.1f, false);
-		MainRenderer->CreateAnimation("Right_AirStrike", "AirStrikeOnRight.bmp", 9, 9, 0.1f, false);
-		MainRenderer->CreateAnimation("Right_AirStrikeOff", "AirStrikeOffRight.bmp", 0, 9, 0.1f, false);
-		MainRenderer->CreateAnimation("Right_GirderOn", "girderOnRight.bmp", 0, 14, 0.1f, false);
-		MainRenderer->CreateAnimation("Right_Girder", "girderOnRight.bmp", 14, 14, 0.1f, false);
-		MainRenderer->CreateAnimation("Right_GirderOff", "girderOffRight.bmp", 0, 14, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_BazookaOn", "bazOnRight.bmp", 0, 6, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_BazookaOff", "bazOffRight.bmp", 0, 6, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_UziOn", "uziOnRight.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_UziOff", "uziOffRight.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_HomingMissileOn", "homingOnRight.bmp", 0, 6, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_HomingMissileOff", "homingOffRight.bmp", 0, 6, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_SheepOn", "sheepOnRight.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_Sheep", "sheepOnRight.bmp", 9, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_SheepOff", "sheepOffRight.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_GranadeOn", "grnOnRight.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_GranadeOff", "grnOffRight.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_TeleportOn", "teleportOnRight.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_Teleport", "teleportOnRight.bmp", 9, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_TeleportFire", "teleportFireRight.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_TeleportMoveOn", "teleportMoveRight.bmp", 0, 47, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_TeleportMoveOff", "teleportMoveRight.bmp", 47, 0, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_TeleportOff", "teleportOffRight.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_AirStrikeOn", "AirStrikeOnRight.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_AirStrike", "AirStrikeOnRight.bmp", 9, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_AirStrikeOff", "AirStrikeOffRight.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_GirderOn", "girderOnRight.bmp", 0, 14, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_Girder", "girderOnRight.bmp", 14, 14, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_GirderOff", "girderOffRight.bmp", 0, 14, 0.05f, false);
 
 		// BazookaAnimation
 		for (int i = 0; i < 32; i++)
@@ -1091,6 +1091,23 @@ void Player::Movement(float _Delta)
 			}
 			AddPos(MovePos1);
 		}
+	}
+}
+
+void Player::InputMove()
+{
+	if (true == GameEngineInput::IsPress(VK_LEFT)
+		|| true == GameEngineInput::IsPress(VK_RIGHT))
+	{
+		DirCheck();
+		ChangeState(PlayerState::Move);
+		return;
+	}
+
+	if (true == GameEngineInput::IsDown(VK_SPACE))
+	{
+		ChangeState(PlayerState::JumpReady);
+		return;
 	}
 }
 

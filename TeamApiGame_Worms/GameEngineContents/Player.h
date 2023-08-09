@@ -246,6 +246,7 @@ protected:
 
 	void SetDirPosNormalize();
 
+	void InputMove();
 	void ChangeWeapon();
 
 	// Collision
@@ -258,6 +259,8 @@ private:
 	float PlayerJumpPower = 400.0f;
 
 	float CurAngle = -45.0f;
+
+	PlayerState PrevMoveState = PlayerState::Idle;
 
 	// 플레이어 전체를 관리하도록 list로 플레이어 관리
 	static std::vector<Player*> AllPlayer;
