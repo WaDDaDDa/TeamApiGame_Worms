@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "ContentsEnum.h"
+#include "MouseObject.h"
 
 //무기
 #include "Weapon.h"
@@ -99,6 +100,12 @@ void Player::IdleUpdate(float _Delta)
 	if (true == GameEngineInput::IsDown('6'))
 	{
 		ChangeState(PlayerState::GranadeOn);
+		return;
+	}
+
+	if (true == GameEngineInput::IsDown('7'))
+	{
+		ChangeState(PlayerState::TeleportOn);
 		return;
 	}
 	
@@ -1234,7 +1241,20 @@ void Player::TeleportOnStart()
 }
 void Player::TeleportOnUpdate(float _Delta)
 {
+	unsigned int ColorCheck;
 	// 마우스 이용, 마우스 좌클릭시 애니메이션 전환
+	if (GameEngineInput::IsDown(VK_LBUTTON))
+	{
+		TeleportPos = MouseObject::GetPlayMousePos();
+		ColorCheck = GetGroundColor(RGB(255, 255, 255), TeleportPos);
+
+		if (ColorCheck == RGB(255, 255, 255))
+		{
+			return;
+		}
+
+		ChangeState(PlayerState::TeleportFire);
+	}
 }
 
 void Player::TeleportFireStart()
@@ -1260,14 +1280,15 @@ void Player::TeleportMoveUpdate(float _Delta)
 		if (MainRenderer->IsAnimation("Left_TeleportMoveOn") || MainRenderer->IsAnimation("Right_TeleportMoveOn"))
 		{
 			// 이동 코드
-
+			SetPos(TeleportPos);
 
 			// 애니메이션 전환
 			ChangeAnimationState("TeleportMoveOff");
 		}
 		else if (MainRenderer->IsAnimation("Left_TeleportMoveOff") || MainRenderer->IsAnimation("Right_TeleportMoveOff"))
 		{
-			ChangeState(PlayerState::TeleportOff);
+			//ChangeState(PlayerState::TeleportOff);
+			ChangeState(PlayerState::Idle);
 		}
 	}
 }
