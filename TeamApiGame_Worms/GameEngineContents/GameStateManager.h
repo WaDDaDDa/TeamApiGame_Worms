@@ -20,13 +20,6 @@ public:
 	GameStateManager& operator=(const GameStateManager& _Other) = delete;
 	GameStateManager& operator=(GameStateManager&& _Other) noexcept = delete;
 
-protected:
-	void Start() override;
-	void Update(float _Delta) override;
-	
-private:
-
-
 
 	// Getter
 	float GetRoundTime() const
@@ -59,14 +52,31 @@ private:
 		return m_bUseTeleport;
 	}
 
-		
+	std::string GetStageName() const
+	{
+		return StageName;
+	}
+
+
 
 	// Setter
 	// 매개변수로 enum을 받는게 더 나을 수도
 	void SetRoundTime()
 	{
-	
+
 	}
+
+	void SetStageName(std::string _StageName)
+	{
+		StageName = _StageName;
+	}
+
+
+protected:
+	void Start() override;
+	void Update(float _Delta) override;
+	
+private:
 
 	//스테이지 이름은 .bmp를 뺀다. 
 	std::string StageName			= "MapBooks";

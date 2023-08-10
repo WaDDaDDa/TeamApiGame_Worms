@@ -71,6 +71,10 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 #pragma region UI 세팅
 	CreateActor<UI_Mouse>();
 
+	std::string StageNameTest = GameStateManager::GameState->GetStageName();
+
+	int a = 0;
+
 	//// UI 세팅 테스트
 	//UI_Button* Btn_StartGame = CreateActor<UI_Button>();
 	//Btn_StartGame->InitButtonData("UI_Button_StartGame", float4{ UI_BUTTON_START_WITDH, UI_BUTTON_START_HEIGHT });

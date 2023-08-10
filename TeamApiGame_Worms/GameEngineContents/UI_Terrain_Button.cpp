@@ -4,6 +4,7 @@
 #include <GameEngineCore/GameEngineCollision.h>
 #include "ContentsEnum.h"
 #include <GameEnginePlatform/GameEngineInput.h>
+#include "GameStateManager.h"
 
 UI_Terrain_Button::UI_Terrain_Button()
 {
@@ -79,18 +80,22 @@ void UI_Terrain_Button::ChangeSelectMap()
 	{
 	case 0:
 		MainRenderer->SetTexture("LobbyMap_MapBooks.bmp");
+		GameStateManager::GameState->SetStageName("MapBooks");
 		break;
 
 	case 1:
 		MainRenderer->SetTexture("LobbyMap_MapCars.bmp");
+		GameStateManager::GameState->SetStageName("MapCars");
 		break;
 
 	case 2:
 		MainRenderer->SetTexture("LobbyMap_MapCity.bmp");
+		GameStateManager::GameState->SetStageName("MapCity");
 		break;
 
 	case 3:
 		MainRenderer->SetTexture("LobbyMap_MapTrain.bmp");
+		GameStateManager::GameState->SetStageName("MapTrain");
 		break;
 
 	default:
