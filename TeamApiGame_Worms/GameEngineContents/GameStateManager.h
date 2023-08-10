@@ -67,20 +67,12 @@ private:
 	
 	}
 
-
-
-
-
-
-	//class GameSettingData
-	//{
 	float	m_fRoundTime = 0.0f;
 	float	m_fTurnTime = 0.0f;
 	int		m_iWinConditions = 0;
 	int		m_iWormMaxHp = 0;
 	int		m_iWormSelectMode = 0;	// enum 타입으로 선언하는 거 고려해보기
 	bool	m_bUseTeleport = false;
-	//};
 
 };
 
