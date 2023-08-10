@@ -129,6 +129,13 @@
     <ClInclude Include="GameStateManager.h">
       <Filter>Global</Filter>
     </ClInclude>
+    <ClInclude Include="UI_WormSelect_Button.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_WormMaxHp_Button.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Teleportin_Button.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -259,6 +266,13 @@
     <ClCompile Include="GameStateManager.cpp">
       <Filter>Global</Filter>
     </ClCompile>
+    <ClCompile Include="UI_WormSelect_Button.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_WormMaxHp_Button.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Teleportin_Button.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">

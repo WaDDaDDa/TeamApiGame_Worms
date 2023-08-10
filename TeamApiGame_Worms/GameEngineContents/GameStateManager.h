@@ -2,16 +2,23 @@
 
 class GameStateManager
 {
-
-	static GameStateManager* GetGameStateManager()
+public:
+	static GameStateManager& GetGameStateManager()
 	{
 		return GameState;
 	}
 
-
+	GameStateManager(const GameStateManager& _Other) = delete;
+	GameStateManager(GameStateManager&& _Other) noexcept = delete;
+	GameStateManager& operator=(const GameStateManager& _Other) = delete;
+	GameStateManager& operator=(GameStateManager&& _Other) noexcept = delete;
 
 private:
-	static GameStateManager* GameState;
+
+	GameStateManager();
+	~GameStateManager();
+
+	static GameStateManager GameState;
 
 };
 

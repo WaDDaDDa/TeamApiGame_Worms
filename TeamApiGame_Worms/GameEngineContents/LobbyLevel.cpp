@@ -19,6 +19,9 @@
 #include "UI_TurnTime_Button.h"
 #include "UI_RoundTime_Button.h"
 #include "UI_Win_Button.h"
+#include "UI_WormSelect_Button.h"
+#include "UI_WormMaxHp_Button.h"
+#include "UI_Teleportin_Button.h"
 
 #include "ContentsDefine.h"
 #include "MouseObject.h"
@@ -71,6 +74,16 @@ void LobbyLevel::LevelStart(GameEngineLevel* _PrevLevel)
 
 	UI_Win_Button* Btn_Win = CreateActor<UI_Win_Button>();
 	Btn_Win->SetPos({ 320, 580 });
+	
+	UI_WormSelect_Button* Btn_WormSelect = CreateActor<UI_WormSelect_Button>();
+	Btn_WormSelect->SetPos({ 400 , 580});
+
+	UI_WormMaxHp_Button* Btn_WormMaxHp = CreateActor<UI_WormMaxHp_Button>();
+	Btn_WormMaxHp->SetPos({ 480 , 580 });
+
+	UI_Teleportin_Button* Btn_Teleportin = CreateActor<UI_Teleportin_Button>();
+	Btn_Teleportin->SetPos({ 560, 580 });
+
 
 	UI_Button* Btn_StartGame = CreateActor<UI_Button>();
 	Btn_StartGame->InitButtonData("UI_Button_StartGame", float4{ 400, 80 }, true);
