@@ -7,6 +7,8 @@
 #include "BackGround.h"
 #include <GameEnginePlatform/GameEngineWindow.h>
 
+#include "GameStateManager.h"
+
 #pragma region UI에서 사용할 헤더 & 함수 전방 선언
 #include "UI_Mouse.h"
 #include "UI_Button.h"
@@ -42,11 +44,44 @@ LobbyLevel::~LobbyLevel()
 {
 }
 
-void LobbyLevel::LevelStart(GameEngineLevel* _PrevLevel)
+void LobbyLevel::Start()
 {
 	CreateActor<MouseObject>();
 	CreateActor<UI_Mouse>();
 
+	// 게임 세팅 매니저를 이곳에서 생성하고 세팅이 끝나면 레벨 종료시 PlayLevel에 OverOn하여 값들을 넘겨줍니다.
+	GameStateManager::GameState = CreateActor<GameStateManager>();
+}
+
+void LobbyLevel::Update(float _Delta)
+{
+	if (true == GameEngineInput::IsDown('J'))
+	{
+		GameEngineLevel::CollisionDebugRenderSwitch();
+	}
+
+	// 유성우 효과 적용
+	float MeteorPosX = GameEngineRandom::MainRandom.RandomFloat(-800, 1400);
+	float MeteorPosY = GameEngineRandom::MainRandom.RandomFloat(-400, 0);
+
+	MeteorCreateTimer += _Delta;
+
+	if (MeteorCreateTimer > 0.2f)
+	{
+		UI_Meteor* Meteor = CreateActor<UI_Meteor>();
+		Meteor->SetPos({ MeteorPosX, MeteorPosY });
+		MeteorCreateTimer = 0.0f;
+	}
+
+}
+
+void LobbyLevel::LevelStart(GameEngineLevel* _PrevLevel)
+{
+
+	//if (nullptr == GameSetting)
+	//{
+	//	MsgBoxAssert("게임 스테이트 매니저를 세팅해주지 않았습니다");
+	//}
 
 	// 레이아웃 세팅
 	UI_Box_Terrain* Box_Terrain = CreateActor<UI_Box_Terrain>();
@@ -105,39 +140,7 @@ void LobbyLevel::LevelStart(GameEngineLevel* _PrevLevel)
 
 void LobbyLevel::LevelEnd(GameEngineLevel* _NextLevel)
 {
-}
-
-void LobbyLevel::Start()
-{
-}
-
-void LobbyLevel::Update(float _Delta)
-{
-	if (true == GameEngineInput::IsDown('J'))
-	{
-		GameEngineLevel::CollisionDebugRenderSwitch();
-	}
-
-
-
-
-
-
-
-
-	// 유성우 효과 적용
-	float MeteorPosX = GameEngineRandom::MainRandom.RandomFloat(-800, 1400);
-	float MeteorPosY = GameEngineRandom::MainRandom.RandomFloat(-400, 0);
-
-	MeteorCreateTimer += _Delta;
-
-	if (MeteorCreateTimer > 0.2f)
-	{
-		UI_Meteor* Meteor = CreateActor<UI_Meteor>();
-		Meteor->SetPos({ MeteorPosX, MeteorPosY });
-		MeteorCreateTimer = 0.0f;
-	}
-
+	GameStateManager::GameState->OverOn();
 }
 
 void LobbyLevel::Release()

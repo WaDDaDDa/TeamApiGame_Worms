@@ -3,6 +3,7 @@
 #include <GameEngineCore/GameEngineLevel.h>
 
 class Ground;
+class GameStateManager;
 class PlayLevel :public GameEngineLevel
 {
 public:

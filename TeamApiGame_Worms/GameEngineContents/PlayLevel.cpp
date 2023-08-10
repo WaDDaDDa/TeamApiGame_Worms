@@ -47,6 +47,8 @@ Ground* PlayLevel::GetGround() const
 
 void PlayLevel::Start()
 {
+
+
 	//나중에 LobbyLevel에서 받아올것
 	{
 		GroundFileName = "MapBooks.Bmp";

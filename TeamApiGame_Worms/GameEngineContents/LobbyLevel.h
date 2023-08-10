@@ -23,6 +23,8 @@ private:
 	void Update(float _Delta) override;
 	void Release() override;
 
+	class GameStateManager* GameSetting = nullptr;
+
 	float MeteorCreateTimer = 0.0f;
 
 	UI_Terrain_Button* Btn_Terrain = nullptr;

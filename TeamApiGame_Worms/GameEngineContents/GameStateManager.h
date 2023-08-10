@@ -1,33 +1,34 @@
 #pragma once
 #include <string>
+#include <GameEngineCore/GameEngineActor.h>
 
-class GameStateManager
+class GameStateManager : public GameEngineActor
 {
 public:
-	static GameStateManager& GetGameStateManager()
+	static GameStateManager* GameState;
+
+	static GameStateManager* GetGameStateManager()
 	{
 		return GameState;
 	}
+
+	GameStateManager();
+	~GameStateManager();
 
 	GameStateManager(const GameStateManager& _Other) = delete;
 	GameStateManager(GameStateManager&& _Other) noexcept = delete;
 	GameStateManager& operator=(const GameStateManager& _Other) = delete;
 	GameStateManager& operator=(GameStateManager&& _Other) noexcept = delete;
 
+protected:
+	void Start() override;
+	void Update(float _Delta) override;
 	
-	
-	//스테이지 이름은 .bmp를 뺀다. 
-	std::string StageName = "MapBooks";
-
 private:
 
-	GameStateManager();
-	~GameStateManager();
 
-	static GameStateManager GameState;
 
 	// Getter
-
 	float GetRoundTime() const
 	{
 		return m_fRoundTime;
@@ -67,12 +68,14 @@ private:
 	
 	}
 
-	float	m_fRoundTime = 0.0f;
-	float	m_fTurnTime = 0.0f;
-	int		m_iWinConditions = 0;
-	int		m_iWormMaxHp = 0;
-	int		m_iWormSelectMode = 0;	// enum 타입으로 선언하는 거 고려해보기
-	bool	m_bUseTeleport = false;
+	//스테이지 이름은 .bmp를 뺀다. 
+	std::string StageName			= "MapBooks";
+	float		m_fRoundTime		= 0.0f;
+	float		m_fTurnTime			= 0.0f;
+	int			m_iWinConditions	= 0;
+	int			m_iWormMaxHp		= 0;
+	int			m_iWormSelectMode	= 0;	// enum 타입으로 선언하는 거 고려해보기
+	bool		m_bUseTeleport		= false;
 
 };
 
