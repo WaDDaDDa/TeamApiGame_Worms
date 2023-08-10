@@ -33,9 +33,16 @@ enum class PlayerState
 	GranadeFire,
 	GranadeOff,
 	TeleportOn,
+	Teleport,
 	TeleportFire,
 	TeleportMove,
 	TeleportOff,
+	AirStrikeOn,
+	AirStrike,
+	AirStrikeOff,
+	GirderOn,
+	Girder,
+	GirderOff,
 
 	DeathEnd,
 	Max
@@ -207,6 +214,9 @@ protected:
 	void TeleportOnStart();
 	void TeleportOnUpdate(float _Delta);
 
+	void TeleportStart();
+	void TeleportUpdate(float _Delta);
+
 	void TeleportFireStart();
 	void TeleportFireUpdate(float _Delta);
 
@@ -216,7 +226,28 @@ protected:
 	void TeleportOffStart();
 	void TeleportOffUpdate(float _Delta);
 
+	void AirStrikeOnStart();
+	void AirStrikeOnUpdate(float _Delta);
+
+	void AirStrikeStart();
+	void AirStrikeUpdate(float _Delta);
+
+	void AirStrikeOffStart();
+	void AirStrikeOffUpdate(float _Delta);
+
+	void GirderOnStart();
+	void GirderOnUpdate(float _Delta);
+
+	void GirderStart();
+	void GirderUpdate(float _Delta);
+
+	void GirderOffStart();
+	void GirderOffUpdate(float _Delta);
+
 	void SetDirPosNormalize();
+
+	void InputMove();
+	void ChangeWeapon();
 
 	// Collision
 	GameEngineCollision* PlayerBodyCollision = nullptr;
@@ -228,6 +259,8 @@ private:
 	float PlayerJumpPower = 400.0f;
 
 	float CurAngle = -45.0f;
+
+	PlayerState PrevMoveState = PlayerState::Idle;
 
 	// 플레이어 전체를 관리하도록 list로 플레이어 관리
 	static std::vector<Player*> AllPlayer;
@@ -252,5 +285,6 @@ private:
 	// 마우스로 클릭한 후 사용하는 무기의 마우스 클릭 좌표.
 	float4 TargetPos = float4::ZERO;
 
+	float4 TeleportPos = float4::ZERO;
 };
 

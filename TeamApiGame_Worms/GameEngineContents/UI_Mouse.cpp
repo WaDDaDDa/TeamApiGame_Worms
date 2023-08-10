@@ -9,8 +9,8 @@
 #include <GameEngineCore/GameEngineLevel.h>
 #pragma endregion
 
-#define MOUSE_WITDH	32
-#define MOUSE_HEIGHT 32
+#define MOUSE_WITDH 24
+#define MOUSE_HEIGHT 24
 
 UI_Mouse::UI_Mouse()
 {

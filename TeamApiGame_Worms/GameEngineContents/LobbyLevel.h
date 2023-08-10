@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineLevel.h>
+#include "UI_Terrain_Button.h"
 
 class LobbyLevel : public GameEngineLevel
 {
@@ -23,5 +24,7 @@ private:
 	void Release() override;
 
 	float MeteorCreateTimer = 0.0f;
+
+	UI_Terrain_Button* Btn_Terrain = nullptr;
 
 };

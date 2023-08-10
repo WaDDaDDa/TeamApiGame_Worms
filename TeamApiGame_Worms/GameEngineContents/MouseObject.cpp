@@ -37,7 +37,7 @@ void MouseObject::Start()
 	CrossHairRenderer->SetRenderScaleToTexture();
 
 	Collision = CreateCollision(CollisionOrder::Mouse);
-	Collision->SetCollisionScale({ 100, 100 });
+	Collision->SetCollisionScale({ 10, 10 });
 	Collision->SetCollisionType(CollisionType::CirCle);
 
 }

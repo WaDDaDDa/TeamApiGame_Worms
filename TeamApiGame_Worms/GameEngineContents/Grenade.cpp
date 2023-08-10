@@ -10,6 +10,7 @@
 #include "Range100.h"
 
 #include <GameEngineBase/GameEnginePath.h>
+#include <GameEnginePlatform/GameEngineWindow.h>
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/ResourcesManager.h>
 #include <GameEngineCore/GameEngineRenderer.h>
@@ -110,9 +111,19 @@ void Grenade::Start()
 	//// -270
 	//Renderer->CreateAnimation("Grenade_Fly", "grenade.bmp", 32, 32, 0.05f, false);
 
+	{
+		//Collision
+		GrenadeCollision = CreateCollision(CollisionOrder::PlayerBody);
+
+		GrenadeCollision->SetCollisionScale({ 10, 10 });
+		GrenadeCollision->SetCollisionType(CollisionType::CirCle);
+		//GrenadeCollision->SetCollisionPos({ 0, -10 });
+	}
+
 	SetWeaponDamage(GrenadeDamage);
 	SetWeaponSpeed(GrenadeSpeed);
 
+	//Renderer->SetRenderPos({ 0, -10.0f });
 
 	ChangeState(GrenadeState::Max);
 }
@@ -133,6 +144,8 @@ void Grenade::StateUpdate(float _Delta)
 {
 	switch (State)
 	{
+	case GrenadeState::Ready:
+		return ReadyUpdate(_Delta);
 	case GrenadeState::Idle:
 		return IdleUpdate(_Delta);
 	case GrenadeState::Fly:
@@ -154,12 +167,15 @@ void Grenade::ChangeState(GrenadeState _State)
 	{
 		switch (_State)
 		{
+		case GrenadeState::Ready:
+			ReadyStart();
+			break;
 		case GrenadeState::Idle:
 			IdleStart();
 			break;
 		case GrenadeState::Fly:
 			FlyStart();
-			break;
+			break;		
 		case GrenadeState::Bomb:
 			BombStart();
 			break;
@@ -293,7 +309,7 @@ void Grenade::DirCheck()
 
 void Grenade::IdleStart()
 {
-	SetGravityVector(-(GetGravityVector() * 0.8f));
+	//SetGravityVector(-(GetGravityVector() * 0.8f));
 }
 
 void Grenade::IdleUpdate(float _Delta)
@@ -309,43 +325,214 @@ void Grenade::IdleUpdate(float _Delta)
 	}
 }
 
+
+//void Grenade::GroundCheck(float _Delta)
+//{
+//	unsigned int Color = GetGroundColor(RGB(255, 255, 255));
+//
+//	// 위치가 흰색이면 중력작용.
+//	// 모두 흰색이면 공중이다.
+//	if (RGB(255, 255, 255) == Color)
+//	{
+//		Gravity(_Delta);
+//	}
+//	else // 모두흰색이 아니다 = 땅에닿아있다.
+//	{
+//		unsigned int CheckColor = GetGroundColor(RGB(255, 255, 255), float4::UP);
+//
+//		// 체크중 어느하나라도  흰색이 아니라면 한칸올리기 반복한다.
+//		while (CheckColor != RGB(255, 255, 255))
+//		{
+//			CheckColor = GetGroundColor(RGB(255, 255, 255), float4::UP);
+//
+//			AddPos(float4::UP);
+//		}
+//
+//		float4 CurCravityVector = GetGravityVector();
+//
+//		CheckColor = GetGroundColor(RGB(255, 255, 255), float4::LEFT * 2);
+//		if (CheckColor == RGB(255, 255, 255))
+//		{
+//			if (CurCravityVector.X >= 0)
+//			{
+//				CurCravityVector.X = -CurCravityVector.X * 0.8f;
+//
+//				CurCravityVector.Y = 0.0f;
+//				SetGravityVector(CurCravityVector);
+//
+//				return;
+//			}
+//		}
+//
+//		CheckColor = GetGroundColor(RGB(255, 255, 255), float4::RIGHT * 2);
+//		if (CheckColor == RGB(255, 255, 255))
+//		{
+//			if (CurCravityVector.X <= 0)
+//			{
+//				CurCravityVector.X = -CurCravityVector.X * 0.8f; 
+//
+//				CurCravityVector.Y = 0.0f;
+//				SetGravityVector(CurCravityVector);
+//
+//				return;
+//			}
+//		}
+//
+//		CurCravityVector.Y = 0.0f;
+//		SetGravityVector(CurCravityVector);
+//	}
+//}
+
+void Grenade::GroundCheck(float _Delta)
+{
+	unsigned int Color = GetGroundColor(RGB(255, 255, 255));
+
+	// 위치가 흰색이면 중력작용.
+	// 모두 흰색이면 공중이다.
+	if (RGB(255, 255, 255) == Color)
+	{
+		Gravity(_Delta);
+	}
+	else // 모두흰색이 아니다 = 땅에닿아있다.
+	{
+		unsigned int CheckColor = GetGroundColor(RGB(255, 255, 255), float4::UP);
+
+		// 체크중 어느하나라도  흰색이 아니라면 한칸올리기 반복한다.
+		while (CheckColor != RGB(255, 255, 255))
+		{
+			CheckColor = GetGroundColor(RGB(255, 255, 255), float4::UP);
+
+			AddPos(float4::UP);
+		}
+
+		float4 CurCravityVector = GetGravityVector();
+		float4 ReflectionDeg = float4::ZERO;
+
+		ReflectionDeg = -CurCravityVector;
+		ReflectionDeg.Normalize();
+		// 현재 벡터의 각도
+		float CurDeg = ReflectionDeg.AngleDeg();
+
+		CheckColor = GetGroundColor(RGB(255, 255, 255), ReflectionDeg);
+
+		// 오른쪽 각도
+		while (CheckColor == RGB(255, 255, 255))
+		{
+			ReflectionDeg = ReflectionDeg.GetRotationToDegZ(1.0f);
+			CheckColor = GetGroundColor(RGB(255, 255, 255), ReflectionDeg);
+		}
+		// 오른쪽으로 돌았을때의 제일 처음 픽셀 충돌되는 각도
+		float4 RightDir = ReflectionDeg;
+		float RightDeg = ReflectionDeg.AngleDeg();
+
+
+		ReflectionDeg = -CurCravityVector;
+		ReflectionDeg.Normalize();
+
+		CheckColor = GetGroundColor(RGB(255, 255, 255), ReflectionDeg);
+
+		// 왼쪽 각도
+		while (CheckColor == RGB(255, 255, 255))
+		{
+			ReflectionDeg = ReflectionDeg.GetRotationToDegZ(-1.0f);
+			CheckColor = GetGroundColor(RGB(255, 255, 255), ReflectionDeg);
+		}
+		// 왼쪽으로 돌았을때의 제일 처음 픽셀 충돌되는 각도
+		float4 LeftDir = ReflectionDeg;
+		float LeftDeg = ReflectionDeg.AngleDeg();
+
+		float4 LastDir = RightDir - LeftDir;
+		float LastDeg = LastDir.AngleDeg();
+
+		if (LastDeg <= 1.0f || LastDeg >= 359.0f)
+		{
+			float4 Test = CurCravityVector;
+			Test.Y = -Test.Y;
+			SetGravityVector(Test * 0.8);
+			return;
+		}
+
+		// CurCravityVector.Y = 0.0f;
+		float4 Test = -CurCravityVector;
+		Test = Test.GetRotationToDegZ(-(LastDeg + LastDeg));
+		SetGravityVector(Test * 0.8);
+
+	}
+}
+
 void Grenade::FlyStart()
 {
-	SetGravityVector(AngleVec.GetRotationToDegZ(Master->GetCurAngle()) * GetChargingSpeed());
+	//SetGravityVector(AngleVec.GetRotationToDegZ(Master->GetCurAngle()) * GetChargingSpeed());
 	Renderer->ChangeAnimation("Grenade_Fly");
 }
 
 void Grenade::FlyUpdate(float _Delta)
 {
 	//DirCheck();
-	Gravity(_Delta);
-	//GroundCheck(_Delta);
+	//Gravity(_Delta);
+	GroundCheck(_Delta);
 
 	// 튕기는걸 세부화 해야함. 보류();
 	unsigned int Color = GetGroundColor(RGB(255, 255, 255));
-	if (Color != RGB(255, 255, 255) || GetLiveTime() >= 5.0f)
+	unsigned int DownColor = GetGroundColor(RGB(255, 255, 255), DownCheckPos);
+	unsigned int UpColor = GetGroundColor(RGB(255, 255, 255), UpCheckPos);
+	unsigned int LeftColor = GetGroundColor(RGB(255, 255, 255), LeftCheckPos);
+	unsigned int RightColor = GetGroundColor(RGB(255, 255, 255), RightCheckPos);
+
+	float4 CurCravityVector = GetGravityVector();
+	float YVector = CurCravityVector.Y;
+
+	if (abs(YVector) <= 5.0f)
 	{
-		float4 CurCravityVector = GetGravityVector();
-
-		CurCravityVector.Y = -CurCravityVector.Y;
-
-		SetGravityVector(CurCravityVector * 0.8f);
-
-
-		float YVector = CurCravityVector.Y;
-		if (abs(YVector) <= 100.0f)
-		{
-			ChangeState(GrenadeState::Idle);
-			return;
-		}
-
+		ChangeState(GrenadeState::Idle);
+		return;
 	}
 
+	//if (Color != RGB(255, 255, 255))
+	//{
+	//	ChangeState(GrenadeState::Idle);
+	//	return;
+	//}
+
+	////땅에 닿았을때.
+	//if (DownColor != RGB(255, 255, 255))
+	//{
+	//	CurCravityVector.Y = -CurCravityVector.Y;
+
+	//	SetGravityVector(CurCravityVector * 0.8f);
+	//	return;
+	//}
+	// 위에 판정
+	//if (UpColor != RGB(255, 255, 255))
+	//{
+	//	CurCravityVector.Y = -CurCravityVector.Y;
+
+	//	SetGravityVector(CurCravityVector * 0.8f);
+	//	return;
+	//}
+	//// 왼쪽 판정
+	//else if (LeftColor != RGB(255, 255, 255))
+	//{
+
+	//	CurCravityVector.X = -CurCravityVector.X;
+
+	//	SetGravityVector(CurCravityVector * 0.4f);
+	//	return;
+	//}
+	//// 오른쪽 판정
+	//else if (RightColor != RGB(255, 255, 255))
+	//{
+
+	//	CurCravityVector.X = -CurCravityVector.X;
+
+	//	SetGravityVector(CurCravityVector * 0.4f);
+	//	return;
+	//}
 }
 
 void Grenade::BombStart()
 {
-	GrenadeBomb = CreateBombEffect<Range50>();
+	GrenadeBomb = CreateBombEffect<Range75>();
 	Renderer->Off();
 }
 
@@ -390,6 +577,72 @@ void Grenade::MaxStart()
 
 void Grenade::MaxUpdate(float _Delta)
 {
+	ChangeState(GrenadeState::Ready);
+	return;
+}
+
+void Grenade::ReadyStart()
+{
+	SetGravityVector(AngleVec.GetRotationToDegZ(Master->GetCurAngle()) * GetChargingSpeed());
+}
+
+void Grenade::ReadyUpdate(float _Delta)
+{
 	ChangeState(GrenadeState::Fly);
 	return;
+}
+
+void Grenade::Render(float _Delta)
+{
+	HDC dc = GameEngineWindow::MainWindow.GetBackBuffer()->GetImageDC();
+
+	{
+		CollisionData Data;
+
+		Data.Pos = ActorCameraPos();
+
+		Data.Scale = { 5,5 };
+
+		Rectangle(dc, Data.iLeft(), Data.iTop(), Data.iRight(), Data.iBot());
+	}
+
+	{
+		CollisionData Data;
+
+		Data.Pos = ActorCameraPos() + LeftCheckPos;
+
+		Data.Scale = { 5,5 };
+
+		Rectangle(dc, Data.iLeft(), Data.iTop(), Data.iRight(), Data.iBot());
+	}
+
+	{
+		CollisionData Data;
+
+		Data.Pos = ActorCameraPos() + RightCheckPos;
+
+		Data.Scale = { 5,5 };
+
+		Rectangle(dc, Data.iLeft(), Data.iTop(), Data.iRight(), Data.iBot());
+	}
+
+	{
+		CollisionData Data;
+
+		Data.Pos = ActorCameraPos() + UpCheckPos;
+
+		Data.Scale = { 5,5 };
+
+		Rectangle(dc, Data.iLeft(), Data.iTop(), Data.iRight(), Data.iBot());
+	}
+
+	{
+		CollisionData Data;
+
+		Data.Pos = ActorCameraPos() + DownCheckPos;
+
+		Data.Scale = { 5,5 };
+
+		Rectangle(dc, Data.iLeft(), Data.iTop(), Data.iRight(), Data.iBot());
+	}
 }

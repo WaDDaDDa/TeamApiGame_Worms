@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "ContentsEnum.h"
+#include "MouseObject.h"
 
 //무기
 #include "Weapon.h"
@@ -57,50 +58,25 @@ void Player::IdleUpdate(float _Delta)
 		return;
 	}
 
-	if (true == GameEngineInput::IsPress(VK_LEFT)
-		|| true == GameEngineInput::IsPress(VK_RIGHT))
-	{
-		DirCheck();
-		ChangeState(PlayerState::Move);
-		return;
-	}
+	//if (true == GameEngineInput::IsPress(VK_LEFT)
+	//	|| true == GameEngineInput::IsPress(VK_RIGHT))
+	//{
+	//	DirCheck();
+	//	ChangeState(PlayerState::Move);
+	//	return;
+	//}
 
-	if (true == GameEngineInput::IsDown(VK_SPACE))
-	{
-		//ChangeState(PlayerState::Jump);
-		ChangeState(PlayerState::JumpReady);
-		return;
-	}
+	//if (true == GameEngineInput::IsDown(VK_SPACE))
+	//{
+	//	//ChangeState(PlayerState::Jump);
+	//	ChangeState(PlayerState::JumpReady);
+	//	return;
+	//}
 
-	if (true == GameEngineInput::IsDown('2'))
-	{
-		ChangeState(PlayerState::BazookaOn);
-		return;
-	}
+	InputMove();
+	ChangeWeapon();
 
-	if (true == GameEngineInput::IsDown('3'))
-	{
-		ChangeState(PlayerState::UziOn);
-		return;
-	}
-
-	if (true == GameEngineInput::IsDown('4'))
-	{
-		ChangeState(PlayerState::HomingMissileOn);
-		return;
-	}
 	
-	if (true == GameEngineInput::IsDown('5'))
-	{
-		ChangeState(PlayerState::SheepOn);
-		return;
-	}
-
-	if (true == GameEngineInput::IsDown('6'))
-	{
-		ChangeState(PlayerState::GranadeOn);
-		return;
-	}
 	
 
 }
@@ -119,7 +95,8 @@ void Player::MoveUpdate(float _Delta)
 
 	if (true == GameEngineInput::IsFree(VK_LEFT) && true == GameEngineInput::IsFree(VK_RIGHT))
 	{
-		ChangeState(PlayerState::Idle);
+		//ChangeState(PlayerState::Idle);
+		ChangeState(PrevMoveState);
 	}
 
 	unsigned int Color = GetGroundColor(RGB(255, 255, 255), float4::DOWN);
@@ -284,6 +261,7 @@ void Player::DeathEnd()
 
 void Player::BazookaOnStart()
 {
+	PrevMoveState = PlayerState::BazookaOn;
 	ChangeAnimationState("BazookaOn");
 }
 void Player::BazookaOnUpdate(float _Delta)
@@ -293,6 +271,7 @@ void Player::BazookaOnUpdate(float _Delta)
 		ChangeState(PlayerState::Bazooka);
 		return;
 	}
+	InputMove();
 }
 
 void Player::BazookaStart()
@@ -483,6 +462,9 @@ void Player::BazookaUpdate(float _Delta)
 		ChangeAnimationState("Bazooka0");
 		break;
 	}
+
+	InputMove();
+	ChangeWeapon();
 }
 
 void Player::BazookaFireStart()
@@ -512,6 +494,7 @@ void Player::BazookaOffUpdate(float _Delta)
 
 void Player::UziOnStart()
 {
+	PrevMoveState = PlayerState::UziOn;
 	ChangeAnimationState("UziOn");
 }
 void Player::UziOnUpdate(float _Delta)
@@ -522,6 +505,7 @@ void Player::UziOnUpdate(float _Delta)
 		return;
 	}
 
+	InputMove();
 }
 
 void Player::UziStart()
@@ -702,6 +686,9 @@ void Player::UziUpdate(float _Delta)
 		ChangeAnimationState("Uzi0");
 		break;
 	}
+
+	InputMove();
+	ChangeWeapon();
 }
 void Player::UziFireStart()
 {
@@ -729,6 +716,7 @@ void Player::UziOffUpdate(float _Delta)
 
 void Player::HomingMissileOnStart()
 {
+	PrevMoveState = PlayerState::HomingMissileOn;
 	ChangeAnimationState("HomingMissileOn");
 }
 void Player::HomingMissileOnUpdate(float _Delta)
@@ -738,6 +726,8 @@ void Player::HomingMissileOnUpdate(float _Delta)
 		ChangeState(PlayerState::HomingMissile);
 		return;
 	}
+
+	InputMove();
 }
 
 void Player::HomingMissileStart()
@@ -929,6 +919,9 @@ void Player::HomingMissileUpdate(float _Delta)
 		ChangeAnimationState("HomingMissile0");
 		break;
 	}
+
+	InputMove();
+	ChangeWeapon();
 }
 
 void Player::HomingMissileFireStart()
@@ -955,6 +948,7 @@ void Player::HomingMissileOffUpdate(float _Delta)
 
 void Player::SheepOnStart()
 {
+	PrevMoveState = PlayerState::SheepOn;
 	ChangeAnimationState("SheepOn");
 }
 void Player::SheepOnUpdate(float _Delta)
@@ -963,6 +957,8 @@ void Player::SheepOnUpdate(float _Delta)
 	{
 		ChangeState(PlayerState::Sheep);
 	}
+
+	InputMove();
 }
 
 void Player::SheepStart()
@@ -981,7 +977,8 @@ void Player::SheepUpdate(float _Delta)
 		ChangeState(PlayerState::SheepFire);
 	}
 
-	
+	InputMove();
+	ChangeWeapon();
 }
 
 void Player::SheepFireStart()
@@ -1007,6 +1004,7 @@ void Player::SheepOffUpdate(float _Delta)
 
 void Player::GranadeOnStart()
 {
+	PrevMoveState = PlayerState::GranadeOn;
 	ChangeAnimationState("GranadeOn");
 }
 void Player::GranadeOnUpdate(float _Delta)
@@ -1015,6 +1013,8 @@ void Player::GranadeOnUpdate(float _Delta)
 	{
 		ChangeState(PlayerState::Granade);
 	}
+
+	InputMove();
 }
 
 void Player::GranadeStart()
@@ -1205,6 +1205,9 @@ void Player::GranadeUpdate(float _Delta)
 		ChangeAnimationState("Granade0");
 		break;
 	}
+
+	InputMove();
+	ChangeWeapon();
 }
 
 void Player::GranadeFireStart()
@@ -1230,11 +1233,42 @@ void Player::GranadeOffUpdate(float _Delta)
 
 void Player::TeleportOnStart()
 {
+	PrevMoveState = PlayerState::TeleportOn;
 	ChangeAnimationState("TeleportOn");
 }
 void Player::TeleportOnUpdate(float _Delta)
 {
+	if (MainRenderer->IsAnimationEnd())
+	{
+		ChangeState(PlayerState::Teleport);
+	}
+
+	InputMove();
+}
+
+void Player::TeleportStart()
+{
+	ChangeAnimationState("Teleport");
+}
+void Player::TeleportUpdate(float _Delta)
+{
+	unsigned int ColorCheck;
 	// 마우스 이용, 마우스 좌클릭시 애니메이션 전환
+	if (GameEngineInput::IsDown(VK_LBUTTON))
+	{
+		TeleportPos = MouseObject::GetPlayMousePos();
+		ColorCheck = GetGroundColor(RGB(255, 255, 255), TeleportPos);
+
+		if (ColorCheck == RGB(255, 255, 255))
+		{
+			return;
+		}
+
+		ChangeState(PlayerState::TeleportFire);
+	}
+
+	InputMove();
+	ChangeWeapon();
 }
 
 void Player::TeleportFireStart()
@@ -1260,14 +1294,15 @@ void Player::TeleportMoveUpdate(float _Delta)
 		if (MainRenderer->IsAnimation("Left_TeleportMoveOn") || MainRenderer->IsAnimation("Right_TeleportMoveOn"))
 		{
 			// 이동 코드
-
+			SetPos(TeleportPos);
 
 			// 애니메이션 전환
 			ChangeAnimationState("TeleportMoveOff");
 		}
 		else if (MainRenderer->IsAnimation("Left_TeleportMoveOff") || MainRenderer->IsAnimation("Right_TeleportMoveOff"))
 		{
-			ChangeState(PlayerState::TeleportOff);
+			//ChangeState(PlayerState::TeleportOff);
+			ChangeState(PlayerState::Idle);
 		}
 	}
 }
@@ -1279,6 +1314,93 @@ void Player::TeleportOffStart()
 void Player::TeleportOffUpdate(float _Delta)
 {
 	if(MainRenderer->IsAnimationEnd())
+	{
+		ChangeState(PlayerState::Idle);
+	}
+}
+
+void Player::AirStrikeOnStart()
+{
+	PrevMoveState = PlayerState::AirStrikeOn;
+	ChangeAnimationState("AirStrikeOn");
+}
+void Player::AirStrikeOnUpdate(float _Delta)
+{
+	if (MainRenderer->IsAnimationEnd())
+	{
+		ChangeState(PlayerState::AirStrike);
+	}
+
+	InputMove();
+}
+
+void Player::AirStrikeStart()
+{
+	ChangeAnimationState("AirStrike");
+}
+void Player::AirStrikeUpdate(float _Delta)
+{
+	// 마우스 위치 이용해서 목표 설정
+	// 하늘에서 미사일 5개 스폰
+
+	if (GameEngineInput::IsDown('1'))
+	{
+		ChangeState(PlayerState::AirStrikeOff);
+	}
+
+	InputMove();
+	ChangeWeapon();
+}
+
+void Player::AirStrikeOffStart()
+{
+	ChangeAnimationState("AirStrikeOff");
+}
+void Player::AirStrikeOffUpdate(float _Delta)
+{
+	if (MainRenderer->IsAnimationEnd())
+	{
+		ChangeState(PlayerState::Idle);
+	}
+}
+
+void Player::GirderOnStart()
+{
+	// Girder 상태 이동 불가
+	ChangeAnimationState("GirderOn");
+}
+void Player::GirderOnUpdate(float _Delta)
+{
+	if (MainRenderer->IsAnimationEnd())
+	{
+		ChangeState(PlayerState::Girder);
+	}
+}
+
+void Player::GirderStart()
+{
+	ChangeAnimationState("Girder");
+}
+void Player::GirderUpdate(float _Delta)
+{
+	// 보류
+	// 마우스 포인터 바꾸고 철근 좌우방향키로 회전, 180도 돌면은 크기 변환
+
+	if (GameEngineInput::IsDown('1'))
+	{
+		ChangeState(PlayerState::GirderOff);
+	}
+
+	ChangeWeapon();
+}
+
+void Player::GirderOffStart()
+{
+	ChangeAnimationState("GirderOff");
+}
+void Player::GirderOffUpdate(float _Delta)
+{
+	if (MainRenderer->IsAnimationEnd())
 	{
 		ChangeState(PlayerState::Idle);
 	}

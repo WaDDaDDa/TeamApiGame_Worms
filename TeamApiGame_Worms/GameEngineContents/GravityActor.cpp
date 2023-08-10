@@ -127,6 +127,7 @@ void GravityActor::GroundCheck(float _Delta)
 
 			AddPos(float4::UP);
 		}
+
 		GravityReset();
 	}
 }
