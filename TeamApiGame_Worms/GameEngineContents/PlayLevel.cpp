@@ -10,6 +10,7 @@
 #include "BackGround.h"
 #include "Ground.h"
 #include "Wave.h"
+#include "Wind.h"
 #include "UnderWater.h"
 #include "Player.h"
 #include "GameTurn.h"
@@ -98,6 +99,11 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 		NewUnderWater->DrawAtStage(this);
 
 
+		
+	}
+
+	{
+		Wind* PlayWind = CreateActor<Wind>();
 		
 	}
 
