@@ -21,6 +21,9 @@
 #pragma region UI에서 사용할 헤더 & 함수 전방 선언
 #include "UI_Mouse.h"
 #include "UI_Button.h"
+#include "UI_Inventory.h"
+
+
 #include "ContentsDefine.h"
 
 void ChangeLevel(DWORD_PTR, DWORD_PTR);
@@ -74,6 +77,11 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 	std::string StageNameTest = GameStateManager::GameState->GetStageName();
 
 	int a = 0;
+
+	Inven = CreateActor<UI_Inventory>();
+//	Inven->SetPos({1180, 500});
+
+	Inven->SetPos({ 1400, 500 });
 
 	//// UI 세팅 테스트
 	//UI_Button* Btn_StartGame = CreateActor<UI_Button>();
@@ -153,6 +161,11 @@ void PlayLevel::Update(float _Delta)
 	{
 		GameEngineLevel::CollisionDebugRenderSwitch();
 		GroundPtr->SwitchRender();
+	}
+
+	if (true == GameEngineInput::IsDown(VK_RBUTTON))
+	{
+		Inven->SwitchActiveState();
 	}
 }
 

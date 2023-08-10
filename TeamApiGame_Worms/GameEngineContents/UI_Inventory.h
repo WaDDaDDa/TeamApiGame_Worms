@@ -16,11 +16,26 @@ public:
 
 	std::vector<UI_Button> AllButtons;
 
+	bool GetActiveState() const
+	{
+		return m_bIsActive;
+	}
+
+	// 인벤토리의 활성 여부를 현재 상태의 반대로 설정합니다.
+	void SwitchActiveState()
+	{
+		m_bIsActive = !m_bIsActive;
+	}
+
+	void ShowInventory(bool _isActive, float _Delta);
+
 protected:
 	void Start() override;
 	void Update(float _Delta) override;
 
 private:
 	GameEngineRenderer* MainRenderer = nullptr;
+	
+	bool m_bIsActive = false;
 
 };
