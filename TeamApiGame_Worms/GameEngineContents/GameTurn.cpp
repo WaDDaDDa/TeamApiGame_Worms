@@ -4,6 +4,7 @@
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/GameEngineCamera.h>
 #include "Player.h"
+#include "Wind.h"
 
 GameTurn GameTurn::MainGameTurn;
 
@@ -79,6 +80,19 @@ void GameTurn::Render(float _Delta)
 	Text += std::to_string(static_cast<int>(TurnPlayer->GetCurAngle() * 1000));
 
 	TextOutA(dc, 2, 3, Text.c_str(), static_cast<int>(Text.size()));
+
+	
+	
+
+	{
+		HDC dc2 = GameEngineWindow::MainWindow.GetBackBuffer()->GetImageDC();
+
+		std::string Text2 = "WindVector : ";
+		Text2 += std::to_string(Wind::GetWind()->GetWindVector().X);
+
+		TextOutA(dc2, 2,20, Text2.c_str(), static_cast<int>(Text2.size()));
+	}
+
 }
 
 void GameTurn::ChangeTurnPlayer()
@@ -97,4 +111,5 @@ void GameTurn::ChangeTurnPlayer()
 	TurnPlayer->SwitchIsTurnPlayer();
 
 	ResetLiveTime();
+	Wind::GetWind()->ChangeWind();
 }
