@@ -16,6 +16,8 @@
 #include "GameTurn.h"
 #include "MouseObject.h"
 
+#include "GameStateManager.h"
+
 #pragma region UI에서 사용할 헤더 & 함수 전방 선언
 #include "UI_Mouse.h"
 #include "UI_Button.h"
@@ -49,6 +51,9 @@ void PlayLevel::Start()
 	{
 		GroundFileName = "MapBooks.Bmp";
 		GroundPixelFileName = "MapBooks_Ground.Bmp";
+
+		//GroundFileName = GameStateManager::GetGameStateManager().StageName+".Bmp";
+		//GroundPixelFileName = GameStateManager::GetGameStateManager().StageName+"_Ground.Bmp";
 
 	}
 
