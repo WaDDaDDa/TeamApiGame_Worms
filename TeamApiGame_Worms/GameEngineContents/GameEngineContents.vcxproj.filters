@@ -135,7 +135,12 @@
     <ClInclude Include="UI_WormMaxHp_Button.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="UI_Teleportin_Button.h" />
+    <ClInclude Include="UI_Teleportin_Button.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Inventory.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -272,7 +277,12 @@
     <ClCompile Include="UI_WormMaxHp_Button.cpp">
       <Filter>UI</Filter>
     </ClCompile>
-    <ClCompile Include="UI_Teleportin_Button.cpp" />
+    <ClCompile Include="UI_Teleportin_Button.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Inventory.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
