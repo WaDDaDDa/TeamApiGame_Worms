@@ -742,9 +742,9 @@ void Player::UziUpdate(float _Delta)
 void Player::UziFireStart()
 {
 	UziCount = 10;
-	ChangeAnimationState("UziFire15");
+//	ChangeAnimationState("UziFire15");
 
-	CreateWeapon<Uzi>();
+	//CreateWeapon<Uzi>();
 }
 void Player::UziFireUpdate(float _Delta)
 {
