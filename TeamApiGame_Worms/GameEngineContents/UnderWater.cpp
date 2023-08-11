@@ -31,7 +31,7 @@ void UnderWater::DrawAtStage(GameEngineLevel* _Level)
 	
 
 
-	Stage->GetPixelGroundTexture()->TransCopy(Texture, RenderPos, RenderScale, float4::ZERO, Texture->GetScale(), NULL);
+	//Stage->GetPixelGroundTexture()->TransCopy(Texture, RenderPos, RenderScale, float4::ZERO, Texture->GetScale(), NULL);
 	 
 	Renderer->SetRenderScale(RenderScale);
 	Renderer->SetRenderPos(RenderPos);
