@@ -1,8 +1,12 @@
 #include "UI_Inventory.h"
 
+#include "UI_Button.h"
 #include <GameEngineCore/ResourcesManager.h>
 #include <GameEngineCore/GameEngineRenderer.h>
+#include <GameEngineCore/GameEngineLevel.h>
 #include "ContentsEnum.h"
+
+void ChangeWeapon(DWORD_PTR, DWORD_PTR);
 
 UI_Inventory::UI_Inventory()
 {
@@ -14,20 +18,52 @@ UI_Inventory::~UI_Inventory()
 
 void UI_Inventory::Start()
 {
+	GameEnginePath FilePath;
+	FilePath.SetCurrentPath();
+	FilePath.MoveParentToExistsChild("ContentsResources");
+	FilePath.MoveChild("ContentsResources\\UI\\Inventory\\");
+
 	// 리소스 로딩
-
-	if (false == ResourcesManager::GetInst().IsLoadTexture("UI_Inventory_Base.bmp"))
+	if (false == ResourcesManager::GetInst().IsLoadTexture("UI_Inventory_Weapon.bmp"))
 	{
-		GameEnginePath FilePath;
-		FilePath.SetCurrentPath();
-		FilePath.MoveParentToExistsChild("ContentsResources");
-		FilePath.MoveChild("ContentsResources\\UI\\Inventory\\");
-
-		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("UI_Inventory_Base.bmp"), 1, 1);
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("UI_Inventory_Weapon.bmp"));
 	}
 
-	MainRenderer = CreateUIRenderer("UI_Inventory_Base.bmp", RenderOrder::UI);
+	// 위치 테스트용
+	if (false == ResourcesManager::GetInst().IsLoadTexture("bazooka.bmp"))
+	{
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("bazooka.bmp"));
+	}
+
+	// 배경 렌더러 세팅
+//	MainRenderer = CreateUIRenderer("UI_Inventory_Weapon.bmp", RenderOrder::UI);
+	MainRenderer = CreateRenderer("UI_Inventory_Weapon.bmp", RenderOrder::UI);
 	MainRenderer->SetRenderScale({ 180, 400 });
+
+
+	// 무기 이름 출력용 렌더러 세팅
+	WeaponNameRenderer = CreateRenderer(RenderOrder::UI);
+	WeaponNameRenderer->SetRenderScale({ 100, 100 });
+	WeaponNameRenderer->SetText("TEST TEXT", 14);
+	WeaponNameRenderer->SetRenderPos({ -80 , 182 });
+
+	//// 위치 테스트용
+	//	Btn_Weapon_Bazooka->SetPos({ 1125, 347 }); // ON 최종 위치
+
+	UI_Button* Btn_Weapon_Bazooka = GetLevel()->CreateActor<UI_Button>();
+	Btn_Weapon_Bazooka->InitButtonData("UI_ButtonHighlighter", { 30, 30 }, true);
+
+	Btn_Weapon_Bazooka->SetPos({ 1317, 1616 });
+
+
+//	Btn_Weapon_Bazooka->SetPos({ 1359, 347 });
+	Btn_Weapon_Bazooka->SetClickedCallBack(ChangeWeapon, 0, 0);
+	AllWeaponButtons.push_back(Btn_Weapon_Bazooka);
+
+
+
+
+
 
 }
 
@@ -43,12 +79,27 @@ void UI_Inventory::ShowInventory(bool _isActive, float _Delta)
 	{
 		float4 NextPos = GetPos() * float4::LEFT * _Delta;
 		AddPos(NextPos);
+
+		for (int i = 0; i < AllWeaponButtons.size(); i++)
+		{
+			AllWeaponButtons[i]->AddPos(NextPos);
+		}
 	}
 
 	else if (false == m_bIsActive && GetPos().X < 1400)
 	{
 		float4 NextPos = GetPos() * float4::RIGHT * _Delta;
 		AddPos(NextPos);
+
+		for (int i = 0; i < AllWeaponButtons.size(); i++)
+		{
+			AllWeaponButtons[i]->AddPos(NextPos);
+		}
 	}
 
+}
+
+void ChangeWeapon(DWORD_PTR, DWORD_PTR)
+{
+	int a = 0;
 }

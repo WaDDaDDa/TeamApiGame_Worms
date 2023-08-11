@@ -39,7 +39,7 @@ void UI_Mouse::Start()
 	}
 
 	// ·»´õ·¯ ¼³Á¤
-	MainRenderer = CreateUIRenderer("UI_MOUSE.bmp", RenderOrder::UI);
+	MainRenderer = CreateUIRenderer("UI_MOUSE.bmp", RenderOrder::Mouse);
 	MainRenderer->SetRenderScale({ MOUSE_WITDH, MOUSE_HEIGHT });
 
 }

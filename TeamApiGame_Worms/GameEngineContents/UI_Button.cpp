@@ -72,7 +72,7 @@ UI_Button& UI_Button::InitButtonData(const std::string _ButtonName, float4 _Butt
 	MainRenderer = CreateRenderer(ImageName, static_cast<int>(RenderOrder::UI));
 	MainRenderer->SetRenderScale(ButtonScale);
 
-	MainCollision = CreateCollision(CollisionOrder::Mouse);
+	MainCollision = CreateCollision(CollisionOrder::UI);
 
 	MainCollision->SetCollisionType(CollisionType::Rect);
 	MainCollision->SetCollisionScale(ButtonScale);

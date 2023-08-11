@@ -14,11 +14,16 @@ public:
 	UI_Inventory& operator=(const UI_Inventory& _Other) = delete;
 	UI_Inventory& operator=(UI_Inventory&& _Other) noexcept = delete;
 
-	std::vector<UI_Button> AllButtons;
+	std::vector<UI_Button*> AllWeaponButtons;
 
 	bool GetActiveState() const
 	{
 		return m_bIsActive;
+	}
+
+	GameEngineRenderer* GetWeaponNameRenderer()
+	{
+		return WeaponNameRenderer;
 	}
 
 	// 인벤토리의 활성 여부를 현재 상태의 반대로 설정합니다.
@@ -35,7 +40,8 @@ protected:
 
 private:
 	GameEngineRenderer* MainRenderer = nullptr;
-	
+	GameEngineRenderer* WeaponNameRenderer = nullptr;
+
 	bool m_bIsActive = false;
 
 };
