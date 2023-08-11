@@ -71,7 +71,7 @@ void UI_Inventory::Update(float _Delta)
 void UI_Inventory::ShowInventory(bool _isActive, float _Delta)
 {
 	// 활성 상태가 바뀜에 따라 위치를 전환합니다.
-	if (true == m_bIsActive && GetPos().X > 1180)
+	if (true == m_bIsActive && GetPos().X > 1185)
 	{
 		float4 NextPos = GetPos() * float4::LEFT * _Delta;
 		AddPos(NextPos);

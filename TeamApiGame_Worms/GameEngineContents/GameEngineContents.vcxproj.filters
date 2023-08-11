@@ -144,6 +144,9 @@
     <ClInclude Include="UI_Inventory.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="UI_Wind.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -287,6 +290,9 @@
       <Filter>UI</Filter>
     </ClCompile>
     <ClCompile Include="UI_Inventory.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Wind.cpp">
       <Filter>UI</Filter>
     </ClCompile>
   </ItemGroup>
