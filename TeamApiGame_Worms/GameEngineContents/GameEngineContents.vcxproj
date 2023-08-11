@@ -229,6 +229,7 @@
     <ClInclude Include="UI_Teleportin_Button.h" />
     <ClInclude Include="UI_Terrain_Button.h" />
     <ClInclude Include="UI_TurnTime_Button.h" />
+    <ClInclude Include="UI_Wind.h" />
     <ClInclude Include="UI_Win_Button.h" />
     <ClInclude Include="UI_WormMaxHp_Button.h" />
     <ClInclude Include="UI_WormSelect_Button.h" />
@@ -324,6 +325,7 @@
     <ClCompile Include="UI_Teleportin_Button.cpp" />
     <ClCompile Include="UI_Terrain_Button.cpp" />
     <ClCompile Include="UI_TurnTime_Button.cpp" />
+    <ClCompile Include="UI_Wind.cpp" />
     <ClCompile Include="UI_Win_Button.cpp" />
     <ClCompile Include="UI_WormMaxHp_Button.cpp" />
     <ClCompile Include="UI_WormSelect_Button.cpp" />
