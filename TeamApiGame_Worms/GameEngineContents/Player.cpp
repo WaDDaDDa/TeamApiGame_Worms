@@ -581,8 +581,8 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Left_TeleportOn", "teleportOnLeft.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_Teleport", "teleportOnLeft.bmp", 9, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_TeleportFire", "teleportFireLeft.bmp", 0, 9, 0.05f, false);
-		MainRenderer->CreateAnimation("Left_TeleportMoveOn", "teleportMoveLeft.bmp", 0, 47, 0.05f, false);
-		MainRenderer->CreateAnimation("Left_TeleportMoveOff", "teleportMoveLeft.bmp", 47, 0, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_TeleportMoveOn", "teleportMoveLeft.bmp", 0, 47, 0.01f, false);
+		MainRenderer->CreateAnimation("Left_TeleportMoveOff", "teleportMoveLeft.bmp", 47, 0, 0.01f, false);
 		MainRenderer->CreateAnimation("Left_TeleportOff", "teleportOffLeft.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_AirStrikeOn", "AirStrikeOnLeft.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_AirStrike", "AirStrikeOnLeft.bmp", 9, 9, 0.05f, false);
@@ -616,8 +616,8 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Right_TeleportOn", "teleportOnRight.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_Teleport", "teleportOnRight.bmp", 9, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_TeleportFire", "teleportFireRight.bmp", 0, 9, 0.05f, false);
-		MainRenderer->CreateAnimation("Right_TeleportMoveOn", "teleportMoveRight.bmp", 0, 47, 0.05f, false);
-		MainRenderer->CreateAnimation("Right_TeleportMoveOff", "teleportMoveRight.bmp", 47, 0, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_TeleportMoveOn", "teleportMoveRight.bmp", 0, 47, 0.01f, false);
+		MainRenderer->CreateAnimation("Right_TeleportMoveOff", "teleportMoveRight.bmp", 47, 0, 0.01f, false);
 		MainRenderer->CreateAnimation("Right_TeleportOff", "teleportOffRight.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_AirStrikeOn", "AirStrikeOnRight.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_AirStrike", "AirStrikeOnRight.bmp", 9, 9, 0.05f, false);
@@ -731,6 +731,10 @@ void Player::Render(float _Delta)
 
 		Rectangle(dc, Data.iLeft(), Data.iTop(), Data.iRight(), Data.iBot());
 	}
+
+	std::string Text = "";
+	Text += std::to_string(Hp);
+	TextOutA(dc, ActorCameraPos().iX(), (ActorCameraPos().iY() - 50), Text.c_str(), static_cast<int>(Text.size()));
 }
 
 void Player::ChangeState(PlayerState _State)

@@ -212,17 +212,34 @@ void Player::DamagingStart()
 		float4 WeaponPos = float4::ZERO;
 		float4 GravityDir = float4::ZERO;
 
+		float4 WeaponPlayerPos = float4::ZERO;
+
 		for (size_t i = 0; i < _Col.size(); i++)
 		{
-			GameEngineCollision* Collison = _Col[i];
+			GameEngineCollision* Collision = _Col[i];
 
-			GameEngineActor* Actor = Collison->GetActor();
+			GameEngineActor* Actor = Collision->GetActor();
 
 			WeaponPos = Actor->GetPos();
+
+			Collision->Off();
 		}
 		GravityDir = GetPos() - WeaponPos;
 		GravityDir.Normalize();
 		GravityDir += float4::UP;
+
+		WeaponPlayerPos = GetPos() - WeaponPos;
+
+		float BazookaDamage = 50.0f;
+
+		float Damaging = BazookaDamage - (WeaponPlayerPos.Size());
+
+		if (0 >= Damaging)
+		{
+			Damaging = 5;
+		}
+
+		this->Hp -= Damaging;
 
 		SetGravityVector(GravityDir * 250.0f);
 	}
