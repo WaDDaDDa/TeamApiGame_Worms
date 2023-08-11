@@ -635,14 +635,14 @@ void Player::Start()
 		// UziAnimation
 		for (int i = 0; i < 32; i++)
 		{
-			MainRenderer->CreateAnimation("Left_Uzi" + std::to_string(i), "uziAimLeft.bmp", i, i, 0.1f, false);
-			MainRenderer->CreateAnimation("Right_Uzi" + std::to_string(i), "uziAimRight.bmp", i, i, 0.1f, false);
+			MainRenderer->CreateAnimation("Left_Uzi" + std::to_string(i), "uziAimLeft.bmp", i, i, 0.2f, false);
+			MainRenderer->CreateAnimation("Right_Uzi" + std::to_string(i), "uziAimRight.bmp", i, i, 0.2f, false);
 		}
 		//UziFireAnimation
 		for (int i = 0; i < 32; i++)
 		{
-			MainRenderer->CreateAnimation("Left_UziFire" + std::to_string(i), "uziFireLeft.bmp", i, i, 0.1f, false);
-			MainRenderer->CreateAnimation("Right_UziFire" + std::to_string(i), "uziFireRight.bmp", i, i, 0.1f, false);
+			MainRenderer->CreateAnimation("Left_UziFire" + std::to_string(i), "uziFireLeft.bmp", i, i, 0.2f, false);
+			MainRenderer->CreateAnimation("Right_UziFire" + std::to_string(i), "uziFireRight.bmp", i, i, 0.2f, false);
 		}
 		// HomingMissileAnimation
 		for (int i = 0; i < 32; i++)
@@ -848,6 +848,9 @@ void Player::ChangeState(PlayerState _State)
 		case PlayerState::AirStrike:
 			AirStrikeStart();
 			break;
+		case PlayerState::AirStrikeFire:
+			AirStrikeFireStart();
+			break;
 		case PlayerState::AirStrikeOff:
 			AirStrikeOffStart();
 			break;
@@ -938,6 +941,8 @@ void Player::StateUpdate(float _Delta)
 		return AirStrikeOnUpdate(_Delta);
 	case PlayerState::AirStrike:
 		return AirStrikeUpdate(_Delta);
+	case PlayerState::AirStrikeFire:
+		return AirStrikeFireUpdate(_Delta);
 	case PlayerState::AirStrikeOff:
 		return AirStrikeOffUpdate(_Delta);
 	case PlayerState::GirderOn:

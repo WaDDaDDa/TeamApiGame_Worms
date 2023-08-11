@@ -39,6 +39,7 @@ enum class PlayerState
 	TeleportOff,
 	AirStrikeOn,
 	AirStrike,
+	AirStrikeFire,
 	AirStrikeOff,
 	GirderOn,
 	Girder,
@@ -232,6 +233,9 @@ protected:
 	void AirStrikeStart();
 	void AirStrikeUpdate(float _Delta);
 
+	void AirStrikeFireStart();
+	void AirStrikeFireUpdate(float _Delta);
+
 	void AirStrikeOffStart();
 	void AirStrikeOffUpdate(float _Delta);
 
@@ -261,6 +265,11 @@ private:
 	float CurAngle = -45.0f;
 
 	PlayerState PrevMoveState = PlayerState::Idle;
+
+	// Uzi 관련
+	int UziAnimationNumber = 0;
+	int UziCount = 0;
+
 
 	// 플레이어 전체를 관리하도록 list로 플레이어 관리
 	static std::vector<Player*> AllPlayer;

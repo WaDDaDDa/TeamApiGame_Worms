@@ -1,0 +1,11 @@
+--------Damage--------
+
+Bazooka = ~ 50
+
+HomingMissile = ~ 50
+
+Granade = ~ 50
+
+Uzi = 1Bullet_Damage = 5, Bullet_Count = 10
+
+Sheep = ~ 75

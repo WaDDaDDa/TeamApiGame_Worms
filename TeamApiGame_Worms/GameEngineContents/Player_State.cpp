@@ -607,99 +607,131 @@ void Player::UziUpdate(float _Delta)
 	switch (iCurAngle)
 	{
 	case -90:
+		UziAnimationNumber = 31;
 		ChangeAnimationState("Uzi31");
 		break;
 	case -84:
+		UziAnimationNumber = 30;
 		ChangeAnimationState("Uzi30");
 		break;
 	case -78:
+		UziAnimationNumber = 29;
 		ChangeAnimationState("Uzi29");
 		break;
 	case -73:
+		UziAnimationNumber = 28;
 		ChangeAnimationState("Uzi28");
 		break;
 	case -67:
+		UziAnimationNumber = 27;
 		ChangeAnimationState("Uzi27");
 		break;
 	case -61:
+		UziAnimationNumber = 26;
 		ChangeAnimationState("Uzi26");
 		break;
 	case -56:
+		UziAnimationNumber = 25;
 		ChangeAnimationState("Uzi25");
 		break;
 	case -50:
+		UziAnimationNumber = 24;
 		ChangeAnimationState("Uzi24");
 		break;
 	case -45:
+		UziAnimationNumber = 23;
 		ChangeAnimationState("Uzi23");
 		break;
 	case -39:
+		UziAnimationNumber = 22;
 		ChangeAnimationState("Uzi22");
 		break;
 	case -33:
+		UziAnimationNumber = 21;
 		ChangeAnimationState("Uzi21");
 		break;
 	case -28:
+		UziAnimationNumber = 20;
 		ChangeAnimationState("Uzi20");
 		break;
 	case -22:
+		UziAnimationNumber = 19;
 		ChangeAnimationState("Uzi19");
 		break;
 	case -16:
+		UziAnimationNumber = 18;
 		ChangeAnimationState("Uzi18");
 		break;
 	case -11:
+		UziAnimationNumber = 17;
 		ChangeAnimationState("Uzi17");
 		break;
 	case -5:
+		UziAnimationNumber = 16;
 		ChangeAnimationState("Uzi16");
 		break;
 	case 0:
+		UziAnimationNumber = 15;
 		ChangeAnimationState("Uzi15");
 		break;
 	case 5:
+		UziAnimationNumber = 14;
 		ChangeAnimationState("Uzi14");
 		break;
 	case 11:
+		UziAnimationNumber = 13;
 		ChangeAnimationState("Uzi13");
 		break;
 	case 16:
+		UziAnimationNumber = 12;
 		ChangeAnimationState("Uzi12");
 		break;
 	case 22:
+		UziAnimationNumber = 11;
 		ChangeAnimationState("Uzi11");
 		break;
 	case 28:
+		UziAnimationNumber = 10;
 		ChangeAnimationState("Uzi10");
 		break;
 	case 33:
+		UziAnimationNumber = 9;
 		ChangeAnimationState("Uzi9");
 		break;
 	case 39:
+		UziAnimationNumber = 8;
 		ChangeAnimationState("Uzi8");
 		break;
 	case 45:
+		UziAnimationNumber = 7;
 		ChangeAnimationState("Uzi7");
 		break;
 	case 50:
+		UziAnimationNumber = 6;
 		ChangeAnimationState("Uzi6");
 		break;
 	case 56:
+		UziAnimationNumber = 5;
 		ChangeAnimationState("Uzi5");
 		break;
 	case 61:
+		UziAnimationNumber = 4;
 		ChangeAnimationState("Uzi4");
 		break;
 	case 67:
+		UziAnimationNumber = 3;
 		ChangeAnimationState("Uzi3");
 		break;
 	case 73:
+		UziAnimationNumber = 2;
 		ChangeAnimationState("Uzi2");
 		break;
 	case 78:
+		UziAnimationNumber = 1;
 		ChangeAnimationState("Uzi1");
 		break;
 	case 84:
+		UziAnimationNumber = 0;
 		ChangeAnimationState("Uzi0");
 		break;
 	}
@@ -709,13 +741,39 @@ void Player::UziUpdate(float _Delta)
 }
 void Player::UziFireStart()
 {
+	UziCount = 10;
 	ChangeAnimationState("UziFire15");
 
 	CreateWeapon<Uzi>();
 }
 void Player::UziFireUpdate(float _Delta)
 {
-	ChangeState(PlayerState::UziOff);
+	std::string AnimationUzi = "Uzi" + std::to_string(UziAnimationNumber);
+	std::string AnimationUziFire = "UziFire" + std::to_string(UziAnimationNumber);
+
+	if (MainRenderer->IsAnimationEnd())
+	{
+		if (MainRenderer->IsAnimation("Left_" + AnimationUzi) || MainRenderer->IsAnimation("Right_" + AnimationUzi))
+		{
+			CreateWeapon<Uzi>();
+			ChangeAnimationState(AnimationUziFire);
+			UziCount -= 1;
+		}
+		
+		if (MainRenderer->IsAnimation("Left_" + AnimationUziFire) || MainRenderer->IsAnimation("Right_" + AnimationUziFire))
+		{
+			ChangeAnimationState(AnimationUzi);
+		}
+
+		if (0 >= UziCount)
+		{
+			ChangeState(PlayerState::UziOff);
+		}
+		
+	}
+
+
+	//ChangeState(PlayerState::UziOff);
 }
 
 void Player::UziOffStart()
@@ -1367,6 +1425,16 @@ void Player::AirStrikeUpdate(float _Delta)
 
 	InputMove();
 	ChangeWeapon();
+}
+
+void Player::AirStrikeFireStart()
+{
+	// 미사일 생성
+}
+void Player::AirStrikeFireUpdate(float _Delta)
+{
+	
+	ChangeState(PlayerState::AirStrikeOff);
 }
 
 void Player::AirStrikeOffStart()
