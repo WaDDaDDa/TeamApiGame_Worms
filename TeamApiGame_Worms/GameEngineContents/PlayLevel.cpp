@@ -80,9 +80,9 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 
 	Inven = CreateActor<UI_Inventory>();
 //	Inven->SetPos({1180, 500}); // ON 시 최종 위치
-//	Inven->SetPos({ 1400, 500 }); // UI 렌더러 사용시 초기 위치
+	Inven->SetPos({ 1400, 500 }); // UI 렌더러 사용시 초기 위치
 
-	Inven->SetPos({ 1359, 1770 });
+//	Inven->SetPos({ 1359, 1770 }); // 일반 엑터 사용시 초기 위치
 
 	//// UI 세팅 테스트
 	//UI_Button* Btn_StartGame = CreateActor<UI_Button>();

@@ -31,29 +31,30 @@ void UI_Inventory::Start()
 	}
 
 	// 배경 렌더러 세팅
-//	MainRenderer = CreateUIRenderer("UI_Inventory_Weapon.bmp", RenderOrder::UI);
-	MainRenderer = CreateRenderer("UI_Inventory_Weapon.bmp", RenderOrder::UI);
+	MainRenderer = CreateUIRenderer("UI_Inventory_Weapon.bmp", RenderOrder::UI);
+//	MainRenderer = CreateRenderer("UI_Inventory_Weapon.bmp", RenderOrder::UI);
 	MainRenderer->SetRenderScale({ 180, 400 });
 
 
 	// 무기 이름 출력용 렌더러 세팅
-	WeaponNameRenderer = CreateRenderer(RenderOrder::UI);
+	WeaponNameRenderer = CreateUIRenderer(RenderOrder::UI);
 	WeaponNameRenderer->SetRenderScale({ 100, 100 });
 	WeaponNameRenderer->SetText("TEST TEXT", 14);
 	WeaponNameRenderer->SetRenderPos({ -80 , 182 });
 
 	//// 위치 테스트용
-	//	Btn_Weapon_Bazooka->SetPos({ 1125, 347 }); // ON 최종 위치
-
-	UI_Button* Btn_Weapon_Bazooka = GetLevel()->CreateActor<UI_Button>();
-	Btn_Weapon_Bazooka->InitButtonData("UI_ButtonHighlighter", { 30, 30 }, true);
-
-	Btn_Weapon_Bazooka->SetPos({ 1317, 1616 });
 
 
+//	UI_Button* Btn_Weapon_Bazooka = GetLevel()->CreateActor<UI_Button>();
+//	Btn_Weapon_Bazooka->InitButtonData("UI_ButtonHighlighter", { 30, 30 }, true);
+//
+//	Btn_Weapon_Bazooka->SetPos({ 1317, 1616 });
+//
+//
 //	Btn_Weapon_Bazooka->SetPos({ 1359, 347 });
-	Btn_Weapon_Bazooka->SetClickedCallBack(ChangeWeapon, 0, 0);
-	AllWeaponButtons.push_back(Btn_Weapon_Bazooka);
+//	Btn_Weapon_Bazooka->SetPos({ 1125, 347 }); // ON 최종 위치
+//	Btn_Weapon_Bazooka->SetClickedCallBack(ChangeWeapon, 0, 0);
+//	AllWeaponButtons.push_back(Btn_Weapon_Bazooka);
 
 
 
