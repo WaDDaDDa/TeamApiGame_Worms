@@ -5,6 +5,7 @@
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEngineCore/GameEngineLevel.h>
 #include "ContentsEnum.h"
+#include "GameTurn.h"
 
 void ChangeWeapon(DWORD_PTR, DWORD_PTR);
 
@@ -27,12 +28,6 @@ void UI_Inventory::Start()
 	if (false == ResourcesManager::GetInst().IsLoadTexture("UI_Inventory_Weapon.bmp"))
 	{
 		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("UI_Inventory_Weapon.bmp"));
-	}
-
-	// 위치 테스트용
-	if (false == ResourcesManager::GetInst().IsLoadTexture("bazooka.bmp"))
-	{
-		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("bazooka.bmp"));
 	}
 
 	// 배경 렌더러 세팅
@@ -101,5 +96,5 @@ void UI_Inventory::ShowInventory(bool _isActive, float _Delta)
 
 void ChangeWeapon(DWORD_PTR, DWORD_PTR)
 {
-	int a = 0;
+	//ChangeState(PlayerState::BazookaOn);
 }
