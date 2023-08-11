@@ -223,6 +223,7 @@ void Player::DamagingStart()
 			WeaponPos = Actor->GetPos();
 
 			Collision->Off();
+
 		}
 		GravityDir = GetPos() - WeaponPos;
 		GravityDir.Normalize();
@@ -745,24 +746,26 @@ void Player::UziFireStart()
 //	ChangeAnimationState("UziFire15");
 
 	//CreateWeapon<Uzi>();
+	ResetLiveTime();
 }
 void Player::UziFireUpdate(float _Delta)
 {
 	std::string AnimationUzi = "Uzi" + std::to_string(UziAnimationNumber);
 	std::string AnimationUziFire = "UziFire" + std::to_string(UziAnimationNumber);
 
-	if (MainRenderer->IsAnimationEnd())
+	if (0.2f <= GetLiveTime())
 	{
 		if (MainRenderer->IsAnimation("Left_" + AnimationUzi) || MainRenderer->IsAnimation("Right_" + AnimationUzi))
 		{
 			CreateWeapon<Uzi>();
 			ChangeAnimationState(AnimationUziFire);
 			UziCount -= 1;
+			ResetLiveTime();
 		}
-		
-		if (MainRenderer->IsAnimation("Left_" + AnimationUziFire) || MainRenderer->IsAnimation("Right_" + AnimationUziFire))
+		else if (MainRenderer->IsAnimation("Left_" + AnimationUziFire) || MainRenderer->IsAnimation("Right_" + AnimationUziFire))
 		{
 			ChangeAnimationState(AnimationUzi);
+			ResetLiveTime();
 		}
 
 		if (0 >= UziCount)
@@ -771,8 +774,6 @@ void Player::UziFireUpdate(float _Delta)
 		}
 		
 	}
-
-
 	//ChangeState(PlayerState::UziOff);
 }
 

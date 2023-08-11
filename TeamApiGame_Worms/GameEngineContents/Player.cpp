@@ -641,8 +641,8 @@ void Player::Start()
 		//UziFireAnimation
 		for (int i = 0; i < 32; i++)
 		{
-			MainRenderer->CreateAnimation("Left_UziFire" + std::to_string(i), "uziFireLeft.bmp", i, i, 0.2f, false);
-			MainRenderer->CreateAnimation("Right_UziFire" + std::to_string(i), "uziFireRight.bmp", i, i, 0.2f, false);
+			MainRenderer->CreateAnimation("Left_UziFire" + std::to_string(i), "uziFireLeft.bmp", i, i, 0.5f, false);
+			MainRenderer->CreateAnimation("Right_UziFire" + std::to_string(i), "uziFireRight.bmp", i, i, 0.5f, false);
 		}
 		// HomingMissileAnimation
 		for (int i = 0; i < 32; i++)
