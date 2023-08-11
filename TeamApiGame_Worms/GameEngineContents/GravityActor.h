@@ -52,7 +52,7 @@ private:
 
 	// Gravity
 public:
-	void Gravity(float _Delta);
+	virtual void Gravity(float _Delta);
 
 	void GravityReset()
 	{

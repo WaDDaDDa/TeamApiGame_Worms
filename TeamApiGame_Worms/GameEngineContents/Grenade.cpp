@@ -307,81 +307,6 @@ void Grenade::DirCheck()
 	}
 }
 
-void Grenade::IdleStart()
-{
-	//SetGravityVector(-(GetGravityVector() * 0.8f));
-}
-
-void Grenade::IdleUpdate(float _Delta)
-{
-	DirCheck();
-	//Gravity(_Delta);
-	GroundCheck(_Delta);
-
-	if (GetLiveTime() >= 3.0f)
-	{
-		ChangeState(GrenadeState::Bomb);
-		return;
-	}
-}
-
-
-//void Grenade::GroundCheck(float _Delta)
-//{
-//	unsigned int Color = GetGroundColor(RGB(255, 255, 255));
-//
-//	// 위치가 흰색이면 중력작용.
-//	// 모두 흰색이면 공중이다.
-//	if (RGB(255, 255, 255) == Color)
-//	{
-//		Gravity(_Delta);
-//	}
-//	else // 모두흰색이 아니다 = 땅에닿아있다.
-//	{
-//		unsigned int CheckColor = GetGroundColor(RGB(255, 255, 255), float4::UP);
-//
-//		// 체크중 어느하나라도  흰색이 아니라면 한칸올리기 반복한다.
-//		while (CheckColor != RGB(255, 255, 255))
-//		{
-//			CheckColor = GetGroundColor(RGB(255, 255, 255), float4::UP);
-//
-//			AddPos(float4::UP);
-//		}
-//
-//		float4 CurCravityVector = GetGravityVector();
-//
-//		CheckColor = GetGroundColor(RGB(255, 255, 255), float4::LEFT * 2);
-//		if (CheckColor == RGB(255, 255, 255))
-//		{
-//			if (CurCravityVector.X >= 0)
-//			{
-//				CurCravityVector.X = -CurCravityVector.X * 0.8f;
-//
-//				CurCravityVector.Y = 0.0f;
-//				SetGravityVector(CurCravityVector);
-//
-//				return;
-//			}
-//		}
-//
-//		CheckColor = GetGroundColor(RGB(255, 255, 255), float4::RIGHT * 2);
-//		if (CheckColor == RGB(255, 255, 255))
-//		{
-//			if (CurCravityVector.X <= 0)
-//			{
-//				CurCravityVector.X = -CurCravityVector.X * 0.8f; 
-//
-//				CurCravityVector.Y = 0.0f;
-//				SetGravityVector(CurCravityVector);
-//
-//				return;
-//			}
-//		}
-//
-//		CurCravityVector.Y = 0.0f;
-//		SetGravityVector(CurCravityVector);
-//	}
-//}
 
 void Grenade::GroundCheck(float _Delta)
 {
@@ -404,59 +329,83 @@ void Grenade::GroundCheck(float _Delta)
 
 			AddPos(float4::UP);
 		}
+		TongTong();
+	}
+}
 
-		float4 CurCravityVector = GetGravityVector();
-		float4 ReflectionDeg = float4::ZERO;
+void Grenade::TongTong(float4 _Pos)
+{
+	unsigned int CheckColor = GetGroundColor(RGB(255, 255, 255));
 
-		ReflectionDeg = -CurCravityVector;
-		ReflectionDeg.Normalize();
-		// 현재 벡터의 각도
-		float CurDeg = ReflectionDeg.AngleDeg();
+	float4 CurCravityVector = GetGravityVector();
+	float4 ReflectionDeg = float4::ZERO;
 
-		CheckColor = GetGroundColor(RGB(255, 255, 255), ReflectionDeg);
+	ReflectionDeg = -CurCravityVector;
+	ReflectionDeg.Normalize();
+	// 현재 벡터의 각도
+	float CurDeg = ReflectionDeg.AngleDeg();
 
-		// 오른쪽 각도
-		while (CheckColor == RGB(255, 255, 255))
-		{
-			ReflectionDeg = ReflectionDeg.GetRotationToDegZ(1.0f);
-			CheckColor = GetGroundColor(RGB(255, 255, 255), ReflectionDeg);
-		}
-		// 오른쪽으로 돌았을때의 제일 처음 픽셀 충돌되는 각도
-		float4 RightDir = ReflectionDeg;
-		float RightDeg = ReflectionDeg.AngleDeg();
+	CheckColor = GetGroundColor(RGB(255, 255, 255), _Pos + ReflectionDeg);
+
+	// 오른쪽 각도
+	while (CheckColor == RGB(255, 255, 255))
+	{
+		ReflectionDeg = ReflectionDeg.GetRotationToDegZ(1.0f);
+		CheckColor = GetGroundColor(RGB(255, 255, 255), _Pos + ReflectionDeg);
+	}
+	// 오른쪽으로 돌았을때의 제일 처음 픽셀 충돌되는 각도
+	float4 RightDir = ReflectionDeg;
+	float RightDeg = ReflectionDeg.AngleDeg();
 
 
-		ReflectionDeg = -CurCravityVector;
-		ReflectionDeg.Normalize();
+	ReflectionDeg = -CurCravityVector;
+	ReflectionDeg.Normalize();
 
-		CheckColor = GetGroundColor(RGB(255, 255, 255), ReflectionDeg);
+	CheckColor = GetGroundColor(RGB(255, 255, 255), _Pos + ReflectionDeg);
 
-		// 왼쪽 각도
-		while (CheckColor == RGB(255, 255, 255))
-		{
-			ReflectionDeg = ReflectionDeg.GetRotationToDegZ(-1.0f);
-			CheckColor = GetGroundColor(RGB(255, 255, 255), ReflectionDeg);
-		}
-		// 왼쪽으로 돌았을때의 제일 처음 픽셀 충돌되는 각도
-		float4 LeftDir = ReflectionDeg;
-		float LeftDeg = ReflectionDeg.AngleDeg();
+	// 왼쪽 각도
+	while (CheckColor == RGB(255, 255, 255))
+	{
+		ReflectionDeg = ReflectionDeg.GetRotationToDegZ(-1.0f);
+		CheckColor = GetGroundColor(RGB(255, 255, 255), _Pos + ReflectionDeg);
+	}
+	// 왼쪽으로 돌았을때의 제일 처음 픽셀 충돌되는 각도
+	float4 LeftDir = ReflectionDeg;
+	float LeftDeg = ReflectionDeg.AngleDeg();
 
-		float4 LastDir = RightDir - LeftDir;
-		float LastDeg = LastDir.AngleDeg();
+	float4 LastDir = RightDir - LeftDir;
+	float LastDeg = LastDir.AngleDeg();
 
-		if (LastDeg <= 1.0f || LastDeg >= 359.0f)
-		{
-			float4 Test = CurCravityVector;
-			Test.Y = -Test.Y;
-			SetGravityVector(Test * 0.8);
-			return;
-		}
+	if (LastDeg <= 1.0f || LastDeg >= 359.0f)
+	{
+		float4 Test = CurCravityVector;
+		Test.Y = -Test.Y;
+		SetGravityVector(Test * 0.8f);
+		return;
+	}
 
-		// CurCravityVector.Y = 0.0f;
-		float4 Test = -CurCravityVector;
-		Test = Test.GetRotationToDegZ(-(LastDeg + LastDeg));
-		SetGravityVector(Test * 0.8);
+	// CurCravityVector.Y = 0.0f;
+	float4 Test = -CurCravityVector;
+	Test = Test.GetRotationToDegZ(-(LastDeg + LastDeg));
+	SetGravityVector(Test * 0.8f);
+	return;
+}
 
+void Grenade::IdleStart()
+{
+	//SetGravityVector(-(GetGravityVector() * 0.8f));
+}
+
+void Grenade::IdleUpdate(float _Delta)
+{
+	DirCheck();
+	//Gravity(_Delta);
+	GroundCheck(_Delta);
+
+	if (GetLiveTime() >= 3.0f)
+	{
+		ChangeState(GrenadeState::Bomb);
+		return;
 	}
 }
 
@@ -468,9 +417,9 @@ void Grenade::FlyStart()
 
 void Grenade::FlyUpdate(float _Delta)
 {
+	GroundCheck(_Delta);
 	//DirCheck();
 	//Gravity(_Delta);
-	GroundCheck(_Delta);
 
 	// 튕기는걸 세부화 해야함. 보류();
 	unsigned int Color = GetGroundColor(RGB(255, 255, 255));
@@ -482,53 +431,40 @@ void Grenade::FlyUpdate(float _Delta)
 	float4 CurCravityVector = GetGravityVector();
 	float YVector = CurCravityVector.Y;
 
-	if (abs(YVector) <= 5.0f)
+	if (RGB(255, 255, 255) != Color)
 	{
 		ChangeState(GrenadeState::Idle);
 		return;
 	}
+
+	//if (abs(YVector) <= 5.0f)
+	//{
+	//	ChangeState(GrenadeState::Idle);
+	//	return;
+	//}
+
+	// 위치가 흰색이면 중력작용.
+	// 모두 흰색이면 공중이다.
+	float4 Check = DownCheckPos;
+	for (size_t i = 0; i <= 360; i++)
+	{
+		Check = Check.GetRotationToDegZ(i * 1.0f);
+
+		if (RGB(255, 255, 255) != GetGroundColor(RGB(255, 255, 255), Check))
+		{
+			TongTong(Check);
+			return;
+		}
+	}
+
 
 	//if (Color != RGB(255, 255, 255))
 	//{
 	//	ChangeState(GrenadeState::Idle);
 	//	return;
 	//}
-
-	////땅에 닿았을때.
-	//if (DownColor != RGB(255, 255, 255))
-	//{
-	//	CurCravityVector.Y = -CurCravityVector.Y;
-
-	//	SetGravityVector(CurCravityVector * 0.8f);
-	//	return;
-	//}
-	// 위에 판정
-	//if (UpColor != RGB(255, 255, 255))
-	//{
-	//	CurCravityVector.Y = -CurCravityVector.Y;
-
-	//	SetGravityVector(CurCravityVector * 0.8f);
-	//	return;
-	//}
-	//// 왼쪽 판정
-	//else if (LeftColor != RGB(255, 255, 255))
-	//{
-
-	//	CurCravityVector.X = -CurCravityVector.X;
-
-	//	SetGravityVector(CurCravityVector * 0.4f);
-	//	return;
-	//}
-	//// 오른쪽 판정
-	//else if (RightColor != RGB(255, 255, 255))
-	//{
-
-	//	CurCravityVector.X = -CurCravityVector.X;
-
-	//	SetGravityVector(CurCravityVector * 0.4f);
-	//	return;
-	//}
 }
+
 
 void Grenade::BombStart()
 {
@@ -644,5 +580,18 @@ void Grenade::Render(float _Delta)
 		Data.Scale = { 5,5 };
 
 		Rectangle(dc, Data.iLeft(), Data.iTop(), Data.iRight(), Data.iBot());
+	}
+
+	{
+		HDC dc2 = GameEngineWindow::MainWindow.GetBackBuffer()->GetImageDC();
+
+		std::string Text2 = "GravityVector : ";
+		Text2 += std::to_string(GetGravityVector().AngleDeg());
+		Text2 += "  , ";
+		Text2 += std::to_string(GetGravityVector().iX());
+		Text2 += "  , ";
+		Text2 += std::to_string(GetGravityVector().iY());
+
+		TextOutA(dc2, 2, 40, Text2.c_str(), static_cast<int>(Text2.size()));
 	}
 }

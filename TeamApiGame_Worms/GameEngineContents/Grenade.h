@@ -62,7 +62,7 @@ private:
 	float4 LeftCheckPos = float4{ -5.0f, 0.0f };
 	float4 RightCheckPos = float4{ 5.0f, 0.0f };
 	float4 UpCheckPos = float4{ 0 , -10.0f };
-	float4 DownCheckPos = float4{ 0 , 10.0f };
+	float4 DownCheckPos = float4{ 0 , 8.0f };
 
 	float4 Dir = float4::ZERO;
 	float4 GravityDir = float4::ZERO;
@@ -71,6 +71,8 @@ private:
 	GrenadeState State = GrenadeState::Max;
 
 	class BombEffect* GrenadeBomb = nullptr;
+
+	void TongTong(float4 _Pos = float4::ZERO);
 
 	void DirCheck();
 
