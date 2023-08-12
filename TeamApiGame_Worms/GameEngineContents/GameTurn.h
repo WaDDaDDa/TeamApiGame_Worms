@@ -17,7 +17,7 @@ public:
         return TurnPlayer;
     }
 
-    void ChangeTurnPlayer();
+    void ChangeTurnPlayer(float _Delta);
 
     static GameTurn MainGameTurn;
 

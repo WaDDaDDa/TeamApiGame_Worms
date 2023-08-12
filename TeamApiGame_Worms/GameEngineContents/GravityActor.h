@@ -41,6 +41,11 @@ public:
 	// GravityActor들의 제어권 (카메라 포커싱, 턴플레이어의 행동권)
 	bool IsTurnPlayer = false;
 
+	void IsWindOn()
+	{
+		IsWind = true;
+	}
+
 protected:
 	void CameraFocus(float _Delta);
 
@@ -71,6 +76,7 @@ public:
 
 private:
 	bool IsGravity = true;
+	bool IsWind = false;
 	float CameraSpeed = 2500.0f;
 	float GravityPower = 1000.0f;
 	float4 GravityVector = float4::ZERO;

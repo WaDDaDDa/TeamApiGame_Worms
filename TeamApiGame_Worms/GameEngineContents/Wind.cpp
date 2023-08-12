@@ -3,7 +3,7 @@
 
 Wind* Wind::PlayWind = nullptr;
 
-#define WIND_LIMIT 100.0F
+#define WIND_LIMIT 300.0F
 
 
 Wind::Wind()
@@ -14,7 +14,7 @@ Wind::~Wind()
 {
 }
 
-void Wind::ChangeWind()
+void Wind::ChangeWind(float _Delta)
 {
 	WindPower= GameEngineRandom::MainRandom.RandomFloat(0, WIND_LIMIT);
 	int WindDirtmp = GameEngineRandom::MainRandom.RandomInt(0, 1);
@@ -32,7 +32,7 @@ void Wind::ChangeWind()
 		break;
 	}
 
-	WindVector = WindDir * WindPower;
+	WindVector = WindDir * WindPower * _Delta;
 }
 
 void Wind::Start()

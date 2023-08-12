@@ -119,6 +119,8 @@ void HomingMissile::Start()
 	SetWeaponDamage(HomingMissileDamage);
 	SetWeaponSpeed(HomingMissileSpeed);
 
+	IsWindOn();
+
 	ChangeState(HomingMissileState::Max);
 }
 

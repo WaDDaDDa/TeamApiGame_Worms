@@ -111,6 +111,7 @@ void Bazooka::Start()
 	SetWeaponDamage(BazookaDamage);
 	SetWeaponSpeed(BazookaSpeed);
 
+	IsWindOn();
 
 	ChangeState(BazookaState::Max);
 }

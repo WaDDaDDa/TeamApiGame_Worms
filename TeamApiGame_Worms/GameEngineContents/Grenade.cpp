@@ -123,7 +123,7 @@ void Grenade::Start()
 	SetWeaponDamage(GrenadeDamage);
 	SetWeaponSpeed(GrenadeSpeed);
 
-	//Renderer->SetRenderPos({ 0, -10.0f });
+	IsWindOn();
 
 	ChangeState(GrenadeState::Max);
 }

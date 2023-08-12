@@ -1,4 +1,5 @@
 #include "GravityActor.h"
+#include "Wind.h"
 #include <math.h>
 
 #include <GameEnginePlatform/GameEngineWindow.h>
@@ -101,7 +102,15 @@ void GravityActor::Gravity(float _Delta)
 		return;
 	}
 
-	GravityVector += float4::DOWN * GravityPower * _Delta;
+	if (true == IsWind)
+	{
+		GravityVector += float4::DOWN * GravityPower * _Delta + Wind::GetWind()->GetWindVector();
+	}
+	else
+	{
+		GravityVector += float4::DOWN * GravityPower * _Delta;
+	}
+
 
 	AddPos(GravityVector * _Delta);
 }

@@ -33,7 +33,7 @@ public:
 		return WindPower;
 	}
 
-	void ChangeWind();
+	void ChangeWind(float _Delta);
 
 protected:
 

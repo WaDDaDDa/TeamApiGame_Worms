@@ -36,17 +36,17 @@ void GameTurn::Update(float _Delta)
 	if (GetStopValue() == true && TurnPlayer->IsTurnPlayer == true)
 	{
 		GoLiveTime(); 
-		ChangeTurnPlayer();
+		ChangeTurnPlayer(_Delta);
 	}
 
 	if (TurnPlayTime <= GetLiveTime())
 	{
-		ChangeTurnPlayer();
+		ChangeTurnPlayer(_Delta);
 	}
 
 	if (true == GameEngineInput::IsDown('Q'))
 	{
-		ChangeTurnPlayer();
+		ChangeTurnPlayer(_Delta);
 	}
 
 	if (true == GameEngineInput::IsDown(VK_F2))
@@ -95,7 +95,7 @@ void GameTurn::Render(float _Delta)
 
 }
 
-void GameTurn::ChangeTurnPlayer()
+void GameTurn::ChangeTurnPlayer(float _Delta)
 {
 	//원래 플레이어bool값 false로 변경
 	TurnPlayer->SwitchIsTurnPlayer();
@@ -111,5 +111,5 @@ void GameTurn::ChangeTurnPlayer()
 	TurnPlayer->SwitchIsTurnPlayer();
 
 	ResetLiveTime();
-	Wind::GetWind()->ChangeWind();
+	Wind::GetWind()->ChangeWind(_Delta);
 }
