@@ -108,6 +108,12 @@ void Uzi::ChangeState(UziState _State)
 	State = _State;
 }
 
+void Uzi::CameraFocus(float _Delta)
+{
+
+}
+
+
 void Uzi::DirCheck()
 {
 	Dir = GetGravityVector();

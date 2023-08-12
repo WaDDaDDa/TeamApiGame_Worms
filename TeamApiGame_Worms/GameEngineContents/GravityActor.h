@@ -47,7 +47,7 @@ public:
 	}
 
 protected:
-	void CameraFocus(float _Delta);
+	virtual void CameraFocus(float _Delta);
 
 
 

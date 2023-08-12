@@ -44,6 +44,9 @@ protected:
 	void MaxStart();
 	void MaxUpdate(float _Delta);
 
+	void CameraFocus(float _Delta) override;
+
+
 private:
 	int UziDamage = 50;
 	float UziSpeed = 2000.0f;
