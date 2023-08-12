@@ -51,6 +51,7 @@ private:
 	int HomingMissileDamage = 50;
 	float HomingMissileSpeed = 3000.0f;
 	float HomingMissileRockOnSpeed = 1500.0f;
+	float MissileDir = 0;
 
 	float4 TargetPos = float4::ZERO;
 

@@ -324,14 +324,14 @@ void HomingMissile::FlyUpdate(float _Delta)
 void HomingMissile::RockOnFlyStart()
 {
 	TargetPos = Master->GetTargetPos();
+	DirCheck();
+	Dir.Normalize();
+	MissileDir = Dir.AngleDeg();
 }
 
 void HomingMissile::RockOnFlyUpdate(float _Delta)
 {
-	DirCheck();
-
-	Dir.Normalize();
-	AddPos(Dir * HomingMissileRockOnSpeed * _Delta);
+	AddPos(float4::RIGHT.GetRotationToDegZ(-MissileDir) * HomingMissileRockOnSpeed * _Delta);
 
 	unsigned int Color = GetGroundColor(RGB(255, 255, 255) || GetLiveTime() >= 5.0f);
 	if (Color != RGB(255, 255, 255))

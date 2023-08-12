@@ -872,6 +872,11 @@ void Player::HomingMissileUpdate(float _Delta)
 		}
 	}
 
+	if (GameEngineInput::IsDown(VK_LBUTTON))
+	{
+		TargetPos = MouseObject::GetPlayMousePos();
+	}
+
 
 	if (true == GameEngineInput::IsUp('A') || GameEngineInput::GetPressTime('A') >= MaxChargingTime)
 	{
