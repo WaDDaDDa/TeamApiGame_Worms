@@ -42,6 +42,10 @@ private:
 	GameEngineRenderer* MainRenderer = nullptr;
 	GameEngineRenderer* WeaponNameRenderer = nullptr;
 
+
+
+	UI_Button* Btn_Weapon_Bazooka = nullptr;
+
 	bool m_bIsActive = false;
 
 };

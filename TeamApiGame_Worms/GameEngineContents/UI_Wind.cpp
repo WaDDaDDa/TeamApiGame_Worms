@@ -4,6 +4,8 @@
 #include <GameEngineCore/GameEngineRenderer.h>
 #include "ContentsEnum.h"
 
+#include "Wind.h"
+
 UI_Wind* UI_Wind::WindUI = nullptr;
 
 UI_Wind::UI_Wind()
@@ -75,7 +77,9 @@ void UI_Wind::ChangeWindBarDir(float4 _WindDir)
 
 void UI_Wind::Update(float _Delta)
 {
+	float4 SetWindDir = Wind::GetWind()->GetWindDir();
 
+	ChangeWindBarDir(SetWindDir);
 
 }
 

@@ -6,7 +6,9 @@
 #include <GameEngineCore/GameEngineCollision.h>
 #include <GameEngineCore/ResourcesManager.h>
 #include <GameEngineCore/GameEngineRenderer.h>
-
+#include <GameEngineCore/GameEngineLevel.h>
+#include <GameEngineCore/GameEngineCamera.h>
+#include <GameEnginePlatform/GameEngineWindow.h>
 
 UI_Button::UI_Button()
 {
@@ -34,6 +36,8 @@ void UI_Button::Update(float _Delta)
 	// 버튼 전체 상태 업데이트
 	StateUpdate();
 
+	// 렌더러와 충돌체의 위치를 동일하게 만들기 위해 카메라 위치에 따라 렌더러 위치를 갱신합니다.
+	MainCollision->SetCollisionPos(GetLevel()->GetMainCamera()->GetPos());
 }
 
 UI_Button& UI_Button::InitButtonData(const std::string _ButtonName, float4 _ButtonScale, bool _UseHighlighter)
@@ -69,7 +73,7 @@ UI_Button& UI_Button::InitButtonData(const std::string _ButtonName, float4 _Butt
 		}
 	}
 
-	MainRenderer = CreateRenderer(ImageName, static_cast<int>(RenderOrder::UI));
+	MainRenderer = CreateUIRenderer(ImageName, static_cast<int>(RenderOrder::UI));
 	MainRenderer->SetRenderScale(ButtonScale);
 
 	MainCollision = CreateCollision(CollisionOrder::UI);

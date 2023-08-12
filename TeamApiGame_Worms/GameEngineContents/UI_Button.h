@@ -52,11 +52,6 @@ public:
 
 	void HighlighterOff();
 
-
-protected:
-	void Start() override;
-	void Update(float _Delta) override;
-
 	GameEngineRenderer* GetRenderer()
 	{
 		return MainRenderer;
@@ -74,8 +69,15 @@ protected:
 
 	void CheckButtonCollision();
 
-	GameEngineRenderer* MainRenderer = nullptr;
 	GameEngineCollision* MainCollision = nullptr;
+
+protected:
+	void Start() override;
+	void Update(float _Delta) override;
+
+
+	GameEngineRenderer* MainRenderer = nullptr;
+
 
 	BUTTON_STATE ButtonState;
 
