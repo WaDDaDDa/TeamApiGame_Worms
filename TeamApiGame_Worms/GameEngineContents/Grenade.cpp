@@ -457,6 +457,12 @@ void Grenade::FlyUpdate(float _Delta)
 		}
 	}
 
+	if (GetLiveTime() >= 5.0f)
+	{
+		ChangeState(GrenadeState::Bomb);
+		return;
+	}
+
 
 	//if (Color != RGB(255, 255, 255))
 	//{

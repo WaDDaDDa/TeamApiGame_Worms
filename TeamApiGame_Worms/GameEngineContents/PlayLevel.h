@@ -29,6 +29,8 @@ private:
 	std::string GroundFileName = "";
 	std::string GroundPixelFileName = "";
 
+	void PlayerSetting(size_t _PlayerCount);
+
 
 	void Start() override;
 	void Update(float _Delta) override;

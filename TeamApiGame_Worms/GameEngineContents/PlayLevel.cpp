@@ -5,6 +5,7 @@
 #include <GameEnginePlatform/GameEngineWindow.h>
 #include <GameEngineCore/GameEngineCore.h>
 #include <GameEngineCore/ResourcesManager.h>
+#include <GameEngineBase/GameEngineRandom.h>
 
 #include "ContentsEnum.h"
 #include "BackGround.h"
@@ -137,32 +138,8 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 		Wind* PlayWind = CreateActor<Wind>();
 		
 	}
-
-
-
-	{
-		Player* TestPlayer = CreateActor<Player>(RenderOrder::Player);
-		TestPlayer->SetGroundTexture(GroundPtr->GetPixelGroundTexture());
-		TestPlayer->SetPos(float4{ 100, 100 });
-	}
-
-	{
-		Player* TestPlayer = CreateActor<Player>(RenderOrder::Player);
-		TestPlayer->SetGroundTexture(GroundPtr->GetPixelGroundTexture());
-		TestPlayer->SetPos(float4{ 400, 100 });
-	}
-
-	{
-		Player* TestPlayer = CreateActor<Player>(RenderOrder::Player);
-		TestPlayer->SetGroundTexture(GroundPtr->GetPixelGroundTexture());
-		TestPlayer->SetPos(float4{ 700, 100 });
-	}
-
-	{
-		Player* TestPlayer = CreateActor<Player>(RenderOrder::Player);
-		TestPlayer->SetGroundTexture(GroundPtr->GetPixelGroundTexture());
-		TestPlayer->SetPos(float4{ 1000, 100 });
-	}
+	// 플레이어 수만큼 랜덤으로 생성
+	PlayerSetting(6);
 
 	CreateActor<GameTurn>();
 }
@@ -190,6 +167,44 @@ void PlayLevel::LevelEnd(GameEngineLevel* _NextLevel)
 {
 
 }
+
+void PlayLevel::PlayerSetting(size_t _PlayerCount)
+{
+	for (size_t i = 0; i < _PlayerCount; i++)
+	{
+		float PlayerSettingX = GameEngineRandom::MainRandom.RandomFloat(0, GroundPtr->GetPixelGroundTexture()->GetScale().X);
+		float PlayerSettingY = GameEngineRandom::MainRandom.RandomFloat(0, GroundPtr->GetPixelGroundTexture()->GetScale().Y);
+
+		float4 CheckPos = { PlayerSettingX , PlayerSettingY };
+		unsigned int CheckColor = GroundPtr->GetPixelGroundTexture()->GetColor(RGB(255, 255, 255), CheckPos);
+
+		if (CheckColor == RGB(0, 0, 255))
+		{
+			Player* TestPlayer = CreateActor<Player>(RenderOrder::Player);
+			TestPlayer->SetGroundTexture(GroundPtr->GetPixelGroundTexture());
+			TestPlayer->SetPos(float4{ PlayerSettingX, PlayerSettingY });
+		}
+		else
+		{
+			while (CheckColor != RGB(0, 0, 255))
+			{
+				PlayerSettingX = GameEngineRandom::MainRandom.RandomFloat(0, GroundPtr->GetPixelGroundTexture()->GetScale().X);
+				PlayerSettingY = GameEngineRandom::MainRandom.RandomFloat(0, GroundPtr->GetPixelGroundTexture()->GetScale().Y);
+
+				CheckPos = { PlayerSettingX , PlayerSettingY };
+				CheckColor = GroundPtr->GetPixelGroundTexture()->GetColor(RGB(255, 255, 255), CheckPos);
+
+				if (CheckColor == RGB(0, 0, 255))
+				{
+					Player* TestPlayer = CreateActor<Player>(RenderOrder::Player);
+					TestPlayer->SetGroundTexture(GroundPtr->GetPixelGroundTexture());
+					TestPlayer->SetPos(float4{ PlayerSettingX, PlayerSettingY });
+				}
+			}
+		}
+	}
+}
+
 
 
 #pragma region UI 함수 포인터 등록용 함수
