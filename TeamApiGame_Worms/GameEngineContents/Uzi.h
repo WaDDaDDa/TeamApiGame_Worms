@@ -24,8 +24,6 @@ public:
 
 	class GameEngineRenderer* Renderer = nullptr;
 
-	GameEngineCollision* BombCollision = nullptr;
-
 	void SetDir(float4& _DirPos)
 	{
 		Dir = _DirPos;
@@ -58,6 +56,8 @@ private:
 	UziState State = UziState::Max;
 
 	class BombEffect* UziBomb = nullptr;
+
+	GameEngineCollision* BodyCollision = nullptr;
 
 	void DirCheck();
 

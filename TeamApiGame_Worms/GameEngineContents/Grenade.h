@@ -26,8 +26,6 @@ public:
 
 	class GameEngineRenderer* Renderer = nullptr;
 
-	GameEngineCollision* BombCollision = nullptr;
-
 	void SetDir(float4& _DirPos)
 	{
 		Dir = _DirPos;
@@ -52,8 +50,6 @@ protected:
 	void MaxStart();
 	void MaxUpdate(float _Delta);
 
-	GameEngineCollision* GrenadeCollision = nullptr;
-
 private:
 	int GrenadeDamage = 50;
 	float GrenadeSpeed = 3000.0f;
@@ -71,6 +67,7 @@ private:
 	GrenadeState State = GrenadeState::Max;
 
 	class BombEffect* GrenadeBomb = nullptr;
+	GameEngineCollision* BodyCollision = nullptr;
 
 	void TongTong(float4 _Pos = float4::ZERO);
 

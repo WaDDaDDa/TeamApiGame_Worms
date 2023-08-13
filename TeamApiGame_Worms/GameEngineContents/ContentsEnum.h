@@ -24,6 +24,7 @@ enum class RenderOrder
 enum class CollisionOrder
 {
 	PlayerBody,
+	Weapon,
 	Bomb,
 	UI,
 	Mouse,

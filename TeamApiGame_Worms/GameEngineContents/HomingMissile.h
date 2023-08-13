@@ -25,7 +25,6 @@ public:
 
 	class GameEngineRenderer* Renderer = nullptr;
 
-	GameEngineCollision* BombCollision = nullptr;
 
 	void SetDir(float4& _DirPos)
 	{
@@ -65,6 +64,8 @@ private:
 	HomingMissileState State = HomingMissileState::Max;
 
 	class BombEffect* HomingMissileBomb = nullptr;
+
+	GameEngineCollision* BodyCollision = nullptr;
 
 	void DirCheck();
 

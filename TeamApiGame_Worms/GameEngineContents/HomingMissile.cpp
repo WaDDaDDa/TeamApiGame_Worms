@@ -117,6 +117,15 @@ void HomingMissile::Start()
 		//Renderer->CreateAnimation("HomingMissile_Fly", "hmissil2.bmp", 32, 32, 0.05f, false);
 	}
 
+	{
+		//Collision
+		BodyCollision = CreateCollision(CollisionOrder::Weapon);
+		BodyCollision->SetCollisionScale({ 10, 10 });
+		BodyCollision->SetCollisionType(CollisionType::CirCle);
+		//GrenadeCollision->SetCollisionPos({ 0, -10 });
+		BodyCollision->Off();
+	}
+
 	SetWeaponDamage(HomingMissileDamage);
 	SetWeaponSpeed(HomingMissileSpeed);
 
@@ -322,6 +331,21 @@ void HomingMissile::FlyUpdate(float _Delta)
 		ChangeState(HomingMissileState::Bomb);
 		return;
 	}
+
+	if (GetLiveTime() >= 0.1f)
+	{
+		BodyCollision->On();
+	}
+
+	std::vector<GameEngineCollision*> _Col;
+	if (true == BodyCollision->Collision(CollisionOrder::PlayerBody, _Col
+		, CollisionType::Rect
+		, CollisionType::CirCle
+	))
+	{
+		ChangeState(HomingMissileState::Bomb);
+		return;
+	}
 }
 
 void HomingMissile::RockOnFlyStart()
@@ -346,6 +370,16 @@ void HomingMissile::RockOnFlyUpdate(float _Delta)
 
 	unsigned int Color = GetGroundColor(RGB(255, 255, 255) || GetLiveTime() >= 5.0f);
 	if (Color != RGB(255, 255, 255))
+	{
+		ChangeState(HomingMissileState::Bomb);
+		return;
+	}
+
+	std::vector<GameEngineCollision*> _Col;
+	if (true == BodyCollision->Collision(CollisionOrder::PlayerBody, _Col
+		, CollisionType::Rect
+		, CollisionType::CirCle
+	))
 	{
 		ChangeState(HomingMissileState::Bomb);
 		return;
