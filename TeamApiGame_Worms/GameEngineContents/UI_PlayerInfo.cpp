@@ -152,7 +152,14 @@ void UI_PlayerInfo::Start()
 	PlayerHpTextRenderer->SetRenderPos({ -13, 12 });
 
 	PlayerArrowRenderer = CreateUIRenderer(RenderOrder::UI);
+
 	PlayerArrowRenderer->CreateAnimation("PlayerArrow_Blue", "PlayerSelectArrowBlue.bmp", 0, 29, 0.05f, true);
+	PlayerArrowRenderer->CreateAnimation("PlayerArrow_Green", "PlayerSelectArrowGreen.bmp", 0, 29, 0.05f, true);
+	PlayerArrowRenderer->CreateAnimation("PlayerArrow_Mint", "PlayerSelectArrowMint.bmp", 0, 29, 0.05f, true);
+	PlayerArrowRenderer->CreateAnimation("PlayerArrow_Pink", "PlayerSelectArrowPink.bmp", 0, 29, 0.05f, true);
+	PlayerArrowRenderer->CreateAnimation("PlayerArrow_Red", "PlayerSelectArrowRed.bmp", 0, 29, 0.05f, true);
+	PlayerArrowRenderer->CreateAnimation("PlayerArrow_Yellow", "PlayerSelectArrowYellow.bmp", 0, 29, 0.05f, true);
+
 	PlayerArrowRenderer->SetRenderScale({ 50, 50 });
 	PlayerArrowRenderer->ChangeAnimation("PlayerArrow_Blue");
 	PlayerArrowRenderer->SetRenderPos({0, -30});
@@ -163,6 +170,48 @@ void UI_PlayerInfo::Update(float _Delta)
 {
 
 
+
+}
+
+void UI_PlayerInfo::SetPlayerColorIndex(int _ColorIndex)
+{
+	PlayerColorIndex = _ColorIndex;
+
+	switch (PlayerColorIndex)
+	{
+	case 0:
+		PlayerNameRenderer->SetTexture("UI_BottomNameTagR.bmp");
+		PlayerArrowRenderer->ChangeAnimation("PlayerArrow_Red");
+		break;
+
+	case 1:
+		PlayerNameRenderer->SetTexture("UI_BottomNameTagB.bmp");
+		PlayerArrowRenderer->ChangeAnimation("PlayerArrow_Blue");
+		break;
+
+	case 2:
+		PlayerNameRenderer->SetTexture("UI_BottomNameTagG.bmp");
+		PlayerArrowRenderer->ChangeAnimation("PlayerArrow_Green");
+		break;
+
+	case 3:
+		PlayerNameRenderer->SetTexture("UI_BottomNameTagY.bmp");
+		PlayerArrowRenderer->ChangeAnimation("PlayerArrow_Yellow");
+		break;
+
+	case 4:
+		PlayerNameRenderer->SetTexture("UI_BottomNameTagP.bmp");
+		PlayerArrowRenderer->ChangeAnimation("PlayerArrow_Pink");
+		break;
+
+	case 5:
+		PlayerNameRenderer->SetTexture("UI_BottomNameTagS.bmp");
+		PlayerArrowRenderer->ChangeAnimation("PlayerArrow_Mint");
+		break;
+
+	default:
+		break;
+	}
 
 }
 
