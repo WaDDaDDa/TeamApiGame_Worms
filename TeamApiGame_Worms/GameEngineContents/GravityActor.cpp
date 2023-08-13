@@ -62,6 +62,12 @@ void GravityActor::CameraFocus(float _Delta)
 	float MouseX = MousePos.X;
 	float MouseY = MousePos.Y;
 
+	// 키입력이있다면 마우스포커스 false
+	if (true == GameEngineInput::AllKeyCheck())
+	{
+		MouseFocus = false;
+	}
+
 	// 마우스로 화면 이동
 	if (1200.0f < MouseX - CameraRangeX)
 	{
@@ -102,7 +108,7 @@ void GravityActor::CameraFocus(float _Delta)
 			GetLevel()->GetMainCamera()->AddPos(float4::DOWN * CameraSpeed * _Delta);
 		}
 
-		MouseFocus = false;
+		//MouseFocus = false;
 	}
 	else if (abs(CameraDir.X) <= 50.0f && abs(CameraDir.Y) <= 50.0f)
 	{
