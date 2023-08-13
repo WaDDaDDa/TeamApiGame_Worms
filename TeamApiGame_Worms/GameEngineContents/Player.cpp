@@ -677,6 +677,13 @@ void Player::Start()
 
 
 	PlayerInfoUI = GetLevel()->CreateActor<UI_PlayerInfo>();
+	
+	// 색깔 적용 테스트용
+	for (int i = 0; i < AllPlayer.size(); i++)
+	{
+		PlayerInfoUI->SetPlayerColorIndex(i);
+	}
+
 }
 
 
