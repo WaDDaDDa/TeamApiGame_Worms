@@ -12,6 +12,8 @@
 #include <GameEngineCore/GameEngineCamera.h>
 #include <GameEngineCore/GameEngineCollision.h>
 
+#include "UI_PlayerInfo.h"
+
 std::vector<Player*> Player::AllPlayer;
 
 float4 Player::DirPos = float4::ZERO;
@@ -671,6 +673,10 @@ void Player::Start()
 
 	Dir = PlayerDir::Right;
 	ChangeState(PlayerState::Idle);
+
+
+
+	PlayerInfoUI = GetLevel()->CreateActor<UI_PlayerInfo>();
 }
 
 
@@ -685,6 +691,13 @@ void Player::Update(float _Delta)
 
 	SetDirPosNormalize();
 	StateUpdate(_Delta);
+
+	
+
+	// UI 테스트용 임시 코드
+	PlayerInfoUI->SetPos({ GetPos().X - GetLevel()->GetMainCamera()->GetPos().X,  (GetPos().Y - GetLevel()->GetMainCamera()->GetPos().Y) - 70});
+	PlayerInfoUI->UpdateData_PlayerInfoUI(&Hp, IsTurnPlayer);
+
 }
 
 

@@ -3,6 +3,9 @@
 #include <GameEngineCore/GameEngineLevel.h>
 #include <vector>
 
+// UI
+#include "UI_PlayerInfo.h"
+
 enum class PlayerState
 {
 	Idle,
@@ -295,5 +298,10 @@ private:
 	float4 TargetPos = float4::ZERO;
 
 	float4 TeleportPos = float4::ZERO;
+
+
+
+	// UI
+	UI_PlayerInfo* PlayerInfoUI = nullptr;
 };
 
