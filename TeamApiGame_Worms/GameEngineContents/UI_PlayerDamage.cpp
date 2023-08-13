@@ -37,12 +37,12 @@ void UI_PlayerDamage::Start()
 
 void UI_PlayerDamage::Update(float _Delta)
 {
-	if (GetLiveTime() < 1.0f)
+	if (GetLiveTime() < 0.5f)
 	{
 		AddPos(float4::UP * 100.0f * _Delta);
 	}
 
-	if (GetLiveTime() > 1.5f)
+	if (GetLiveTime() > 0.5f)
 	{
 		Death();
 	}
@@ -51,7 +51,15 @@ void UI_PlayerDamage::Update(float _Delta)
 void UI_PlayerDamage::UpdateData_PlayerDamageUI(float4 _TargetPos, int _PlayerDamage)
 {
 	MainRenderer->SetRenderPos(_TargetPos);
-	DamageTextRenderer->SetRenderPos({ _TargetPos.X - 10,  _TargetPos.Y - 10 });
+
+	if (_PlayerDamage > 10)
+	{
+		DamageTextRenderer->SetRenderPos({ _TargetPos.X - 10,  _TargetPos.Y - 10 });
+	}
+	else if (_PlayerDamage < 10)
+	{
+		DamageTextRenderer->SetRenderPos({ _TargetPos.X - 5,  _TargetPos.Y - 10 });
+	}
 
 	int Damage = static_cast<int>(_PlayerDamage);
 	DamageTextRenderer->SetText(std::to_string(Damage));
