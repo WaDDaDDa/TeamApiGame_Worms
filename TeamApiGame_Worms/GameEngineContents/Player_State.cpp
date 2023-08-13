@@ -9,6 +9,7 @@
 #include "Sheep.h"
 #include "Uzi.h"
 #include "Grenade.h"
+#include "Self_Bomb.h"
 
 
 #include <GameEnginePlatform/GameEngineInput.h>
@@ -274,7 +275,9 @@ void Player::DeathUpdate(float _Delta)
 {
 	if(MainRenderer->IsAnimationEnd())
 	{
+		CreateWeapon<Self_Bomb>();
 		ChangeState(PlayerState::DeathEnd);
+		return;
 	}
 }
 
