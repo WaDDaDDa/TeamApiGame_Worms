@@ -48,6 +48,9 @@ private:
 	int BazookaDamage = 50;
 	float BazookaSpeed = 3000.0f;
 
+	float EffectTime = 0.0f;
+	float EffectInterval = 0.05f;
+
 	float4 Dir = float4::ZERO;
 	float4 GravityDir = float4::ZERO;
 	float4 AngleVec = float4::RIGHT;

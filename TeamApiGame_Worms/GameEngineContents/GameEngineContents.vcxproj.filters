@@ -147,6 +147,9 @@
     <ClInclude Include="UI_Wind.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="FlyEffect.h">
+      <Filter>Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -294,6 +297,9 @@
     </ClCompile>
     <ClCompile Include="UI_Wind.cpp">
       <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="FlyEffect.cpp">
+      <Filter>Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

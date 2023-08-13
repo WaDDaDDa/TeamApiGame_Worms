@@ -170,6 +170,7 @@
     </ClInclude>
     <ClInclude Include="ContentsDefine.h" />
     <ClInclude Include="ContentsEnum.h" />
+    <ClInclude Include="FlyEffect.h" />
     <ClInclude Include="GameStateManager.h" />
     <ClInclude Include="GameTurn.h">
       <SubType>
@@ -265,6 +266,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="FlyEffect.cpp" />
     <ClCompile Include="GameStateManager.cpp" />
     <ClCompile Include="GameTurn.cpp">
       <SubType>

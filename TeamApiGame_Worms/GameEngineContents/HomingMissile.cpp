@@ -8,6 +8,7 @@
 #include "Range50.h"
 #include "Range75.h"
 #include "Range100.h"
+#include "FlyEffect.h"
 
 #include <GameEngineBase/GameEnginePath.h>
 #include <GameEngineCore/GameEngineLevel.h>
@@ -334,6 +335,14 @@ void HomingMissile::RockOnFlyStart()
 void HomingMissile::RockOnFlyUpdate(float _Delta)
 {
 	AddPos(float4::RIGHT.GetRotationToDegZ(-MissileDir) * HomingMissileRockOnSpeed * _Delta);
+
+	EffectTime += _Delta;
+
+	if (EffectTime >= EffectInterval)
+	{
+		CreateBombEffect<FlyEffect>();
+		EffectTime = 0.0f;
+	}
 
 	unsigned int Color = GetGroundColor(RGB(255, 255, 255) || GetLiveTime() >= 5.0f);
 	if (Color != RGB(255, 255, 255))
