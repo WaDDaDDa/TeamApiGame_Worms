@@ -2,26 +2,14 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="BackGround.cpp" />
-    <ClCompile Include="Bazooka.cpp" />
-    <ClCompile Include="BombEffect.cpp" />
-    <ClCompile Include="FlyEffect.cpp" />
     <ClCompile Include="GameTurn.cpp" />
     <ClCompile Include="GravityActor.cpp" />
-    <ClCompile Include="Grenade.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="Hole.cpp" />
-    <ClCompile Include="HomingMissile.cpp" />
     <ClCompile Include="MouseObject.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Player_State.cpp" />
-    <ClCompile Include="Range100.cpp" />
-    <ClCompile Include="Range25.cpp" />
-    <ClCompile Include="Range50.cpp" />
-    <ClCompile Include="Range75.cpp" />
-    <ClCompile Include="Self_Bomb.cpp" />
-    <ClCompile Include="Sheep.cpp" />
     <ClCompile Include="UnderWater.cpp" />
-    <ClCompile Include="Uzi.cpp" />
     <ClCompile Include="Wave.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="Wind.cpp" />
@@ -112,28 +100,52 @@
     <ClCompile Include="ModeSelectLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
+    <ClCompile Include="BombEffect.cpp">
+      <Filter>Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="FlyEffect.cpp">
+      <Filter>Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Range25.cpp">
+      <Filter>Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Range50.cpp">
+      <Filter>Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Range75.cpp">
+      <Filter>Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Range100.cpp">
+      <Filter>Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Bazooka.cpp">
+      <Filter>Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Grenade.cpp">
+      <Filter>Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="HomingMissile.cpp">
+      <Filter>Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Self_Bomb.cpp">
+      <Filter>Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Sheep.cpp">
+      <Filter>Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Uzi.cpp">
+      <Filter>Weapon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BackGround.h" />
-    <ClInclude Include="Bazooka.h" />
-    <ClInclude Include="BombEffect.h" />
-    <ClInclude Include="FlyEffect.h" />
     <ClInclude Include="GameTurn.h" />
     <ClInclude Include="GravityActor.h" />
-    <ClInclude Include="Grenade.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="Hole.h" />
-    <ClInclude Include="HomingMissile.h" />
     <ClInclude Include="MouseObject.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Range100.h" />
-    <ClInclude Include="Range25.h" />
-    <ClInclude Include="Range50.h" />
-    <ClInclude Include="Range75.h" />
-    <ClInclude Include="Self_Bomb.h" />
-    <ClInclude Include="Sheep.h" />
     <ClInclude Include="UnderWater.h" />
-    <ClInclude Include="Uzi.h" />
     <ClInclude Include="Wave.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="Wind.h" />
@@ -230,6 +242,42 @@
     <ClInclude Include="ModeSelectLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
+    <ClInclude Include="BombEffect.h">
+      <Filter>Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="FlyEffect.h">
+      <Filter>Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Range25.h">
+      <Filter>Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Range50.h">
+      <Filter>Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Range75.h">
+      <Filter>Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Range100.h">
+      <Filter>Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Bazooka.h">
+      <Filter>Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Grenade.h">
+      <Filter>Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="HomingMissile.h">
+      <Filter>Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Self_Bomb.h">
+      <Filter>Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Sheep.h">
+      <Filter>Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Uzi.h">
+      <Filter>Weapon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="UI">
@@ -255,6 +303,12 @@
     </Filter>
     <Filter Include="Level">
       <UniqueIdentifier>{b2f83546-3162-4835-8bd2-4b1b815b3e7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Effect">
+      <UniqueIdentifier>{672d0bda-e0e3-4741-80ea-6630e0516119}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Weapon">
+      <UniqueIdentifier>{55d5a1d2-5634-496e-a69d-64ea6450e53c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
