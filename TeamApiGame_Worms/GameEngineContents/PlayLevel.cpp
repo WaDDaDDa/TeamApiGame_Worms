@@ -24,6 +24,7 @@
 #include "UI_Button.h"
 #include "UI_Inventory.h"
 #include "UI_Wind.h"
+#include "UI_Timer.h"
 
 
 #include "ContentsDefine.h"
@@ -91,7 +92,8 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 	WindBar->SetPos({ 1180 , 700 });
 
 
-
+	UI_Timer* TimerBox = CreateActor<UI_Timer>();
+	TimerBox->SetPos({ 40 , 690 });
 
 
 

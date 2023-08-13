@@ -21,6 +21,11 @@ public:
 
     static GameTurn MainGameTurn;
 
+    float GetTurnPlayTime() const
+    {
+        return TurnPlayTime;
+    }
+
 protected:
 
 private:
