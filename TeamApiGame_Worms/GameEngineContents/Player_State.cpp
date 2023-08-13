@@ -73,6 +73,11 @@ void Player::IdleUpdate(float _Delta)
 	//	return;
 	//}
 
+	if (true == GameEngineInput::IsDown('S'))
+	{
+		ChangeState(PlayerState::Death);
+	}
+
 	InputMove();
 	ChangeWeapon();
 
@@ -272,9 +277,12 @@ void Player::DeathUpdate(float _Delta)
 		ChangeState(PlayerState::DeathEnd);
 	}
 }
+
 void Player::DeathEnd()
 {
-	Death();
+	// 플레이어가 죽어서 사라지면 안됨. 
+	// 묘비 상태로 중력에는 영향을 받고있어야함.
+	// Death();
 }
 
 void Player::BazookaOnStart()
