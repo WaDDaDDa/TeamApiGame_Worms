@@ -26,6 +26,11 @@ public:
         return TurnPlayTime;
     }
 
+    float GetTurnTime()
+    {
+        return TurnTime;
+    }
+
 protected:
 
 private:
@@ -41,6 +46,7 @@ private:
     int StartValue = 0;
     // 턴플레이어 제한시간.
     float TurnPlayTime = 20.0f;
-
+    // 남은 시간
+    static float TurnTime;
 };
 

@@ -7,6 +7,7 @@
 #include "Wind.h"
 
 GameTurn GameTurn::MainGameTurn;
+float GameTurn::TurnTime = 0.0f;
 
 GameTurn::GameTurn()
 {
@@ -26,6 +27,7 @@ void GameTurn::Start()
 
 void GameTurn::Update(float _Delta)
 {
+	TurnTime = TurnPlayTime - GetLiveTime();
 	// 턴플레이어인데 무기사용으로 IsTurnPlayer가 false가되면 Turn의 시간을 멈춘다.
 	if (TurnPlayer->IsTurnPlayer == false)
 	{
