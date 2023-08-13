@@ -147,16 +147,13 @@
     <ClInclude Include="UI_Wind.h">
       <Filter>UI</Filter>
     </ClInclude>
-<<<<<<< HEAD
     <ClInclude Include="UI_Timer.h">
       <Filter>UI</Filter>
-=======
     <ClInclude Include="FlyEffect.h">
       <Filter>Effect</Filter>
     </ClInclude>
     <ClInclude Include="Self_Bomb.h">
       <Filter>Weapon</Filter>
->>>>>>> 3580961172b126bb0e0e2af9f2772a71d0b6a495
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
