@@ -75,6 +75,7 @@ public:
 	}
 
 private:
+	bool MouseFocus = false;
 	bool IsGravity = true;
 	bool IsWind = false;
 	float CameraSpeed = 2500.0f;
