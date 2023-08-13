@@ -8,6 +8,7 @@
 #include "Range50.h"
 #include "Range75.h"
 #include "Range100.h"
+#include "FlyEffect.h"
 
 #include <GameEngineBase/GameEnginePath.h>
 #include <GameEngineCore/GameEngineLevel.h>
@@ -107,6 +108,16 @@ void Bazooka::Start()
 	Renderer->CreateAnimation("9_Bazooka_Fly", "bazooka.bmp", 31, 31, 0.05f, false);
 	//// -270
 	//Renderer->CreateAnimation("Bazooka_Fly", "bazooka.bmp", 32, 32, 0.05f, false);
+
+	{
+		//Collision
+		BodyCollision = CreateCollision(CollisionOrder::Weapon);
+
+		BodyCollision->SetCollisionScale({ 10, 10 });
+		BodyCollision->SetCollisionType(CollisionType::CirCle);
+		//GrenadeCollision->SetCollisionPos({ 0, -10 });
+		BodyCollision->Off();
+	}
 
 	SetWeaponDamage(BazookaDamage);
 	SetWeaponSpeed(BazookaSpeed);
@@ -296,13 +307,34 @@ void Bazooka::FlyUpdate(float _Delta)
 	DirCheck();
 	Gravity(_Delta);
 
+	EffectTime += _Delta;
+
+	if (EffectTime >= EffectInterval)
+	{
+		CreateBombEffect<FlyEffect>();
+		EffectTime = 0.0f;
+	}
+
 	unsigned int Color = GetGroundColor(RGB(255, 255, 255));
 	if (Color != RGB(255, 255, 255) || GetLiveTime() >= 5.0f)
 	{
-
 		ChangeState(BazookaState::Bomb);
 		return;
+	}
 
+	if (GetLiveTime() >= 0.1f)
+	{
+		BodyCollision->On();
+	}
+
+	std::vector<GameEngineCollision*> _Col;
+	if (true == BodyCollision->Collision(CollisionOrder::PlayerBody, _Col
+		, CollisionType::Rect
+		, CollisionType::CirCle
+	))
+	{
+		ChangeState(BazookaState::Bomb);
+		return;
 	}
 
 }

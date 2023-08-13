@@ -170,6 +170,7 @@
     </ClInclude>
     <ClInclude Include="ContentsDefine.h" />
     <ClInclude Include="ContentsEnum.h" />
+    <ClInclude Include="FlyEffect.h" />
     <ClInclude Include="GameStateManager.h" />
     <ClInclude Include="GameTurn.h">
       <SubType>
@@ -204,6 +205,7 @@
     <ClInclude Include="Range25.h" />
     <ClInclude Include="Range50.h" />
     <ClInclude Include="Range75.h" />
+    <ClInclude Include="Self_Bomb.h" />
     <ClInclude Include="Sheep.h" />
     <ClInclude Include="TitleLevel.h">
       <SubType>
@@ -266,6 +268,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="FlyEffect.cpp" />
     <ClCompile Include="GameStateManager.cpp" />
     <ClCompile Include="GameTurn.cpp">
       <SubType>
@@ -301,6 +304,7 @@
     <ClCompile Include="Range25.cpp" />
     <ClCompile Include="Range50.cpp" />
     <ClCompile Include="Range75.cpp" />
+    <ClCompile Include="Self_Bomb.cpp" />
     <ClCompile Include="Sheep.cpp" />
     <ClCompile Include="TitleLevel.cpp">
       <SubType>

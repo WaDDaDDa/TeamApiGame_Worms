@@ -1,7 +1,7 @@
 #pragma once
 #include "Weapon.h"
 
-enum class BazookaState
+enum class Self_BombState
 {
 	Fly,
 	Bomb,
@@ -9,22 +9,20 @@ enum class BazookaState
 	Max,
 };
 
-class Bazooka : public Weapon
+class Self_Bomb : public Weapon
 {
 public:
 	// constrcuter destructer
-	Bazooka();
-	~Bazooka();
+	Self_Bomb();
+	~Self_Bomb();
 
 	// delete Function
-	Bazooka(const Bazooka& _Other) = delete;
-	Bazooka(Bazooka&& _Other) noexcept = delete;
-	Bazooka& operator=(const Bazooka& _Other) = delete;
-	Bazooka& operator=(Bazooka&& _Other) noexcept = delete;
+	Self_Bomb(const Self_Bomb& _Other) = delete;
+	Self_Bomb(Self_Bomb&& _Other) noexcept = delete;
+	Self_Bomb& operator=(const Self_Bomb& _Other) = delete;
+	Self_Bomb& operator=(Self_Bomb&& _Other) noexcept = delete;
 
 	class GameEngineRenderer* Renderer = nullptr;
-
-	GameEngineCollision* BombCollision = nullptr;
 
 	void SetDir(float4& _DirPos)
 	{
@@ -32,7 +30,7 @@ public:
 	}
 
 protected:
-	void ChangeState(BazookaState _State);
+	void ChangeState(Self_BombState _State);
 	void StateUpdate(float _Delta);
 
 	void FlyStart();
@@ -44,22 +42,22 @@ protected:
 	void MaxStart();
 	void MaxUpdate(float _Delta);
 
+	void CameraFocus(float _Delta) override;
+
+
 private:
-	int BazookaDamage = 50;
-	float BazookaSpeed = 3000.0f;
-
-	float EffectTime = 0.0f;
-	float EffectInterval = 0.05f;
-
-	GameEngineCollision* BodyCollision = nullptr;
+	int Self_BombDamage = 50;
+	float Self_BombSpeed = 2000.0f;
 
 	float4 Dir = float4::ZERO;
 	float4 GravityDir = float4::ZERO;
 	float4 AngleVec = float4::RIGHT;
 
-	BazookaState State = BazookaState::Max;
+	Self_BombState State = Self_BombState::Max;
 
-	class BombEffect* BazookaBomb = nullptr;
+	class BombEffect* Self_BombBomb = nullptr;
+
+	GameEngineCollision* BodyCollision = nullptr;
 
 	void DirCheck();
 

@@ -113,10 +113,10 @@ void Grenade::Start()
 
 	{
 		//Collision
-		GrenadeCollision = CreateCollision(CollisionOrder::PlayerBody);
+		BodyCollision = CreateCollision(CollisionOrder::Weapon);
 
-		GrenadeCollision->SetCollisionScale({ 10, 10 });
-		GrenadeCollision->SetCollisionType(CollisionType::CirCle);
+		BodyCollision->SetCollisionScale({ 10, 10 });
+		BodyCollision->SetCollisionType(CollisionType::CirCle);
 		//GrenadeCollision->SetCollisionPos({ 0, -10 });
 	}
 
@@ -424,9 +424,6 @@ void Grenade::FlyUpdate(float _Delta)
 	// 튕기는걸 세부화 해야함. 보류();
 	unsigned int Color = GetGroundColor(RGB(255, 255, 255));
 	unsigned int DownColor = GetGroundColor(RGB(255, 255, 255), DownCheckPos);
-	unsigned int UpColor = GetGroundColor(RGB(255, 255, 255), UpCheckPos);
-	unsigned int LeftColor = GetGroundColor(RGB(255, 255, 255), LeftCheckPos);
-	unsigned int RightColor = GetGroundColor(RGB(255, 255, 255), RightCheckPos);
 
 	float4 CurCravityVector = GetGravityVector();
 	float YVector = CurCravityVector.Y;
@@ -436,12 +433,6 @@ void Grenade::FlyUpdate(float _Delta)
 		ChangeState(GrenadeState::Idle);
 		return;
 	}
-
-	//if (abs(YVector) <= 5.0f)
-	//{
-	//	ChangeState(GrenadeState::Idle);
-	//	return;
-	//}
 
 	// 위치가 흰색이면 중력작용.
 	// 모두 흰색이면 공중이다.
@@ -462,13 +453,6 @@ void Grenade::FlyUpdate(float _Delta)
 		ChangeState(GrenadeState::Bomb);
 		return;
 	}
-
-
-	//if (Color != RGB(255, 255, 255))
-	//{
-	//	ChangeState(GrenadeState::Idle);
-	//	return;
-	//}
 }
 
 

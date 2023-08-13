@@ -39,7 +39,7 @@ void GameTurn::Update(float _Delta)
 		int PlayerStateCount = 0;
 		for (size_t i = 0; i < PlayerCount; i++)
 		{
-			if (PlayerState::Idle == Player::GetAllPlayer()[i]->GetState()/* || PlayerState::Die == Player::GetAllPlayer()[i]->GetState()*/)
+			if (PlayerState::Idle == Player::GetAllPlayer()[i]->GetState() || PlayerState::DeathEnd == Player::GetAllPlayer()[i]->GetState())
 			{
 				PlayerStateCount++;
 			}
@@ -116,10 +116,23 @@ void GameTurn::ChangeTurnPlayer(float _Delta)
 
 	++StartValue;
 	size_t SIZE = Player::GetAllPlayer().size();
+
 	if (StartValue >= SIZE)
 	{
 		StartValue = 0;
 	}
+	
+	// 플레이어 상태가 죽어있으면 다음 플레이어로.
+	while (PlayerState::DeathEnd == Player::GetAllPlayer()[StartValue]->GetState())
+	{
+		++StartValue;
+		if (StartValue >= SIZE)
+		{
+			StartValue = 0;
+		}
+	}
+
+
 	TurnPlayer = Player::GetAllPlayer()[StartValue];
 	// 현재 플레이어 bool값 true로 변경
 	TurnPlayer->SwitchIsTurnPlayer();

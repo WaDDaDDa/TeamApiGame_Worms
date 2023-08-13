@@ -9,6 +9,7 @@
 #include "Sheep.h"
 #include "Uzi.h"
 #include "Grenade.h"
+#include "Self_Bomb.h"
 
 
 #include <GameEnginePlatform/GameEngineInput.h>
@@ -72,6 +73,11 @@ void Player::IdleUpdate(float _Delta)
 	//	ChangeState(PlayerState::JumpReady);
 	//	return;
 	//}
+
+	if (true == GameEngineInput::IsDown('S'))
+	{
+		ChangeState(PlayerState::Death);
+	}
 
 	InputMove();
 	ChangeWeapon();
@@ -269,12 +275,17 @@ void Player::DeathUpdate(float _Delta)
 {
 	if(MainRenderer->IsAnimationEnd())
 	{
+		CreateWeapon<Self_Bomb>();
 		ChangeState(PlayerState::DeathEnd);
+		return;
 	}
 }
+
 void Player::DeathEnd()
 {
-	Death();
+	// 플레이어가 죽어서 사라지면 안됨. 
+	// 묘비 상태로 중력에는 영향을 받고있어야함.
+	// Death();
 }
 
 void Player::BazookaOnStart()
