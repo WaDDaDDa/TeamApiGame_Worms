@@ -4,7 +4,6 @@
 #include <GameEngineCore/GameEngineRenderer.h>
 #include "ContentsEnum.h"
 #include "GameTurn.h"
-#include <math.h>
 #include <string.h>
 
 UI_Timer* UI_Timer::TimerUI = nullptr;
@@ -71,12 +70,10 @@ void UI_Timer::Start()
 
 void UI_Timer::Update(float _Delta)
 {
-	// 여기서 - 계산한 건 테스트용입니다 턴이 넘어가버리면 리셋이 없어서 -가 되기 때문에 최종버전 X 
-	// => GameTurn 쪽에서 GetTurnPlayTime() - GetLiveTime() 계산을 한채로 넘어와야 리셋이 정확하게 되기 때문에 수정되어야 합니다
-	int t = static_cast<int>(GameTurn::MainGameTurn.GetTurnTime());
-	TimerTextRenderer->SetText(std::to_string(t));
+	int CurTurnTime = static_cast<int>(GameTurn::MainGameTurn.GetTurnTime());
+	TimerTextRenderer->SetText(std::to_string(CurTurnTime));
 
-	if (t < 10)
+	if (CurTurnTime < 10)
 	{
 		TimerTextRenderer->SetRenderPos({ -5, -8 });
 	}

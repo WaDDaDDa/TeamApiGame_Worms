@@ -17,6 +17,9 @@
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEngineCore/GameEngineCollision.h>
 
+// UI
+#include "UI_PlayerDamage.h"
+
 #define RIGHT_UP_MAXANGEL  -90
 #define RIGHT_DOWN_MAXANGEL  90
 #define LEFT_UP_MAXANGEL 270
@@ -209,6 +212,9 @@ void Player::DamagingStart()
 {
 	ChangeAnimationState("Damaging");
 
+	// 데미지 UI 생성
+	UI_PlayerDamage* DamageUI = GetLevel()->CreateActor<UI_PlayerDamage>();
+
 	std::vector<GameEngineCollision*> _Col;
 	if (true == PlayerBodyCollision->Collision(CollisionOrder::Bomb, _Col
 		, CollisionType::Rect
@@ -245,6 +251,9 @@ void Player::DamagingStart()
 		{
 			Damaging = 5;
 		}
+
+		// 데미지 UI 출력
+		DamageUI->UpdateData_PlayerDamageUI(PlayerInfoUI->GetPos(), Damaging);
 
 		this->Hp -= Damaging;
 

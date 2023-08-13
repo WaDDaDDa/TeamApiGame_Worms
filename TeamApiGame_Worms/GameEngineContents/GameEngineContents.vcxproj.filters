@@ -136,6 +136,9 @@
     <ClCompile Include="Uzi.cpp">
       <Filter>Weapon</Filter>
     </ClCompile>
+    <ClCompile Include="UI_PlayerDamage.cpp">
+      <Filter>UI\PlayLevelUIs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BackGround.h" />
@@ -277,6 +280,9 @@
     </ClInclude>
     <ClInclude Include="Uzi.h">
       <Filter>Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_PlayerDamage.h">
+      <Filter>UI\PlayLevelUIs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
