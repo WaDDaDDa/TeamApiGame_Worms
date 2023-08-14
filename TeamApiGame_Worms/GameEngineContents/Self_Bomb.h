@@ -1,7 +1,7 @@
 #pragma once
 #include "Weapon.h"
 
-enum class UziState
+enum class Self_BombState
 {
 	Fly,
 	Bomb,
@@ -9,18 +9,18 @@ enum class UziState
 	Max,
 };
 
-class Uzi : public Weapon
+class Self_Bomb : public Weapon
 {
 public:
 	// constrcuter destructer
-	Uzi();
-	~Uzi();
+	Self_Bomb();
+	~Self_Bomb();
 
 	// delete Function
-	Uzi(const Uzi& _Other) = delete;
-	Uzi(Uzi&& _Other) noexcept = delete;
-	Uzi& operator=(const Uzi& _Other) = delete;
-	Uzi& operator=(Uzi&& _Other) noexcept = delete;
+	Self_Bomb(const Self_Bomb& _Other) = delete;
+	Self_Bomb(Self_Bomb&& _Other) noexcept = delete;
+	Self_Bomb& operator=(const Self_Bomb& _Other) = delete;
+	Self_Bomb& operator=(Self_Bomb&& _Other) noexcept = delete;
 
 	class GameEngineRenderer* Renderer = nullptr;
 
@@ -30,7 +30,7 @@ public:
 	}
 
 protected:
-	void ChangeState(UziState _State);
+	void ChangeState(Self_BombState _State);
 	void StateUpdate(float _Delta);
 
 	void FlyStart();
@@ -46,17 +46,16 @@ protected:
 
 
 private:
-	int UziDamage = 50;
-	//float UziSpeed = 2000.0f;
-	float UziSpeed = 1000.0f;
+	int Self_BombDamage = 50;
+	float Self_BombSpeed = 2000.0f;
 
 	float4 Dir = float4::ZERO;
 	float4 GravityDir = float4::ZERO;
 	float4 AngleVec = float4::RIGHT;
 
-	UziState State = UziState::Max;
+	Self_BombState State = Self_BombState::Max;
 
-	class BombEffect* UziBomb = nullptr;
+	class BombEffect* Self_BombBomb = nullptr;
 
 	GameEngineCollision* BodyCollision = nullptr;
 

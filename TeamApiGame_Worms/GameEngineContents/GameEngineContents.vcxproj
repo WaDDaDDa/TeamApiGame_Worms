@@ -209,11 +209,13 @@
     <ClInclude Include="Range25.h" />
     <ClInclude Include="Range50.h" />
     <ClInclude Include="Range75.h" />
+    <ClInclude Include="Self_Bomb.h" />
     <ClInclude Include="Sheep.h" />
     <ClInclude Include="TitleLevel.h">
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="UI_Box_AllTeamHpBar.h" />
     <ClInclude Include="UI_Box_Barracks.h" />
     <ClInclude Include="UI_Box_SchemeOption.h" />
     <ClInclude Include="UI_Box_Teams.h" />
@@ -230,9 +232,13 @@
     <ClInclude Include="UI_MainLogo.h" />
     <ClInclude Include="UI_Meteor.h" />
     <ClInclude Include="UI_Mouse.h" />
+    <ClInclude Include="UI_PlayerDamage.h" />
+    <ClInclude Include="UI_PlayerInfo.h" />
     <ClInclude Include="UI_RoundTime_Button.h" />
+    <ClInclude Include="UI_TeamHpBar.h" />
     <ClInclude Include="UI_Teleportin_Button.h" />
     <ClInclude Include="UI_Terrain_Button.h" />
+    <ClInclude Include="UI_Timer.h" />
     <ClInclude Include="UI_TurnTime_Button.h" />
     <ClInclude Include="UI_Wind.h" />
     <ClInclude Include="UI_Win_Button.h" />
@@ -310,11 +316,13 @@
     <ClCompile Include="Range25.cpp" />
     <ClCompile Include="Range50.cpp" />
     <ClCompile Include="Range75.cpp" />
+    <ClCompile Include="Self_Bomb.cpp" />
     <ClCompile Include="Sheep.cpp" />
     <ClCompile Include="TitleLevel.cpp">
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="UI_Box_AllTeamHpBar.cpp" />
     <ClCompile Include="UI_Box_Barracks.cpp" />
     <ClCompile Include="UI_Box_SchemeOption.cpp" />
     <ClCompile Include="UI_Box_Teams.cpp" />
@@ -331,9 +339,13 @@
     <ClCompile Include="UI_MainLogo.cpp" />
     <ClCompile Include="UI_Meteor.cpp" />
     <ClCompile Include="UI_Mouse.cpp" />
+    <ClCompile Include="UI_PlayerDamage.cpp" />
+    <ClCompile Include="UI_PlayerInfo.cpp" />
     <ClCompile Include="UI_RoundTime_Button.cpp" />
+    <ClCompile Include="UI_TeamHpBar.cpp" />
     <ClCompile Include="UI_Teleportin_Button.cpp" />
     <ClCompile Include="UI_Terrain_Button.cpp" />
+    <ClCompile Include="UI_Timer.cpp" />
     <ClCompile Include="UI_TurnTime_Button.cpp" />
     <ClCompile Include="UI_Wind.cpp" />
     <ClCompile Include="UI_Win_Button.cpp" />

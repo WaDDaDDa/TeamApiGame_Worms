@@ -19,13 +19,17 @@
 #include "Cloud.h"
 
 #include "GameStateManager.h"
+#include "UI_PlayerInfo.h"
 
 #pragma region UI에서 사용할 헤더 & 함수 전방 선언
 #include "UI_Mouse.h"
 #include "UI_Button.h"
 #include "UI_Inventory.h"
 #include "UI_Wind.h"
+#include "UI_Timer.h"
 
+
+#include "UI_Box_AllTeamHpBar.h"
 
 #include "ContentsDefine.h"
 
@@ -84,19 +88,22 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 	int a = 0;
 
 	Inven = CreateActor<UI_Inventory>();
-//	Inven->SetPos({1180, 500}); // ON 시 최종 위치
 	Inven->SetPos({ 1400, 480 }); // UI 렌더러 사용시 초기 위치
-
-//	Inven->SetPos({ 1359, 1770 }); // 일반 엑터 사용시 초기 위치
-
 
 	UI_Wind* WindBar = CreateActor<UI_Wind>();
 	WindBar->SetPos({ 1180 , 700 });
 
 
+	UI_Timer* TimerBox = CreateActor<UI_Timer>();
+	TimerBox->SetPos({ 40 , 690 });
 
+	UI_Box_AllTeamHpBar* AllTeamHpBar = CreateActor<UI_Box_AllTeamHpBar>();
+	AllTeamHpBar->SetPos({ 400, 700 });
+	AllTeamHpBar->AddTeamHpBar();
 
+	//UI_TeamHpBar* TeamHp = CreateActor<UI_TeamHpBar>();
 
+	//TeamHp->SetPos({ 100, 100});
 
 
 	//// UI 세팅 테스트

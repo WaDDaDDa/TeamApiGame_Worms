@@ -86,6 +86,19 @@ public:
 	static float GetPressTime(int _Key);
 	static void ResetPressTime(int _Key);
 
+	static bool AllKeyCheck()
+	{
+		size_t Value = AllKeys.size();
+
+		for (size_t i = 0; i < Value; i++)
+		{
+			if (true == AllKeys[static_cast<int>(i)].Down)
+			{
+				return true;
+			}
+		}
+	}
+
 protected:
 
 private:

@@ -9,12 +9,16 @@
 #include "Sheep.h"
 #include "Uzi.h"
 #include "Grenade.h"
+#include "Self_Bomb.h"
 
 
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEngineCore/GameEngineCollision.h>
+
+// UI
+#include "UI_PlayerDamage.h"
 
 #define RIGHT_UP_MAXANGEL  -90
 #define RIGHT_DOWN_MAXANGEL  90
@@ -24,26 +28,29 @@
 void Player::IdleStart()
 {
 	ChangeAnimationState("Idle");
+
+	PlayerBodyCollision->On();
 }
 void Player::IdleUpdate(float _Delta)
 {
 	GroundCheck(_Delta);
 
-	std::vector<GameEngineCollision*> _Col;
-	if (true == PlayerBodyCollision->Collision(CollisionOrder::Bomb, _Col
-		, CollisionType::Rect
-		, CollisionType::CirCle
-	))
-	{
-		for (size_t i = 0; i < _Col.size(); i++)
-		{
-			GameEngineCollision* Collison = _Col[i];
+	//std::vector<GameEngineCollision*> _Col;
+	//if (true == PlayerBodyCollision->Collision(CollisionOrder::Bomb, _Col
+	//	, CollisionType::Rect
+	//	, CollisionType::CirCle
+	//))
+	//{
+	//	for (size_t i = 0; i < _Col.size(); i++)
+	//	{
+	//		GameEngineCollision* Collison = _Col[i];
 
-			GameEngineActor* Actor = Collison->GetActor();
-		}
-		ChangeState(PlayerState::Damaging);
-	}
+	//		GameEngineActor* Actor = Collison->GetActor();
+	//	}
+	//	ChangeState(PlayerState::Damaging);
+	//}
 
+	DamagingCheck();
 
 	unsigned int Color = GetGroundColor(RGB(255, 255, 255), float4::DOWN);
 
@@ -72,6 +79,11 @@ void Player::IdleUpdate(float _Delta)
 	//	ChangeState(PlayerState::JumpReady);
 	//	return;
 	//}
+
+	if (0 >= Hp)
+	{
+		ChangeState(PlayerState::Death);
+	}
 
 	if (true == GameEngineInput::IsDown('S'))
 	{
@@ -208,6 +220,9 @@ void Player::DamagingStart()
 {
 	ChangeAnimationState("Damaging");
 
+	// 데미지 UI 생성
+	UI_PlayerDamage* DamageUI = GetLevel()->CreateActor<UI_PlayerDamage>();
+
 	std::vector<GameEngineCollision*> _Col;
 	if (true == PlayerBodyCollision->Collision(CollisionOrder::Bomb, _Col
 		, CollisionType::Rect
@@ -227,8 +242,9 @@ void Player::DamagingStart()
 
 			WeaponPos = Actor->GetPos();
 
-			Collision->Off();
-
+			//Collision->Off();
+			
+			PlayerBodyCollision->Off();
 		}
 		GravityDir = GetPos() - WeaponPos;
 		GravityDir.Normalize();
@@ -244,6 +260,9 @@ void Player::DamagingStart()
 		{
 			Damaging = 5;
 		}
+
+		// 데미지 UI 출력
+		DamageUI->UpdateData_PlayerDamageUI(PlayerInfoUI->GetPos(), Damaging);
 
 		this->Hp -= Damaging;
 
@@ -264,6 +283,11 @@ void Player::DamagingUpdate(float _Delta)
 		ChangeState(PlayerState::Idle);
 		return;
 	}
+
+	/*if (0 >= Hp)
+	{
+		ChangeState(PlayerState::Death);
+	}*/
 }
 
 void Player::DeathStart()
@@ -274,15 +298,22 @@ void Player::DeathUpdate(float _Delta)
 {
 	if(MainRenderer->IsAnimationEnd())
 	{
+		CreateWeapon<Self_Bomb>();
 		ChangeState(PlayerState::DeathEnd);
+		return;
 	}
 }
 
-void Player::DeathEnd()
+void Player::DeathEndStart()
 {
 	// 플레이어가 죽어서 사라지면 안됨. 
 	// 묘비 상태로 중력에는 영향을 받고있어야함.
 	// Death();
+	ChangeAnimationState("GraveStone");
+}
+void Player::DeathEndUpdate(float _Delta)
+{
+	GroundCheck(_Delta);
 }
 
 void Player::BazookaOnStart()
@@ -500,6 +531,8 @@ void Player::BazookaFireStart()
 
 void Player::BazookaFireUpdate(float _Delta)
 {
+	DamagingCheck();
+
 	ChangeState(PlayerState::BazookaOff);
 	return;
 }
@@ -511,6 +544,8 @@ void Player::BazookaOffStart()
 
 void Player::BazookaOffUpdate(float _Delta)
 {
+	DamagingCheck();
+
 	if (true == MainRenderer->IsAnimationEnd())
 	{
 		ChangeState(PlayerState::Idle);
@@ -758,6 +793,7 @@ void Player::UziFireStart()
 }
 void Player::UziFireUpdate(float _Delta)
 {
+	DamagingCheck();
 	std::string AnimationUzi = "Uzi" + std::to_string(UziAnimationNumber);
 	std::string AnimationUziFire = "UziFire" + std::to_string(UziAnimationNumber);
 
@@ -791,6 +827,7 @@ void Player::UziOffStart()
 }
 void Player::UziOffUpdate(float _Delta)
 {
+	DamagingCheck();
 	if (true == MainRenderer->IsAnimationEnd())
 	{
 		ChangeState(PlayerState::Idle);
@@ -1019,6 +1056,7 @@ void Player::HomingMissileFireStart()
 }
 void Player::HomingMissileFireUpdate(float _Delta)
 {
+	DamagingCheck();
 	ChangeState(PlayerState::HomingMissileOff);
 }
 
@@ -1028,6 +1066,7 @@ void Player::HomingMissileOffStart()
 }
 void Player::HomingMissileOffUpdate(float _Delta)
 {
+	DamagingCheck();
 	if (true == MainRenderer->IsAnimationEnd())
 	{
 		ChangeState(PlayerState::Idle);
@@ -1076,6 +1115,7 @@ void Player::SheepFireStart()
 }
 void Player::SheepFireUpdate(float _Delta)
 {
+	DamagingCheck();
 	ChangeState(PlayerState::SheepOff);
 }
 
@@ -1085,6 +1125,7 @@ void Player::SheepOffStart()
 }
 void Player::SheepOffUpdate(float _Delta)
 {
+	DamagingCheck();
 	if (MainRenderer->IsAnimationEnd())
 	{
 		ChangeState(PlayerState::Idle);
@@ -1305,6 +1346,7 @@ void Player::GranadeFireStart()
 }
 void Player::GranadeFireUpdate(float _Delta)
 {
+	DamagingCheck();
 	ChangeState(PlayerState::GranadeOff);
 }
 
@@ -1314,6 +1356,7 @@ void Player::GranadeOffStart()
 }
 void Player::GranadeOffUpdate(float _Delta)
 {
+	DamagingCheck();
 	if (MainRenderer->IsAnimationEnd())
 	{
 		ChangeState(PlayerState::Idle);

@@ -3,6 +3,9 @@
 #include <GameEngineCore/GameEngineLevel.h>
 #include <vector>
 
+// UI
+#include "UI_PlayerInfo.h"
+
 enum class PlayerState
 {
 	Idle,
@@ -150,7 +153,9 @@ protected:
 
 	void DeathStart();
 	void DeathUpdate(float _Delta);
-	void DeathEnd();
+
+	void DeathEndStart();
+	void DeathEndUpdate(float _Delta);
 
 	void BazookaOnStart();
 	void BazookaOnUpdate(float _Delta);
@@ -252,6 +257,7 @@ protected:
 
 	void InputMove();
 	void ChangeWeapon();
+	void DamagingCheck();
 
 	// Collision
 	GameEngineCollision* PlayerBodyCollision = nullptr;
@@ -295,5 +301,10 @@ private:
 	float4 TargetPos = float4::ZERO;
 
 	float4 TeleportPos = float4::ZERO;
+
+
+
+	// UI
+	UI_PlayerInfo* PlayerInfoUI = nullptr;
 };
 

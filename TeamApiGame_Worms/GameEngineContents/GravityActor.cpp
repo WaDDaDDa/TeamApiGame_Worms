@@ -7,6 +7,8 @@
 #include <GameEngineCore/ResourcesManager.h>
 #include <GameEngineCore/GameEngineCamera.h>
 #include <GameEngineCore/GameEngineLevel.h>
+#include <GameEnginePlatform/GameEngineInput.h>
+#include "MouseObject.h"
 
 GravityActor::GravityActor()
 {
@@ -55,8 +57,60 @@ void GravityActor::CameraFocus(float _Delta)
 	float4 CameraTargetPos = GetPos() + float4{ -WindowScale.hX(), -WindowScale.hY() };
 	
 	float4 CameraDir = CameraTargetPos - CameraPos;
+	
+	float4 MousePos = MouseObject::GetPlayMousePos();
+	float MouseX = MousePos.X;
+	float MouseY = MousePos.Y;
 
-	if (abs(CameraDir.X) <= 50.0f && abs(CameraDir.Y) <= 50.0f)
+	// 키입력이있다면 마우스포커스 false
+	if (true == GameEngineInput::AllKeyCheck())
+	{
+		MouseFocus = false;
+	}
+
+	// 마우스로 화면 이동
+	if (1200.0f < MouseX - CameraRangeX)
+	{
+		MouseFocus = true;
+	}
+	else if (80.0f > MouseX - CameraRangeX)
+	{
+		MouseFocus = true;
+	}
+
+	if (-80.0f < CameraRangeY - MouseY)
+	{
+		MouseFocus = true;
+	}
+	else if (-640.0f > CameraRangeY - MouseY)
+	{
+		MouseFocus = true;
+	}
+
+	// 플레이어 포커싱
+	if (MouseFocus == true)
+	{	// 마우스로 화면 이동
+		if (1200.0f < MouseX - CameraRangeX)
+		{
+			GetLevel()->GetMainCamera()->AddPos(float4::RIGHT * CameraSpeed * _Delta);
+		}
+		else if (80.0f > MouseX - CameraRangeX)
+		{
+			GetLevel()->GetMainCamera()->AddPos(float4::LEFT * CameraSpeed * _Delta);
+		}
+
+		if (-80.0f < CameraRangeY - MouseY)
+		{
+			GetLevel()->GetMainCamera()->AddPos(float4::UP * CameraSpeed * _Delta);
+		}
+		else if (-640.0f > CameraRangeY - MouseY)
+		{
+			GetLevel()->GetMainCamera()->AddPos(float4::DOWN * CameraSpeed * _Delta);
+		}
+
+		//MouseFocus = false;
+	}
+	else if (abs(CameraDir.X) <= 50.0f && abs(CameraDir.Y) <= 50.0f)
 	{
 		GetLevel()->GetMainCamera()->SetPos(CameraTargetPos);
 	}
@@ -65,7 +119,6 @@ void GravityActor::CameraFocus(float _Delta)
 		CameraDir.Normalize();
 		GetLevel()->GetMainCamera()->AddPos(CameraDir * CameraSpeed * _Delta);
 	}
-
 
 
 	// 카메라가 맵의 왼쪽으로 못나가게.

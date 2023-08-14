@@ -12,6 +12,8 @@
 #include <GameEngineCore/GameEngineCamera.h>
 #include <GameEngineCore/GameEngineCollision.h>
 
+#include "UI_PlayerInfo.h"
+
 std::vector<Player*> Player::AllPlayer;
 
 float4 Player::DirPos = float4::ZERO;
@@ -550,6 +552,16 @@ void Player::Start()
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("wdieRight.bmp"), 1, 60);
 		}
+
+		// GraveStone
+		if (false == ResourcesManager::GetInst().IsLoadTexture("GraveStone.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("GraveStone.bmp"), 5, 12); 
+		}
 	}
 
 
@@ -590,6 +602,7 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Left_GirderOn", "girderOnLeft.bmp", 0, 14, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_Girder", "girderOnLeft.bmp", 14, 14, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_GirderOff", "girderOffLeft.bmp", 0, 14, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_GraveStone", "GraveStone.bmp", 0, 59, 0.1f, true);
 
 
 		// Right
@@ -625,6 +638,7 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Right_GirderOn", "girderOnRight.bmp", 0, 14, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_Girder", "girderOnRight.bmp", 14, 14, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_GirderOff", "girderOffRight.bmp", 0, 14, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_GraveStone", "GraveStone.bmp", 0, 59, 0.1f, true);
 
 		// BazookaAnimation
 		for (int i = 0; i < 32; i++)
@@ -671,6 +685,17 @@ void Player::Start()
 
 	Dir = PlayerDir::Right;
 	ChangeState(PlayerState::Idle);
+
+
+
+	PlayerInfoUI = GetLevel()->CreateActor<UI_PlayerInfo>();
+	
+	// 색깔 적용 테스트용
+	for (int i = 0; i < AllPlayer.size(); i++)
+	{
+		PlayerInfoUI->SetPlayerColorIndex(i);
+	}
+
 }
 
 
@@ -685,6 +710,13 @@ void Player::Update(float _Delta)
 
 	SetDirPosNormalize();
 	StateUpdate(_Delta);
+
+	
+
+	// UI 테스트용 임시 코드
+	PlayerInfoUI->SetPos({ GetPos().X - GetLevel()->GetMainCamera()->GetPos().X,  (GetPos().Y - GetLevel()->GetMainCamera()->GetPos().Y) - 70});
+	PlayerInfoUI->UpdateData_PlayerInfoUI(&Hp, IsTurnPlayer);
+
 }
 
 
@@ -732,9 +764,9 @@ void Player::Render(float _Delta)
 		Rectangle(dc, Data.iLeft(), Data.iTop(), Data.iRight(), Data.iBot());
 	}
 
-	std::string Text = "";
-	Text += std::to_string(Hp);
-	TextOutA(dc, ActorCameraPos().iX(), (ActorCameraPos().iY() - 50), Text.c_str(), static_cast<int>(Text.size()));
+	//std::string Text = "";
+	//Text += std::to_string(Hp);
+	//TextOutA(dc, ActorCameraPos().iX(), (ActorCameraPos().iY() - 50), Text.c_str(), static_cast<int>(Text.size()));
 }
 
 void Player::ChangeState(PlayerState _State)
@@ -765,7 +797,7 @@ void Player::ChangeState(PlayerState _State)
 			DeathStart();
 			break;
 		case PlayerState::DeathEnd:
-			DeathEnd();
+			DeathEndStart();
 			break;
 		case PlayerState::BazookaOn:
 			BazookaOnStart();
@@ -887,6 +919,8 @@ void Player::StateUpdate(float _Delta)
 		return DamagingUpdate(_Delta);
 	case PlayerState::Death:
 		return DeathUpdate(_Delta);
+	case PlayerState::DeathEnd:
+		return DeathEndUpdate(_Delta);
 	case PlayerState::BazookaOn:
 		return BazookaOnUpdate(_Delta);
 	case PlayerState::Bazooka:
@@ -1167,4 +1201,32 @@ void Player::ChangeWeapon()
 		ChangeState(PlayerState::GirderOn);
 	}
 
+
+
+	//Debug Key
+	//if (true == GameEngineInput::IsDown(VK_F4))
+	//{
+	//	Hp -= 100;
+	//}
+}
+
+void Player::DamagingCheck()
+{
+	std::vector<GameEngineCollision*> _Col;
+	if (true == PlayerBodyCollision->Collision(CollisionOrder::Bomb, _Col
+		, CollisionType::Rect
+		, CollisionType::CirCle)/* ||
+		true == PlayerBodyCollision->Collision(CollisionOrder::Weapon, _Col
+		, CollisionType::Rect
+		, CollisionType::CirCle)*/
+	)
+	{
+		for (size_t i = 0; i < _Col.size(); i++)
+		{
+			GameEngineCollision* Collison = _Col[i];
+
+			GameEngineActor* Actor = Collison->GetActor();
+		}
+		ChangeState(PlayerState::Damaging);
+	}
 }

@@ -6,7 +6,10 @@
 #include "Player.h"
 #include "Wind.h"
 
+#include "UI_Timer.h"
+
 GameTurn GameTurn::MainGameTurn;
+float GameTurn::TurnTime = 0.0f;
 
 GameTurn::GameTurn()
 {
@@ -26,6 +29,7 @@ void GameTurn::Start()
 
 void GameTurn::Update(float _Delta)
 {
+	TurnTime = TurnPlayTime - GetLiveTime();
 	// 턴플레이어인데 무기사용으로 IsTurnPlayer가 false가되면 Turn의 시간을 멈춘다.
 	if (TurnPlayer->IsTurnPlayer == false)
 	{
@@ -140,6 +144,9 @@ void GameTurn::ChangeTurnPlayer(float _Delta)
 	TurnPlayer = Player::GetAllPlayer()[StartValue];
 	// 현재 플레이어 bool값 true로 변경
 	TurnPlayer->SwitchIsTurnPlayer();
+
+	// 타이머 UI의 색깔을 현재 TurnPlayer에 맞게 변환
+	UI_Timer::GetTimerUI()->ChangeTimerColor(StartValue);
 
 	ResetLiveTime();
 	Wind::GetWind()->ChangeWind(_Delta);
