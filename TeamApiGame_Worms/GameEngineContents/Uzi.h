@@ -46,9 +46,9 @@ protected:
 
 
 private:
-	int UziDamage = 50;
+	int UziDamage = 10;
 	//float UziSpeed = 2000.0f;
-	float UziSpeed = 1000.0f;
+	float UziSpeed = 700.0f;
 
 	float4 Dir = float4::ZERO;
 	float4 GravityDir = float4::ZERO;

@@ -250,21 +250,26 @@ void Player::DamagingStart()
 		GravityDir.Normalize();
 		GravityDir += float4::UP;
 
-		WeaponPlayerPos = GetPos() - WeaponPos;
 
-		float BazookaDamage = 50.0f;
-
-		float Damaging = BazookaDamage - (WeaponPlayerPos.Size());
-
-		if (0 >= Damaging)
+		// Damage 받는 부분
 		{
-			Damaging = 5;
+			WeaponPlayerPos = GetPos() - WeaponPos;
+
+			float BazookaDamage = 50.0f;
+
+			float Damaging = BazookaDamage - (WeaponPlayerPos.Size());
+
+			if (0 >= Damaging)
+			{
+				Damaging = 5;
+			}
+
+			// 데미지 UI 출력
+			DamageUI->UpdateData_PlayerDamageUI(PlayerInfoUI->GetPos(), Damaging);
+
+			this->Hp -= Damaging;
+
 		}
-
-		// 데미지 UI 출력
-		DamageUI->UpdateData_PlayerDamageUI(PlayerInfoUI->GetPos(), Damaging);
-
-		this->Hp -= Damaging;
 
 		SetGravityVector(GravityDir * 250.0f);
 	}
@@ -797,7 +802,7 @@ void Player::UziFireUpdate(float _Delta)
 	std::string AnimationUzi = "Uzi" + std::to_string(UziAnimationNumber);
 	std::string AnimationUziFire = "UziFire" + std::to_string(UziAnimationNumber);
 
-	if (0.2f <= GetLiveTime())
+	if (0.05f <= GetLiveTime())
 	{
 		if (MainRenderer->IsAnimation("Left_" + AnimationUzi) || MainRenderer->IsAnimation("Right_" + AnimationUzi))
 		{
