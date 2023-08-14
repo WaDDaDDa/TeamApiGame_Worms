@@ -153,7 +153,9 @@ protected:
 
 	void DeathStart();
 	void DeathUpdate(float _Delta);
-	void DeathEnd();
+
+	void DeathEndStart();
+	void DeathEndUpdate(float _Delta);
 
 	void BazookaOnStart();
 	void BazookaOnUpdate(float _Delta);

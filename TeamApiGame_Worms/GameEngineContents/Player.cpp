@@ -552,6 +552,16 @@ void Player::Start()
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("wdieRight.bmp"), 1, 60);
 		}
+
+		// GraveStone
+		if (false == ResourcesManager::GetInst().IsLoadTexture("GraveStone.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("GraveStone.bmp"), 5, 12); 
+		}
 	}
 
 
@@ -592,6 +602,7 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Left_GirderOn", "girderOnLeft.bmp", 0, 14, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_Girder", "girderOnLeft.bmp", 14, 14, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_GirderOff", "girderOffLeft.bmp", 0, 14, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_GraveStone", "GraveStone.bmp", 0, 59, 0.1f, true);
 
 
 		// Right
@@ -627,6 +638,7 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Right_GirderOn", "girderOnRight.bmp", 0, 14, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_Girder", "girderOnRight.bmp", 14, 14, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_GirderOff", "girderOffRight.bmp", 0, 14, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_GraveStone", "GraveStone.bmp", 0, 59, 0.1f, true);
 
 		// BazookaAnimation
 		for (int i = 0; i < 32; i++)
@@ -752,9 +764,9 @@ void Player::Render(float _Delta)
 		Rectangle(dc, Data.iLeft(), Data.iTop(), Data.iRight(), Data.iBot());
 	}
 
-	std::string Text = "";
-	Text += std::to_string(Hp);
-	TextOutA(dc, ActorCameraPos().iX(), (ActorCameraPos().iY() - 50), Text.c_str(), static_cast<int>(Text.size()));
+	//std::string Text = "";
+	//Text += std::to_string(Hp);
+	//TextOutA(dc, ActorCameraPos().iX(), (ActorCameraPos().iY() - 50), Text.c_str(), static_cast<int>(Text.size()));
 }
 
 void Player::ChangeState(PlayerState _State)
@@ -785,7 +797,7 @@ void Player::ChangeState(PlayerState _State)
 			DeathStart();
 			break;
 		case PlayerState::DeathEnd:
-			DeathEnd();
+			DeathEndStart();
 			break;
 		case PlayerState::BazookaOn:
 			BazookaOnStart();
@@ -907,6 +919,8 @@ void Player::StateUpdate(float _Delta)
 		return DamagingUpdate(_Delta);
 	case PlayerState::Death:
 		return DeathUpdate(_Delta);
+	case PlayerState::DeathEnd:
+		return DeathEndUpdate(_Delta);
 	case PlayerState::BazookaOn:
 		return BazookaOnUpdate(_Delta);
 	case PlayerState::Bazooka:

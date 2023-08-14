@@ -77,6 +77,11 @@ void Player::IdleUpdate(float _Delta)
 	//	return;
 	//}
 
+	if (0 >= Hp)
+	{
+		ChangeState(PlayerState::Death);
+	}
+
 	if (true == GameEngineInput::IsDown('S'))
 	{
 		ChangeState(PlayerState::Death);
@@ -274,6 +279,11 @@ void Player::DamagingUpdate(float _Delta)
 		ChangeState(PlayerState::Idle);
 		return;
 	}
+
+	/*if (0 >= Hp)
+	{
+		ChangeState(PlayerState::Death);
+	}*/
 }
 
 void Player::DeathStart()
@@ -290,11 +300,16 @@ void Player::DeathUpdate(float _Delta)
 	}
 }
 
-void Player::DeathEnd()
+void Player::DeathEndStart()
 {
 	// 플레이어가 죽어서 사라지면 안됨. 
 	// 묘비 상태로 중력에는 영향을 받고있어야함.
 	// Death();
+	ChangeAnimationState("GraveStone");
+}
+void Player::DeathEndUpdate(float _Delta)
+{
+	GroundCheck(_Delta);
 }
 
 void Player::BazookaOnStart()
