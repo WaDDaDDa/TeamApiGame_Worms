@@ -16,6 +16,7 @@
 #include "Player.h"
 #include "GameTurn.h"
 #include "MouseObject.h"
+#include "Cloud.h"
 
 #include "GameStateManager.h"
 
@@ -56,11 +57,13 @@ void PlayLevel::Start()
 
 	//나중에 LobbyLevel에서 받아올것
 	{
-		GroundFileName = "MapBooks.Bmp";
-		GroundPixelFileName = "MapBooks_Ground.Bmp";
+		//GroundFileName = "MapBooks.Bmp";
+		//GroundPixelFileName = "MapBooks_Ground.Bmp";
 
-		//GroundFileName = GameStateManager::GetGameStateManager().StageName+".Bmp";
-		//GroundPixelFileName = GameStateManager::GetGameStateManager().StageName+"_Ground.Bmp";
+		
+
+		GroundFileName = GameStateManager::GameState->GetStageName() +".Bmp";
+		GroundPixelFileName = GameStateManager::GameState->GetStageName() +"_Ground.Bmp";
 
 	}
 
@@ -138,6 +141,8 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 		Wind* PlayWind = CreateActor<Wind>();
 		
 	}
+
+	
 	// 플레이어 수만큼 랜덤으로 생성
 	PlayerSetting(6);
 
@@ -156,6 +161,20 @@ void PlayLevel::Update(float _Delta)
 	{
 		Inven->SwitchActiveState();
 	}
+
+	//cloud
+	{
+
+		if (0.0f >= CloudRespawn)
+		{
+			GameEngineActor* NewCloud = CreateActor<Cloud>(RenderOrder::BackGroundEffect);
+			CloudRespawn = GameEngineRandom::MainRandom.RandomFloat(0.0f, 3.0f);
+
+		}
+		CloudRespawn -= _Delta;
+		
+	}
+
 }
 
 void PlayLevel::Release()

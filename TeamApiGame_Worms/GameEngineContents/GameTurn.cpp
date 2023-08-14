@@ -104,6 +104,10 @@ void GameTurn::Render(float _Delta)
 		std::string Text2 = "WindVector : ";
 		Text2 += std::to_string(Wind::GetWind()->GetWindVector().X);
 
+	
+
+
+
 		TextOutA(dc2, 2,20, Text2.c_str(), static_cast<int>(Text2.size()));
 	}
 

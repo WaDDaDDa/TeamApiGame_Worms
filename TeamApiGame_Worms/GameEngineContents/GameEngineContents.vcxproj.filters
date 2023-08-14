@@ -150,6 +150,9 @@
     <ClInclude Include="FlyEffect.h">
       <Filter>Effect</Filter>
     </ClInclude>
+    <ClInclude Include="Cloud.h">
+      <Filter>Map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -300,6 +303,9 @@
     </ClCompile>
     <ClCompile Include="FlyEffect.cpp">
       <Filter>Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Cloud.cpp">
+      <Filter>Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

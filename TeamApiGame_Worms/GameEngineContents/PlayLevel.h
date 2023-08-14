@@ -29,6 +29,8 @@ private:
 	std::string GroundFileName = "";
 	std::string GroundPixelFileName = "";
 
+	float CloudRespawn = 0.0f;
+
 	void PlayerSetting(size_t _PlayerCount);
 
 
