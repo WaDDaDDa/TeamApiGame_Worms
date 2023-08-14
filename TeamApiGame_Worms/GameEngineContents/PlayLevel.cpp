@@ -28,6 +28,8 @@
 #include "UI_Timer.h"
 
 
+#include "UI_Box_AllTeamHpBar.h"
+
 #include "ContentsDefine.h"
 
 void ChangeLevel(DWORD_PTR, DWORD_PTR);
@@ -92,9 +94,13 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 	UI_Timer* TimerBox = CreateActor<UI_Timer>();
 	TimerBox->SetPos({ 40 , 690 });
 
-	//UI_PlayerInfo* PlayerInfo = CreateActor<UI_PlayerInfo>();
+	UI_Box_AllTeamHpBar* AllTeamHpBar = CreateActor<UI_Box_AllTeamHpBar>();
+	AllTeamHpBar->SetPos({ 400, 700 });
+	AllTeamHpBar->AddTeamHpBar();
 
-	//PlayerInfo->SetPos({ 100, 100});
+	//UI_TeamHpBar* TeamHp = CreateActor<UI_TeamHpBar>();
+
+	//TeamHp->SetPos({ 100, 100});
 
 
 	//// UI 세팅 테스트

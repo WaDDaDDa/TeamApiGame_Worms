@@ -211,6 +211,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="UI_Box_AllTeamHpBar.h" />
     <ClInclude Include="UI_Box_Barracks.h" />
     <ClInclude Include="UI_Box_SchemeOption.h" />
     <ClInclude Include="UI_Box_Teams.h" />
@@ -230,6 +231,7 @@
     <ClInclude Include="UI_PlayerDamage.h" />
     <ClInclude Include="UI_PlayerInfo.h" />
     <ClInclude Include="UI_RoundTime_Button.h" />
+    <ClInclude Include="UI_TeamHpBar.h" />
     <ClInclude Include="UI_Teleportin_Button.h" />
     <ClInclude Include="UI_Terrain_Button.h" />
     <ClInclude Include="UI_Timer.h" />
@@ -312,6 +314,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="UI_Box_AllTeamHpBar.cpp" />
     <ClCompile Include="UI_Box_Barracks.cpp" />
     <ClCompile Include="UI_Box_SchemeOption.cpp" />
     <ClCompile Include="UI_Box_Teams.cpp" />
@@ -331,6 +334,7 @@
     <ClCompile Include="UI_PlayerDamage.cpp" />
     <ClCompile Include="UI_PlayerInfo.cpp" />
     <ClCompile Include="UI_RoundTime_Button.cpp" />
+    <ClCompile Include="UI_TeamHpBar.cpp" />
     <ClCompile Include="UI_Teleportin_Button.cpp" />
     <ClCompile Include="UI_Terrain_Button.cpp" />
     <ClCompile Include="UI_Timer.cpp" />

@@ -139,6 +139,12 @@
     <ClCompile Include="UI_PlayerDamage.cpp">
       <Filter>UI\PlayLevelUIs</Filter>
     </ClCompile>
+    <ClCompile Include="UI_TeamHpBar.cpp">
+      <Filter>UI\PlayLevelUIs</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Box_AllTeamHpBar.cpp">
+      <Filter>UI\PlayLevelUIs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BackGround.h" />
@@ -282,6 +288,12 @@
       <Filter>Weapon</Filter>
     </ClInclude>
     <ClInclude Include="UI_PlayerDamage.h">
+      <Filter>UI\PlayLevelUIs</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_TeamHpBar.h">
+      <Filter>UI\PlayLevelUIs</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Box_AllTeamHpBar.h">
       <Filter>UI\PlayLevelUIs</Filter>
     </ClInclude>
   </ItemGroup>

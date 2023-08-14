@@ -18,7 +18,7 @@ public:
 	}
 
 
-	void ChangeTimer();
+	void ChangeTimerColor(int _PlayerIndex);
 
 protected:
 	void Start() override;

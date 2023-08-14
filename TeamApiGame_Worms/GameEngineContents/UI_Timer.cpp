@@ -6,6 +6,7 @@
 #include "GameTurn.h"
 #include <string.h>
 
+
 UI_Timer* UI_Timer::TimerUI = nullptr;
 
 UI_Timer::UI_Timer()
@@ -70,6 +71,7 @@ void UI_Timer::Start()
 
 void UI_Timer::Update(float _Delta)
 {
+
 	int CurTurnTime = static_cast<int>(GameTurn::MainGameTurn.GetTurnTime());
 	TimerTextRenderer->SetText(std::to_string(CurTurnTime));
 
@@ -84,6 +86,39 @@ void UI_Timer::Update(float _Delta)
 	}
 }
 
-void UI_Timer::ChangeTimer()
+void UI_Timer::ChangeTimerColor(int _PlayerIndex)
 {
+
+	int PlayerIndex = _PlayerIndex;
+
+	switch (PlayerIndex)
+	{
+	case 0:
+		MainRenderer->SetTexture("UI_TimerWindowR.bmp");
+		break;
+
+	case 1:
+		MainRenderer->SetTexture("UI_TimerWindowB.bmp");
+		break;
+
+	case 2:
+		MainRenderer->SetTexture("UI_TimerWindowG.bmp");
+		break;
+
+	case 3:
+		MainRenderer->SetTexture("UI_TimerWindowY.bmp");
+		break;
+
+	case 4:
+		MainRenderer->SetTexture("UI_TimerWindowP.bmp");
+		break;
+
+	case 5:
+		MainRenderer->SetTexture("UI_TimerWindowC.bmp");
+		break;
+
+	default:
+		break;
+	}
+
 }

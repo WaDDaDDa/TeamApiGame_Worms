@@ -59,7 +59,7 @@ void UI_PlayerInfo::Start()
 
 #pragma endregion
 
-#pragma region HP 관련 리소스 & 국기 리소스 로딩 
+#pragma region HP 관련 리소스 로딩
 
 	if (false == ResourcesManager::GetInst().IsLoadTexture("UI_PlayerHPBase.bmp"))
 	{
@@ -96,12 +96,6 @@ void UI_PlayerInfo::Start()
 		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("UI_BottomHPbarY.bmp"));
 	}
 
-	if (false == ResourcesManager::GetInst().IsLoadTexture("UI_BottomFlagKOR.bmp"))
-	{
-		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("UI_BottomFlagKOR.bmp"));
-	}
-
-
 #pragma endregion
 
 #pragma region Arrow 리소스 로딩 & 애니메이션 생성
@@ -136,6 +130,15 @@ void UI_PlayerInfo::Start()
 		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("PlayerSelectArrowYellow.bmp"), 1, 30);
 	}
 
+	PlayerArrowRenderer = CreateUIRenderer(RenderOrder::UI);
+
+	PlayerArrowRenderer->CreateAnimation("PlayerArrow_Blue", "PlayerSelectArrowBlue.bmp", 0, 29, 0.05f, true);
+	PlayerArrowRenderer->CreateAnimation("PlayerArrow_Green", "PlayerSelectArrowGreen.bmp", 0, 29, 0.05f, true);
+	PlayerArrowRenderer->CreateAnimation("PlayerArrow_Mint", "PlayerSelectArrowMint.bmp", 0, 29, 0.05f, true);
+	PlayerArrowRenderer->CreateAnimation("PlayerArrow_Pink", "PlayerSelectArrowPink.bmp", 0, 29, 0.05f, true);
+	PlayerArrowRenderer->CreateAnimation("PlayerArrow_Red", "PlayerSelectArrowRed.bmp", 0, 29, 0.05f, true);
+	PlayerArrowRenderer->CreateAnimation("PlayerArrow_Yellow", "PlayerSelectArrowYellow.bmp", 0, 29, 0.05f, true);
+
 #pragma endregion
 
 	//// 렌더러 설정
@@ -150,15 +153,6 @@ void UI_PlayerInfo::Start()
 	PlayerHpTextRenderer = CreateUIRenderer(RenderOrder::UI);
 	PlayerHpTextRenderer->SetText("000", 16);
 	PlayerHpTextRenderer->SetRenderPos({ -13, 12 });
-
-	PlayerArrowRenderer = CreateUIRenderer(RenderOrder::UI);
-
-	PlayerArrowRenderer->CreateAnimation("PlayerArrow_Blue", "PlayerSelectArrowBlue.bmp", 0, 29, 0.05f, true);
-	PlayerArrowRenderer->CreateAnimation("PlayerArrow_Green", "PlayerSelectArrowGreen.bmp", 0, 29, 0.05f, true);
-	PlayerArrowRenderer->CreateAnimation("PlayerArrow_Mint", "PlayerSelectArrowMint.bmp", 0, 29, 0.05f, true);
-	PlayerArrowRenderer->CreateAnimation("PlayerArrow_Pink", "PlayerSelectArrowPink.bmp", 0, 29, 0.05f, true);
-	PlayerArrowRenderer->CreateAnimation("PlayerArrow_Red", "PlayerSelectArrowRed.bmp", 0, 29, 0.05f, true);
-	PlayerArrowRenderer->CreateAnimation("PlayerArrow_Yellow", "PlayerSelectArrowYellow.bmp", 0, 29, 0.05f, true);
 
 	PlayerArrowRenderer->SetRenderScale({ 50, 50 });
 	PlayerArrowRenderer->ChangeAnimation("PlayerArrow_Blue");
