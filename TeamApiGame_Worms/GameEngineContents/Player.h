@@ -257,6 +257,7 @@ protected:
 
 	void InputMove();
 	void ChangeWeapon();
+	void DamagingCheck();
 
 	// Collision
 	GameEngineCollision* PlayerBodyCollision = nullptr;

@@ -1201,4 +1201,29 @@ void Player::ChangeWeapon()
 		ChangeState(PlayerState::GirderOn);
 	}
 
+
+
+	//Debug Key
+	if (true == GameEngineInput::IsDown(VK_F4))
+	{
+		Hp -= 100;
+	}
+}
+
+void Player::DamagingCheck()
+{
+	std::vector<GameEngineCollision*> _Col;
+	if (true == PlayerBodyCollision->Collision(CollisionOrder::Bomb, _Col
+		, CollisionType::Rect
+		, CollisionType::CirCle
+	))
+	{
+		for (size_t i = 0; i < _Col.size(); i++)
+		{
+			GameEngineCollision* Collison = _Col[i];
+
+			GameEngineActor* Actor = Collison->GetActor();
+		}
+		ChangeState(PlayerState::Damaging);
+	}
 }

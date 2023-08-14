@@ -33,21 +33,22 @@ void Player::IdleUpdate(float _Delta)
 {
 	GroundCheck(_Delta);
 
-	std::vector<GameEngineCollision*> _Col;
-	if (true == PlayerBodyCollision->Collision(CollisionOrder::Bomb, _Col
-		, CollisionType::Rect
-		, CollisionType::CirCle
-	))
-	{
-		for (size_t i = 0; i < _Col.size(); i++)
-		{
-			GameEngineCollision* Collison = _Col[i];
+	//std::vector<GameEngineCollision*> _Col;
+	//if (true == PlayerBodyCollision->Collision(CollisionOrder::Bomb, _Col
+	//	, CollisionType::Rect
+	//	, CollisionType::CirCle
+	//))
+	//{
+	//	for (size_t i = 0; i < _Col.size(); i++)
+	//	{
+	//		GameEngineCollision* Collison = _Col[i];
 
-			GameEngineActor* Actor = Collison->GetActor();
-		}
-		ChangeState(PlayerState::Damaging);
-	}
+	//		GameEngineActor* Actor = Collison->GetActor();
+	//	}
+	//	ChangeState(PlayerState::Damaging);
+	//}
 
+	DamagingCheck();
 
 	unsigned int Color = GetGroundColor(RGB(255, 255, 255), float4::DOWN);
 
