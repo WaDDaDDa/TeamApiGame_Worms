@@ -28,6 +28,8 @@
 void Player::IdleStart()
 {
 	ChangeAnimationState("Idle");
+
+	PlayerBodyCollision->On();
 }
 void Player::IdleUpdate(float _Delta)
 {
@@ -240,8 +242,9 @@ void Player::DamagingStart()
 
 			WeaponPos = Actor->GetPos();
 
-			Collision->Off();
-
+			//Collision->Off();
+			
+			PlayerBodyCollision->Off();
 		}
 		GravityDir = GetPos() - WeaponPos;
 		GravityDir.Normalize();
@@ -528,6 +531,8 @@ void Player::BazookaFireStart()
 
 void Player::BazookaFireUpdate(float _Delta)
 {
+	DamagingCheck();
+
 	ChangeState(PlayerState::BazookaOff);
 	return;
 }
@@ -539,6 +544,8 @@ void Player::BazookaOffStart()
 
 void Player::BazookaOffUpdate(float _Delta)
 {
+	DamagingCheck();
+
 	if (true == MainRenderer->IsAnimationEnd())
 	{
 		ChangeState(PlayerState::Idle);
@@ -786,6 +793,7 @@ void Player::UziFireStart()
 }
 void Player::UziFireUpdate(float _Delta)
 {
+	DamagingCheck();
 	std::string AnimationUzi = "Uzi" + std::to_string(UziAnimationNumber);
 	std::string AnimationUziFire = "UziFire" + std::to_string(UziAnimationNumber);
 
@@ -819,6 +827,7 @@ void Player::UziOffStart()
 }
 void Player::UziOffUpdate(float _Delta)
 {
+	DamagingCheck();
 	if (true == MainRenderer->IsAnimationEnd())
 	{
 		ChangeState(PlayerState::Idle);
@@ -1047,6 +1056,7 @@ void Player::HomingMissileFireStart()
 }
 void Player::HomingMissileFireUpdate(float _Delta)
 {
+	DamagingCheck();
 	ChangeState(PlayerState::HomingMissileOff);
 }
 
@@ -1056,6 +1066,7 @@ void Player::HomingMissileOffStart()
 }
 void Player::HomingMissileOffUpdate(float _Delta)
 {
+	DamagingCheck();
 	if (true == MainRenderer->IsAnimationEnd())
 	{
 		ChangeState(PlayerState::Idle);
@@ -1104,6 +1115,7 @@ void Player::SheepFireStart()
 }
 void Player::SheepFireUpdate(float _Delta)
 {
+	DamagingCheck();
 	ChangeState(PlayerState::SheepOff);
 }
 
@@ -1113,6 +1125,7 @@ void Player::SheepOffStart()
 }
 void Player::SheepOffUpdate(float _Delta)
 {
+	DamagingCheck();
 	if (MainRenderer->IsAnimationEnd())
 	{
 		ChangeState(PlayerState::Idle);
@@ -1333,6 +1346,7 @@ void Player::GranadeFireStart()
 }
 void Player::GranadeFireUpdate(float _Delta)
 {
+	DamagingCheck();
 	ChangeState(PlayerState::GranadeOff);
 }
 
@@ -1342,6 +1356,7 @@ void Player::GranadeOffStart()
 }
 void Player::GranadeOffUpdate(float _Delta)
 {
+	DamagingCheck();
 	if (MainRenderer->IsAnimationEnd())
 	{
 		ChangeState(PlayerState::Idle);

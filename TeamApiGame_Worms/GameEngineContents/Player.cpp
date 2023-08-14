@@ -1204,10 +1204,10 @@ void Player::ChangeWeapon()
 
 
 	//Debug Key
-	if (true == GameEngineInput::IsDown(VK_F4))
-	{
-		Hp -= 100;
-	}
+	//if (true == GameEngineInput::IsDown(VK_F4))
+	//{
+	//	Hp -= 100;
+	//}
 }
 
 void Player::DamagingCheck()
@@ -1215,8 +1215,11 @@ void Player::DamagingCheck()
 	std::vector<GameEngineCollision*> _Col;
 	if (true == PlayerBodyCollision->Collision(CollisionOrder::Bomb, _Col
 		, CollisionType::Rect
-		, CollisionType::CirCle
-	))
+		, CollisionType::CirCle)/* ||
+		true == PlayerBodyCollision->Collision(CollisionOrder::Weapon, _Col
+		, CollisionType::Rect
+		, CollisionType::CirCle)*/
+	)
 	{
 		for (size_t i = 0; i < _Col.size(); i++)
 		{
