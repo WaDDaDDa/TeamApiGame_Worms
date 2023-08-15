@@ -26,6 +26,16 @@ void GameTurn::Start()
 {
 	TurnPlayer = Player::GetAllPlayer()[StartValue];
 	TurnPlayer->SwitchIsTurnPlayer();
+	Init();
+}
+
+void GameTurn::Init()
+{
+	size_t PlayerCount = Player::GetAllPlayer().size();
+	for (size_t i = 0; i < PlayerCount; i++)
+	{
+		Player::GetAllPlayer()[i]->SetTurnPlayerIndex(static_cast<int>(i));
+	}
 }
 
 void GameTurn::Update(float _Delta)

@@ -21,6 +21,7 @@ float4 Player::DirPos = float4::ZERO;
 Player::Player()
 {
 	AllPlayer.push_back(this);
+	TurnPlayerIndex++;
 }
 
 Player::~Player()

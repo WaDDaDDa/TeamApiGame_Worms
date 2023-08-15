@@ -122,6 +122,11 @@ public:
 		return Dir;
 	}
 
+	void SetTurnPlayerIndex(int _Index)
+	{
+		TurnPlayerIndex = _Index;
+	}
+
 protected:
 	PlayerState State = PlayerState::Max;
 	PlayerDir Dir = PlayerDir::Left;
@@ -263,6 +268,8 @@ protected:
 	GameEngineCollision* PlayerBodyCollision = nullptr;
 
 private:
+	// TurnPlayerIndex
+	int TurnPlayerIndex = 0;
 	// PlayerStatus ฐüทร
 	int Hp = 100;
 	float PlayerSpeed = 200.0f;

@@ -38,6 +38,7 @@ private:
     Player* TurnPlayer = nullptr;
 
     void Start() override;
+    void Init();
 
     void Update(float _Delta) override;
 
