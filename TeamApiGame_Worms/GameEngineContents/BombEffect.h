@@ -29,11 +29,22 @@ public:
 		return Renderer;
 	}
 
+	void SetDamage(float _Damage)
+	{
+		BombDamage = _Damage;
+	}
+
+	float GetDamage()
+	{
+		return BombDamage;
+	}
+
 protected:
 	class GameEngineCollision* BombCollision = nullptr;
 	GameEngineRenderer* Renderer = nullptr;
 
 	float4 BombRange = float4::ZERO;
+	float BombDamage = 0.0f;
 
 	Weapon* Master = nullptr;
 

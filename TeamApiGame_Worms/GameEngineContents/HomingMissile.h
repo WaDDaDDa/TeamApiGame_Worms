@@ -47,7 +47,7 @@ protected:
 	void MaxUpdate(float _Delta);
 
 private:
-	int HomingMissileDamage = 50;
+	float HomingMissileDamage = 50.0f;
 	float HomingMissileSpeed = 3000.0f;
 	float HomingMissileRockOnSpeed = 1500.0f;
 	float MissileDir = 0;

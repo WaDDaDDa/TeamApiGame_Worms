@@ -10,6 +10,7 @@
 #include "Uzi.h"
 #include "Grenade.h"
 #include "Self_Bomb.h"
+#include "BombEffect.h"
 
 
 #include <GameEnginePlatform/GameEngineInput.h>
@@ -233,12 +234,17 @@ void Player::DamagingStart()
 		float4 GravityDir = float4::ZERO;
 
 		float4 WeaponPlayerPos = float4::ZERO;
+		float WeaponDamage = 0.0f;
 
 		for (size_t i = 0; i < _Col.size(); i++)
 		{
 			GameEngineCollision* Collision = _Col[i];
 
 			GameEngineActor* Actor = Collision->GetActor();
+
+			BombEffect* Effect = dynamic_cast<BombEffect*>(Collision->GetActor());
+
+			WeaponDamage = Effect->GetDamage();
 
 			WeaponPos = Actor->GetPos();
 
@@ -255,9 +261,7 @@ void Player::DamagingStart()
 		{
 			WeaponPlayerPos = GetPos() - WeaponPos;
 
-			float BazookaDamage = 50.0f;
-
-			float Damaging = BazookaDamage - (WeaponPlayerPos.Size());
+			float Damaging = WeaponDamage - (WeaponPlayerPos.Size());
 
 			if (0 >= Damaging)
 			{

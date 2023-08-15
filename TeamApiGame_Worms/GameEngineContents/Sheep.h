@@ -60,7 +60,7 @@ protected:
 	void MaxUpdate(float _Delta);
 
 private:
-	int SheepDamage = 50;
+	float SheepDamage = 80.0f;
 	float SheepSpeed = 200.0f;
 	float SheepJumpPower = 600.0f;
 

@@ -28,10 +28,11 @@ public:
 	{
 		class BombEffect* NewEffect = GetLevel()->CreateActor<EffectType>();
 		NewEffect->SetMaster(this);
+		NewEffect->SetDamage(WeaponDamage);
 		return dynamic_cast<EffectType*>(NewEffect);
 	}
 
-	void SetWeaponDamage(int _Value)
+	void SetWeaponDamage(float _Value)
 	{
 		WeaponDamage = _Value;
 	}
@@ -55,7 +56,7 @@ protected:
 	Player* Master = nullptr;
 
 	// 무기의 대미지
-	int WeaponDamage = 0;
+	float WeaponDamage = 0.0f;
 
 	// 무기의 고유의 날라가는 세기
 	float WeaponSpeed = 0.0f;

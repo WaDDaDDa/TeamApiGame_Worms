@@ -45,7 +45,7 @@ protected:
 	void MaxUpdate(float _Delta);
 
 private:
-	int BazookaDamage = 50;
+	float BazookaDamage = 50.0f;
 	float BazookaSpeed = 3000.0f;
 
 	float EffectTime = 0.0f;

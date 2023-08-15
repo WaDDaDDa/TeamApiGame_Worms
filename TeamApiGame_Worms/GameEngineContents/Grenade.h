@@ -51,7 +51,7 @@ protected:
 	void MaxUpdate(float _Delta);
 
 private:
-	int GrenadeDamage = 50;
+	float GrenadeDamage = 60.0f;
 	float GrenadeSpeed = 3000.0f;
 
 	// Move 중 벽을 판정해서 막히는 지점

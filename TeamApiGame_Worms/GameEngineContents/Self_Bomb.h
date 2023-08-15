@@ -46,7 +46,7 @@ protected:
 
 
 private:
-	int Self_BombDamage = 50;
+	float Self_BombDamage = 30.0f;
 	float Self_BombSpeed = 2000.0f;
 
 	float4 Dir = float4::ZERO;

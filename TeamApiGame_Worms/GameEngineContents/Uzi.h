@@ -46,7 +46,7 @@ protected:
 
 
 private:
-	int UziDamage = 10;
+	float UziDamage = 10.0f;
 	//float UziSpeed = 2000.0f;
 	float UziSpeed = 700.0f;
 
