@@ -39,13 +39,13 @@ void Ground::Init(const std::string& _FileName, const std::string& _DebugFileNam
 
 
 	{
-		GameEngineWindowTexture* Texture = ResourcesManager::GetInst().TextureCreate("StageTexture", PLAY_BACKGROUND_SCALE);
+		GameEngineWindowTexture* Texture = ResourcesManager::GetInst().TextureCreate("StageTexture", PLAY_GROUND_SCALE);
 		Texture->FillTexture(RGB(255, 0, 255));
 		Renderer->SetTexture("StageTexture");
 
 	}
 	{
-		GameEngineWindowTexture* Texture = ResourcesManager::GetInst().TextureCreate("StagePixelTexture", PLAY_BACKGROUND_SCALE);
+		GameEngineWindowTexture* Texture = ResourcesManager::GetInst().TextureCreate("StagePixelTexture", PLAY_GROUND_SCALE);
 		Texture->FillTexture(RGB(255, 255, 255));
 
 		DebugRenderer->SetTexture("StagePixelTexture");
@@ -62,7 +62,7 @@ void Ground::Init(const std::string& _FileName, const std::string& _DebugFileNam
 
 
 	float4 Scale = Texture->GetScale();
-	float4 GroundCopyPos = { PLAY_BACKGROUND_SCALE.Half().X,PLAY_BACKGROUND_SCALE.Half().Y + PLAY_BACKGROUND_SCALE.Half().Half().Y };
+	float4 GroundCopyPos = { PLAY_GROUND_SCALE.Half().X,PLAY_GROUND_SCALE.Half().Y + PLAY_GROUND_SCALE.Half().Half().Y };
 
 
 	Texture->TransCopy(NewTexture, GroundCopyPos, NewTexture->GetScale().Half(), float4::ZERO, NewTexture->GetScale());

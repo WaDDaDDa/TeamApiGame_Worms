@@ -113,15 +113,15 @@ void Cloud::Start()
 	}
 
 
-	float YRandom = GameEngineRandom::MainRandom.RandomFloat(PLAY_BACKGROUND_SCALE.hY() - 20.0f, PLAY_BACKGROUND_SCALE.hY() + 20.0f);
+	float YRandom = GameEngineRandom::MainRandom.RandomFloat(PLAY_GROUND_SCALE.hY() - 30.0f, PLAY_GROUND_SCALE.hY() + 30.0f);
 
 	if (float4::LEFT == Dir)
 	{
-		SetPos({ PLAY_BACKGROUND_SCALE.X+30.0f,YRandom });
+		SetPos({ BACKGROUND_SCALE.X+20.0f,YRandom });
 	}
 	else if (float4::RIGHT == Dir)
 	{
-		SetPos({ -30.0f,YRandom });
+		SetPos({ -20.0f,YRandom });
 
 	}
 
@@ -131,7 +131,7 @@ void Cloud::Start()
 
 void Cloud::Update(float _Delta)
 {
-	if (GetPos().X <= (-40.0f) || GetPos().X >= PLAY_BACKGROUND_SCALE.X + 40.0f)
+	if (GetPos().X <= (-40.0f) || GetPos().X >= BACKGROUND_SCALE.X + 40.0f)
 	{
 		Death();
 	}

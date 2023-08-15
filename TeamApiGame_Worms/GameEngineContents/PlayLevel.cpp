@@ -59,11 +59,8 @@ void PlayLevel::Start()
 {
 
 
-	//나중에 LobbyLevel에서 받아올것
-	{
-		//GroundFileName = "MapBooks.Bmp";
-		//GroundPixelFileName = "MapBooks_Ground.Bmp";
 
+	{
 		
 
 		GroundFileName = GameStateManager::GameState->GetStageName() +".Bmp";
@@ -91,7 +88,8 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 		
 
 		BackGroundPtr = CreateActor<BackGround>(RenderOrder::Player);
-		BackGroundPtr->Init("Back.bmp", PLAY_BACKGROUND_SCALE);
+		
+		BackGroundPtr->VerticalPatternInit("gradient.Bmp", {5000.0f,2000.0f});
 
 
 		
@@ -185,7 +183,7 @@ void PlayLevel::Update(float _Delta)
 		if (0.0f >= CloudRespawn)
 		{
 			GameEngineActor* NewCloud = CreateActor<Cloud>(RenderOrder::BackGroundEffect);
-			CloudRespawn = GameEngineRandom::MainRandom.RandomFloat(0.0f, 3.0f);
+			CloudRespawn = GameEngineRandom::MainRandom.RandomFloat(0.0f, 4.0f);
 
 		}
 		CloudRespawn -= _Delta;

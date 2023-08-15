@@ -66,8 +66,9 @@ void BackGround::VerticalPatternInit(const std::string& _FileName)
 {
 	float4 Scale = GameEngineWindow::MainWindow.GetScale();
 	
+	return VerticalPatternInit(_FileName, Scale);
 
-	if (false == ResourcesManager::GetInst().IsLoadTexture(_FileName))
+	/*if (false == ResourcesManager::GetInst().IsLoadTexture(_FileName))
 	{
 		GameEnginePath FilePath;
 		FilePath.SetCurrentPath();
@@ -102,5 +103,49 @@ void BackGround::VerticalPatternInit(const std::string& _FileName)
 		Renderer->SetTexture("VerticalPattern" + _FileName);
 		Renderer->SetRenderScale(Scale);
 
-		SetPos({ Scale.hX(), Scale.hY() });
+		SetPos({ Scale.hX(), Scale.hY() });*/
+}
+
+void BackGround::VerticalPatternInit(const std::string& _FileName, const float4 _Scale)
+{
+	float4 Scale = _Scale;
+
+	if (false == ResourcesManager::GetInst().IsLoadTexture(_FileName))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Texture\\Map\\" + _FileName);
+
+		GameEngineWindowTexture* Texture = ResourcesManager::GetInst().TextureLoad(FilePath.GetStringPath());
+	}
+
+	GameEngineWindowTexture* Texture = ResourcesManager::GetInst().FindTexture(_FileName);
+
+
+	if (false == ResourcesManager::GetInst().IsLoadTexture("VerticalPattern" + _FileName))
+	{
+		GameEngineWindowTexture* NewTexture = ResourcesManager::GetInst().TextureCreate("VerticalPattern" + _FileName, Scale);
+
+	}
+
+	GameEngineWindowTexture* NewTexture = ResourcesManager::GetInst().FindTexture("VerticalPattern" + _FileName);
+
+
+
+	float4 DrawScale = { Texture->GetScale().X, Scale.Y };
+	int Cutcount = static_cast<int>(Scale.X / Texture->GetScale().X);
+
+	for (int i = 0; i <= Cutcount; i++)
+	{
+		float4 DrawPos = { Texture->GetScale().X * i, Scale.hY() };
+		NewTexture->TransCopy(Texture, DrawPos, DrawScale, float4::ZERO, Texture->GetScale(), NULL);
+	}
+
+	Renderer->SetTexture("VerticalPattern" + _FileName);
+	Renderer->SetRenderScale(Scale);
+
+	SetPos({ Scale.hX(), Scale.hY() });
+
+
 }

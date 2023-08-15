@@ -10,7 +10,7 @@
 #include<GameEngineCore/GameEngineLevel.h>
 
 #define UNDER_WATER_COPY_POS_START float4{0.0f,1865.0f }
-#define UNDER_WATER_COPY_POS_END PLAY_BACKGROUND_SCALE
+#define UNDER_WATER_COPY_POS_END PLAY_GROUND_SCALE
 
 
 UnderWater::UnderWater()

@@ -20,6 +20,7 @@ public:
 	void Init(const std::string& _FileName,const float4 _Scale);
 
 	void VerticalPatternInit(const std::string& _FileName);
+	void VerticalPatternInit(const std::string& _FileName, const float4 _Scale);
 
 	
 
