@@ -30,6 +30,8 @@ void GameTurn::Start()
 void GameTurn::Update(float _Delta)
 {
 	TurnTime = TurnPlayTime - GetLiveTime();
+	size_t PlayerCount = Player::GetAllPlayer().size();
+
 	// 턴플레이어인데 무기사용으로 IsTurnPlayer가 false가되면 Turn의 시간을 멈춘다.
 	if (TurnPlayer->IsTurnPlayer == false)
 	{
@@ -39,21 +41,31 @@ void GameTurn::Update(float _Delta)
 	// Turn의시간이 다시 흐르고 Turn플레이어를 변경한다.
 	if (GetStopValue() == true && TurnPlayer->IsTurnPlayer == true)
 	{
-		size_t PlayerCount = Player::GetAllPlayer().size();
 		int PlayerStateCount = 0;
 		for (size_t i = 0; i < PlayerCount; i++)
 		{
-			if (PlayerState::Idle == Player::GetAllPlayer()[i]->GetState() || PlayerState::DeathEnd == Player::GetAllPlayer()[i]->GetState())
+			if (PlayerState::Idle == Player::GetAllPlayer()[static_cast<int>(i)]->GetState() || PlayerState::DeathEnd == Player::GetAllPlayer()[static_cast<int>(i)]->GetState())
 			{
 				PlayerStateCount++;
 			}
 		}
+
+
 
 		if (PlayerStateCount == PlayerCount)
 		{
 			// 무기사용이 종료되면 다시 플레이어로 돌아간다.
 			GoLiveTime();
 			ChangeTurnPlayer(_Delta);
+		}
+
+		for (size_t i = 0; i < PlayerCount; i++)
+		{
+			if (0 >= Player::GetAllPlayer()[static_cast<int>(i)]->GetHp() && PlayerState::DeathEnd != Player::GetAllPlayer()[static_cast<int>(i)]->GetState())
+			{
+				ChangeTurnPlayer(static_cast<int>(i));
+				return;
+			}
 		}
 	}
 
@@ -150,4 +162,14 @@ void GameTurn::ChangeTurnPlayer(float _Delta)
 
 	ResetLiveTime();
 	Wind::GetWind()->ChangeWind(_Delta);
+}
+
+void GameTurn::ChangeTurnPlayer(int _Value)
+{
+	//원래 플레이어bool값 false로 변경
+	TurnPlayer->SwitchIsTurnPlayer();
+
+	TurnPlayer = Player::GetAllPlayer()[_Value];
+	// 현재 플레이어 bool값 true로 변경
+	TurnPlayer->SwitchIsTurnPlayer();
 }

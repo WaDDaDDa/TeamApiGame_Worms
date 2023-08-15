@@ -254,7 +254,7 @@ void Uzi::FlyUpdate(float _Delta)
 
 	}
 
-	if (GetLiveTime() >= 0.02f)
+	if (GetLiveTime() >= 0.1f)
 	{
 		BodyCollision->On();
 	}
@@ -297,7 +297,7 @@ void Uzi::DamageUpdate(float _Delta)
 	int PlayerStateCount = 0;
 	for (size_t i = 0; i < PlayerCount; i++)
 	{
-		if (PlayerState::Idle == Player::GetAllPlayer()[i]->GetState()/* || PlayerState::Die == Player::GetAllPlayer()[i]->GetState()*/)
+		if (PlayerState::Idle == Player::GetAllPlayer()[i]->GetState() || PlayerState::DeathEnd == Player::GetAllPlayer()[i]->GetState())
 		{
 			PlayerStateCount++;
 		}

@@ -18,6 +18,7 @@ public:
     }
 
     void ChangeTurnPlayer(float _Delta);
+    void ChangeTurnPlayer(int _Value);
 
     static GameTurn MainGameTurn;
 
@@ -44,6 +45,8 @@ private:
 
     // 턴플레이어 넘버
     int StartValue = 0;
+    // 이전 플레이어 넘버
+    int PrevValue = 0;
     // 턴플레이어 제한시간.
     float TurnPlayTime = 20.0f;
     // 남은 시간
