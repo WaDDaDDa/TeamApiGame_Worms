@@ -17,17 +17,43 @@ public:
 		return TeamHpBarUI;
 	}
 
-protected:
-	void Start() override;
-	void Update(float _Delta) override;
+	void SetMaxPlayerHp(int _MaxPlayerHp)
+	{
+		MaxPlayerHp = _MaxPlayerHp;
+	}
 
-private:
+	void SetCurPlayerHp(int _CurPlayerHp)
+	{
+		CurPlayerHp = _CurPlayerHp;
+	}
 
-	static UI_TeamHpBar* TeamHpBarUI;
+	void SetHpBarWidth(float _HpBarWidth)
+	{
+		HpBarWidth = _HpBarWidth;
+	}
+
+
+	void InitDecreaseHpBar(int _DamagedHp);
+	void DecreaseHpBar();
+
 
 	GameEngineRenderer* TeamNameRenderer = nullptr;
 	GameEngineRenderer* TeamFlagRenderer = nullptr;
 	GameEngineRenderer* TeamHpRenderer = nullptr;
 
-};
+protected:
+	void Start() override;
+	void Update(float _Delta) override;
 
+private:
+	static UI_TeamHpBar* TeamHpBarUI;
+
+	float	MaxPlayerHp			=	0.0f;
+	float	CurPlayerHp			=	0.0f;
+	float	TargetPlayerHp		=	0.0f;
+	float	HpBarWidth			=	0.0f;
+	float	HpBarWidthPivot		=	0.0f;
+
+	bool	trigger_UpdateHP = false;
+
+};

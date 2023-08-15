@@ -80,38 +80,7 @@ void PlayLevel::Start()
 
 void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 {
-#pragma region UI 세팅
-	CreateActor<UI_Mouse>();
 
-	std::string StageNameTest = GameStateManager::GameState->GetStageName();
-
-	int a = 0;
-
-	Inven = CreateActor<UI_Inventory>();
-	Inven->SetPos({ 1400, 480 }); // UI 렌더러 사용시 초기 위치
-
-	UI_Wind* WindBar = CreateActor<UI_Wind>();
-	WindBar->SetPos({ 1180 , 700 });
-
-
-	UI_Timer* TimerBox = CreateActor<UI_Timer>();
-	TimerBox->SetPos({ 40 , 690 });
-
-	UI_Box_AllTeamHpBar* AllTeamHpBar = CreateActor<UI_Box_AllTeamHpBar>();
-	AllTeamHpBar->SetPos({ 400, 700 });
-	AllTeamHpBar->AddTeamHpBar();
-
-	//UI_TeamHpBar* TeamHp = CreateActor<UI_TeamHpBar>();
-
-	//TeamHp->SetPos({ 100, 100});
-
-
-	//// UI 세팅 테스트
-	//UI_Button* Btn_StartGame = CreateActor<UI_Button>();
-	//Btn_StartGame->InitButtonData("UI_Button_StartGame", float4{ UI_BUTTON_START_WITDH, UI_BUTTON_START_HEIGHT });
-	//Btn_StartGame->SetPos({ 400, 1000 });
-	//Btn_StartGame->SetClickedCallBack(ChangeLevel, 0, 0);
-#pragma endregion
 
 
 	{
@@ -154,6 +123,47 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 	PlayerSetting(6);
 
 	CreateActor<GameTurn>();
+
+#pragma region UI 세팅
+	CreateActor<UI_Mouse>();
+
+	std::string StageNameTest = GameStateManager::GameState->GetStageName();
+
+	Inven = CreateActor<UI_Inventory>();
+	Inven->SetPos({ 1400, 480 }); // UI 렌더러 사용시 초기 위치
+
+	UI_Wind* WindBar = CreateActor<UI_Wind>();
+	WindBar->SetPos({ 1180 , 700 });
+
+
+	UI_Timer* TimerBox = CreateActor<UI_Timer>();
+	TimerBox->SetPos({ 40 , 690 });
+
+
+	UI_Box_AllTeamHpBar* AllTeamHpBar = CreateActor<UI_Box_AllTeamHpBar>();
+//	AllTeamHpBar->InitTeamHpBarData();
+	AllTeamHpBar->AddTeamHpBar();
+
+
+	
+
+
+	//	AllTeamHpBar->SetPos({ 400, 700 });
+
+		//UI_TeamHpBar* TeamHp = CreateActor<UI_TeamHpBar>();
+
+		//TeamHp->SetPos({ 100, 100});
+
+
+		//// UI 세팅 테스트
+		//UI_Button* Btn_StartGame = CreateActor<UI_Button>();
+		//Btn_StartGame->InitButtonData("UI_Button_StartGame", float4{ UI_BUTTON_START_WITDH, UI_BUTTON_START_HEIGHT });
+		//Btn_StartGame->SetPos({ 400, 1000 });
+		//Btn_StartGame->SetClickedCallBack(ChangeLevel, 0, 0);
+#pragma endregion
+
+
+
 }
 
 void PlayLevel::Update(float _Delta)

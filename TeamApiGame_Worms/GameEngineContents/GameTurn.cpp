@@ -7,6 +7,7 @@
 #include "Wind.h"
 
 #include "UI_Timer.h"
+#include "UI_Box_AllTeamHpBar.h"
 
 GameTurn GameTurn::MainGameTurn;
 float GameTurn::TurnTime = 0.0f;
@@ -131,10 +132,17 @@ void GameTurn::Render(float _Delta)
 
 void GameTurn::ChangeTurnPlayer(float _Delta)
 {
+
+	// 턴이 바뀔 때 팀 HpBar의 비율을 현재 HP에 맞게 변경해줍니다. => 턴이 돌아올때마다 점점 뒤로 밀리는 오류가 있음 (수정필요)
+	// 여기가 아니라 데미지를 받는 부분에서 호출해야 맞는 것 같은데, 현재 상황에서는 Player State에서 index를 받아올 방법이 없어서
+	// 다른 방법이 있는지 생각해봐야할 것 같다.
+	UI_Box_AllTeamHpBar::GetAllTeamHpBarUI()->InitTeamHpBarData(StartValue, TurnPlayer->GetHp());
+
 	//원래 플레이어bool값 false로 변경
 	TurnPlayer->SwitchIsTurnPlayer();
 
 	++StartValue;
+
 	size_t SIZE = Player::GetAllPlayer().size();
 
 	if (StartValue >= SIZE)

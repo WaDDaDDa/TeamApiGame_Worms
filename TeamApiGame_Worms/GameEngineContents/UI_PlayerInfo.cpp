@@ -209,17 +209,10 @@ void UI_PlayerInfo::SetPlayerColorIndex(int _ColorIndex)
 
 }
 
-//	void UpdateData_PlayerInfoUI(float4* _PlayerPos, int* _PlayerHp, bool _IsTurnPlayer);
 void UI_PlayerInfo::UpdateData_PlayerInfoUI(int* _PlayerHp, bool _IsTurnPlayer)
 {
 	PlayerHp = _PlayerHp;
 	CurPlayerHp = *_PlayerHp;
-
-	//PlayerPos = _PlayerPos;
-	//CurPlayerPos = *PlayerPos;
-
-
-//	float4 CurUIPos = { CurPlayerPos.X - GetLevel()->GetMainCamera()->GetPos().X,  (CurPlayerPos.Y - GetLevel()->GetMainCamera()->GetPos().Y) - 70 };
 
 	// 현재 플레이어 HP 값에 따라서 렌더러에 출력되는 텍스트의 위치를 조정해줍니다
 	if (CurPlayerHp > 100)
@@ -235,12 +228,16 @@ void UI_PlayerInfo::UpdateData_PlayerInfoUI(int* _PlayerHp, bool _IsTurnPlayer)
 		PlayerHpTextRenderer->SetRenderPos({ -5, 12 });
 	}
 
-	// 현재 플레이어 HP 값을 텍스트로 출력합니다
-	PlayerHpTextRenderer->SetText(std::to_string(CurPlayerHp), 16);
-
-
-//	PlayerInfoUI->SetPos(CurUIPos);
-
+	// 현재 플레이어 HP 값을 텍스트로 출력합니다. 
+	// 혹시 플레이어의 체력이 음수가 된 상태라면 0으로 고정하여 출력해줍니다.
+	if (CurPlayerHp <= 0)
+	{
+		PlayerHpTextRenderer->SetText("0", 16);
+	}
+	else
+	{
+		PlayerHpTextRenderer->SetText(std::to_string(CurPlayerHp), 16);
+	}
 
 	// 현재 플레이어가 턴 플레이어라면 화살표 UI를 활성, 아닌 경우 비활성합니다.
 	if (true == _IsTurnPlayer)

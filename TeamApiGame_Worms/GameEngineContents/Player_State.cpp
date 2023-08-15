@@ -21,6 +21,7 @@
 
 // UI
 #include "UI_PlayerDamage.h"
+#include "UI_Box_AllTeamHpBar.h"
 
 #define RIGHT_UP_MAXANGEL  -90
 #define RIGHT_DOWN_MAXANGEL  90
