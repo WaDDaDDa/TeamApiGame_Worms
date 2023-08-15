@@ -11,6 +11,7 @@
 #include "Grenade.h"
 #include "Self_Bomb.h"
 #include "BombEffect.h"
+#include "Donkey.h"
 
 
 #include <GameEnginePlatform/GameEngineInput.h>
@@ -1062,6 +1063,7 @@ void Player::HomingMissileUpdate(float _Delta)
 void Player::HomingMissileFireStart()
 {
 	CreateWeapon<HomingMissile>();
+	//CreateWeapon<Donkey>();
 }
 void Player::HomingMissileFireUpdate(float _Delta)
 {

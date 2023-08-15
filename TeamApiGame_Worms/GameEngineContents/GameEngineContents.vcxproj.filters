@@ -168,6 +168,9 @@
     <ClCompile Include="MouseObject.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="Donkey.cpp">
+      <Filter>Weapon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentCore.h" />
@@ -339,6 +342,9 @@
     </ClInclude>
     <ClInclude Include="MouseObject.h">
       <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Donkey.h">
+      <Filter>Weapon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
