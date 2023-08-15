@@ -275,6 +275,9 @@ void Player::DamagingStart()
 
 			this->Hp -= Damaging;
 
+			UI_Box_AllTeamHpBar::GetAllTeamHpBarUI()->InitTeamHpBarData(TurnPlayerIndex, GetHp());
+
+
 		}
 
 		SetGravityVector(GravityDir * 250.0f);
