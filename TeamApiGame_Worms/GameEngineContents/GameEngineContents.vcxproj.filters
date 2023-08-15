@@ -1,119 +1,51 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <ClCompile Include="BackGround.cpp" />
+    <ClCompile Include="Cloud.cpp" />
     <ClCompile Include="ContentCore.cpp" />
     <ClCompile Include="GameStateManager.cpp" />
     <ClCompile Include="GameTurn.cpp" />
+    <ClCompile Include="GravityActor.cpp" />
+    <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="Hole.cpp" />
+    <ClCompile Include="LobbyLevel.cpp" />
+    <ClCompile Include="ModeSelectLevel.cpp" />
     <ClCompile Include="MouseObject.cpp" />
-    <ClCompile Include="UI_Box_AllTeamHpBar.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_Box_Barracks.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_Box_SchemeOption.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_Box_Teams.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_Box_Terrain.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_Button.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_Button_StartGame.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_FadeObject.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_IntroLogo.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_Inventory.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_Lobby_SelectTitle.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_MainLogo.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_Meteor.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_Mouse.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_PlayerDamage.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_PlayerInfo.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_RoundTime_Button.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_TeamHpBar.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_Teleportin_Button.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_Terrain_Button.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_Timer.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_TurnTime_Button.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_Win_Button.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_Wind.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_WormMaxHp_Button.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UI_WormSelect_Button.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="Cloud.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
-    <ClCompile Include="BackGround.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
-    <ClCompile Include="Ground.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
-    <ClCompile Include="Hole.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
-    <ClCompile Include="Wave.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
-    <ClCompile Include="UnderWater.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
-    <ClCompile Include="LobbyLevel.cpp">
-      <Filter>GameLevel</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayLevel.cpp">
-      <Filter>GameLevel</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleLevel.cpp">
-      <Filter>GameLevel</Filter>
-    </ClCompile>
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Player_State.cpp" />
+    <ClCompile Include="PlayLevel.cpp" />
+    <ClCompile Include="TitleLevel.cpp" />
+    <ClCompile Include="UI_Box_AllTeamHpBar.cpp" />
+    <ClCompile Include="UI_Box_Barracks.cpp" />
+    <ClCompile Include="UI_Box_SchemeOption.cpp" />
+    <ClCompile Include="UI_Box_Teams.cpp" />
+    <ClCompile Include="UI_Box_Terrain.cpp" />
+    <ClCompile Include="UI_Button.cpp" />
+    <ClCompile Include="UI_Button_StartGame.cpp" />
+    <ClCompile Include="UI_FadeObject.cpp" />
+    <ClCompile Include="UI_IntroLogo.cpp" />
+    <ClCompile Include="UI_Inventory.cpp" />
+    <ClCompile Include="UI_Lobby_SelectTitle.cpp" />
+    <ClCompile Include="UI_MainLogo.cpp" />
+    <ClCompile Include="UI_Meteor.cpp" />
+    <ClCompile Include="UI_Mouse.cpp" />
+    <ClCompile Include="UI_PlayerDamage.cpp" />
+    <ClCompile Include="UI_PlayerInfo.cpp" />
+    <ClCompile Include="UI_RoundTime_Button.cpp" />
+    <ClCompile Include="UI_TeamHpBar.cpp" />
+    <ClCompile Include="UI_Teleportin_Button.cpp" />
+    <ClCompile Include="UI_Terrain_Button.cpp" />
+    <ClCompile Include="UI_Timer.cpp" />
+    <ClCompile Include="UI_TurnTime_Button.cpp" />
+    <ClCompile Include="UI_Wind.cpp" />
+    <ClCompile Include="UI_Win_Button.cpp" />
+    <ClCompile Include="UI_WormMaxHp_Button.cpp" />
+    <ClCompile Include="UI_WormSelect_Button.cpp" />
+    <ClCompile Include="UnderWater.cpp" />
+    <ClCompile Include="Wave.cpp" />
+    <ClCompile Include="Wind.cpp" />
     <ClCompile Include="Bazooka.cpp">
-      <Filter>Weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="BombEffect.cpp">
       <Filter>Weapon</Filter>
     </ClCompile>
     <ClCompile Include="Grenade.cpp">
@@ -134,153 +66,72 @@
     <ClCompile Include="Weapon.cpp">
       <Filter>Weapon</Filter>
     </ClCompile>
-    <ClCompile Include="ModeSelectLevel.cpp">
-      <Filter>GameLevel</Filter>
-    </ClCompile>
-    <ClCompile Include="Range25.cpp">
-      <Filter>Weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="Range50.cpp">
-      <Filter>Weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="Range75.cpp">
-      <Filter>Weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="Range100.cpp">
-      <Filter>Weapon</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Player</Filter>
+    <ClCompile Include="BombEffect.cpp">
+      <Filter>Effect</Filter>
     </ClCompile>
     <ClCompile Include="FlyEffect.cpp">
-      <Filter>Player</Filter>
+      <Filter>Effect</Filter>
     </ClCompile>
-    <ClCompile Include="Player_State.cpp">
-      <Filter>Player</Filter>
+    <ClCompile Include="Range25.cpp">
+      <Filter>Effect</Filter>
     </ClCompile>
-    <ClCompile Include="GravityActor.cpp">
-      <Filter>Global</Filter>
+    <ClCompile Include="Range50.cpp">
+      <Filter>Effect</Filter>
     </ClCompile>
-    <ClCompile Include="Wind.cpp">
-      <Filter>Global</Filter>
+    <ClCompile Include="Range75.cpp">
+      <Filter>Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Range100.cpp">
+      <Filter>Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BackGround.h" />
+    <ClInclude Include="Cloud.h" />
     <ClInclude Include="ContentCore.h" />
     <ClInclude Include="ContentsDefine.h" />
     <ClInclude Include="ContentsEnum.h" />
     <ClInclude Include="GameStateManager.h" />
     <ClInclude Include="GameTurn.h" />
+    <ClInclude Include="GravityActor.h" />
+    <ClInclude Include="Ground.h" />
+    <ClInclude Include="Hole.h" />
+    <ClInclude Include="LobbyLevel.h" />
+    <ClInclude Include="ModeSelectLevel.h" />
     <ClInclude Include="MouseObject.h" />
-    <ClInclude Include="UI_Box_AllTeamHpBar.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_Box_Barracks.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_Box_SchemeOption.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_Box_Teams.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_Box_Terrain.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_Button.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_Button_StartGame.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_FadeObject.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_IntroLogo.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_Inventory.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_Lobby_SelectTitle.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_MainLogo.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_Meteor.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_Mouse.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_PlayerDamage.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_PlayerInfo.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_RoundTime_Button.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_TeamHpBar.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_Teleportin_Button.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_Terrain_Button.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_Timer.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_TurnTime_Button.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_Win_Button.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_Wind.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_WormMaxHp_Button.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_WormSelect_Button.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Cloud.h">
-      <Filter>Map</Filter>
-    </ClInclude>
-    <ClInclude Include="BackGround.h">
-      <Filter>Map</Filter>
-    </ClInclude>
-    <ClInclude Include="Ground.h">
-      <Filter>Map</Filter>
-    </ClInclude>
-    <ClInclude Include="Hole.h">
-      <Filter>Map</Filter>
-    </ClInclude>
-    <ClInclude Include="Wave.h">
-      <Filter>Map</Filter>
-    </ClInclude>
-    <ClInclude Include="UnderWater.h">
-      <Filter>Map</Filter>
-    </ClInclude>
-    <ClInclude Include="LobbyLevel.h">
-      <Filter>GameLevel</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayLevel.h">
-      <Filter>GameLevel</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleLevel.h">
-      <Filter>GameLevel</Filter>
-    </ClInclude>
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayLevel.h" />
+    <ClInclude Include="TitleLevel.h" />
+    <ClInclude Include="UI_Box_AllTeamHpBar.h" />
+    <ClInclude Include="UI_Box_Barracks.h" />
+    <ClInclude Include="UI_Box_SchemeOption.h" />
+    <ClInclude Include="UI_Box_Teams.h" />
+    <ClInclude Include="UI_Box_Terrain.h" />
+    <ClInclude Include="UI_Button.h" />
+    <ClInclude Include="UI_Button_StartGame.h" />
+    <ClInclude Include="UI_FadeObject.h" />
+    <ClInclude Include="UI_IntroLogo.h" />
+    <ClInclude Include="UI_Inventory.h" />
+    <ClInclude Include="UI_Lobby_SelectTitle.h" />
+    <ClInclude Include="UI_MainLogo.h" />
+    <ClInclude Include="UI_Meteor.h" />
+    <ClInclude Include="UI_Mouse.h" />
+    <ClInclude Include="UI_PlayerDamage.h" />
+    <ClInclude Include="UI_PlayerInfo.h" />
+    <ClInclude Include="UI_RoundTime_Button.h" />
+    <ClInclude Include="UI_TeamHpBar.h" />
+    <ClInclude Include="UI_Teleportin_Button.h" />
+    <ClInclude Include="UI_Terrain_Button.h" />
+    <ClInclude Include="UI_Timer.h" />
+    <ClInclude Include="UI_TurnTime_Button.h" />
+    <ClInclude Include="UI_Wind.h" />
+    <ClInclude Include="UI_Win_Button.h" />
+    <ClInclude Include="UI_WormMaxHp_Button.h" />
+    <ClInclude Include="UI_WormSelect_Button.h" />
+    <ClInclude Include="UnderWater.h" />
+    <ClInclude Include="Wave.h" />
+    <ClInclude Include="Wind.h" />
     <ClInclude Include="Bazooka.h">
-      <Filter>Weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="BombEffect.h">
       <Filter>Weapon</Filter>
     </ClInclude>
     <ClInclude Include="Grenade.h">
@@ -289,10 +140,10 @@
     <ClInclude Include="HomingMissile.h">
       <Filter>Weapon</Filter>
     </ClInclude>
-    <ClInclude Include="Sheep.h">
+    <ClInclude Include="Self_Bomb.h">
       <Filter>Weapon</Filter>
     </ClInclude>
-    <ClInclude Include="Self_Bomb.h">
+    <ClInclude Include="Sheep.h">
       <Filter>Weapon</Filter>
     </ClInclude>
     <ClInclude Include="Uzi.h">
@@ -301,52 +152,31 @@
     <ClInclude Include="Weapon.h">
       <Filter>Weapon</Filter>
     </ClInclude>
-    <ClInclude Include="ModeSelectLevel.h">
-      <Filter>GameLevel</Filter>
-    </ClInclude>
-    <ClInclude Include="Range100.h">
-      <Filter>Weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="Range25.h">
-      <Filter>Weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="Range50.h">
-      <Filter>Weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="Range75.h">
-      <Filter>Weapon</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Player</Filter>
+    <ClInclude Include="BombEffect.h">
+      <Filter>Effect</Filter>
     </ClInclude>
     <ClInclude Include="FlyEffect.h">
-      <Filter>Player</Filter>
+      <Filter>Effect</Filter>
     </ClInclude>
-    <ClInclude Include="GravityActor.h">
-      <Filter>Global</Filter>
+    <ClInclude Include="Range25.h">
+      <Filter>Effect</Filter>
     </ClInclude>
-    <ClInclude Include="Wind.h">
-      <Filter>Global</Filter>
+    <ClInclude Include="Range50.h">
+      <Filter>Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Range75.h">
+      <Filter>Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Range100.h">
+      <Filter>Effect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Player">
-      <UniqueIdentifier>{ddb1281e-d966-41fa-8ae6-677834a22d8f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Map">
-      <UniqueIdentifier>{d1959de3-c140-4cf8-a9e0-6e0b137b3718}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="UI">
-      <UniqueIdentifier>{0d48d384-fd16-41a1-96d7-5eff0312437e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Global">
-      <UniqueIdentifier>{4abde989-cf9c-4dc7-9358-aee3a0f69a04}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameLevel">
-      <UniqueIdentifier>{bf2cf648-a3d2-425e-b656-2d0e6c101bc3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Weapon">
-      <UniqueIdentifier>{020f595d-ef62-494c-ae84-884ffd04261f}</UniqueIdentifier>
+      <UniqueIdentifier>{60cdbe29-a34e-4009-8f5b-dde359537e0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Effect">
+      <UniqueIdentifier>{4763a82d-5de8-4f54-9d9b-d16998906060}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
