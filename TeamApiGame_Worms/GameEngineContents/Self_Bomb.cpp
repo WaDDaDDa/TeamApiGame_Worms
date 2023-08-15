@@ -133,7 +133,7 @@ void Self_Bomb::DamageUpdate(float _Delta)
 	int PlayerStateCount = 0;
 	for (size_t i = 0; i < PlayerCount; i++)
 	{
-		if (PlayerState::Idle == Player::GetAllPlayer()[i]->GetState() || PlayerState::DeathEnd == Player::GetAllPlayer()[i]->GetState())
+		if (PlayerState::Idle == Player::GetAllPlayer()[i]->GetState()/* || PlayerState::Die == Player::GetAllPlayer()[i]->GetState()*/)
 		{
 			PlayerStateCount++;
 		}
