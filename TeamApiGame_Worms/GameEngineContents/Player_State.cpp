@@ -1062,8 +1062,8 @@ void Player::HomingMissileUpdate(float _Delta)
 
 void Player::HomingMissileFireStart()
 {
-	CreateWeapon<HomingMissile>();
-	//CreateWeapon<Donkey>();
+	//CreateWeapon<HomingMissile>();
+	CreateWeapon<Donkey>();
 }
 void Player::HomingMissileFireUpdate(float _Delta)
 {

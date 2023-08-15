@@ -151,6 +151,7 @@ void Donkey::JumpStart()
 {
 	DonkeyBomb = CreateBombEffect<Range100>();
 	SetGravityVector(float4::UP * DonkeySpeed);
+	DonkeySpeed -= 120.0;
 }
 void Donkey::JumpUpdate(float _Delta)
 {
