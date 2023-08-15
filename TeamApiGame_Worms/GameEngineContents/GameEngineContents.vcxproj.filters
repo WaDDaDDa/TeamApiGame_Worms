@@ -171,6 +171,9 @@
     <ClCompile Include="Donkey.cpp">
       <Filter>Weapon</Filter>
     </ClCompile>
+    <ClCompile Include="BackGroundEffect.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentCore.h" />
@@ -345,6 +348,9 @@
     </ClInclude>
     <ClInclude Include="Donkey.h">
       <Filter>Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="BackGroundEffect.h">
+      <Filter>Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
