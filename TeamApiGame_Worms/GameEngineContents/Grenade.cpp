@@ -150,6 +150,8 @@ void Grenade::StateUpdate(float _Delta)
 		return IdleUpdate(_Delta);
 	case GrenadeState::Fly:
 		return FlyUpdate(_Delta);
+	case GrenadeState::PrevBomb:
+		return PrevBombUpdate(_Delta);
 	case GrenadeState::Bomb:
 		return BombUpdate(_Delta);
 	case GrenadeState::Damage:
@@ -175,7 +177,10 @@ void Grenade::ChangeState(GrenadeState _State)
 			break;
 		case GrenadeState::Fly:
 			FlyStart();
-			break;		
+			break;
+		case GrenadeState::PrevBomb:
+			PrevBombStart();
+			break;
 		case GrenadeState::Bomb:
 			BombStart();
 			break;
@@ -329,7 +334,7 @@ void Grenade::GroundCheck(float _Delta)
 
 			AddPos(float4::UP);
 		}
-		TongTong();
+		//TongTong();
 	}
 }
 
@@ -342,6 +347,7 @@ void Grenade::TongTong(float4 _Pos)
 
 	ReflectionDeg = -CurCravityVector;
 	ReflectionDeg.Normalize();
+	ReflectionDeg *= 100.0f;
 	// 현재 벡터의 각도
 	float CurDeg = ReflectionDeg.AngleDeg();
 
@@ -360,6 +366,7 @@ void Grenade::TongTong(float4 _Pos)
 
 	ReflectionDeg = -CurCravityVector;
 	ReflectionDeg.Normalize();
+	ReflectionDeg *= 100.0f;
 
 	CheckColor = GetGroundColor(RGB(255, 255, 255), _Pos + ReflectionDeg);
 
@@ -380,14 +387,14 @@ void Grenade::TongTong(float4 _Pos)
 	{
 		float4 Test = CurCravityVector;
 		Test.Y = -Test.Y;
-		SetGravityVector(Test * 0.8f);
+		SetGravityVector(Test * 0.6f);
 		return;
 	}
 
 	// CurCravityVector.Y = 0.0f;
 	float4 Test = -CurCravityVector;
 	Test = Test.GetRotationToDegZ(-(LastDeg + LastDeg));
-	SetGravityVector(Test * 0.8f);
+	SetGravityVector(Test * 0.6f);
 	return;
 }
 
@@ -399,8 +406,30 @@ void Grenade::IdleStart()
 void Grenade::IdleUpdate(float _Delta)
 {
 	DirCheck();
-	//Gravity(_Delta);
-	GroundCheck(_Delta);
+	Gravity(_Delta);
+	//GroundCheck(_Delta);
+
+	float4 Check = DownCheckPos;
+
+	if (RGB(255, 255, 255) != GetGroundColor(RGB(255, 255, 255)))
+	{
+		ChangeState(GrenadeState::PrevBomb);
+		return;
+	}
+
+
+	for (size_t i = 0; i <= 36; i++)
+	{
+		Check = Check.GetRotationToDegZ(i * 10.0f);
+
+		if (RGB(255, 255, 255) != GetGroundColor(RGB(255, 255, 255), Check))
+		{
+			TongTong(Check);
+			DownCheckPos = { DownCheckPos.X , DownCheckPos.Y - 1 };
+			//ChangeState(GrenadeState::Fly);
+			return;
+		}
+	}
 
 	if (GetLiveTime() >= 3.0f)
 	{
@@ -417,9 +446,9 @@ void Grenade::FlyStart()
 
 void Grenade::FlyUpdate(float _Delta)
 {
-	GroundCheck(_Delta);
+	//GroundCheck(_Delta);
 	//DirCheck();
-	//Gravity(_Delta);
+	Gravity(_Delta);
 
 	// 튕기는걸 세부화 해야함. 보류();
 	unsigned int Color = GetGroundColor(RGB(255, 255, 255));
@@ -430,20 +459,21 @@ void Grenade::FlyUpdate(float _Delta)
 
 	if (RGB(255, 255, 255) != Color)
 	{
-		ChangeState(GrenadeState::Idle);
-		return;
+		//ChangeState(GrenadeState::Idle);
+		//return;
 	}
 
 	// 위치가 흰색이면 중력작용.
 	// 모두 흰색이면 공중이다.
 	float4 Check = DownCheckPos;
-	for (size_t i = 0; i <= 360; i++)
+	for (size_t i = 0; i <= 36; i++)
 	{
-		Check = Check.GetRotationToDegZ(i * 1.0f);
+		Check = Check.GetRotationToDegZ(i * 10.0f);
 
 		if (RGB(255, 255, 255) != GetGroundColor(RGB(255, 255, 255), Check))
 		{
 			TongTong(Check);
+			ChangeState(GrenadeState::Idle);
 			return;
 		}
 	}
@@ -454,6 +484,24 @@ void Grenade::FlyUpdate(float _Delta)
 		return;
 	}
 }
+
+void Grenade::PrevBombStart()
+{
+
+}
+
+void Grenade::PrevBombUpdate(float _Delta)
+{
+	//DirCheck();
+	GroundCheck(_Delta);
+
+	if (GetLiveTime() >= 3.0f)
+	{
+		ChangeState(GrenadeState::Bomb);
+		return;
+	}
+}
+
 
 
 void Grenade::BombStart()

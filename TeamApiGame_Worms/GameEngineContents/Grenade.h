@@ -6,6 +6,7 @@ enum class GrenadeState
 	Ready,
 	Idle,
 	Fly,
+	PrevBomb,
 	Bomb,
 	Damage, //플레이어가 대미지입고 정리되는 단계
 	Max,
@@ -43,6 +44,8 @@ protected:
 	void IdleUpdate(float _Delta);
 	void FlyStart();
 	void FlyUpdate(float _Delta);
+	void PrevBombStart();
+	void PrevBombUpdate(float _Delta);
 	void BombStart();
 	void BombUpdate(float _Delta);
 	void DamageStart();
