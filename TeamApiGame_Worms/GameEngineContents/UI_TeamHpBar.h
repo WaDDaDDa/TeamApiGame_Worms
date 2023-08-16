@@ -19,12 +19,12 @@ public:
 
 	void SetMaxPlayerHp(int _MaxPlayerHp)
 	{
-		MaxPlayerHp = _MaxPlayerHp;
+		MaxHpBarAmount = _MaxPlayerHp;
 	}
 
 	void SetCurPlayerHp(int _CurPlayerHp)
 	{
-		CurPlayerHp = _CurPlayerHp;
+		CurHpBarAmount = _CurPlayerHp;
 	}
 
 	void SetHpBarWidth(float _HpBarWidth)
@@ -48,12 +48,14 @@ protected:
 private:
 	static UI_TeamHpBar* TeamHpBarUI;
 
-	float	MaxPlayerHp			=	0.0f;
-	float	CurPlayerHp			=	0.0f;
-	float	TargetPlayerHp		=	0.0f;
+	// HpBar 최대치
+	float	MaxHpBarAmount			=	100.0f;
+	// 현재 HpBar 수치
+	float	CurHpBarAmount		=	0.0f;
+	// HpBar 목표 감소치
+	float	TargetHpBarAmount	=	0.0f;
 	float	HpBarWidth			=	0.0f;
 	float	HpBarWidthPivot		=	0.0f;
-
 	bool	trigger_UpdateHP = false;
 
 };
