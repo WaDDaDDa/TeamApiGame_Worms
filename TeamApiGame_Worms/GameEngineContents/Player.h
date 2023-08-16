@@ -279,6 +279,8 @@ private:
 
 	PlayerState PrevMoveState = PlayerState::Idle;
 
+	int DamageCount = 0;
+
 	// Uzi ฐüทร
 	int UziAnimationNumber = 0;
 	int UziCount = 0;

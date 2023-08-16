@@ -32,7 +32,7 @@ void Player::IdleStart()
 {
 	ChangeAnimationState("Idle");
 
-	PlayerBodyCollision->On();
+	//PlayerBodyCollision->On();
 }
 void Player::IdleUpdate(float _Delta)
 {
@@ -252,7 +252,7 @@ void Player::DamagingStart()
 
 			//Collision->Off();
 			
-			PlayerBodyCollision->Off();
+			//PlayerBodyCollision->Off();
 		}
 		GravityDir = GetPos() - WeaponPos;
 		GravityDir.Normalize();
@@ -279,6 +279,7 @@ void Player::DamagingStart()
 
 
 		}
+		DamageCount++;
 
 		SetGravityVector(GravityDir * 250.0f);
 	}

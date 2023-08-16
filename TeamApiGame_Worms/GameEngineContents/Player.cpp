@@ -1228,6 +1228,13 @@ void Player::DamagingCheck()
 
 			GameEngineActor* Actor = Collison->GetActor();
 		}
-		ChangeState(PlayerState::Damaging);
+		if (0 >= DamageCount)
+		{
+			ChangeState(PlayerState::Damaging);
+		}
+	}
+	else
+	{
+		DamageCount = 0;
 	}
 }
