@@ -48,7 +48,7 @@ void UI_Box_AllTeamHpBar::AddTeamHpBar()
 
 		// 각 HP바의 초기지점을 설정해줍니다.
 		AllTeamHpBars[PlayerIndex]->SetPos({StartPos.X, StartPos.Y + 20 * PlayerIndex });
-		AllTeamHpBars[PlayerIndex]->SetHpBarWidth(StartPos.X);
+//		AllTeamHpBars[PlayerIndex]->SetHpBarWidth(StartPos.X);
 		AllTeamHpBars[PlayerIndex]->TeamHpRenderer->SetYPivot(StartPos.Y + 20 * PlayerIndex);
 
 		float InitPlayerHp = Player::GetAllPlayer()[PlayerIndex]->GetHp();

@@ -19,17 +19,17 @@ public:
 
 	void SetMaxPlayerHp(int _MaxPlayerHp)
 	{
-		MaxHpBarAmount = _MaxPlayerHp;
+		MaxHpBarAmount = static_cast<float>(_MaxPlayerHp);
 	}
 
 	void SetCurPlayerHp(int _CurPlayerHp)
 	{
-		CurHpBarAmount = _CurPlayerHp;
+		CurHpBarAmount = static_cast<float>(_CurPlayerHp);
 	}
 
 	void SetHpBarWidth(float _HpBarWidth)
 	{
-		HpBarWidth = _HpBarWidth;
+		HpBarWidth = static_cast<float>(_HpBarWidth);
 	}
 
 
@@ -51,11 +51,14 @@ private:
 	// HpBar 최대치
 	float	MaxHpBarAmount			=	100.0f;
 	// 현재 HpBar 수치
-	float	CurHpBarAmount		=	0.0f;
+	float	CurHpBarAmount		= MaxHpBarAmount;
 	// HpBar 목표 감소치
 	float	TargetHpBarAmount	=	0.0f;
-	float	HpBarWidth			=	0.0f;
-	float	HpBarWidthPivot		=	0.0f;
+	float	HpBarWidth			=	100.0f;
+
 	bool	trigger_UpdateHP = false;
+
+	int OriginScaleX = 100;
+	int CurScaleX = 100;
 
 };

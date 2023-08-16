@@ -3,6 +3,7 @@
 #include <GameEngineCore/GameEngineRenderer.h>
 #include "ContentsEnum.h"
 #include <GameEngineBase/GameEngineTime.h>
+#include <GameEnginePlatform/GameEngineInput.h>
 
 UI_TeamHpBar::UI_TeamHpBar()
 {
@@ -124,35 +125,15 @@ void UI_TeamHpBar::Update(float _Delta)
 	if (trigger_UpdateHP) // 이 변수가 true일 경우, 체력바의 Scale값을 줄입니다.
 	{
 		// step1. 줄어든 체력을 구합니다. 값을 조금씩 줄입니다.
-		CurHpBarAmount -= 1 * GameEngineTime::MainTimer.GetDeltaTime();
+		CurHpBarAmount -= 1 * _Delta * 100.0f;
 
-		float Lerp = CurHpBarAmount / MaxHpBarAmount; // 피격 후 변동 값 (=피격 후 체력의 비율) => Scale x값은 Ratio값까지 줄어들게 됩니다.
-
-		if (CurHpBarAmount <= Lerp) // Scale값이 목표치만큼 줄어들었다면
-		{
-			trigger_UpdateHP = false; // 더이상 값이 줄어들지 않도록 비활성화합니다.
-		}
-
-		else  // 만약 아직 목표치에 도달하지 못했을 경우(Ratio값까지 값이 줄어 들지 않은 상황)
-		{
-
-			if (CurHpBarAmount < 0.0f)
-			{
-				TeamHpRenderer->SetRenderScale({ 0, 17 }); // 줄어드는 값이 음수가 되는 것을 막기 위해 -가 되는 순간 X값을 0으로 고정시켜줍니다.
-			}
-			else
-			{
-				TeamHpRenderer->SetRenderScale({ CurHpBarAmount, 17 });  // 위 코드에서 줄인 값에 맞춰 HP 렌더러의 Scale값을 줄입니다.
-			}
-
-		}
-
-		float PivotX = (TeamHpRenderer->GetRenderScale().X - TeamHpRenderer->GetRenderScale().X * Lerp) / 2;
-
-		TeamHpRenderer->SetRenderPos({ TeamHpRenderer->GetRenderPos().X - PivotX, TeamHpRenderer->GetRenderPos().Y });
-
-		trigger_UpdateHP = false;
+		// step3. 위 코드에서 줄인 값에 맞춰 HP 렌더러의 스케일을 변경합니다.
+		TeamHpRenderer->SetRenderScale({ CurHpBarAmount, 17 });
 	}
+
+	// step4. 변경된 렌더러 스케일 값만큼 옮겨진 X값 위치를 변경해줍니다.
+	TeamHpRenderer->SetRenderPos({ 10.0f + (CurHpBarAmount / 2), TeamHpRenderer->GetRenderPos().Y });
+
 
 }
 
@@ -170,10 +151,14 @@ void UI_TeamHpBar::InitDecreaseHpBar(int _DamagedHp)
 	{
 		DecreaseHpBar();
 	}
-	else if (_DamagedHp <= 0)
-	{
-		TeamHpRenderer->Off();
-	}
+
+	// **** 0이 된 상태에서 연속 공격을 받으면 체력바가 올라갔다 내려갔다 하는 현상이 가끔 있음.
+	// **** 따라서 필요에 따라 아래 코드를 사용하면 0이 되는 순간 렌더러가 아예 꺼져버리기 때문에 눈에 보이진 않음
+	// **** 단, 조금씩 렌더러가 줄어드는 효과 없이 바로 렌더러가 꺼진다는 문제가 있음 => 몇 번 더 테스트해보고 이상 없으면 지우기
+	//else if (_DamagedHp <= 0)
+	//{
+	//	TeamHpRenderer->Off();
+	//}
 
 }
 
@@ -184,7 +169,10 @@ void UI_TeamHpBar::DecreaseHpBar()
 	// step0. Hp바를 변동시킬 수 있는 상황인지 먼저 체크하여 활성화해줍니다.
 	trigger_UpdateHP = true;
 
-	// Scale.X의 기본값이 될 값을 설정해줍니다. (추후에 입력받은 값으로 바뀌도록 변경할 예정)
-	HpBarWidth = 100.0f;
+	// *** 추후 이 값을 변동시킬 것
+	// *** Scale.X의 기본값이 될 값을 설정해줍니다. (추후에 입력받은 값으로 바뀌도록 변경할 예정)
+//	HpBarWidth = TeamHpRenderer->GetRenderScale().X;
+
+//	CurHpBarAmount = MaxHpBarAmount;
 
 }
