@@ -579,6 +579,24 @@ void Player::Start()
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("GraveStone.bmp"), 5, 12); 
 		}
+
+		// WinMotion
+		if (false == ResourcesManager::GetInst().IsLoadTexture("winLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("winLeft.bmp"), 1, 14);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("winRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("winRight.bmp"), 1, 14);
+		}
 	}
 
 
@@ -625,6 +643,7 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Left_DonkeyFire", "AirStrikeFireLeft.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_DonkeyOff", "AirStrikeOffLeft.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_GraveStone", "GraveStone.bmp", 0, 59, 0.1f, true);
+		MainRenderer->CreateAnimation("Left_Win", "winLeft.bmp", 0, 13, 0.1f, true);
 
 
 		// Right
@@ -666,6 +685,7 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Right_DonkeyFire", "AirStrikeFireRight.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_DonkeyOff", "AirStrikeOffRight.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_GraveStone", "GraveStone.bmp", 0, 59, 0.1f, true);
+		MainRenderer->CreateAnimation("Right_Win", "winRight.bmp", 0, 13, 0.1f, true);
 
 		// BazookaAnimation
 		for (int i = 0; i < 32; i++)
@@ -934,6 +954,9 @@ void Player::ChangeState(PlayerState _State)
 		case PlayerState::DonkeyOff:
 			DonkeyOffStart();
 			break;
+		case PlayerState::Win:
+			WinStart();
+			break;
 		default:
 			break;
 		}
@@ -1032,6 +1055,8 @@ void Player::StateUpdate(float _Delta)
 		return DonkeyFireUpdate(_Delta);
 	case PlayerState::DonkeyOff:
 		return DonkeyOffUpdate(_Delta);
+	case PlayerState::Win:
+		return WinUpdate(_Delta);
 	default:
 		break;
 	}

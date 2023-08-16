@@ -53,6 +53,7 @@ enum class PlayerState
 	DonkeyOff,
 
 	DeathEnd,
+	Win,
 	Max
 };
 
@@ -273,6 +274,9 @@ protected:
 
 	void DonkeyOffStart();
 	void DonkeyOffUpdate(float _Delta);
+
+	void WinStart();
+	void WinUpdate(float _Delta);
 
 	void SetDirPosNormalize();
 

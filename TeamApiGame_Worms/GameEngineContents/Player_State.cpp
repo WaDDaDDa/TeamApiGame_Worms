@@ -1650,3 +1650,12 @@ void Player::DonkeyOffUpdate(float _Delta)
 		ChangeState(PlayerState::Idle);
 	}
 }
+
+void Player::WinStart()
+{
+	ChangeAnimationState("Win");
+}
+void Player::WinUpdate(float _Delta)
+{
+
+}
