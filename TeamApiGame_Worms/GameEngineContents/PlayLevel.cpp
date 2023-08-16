@@ -60,13 +60,6 @@ void PlayLevel::Start()
 
 
 
-	{
-		
-
-		GroundFileName = GameStateManager::GameState->GetStageName() +".Bmp";
-		GroundPixelFileName = GameStateManager::GameState->GetStageName() +"_Ground.Bmp";
-
-	}
 
 
 
@@ -78,7 +71,12 @@ void PlayLevel::Start()
 void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 {
 
+	{
 
+		GroundFileName = GameStateManager::GameState->GetStageName() + ".Bmp";
+		GroundPixelFileName = GameStateManager::GameState->GetStageName() + "_Ground.Bmp";
+
+	}
 
 	{
 
