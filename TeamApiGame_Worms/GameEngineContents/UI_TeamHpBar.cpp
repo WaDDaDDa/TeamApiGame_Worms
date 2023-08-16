@@ -147,8 +147,7 @@ void UI_TeamHpBar::Update(float _Delta)
 
 		}
 
-		// HpBarWidth=> 이 값을 현재 스케일 X값으로 바꿔야할 것 같다.
-		float PivotX = (HpBarWidth - HpBarWidth * Lerp) / 2;
+		float PivotX = (TeamHpRenderer->GetRenderScale().X - TeamHpRenderer->GetRenderScale().X * Lerp) / 2;
 
 		TeamHpRenderer->SetRenderPos({ TeamHpRenderer->GetRenderPos().X - PivotX, TeamHpRenderer->GetRenderPos().Y });
 

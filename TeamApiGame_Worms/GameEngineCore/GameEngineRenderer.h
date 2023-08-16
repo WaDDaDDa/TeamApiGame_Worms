@@ -38,6 +38,11 @@ public:
 		return RenderPos;
 	}
 
+	float4 GetRenderScale()	const
+	{
+		return RenderScale;
+	}
+
 	void SetRenderPos(const float4& _Value)
 	{
 		RenderPos = _Value;
