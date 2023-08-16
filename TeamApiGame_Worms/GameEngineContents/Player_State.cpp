@@ -1491,6 +1491,17 @@ void Player::AirStrikeUpdate(float _Delta)
 	// 마우스 위치 이용해서 목표 설정
 	// 하늘에서 미사일 5개 스폰
 
+	//ChangaAnimationState("AirStrikeFire");
+
+	if (MainRenderer->IsAnimation("Left_AirStrikeFire") || MainRenderer->IsAnimation("Right_AirStrikeFire"))
+	{
+		if (MainRenderer->IsAnimationEnd())
+		{
+			ChangeState(PlayerState::AirStrikeFire);
+		}
+	}
+
+
 	if (GameEngineInput::IsDown('1'))
 	{
 		ChangeState(PlayerState::AirStrikeOff);
@@ -1558,6 +1569,82 @@ void Player::GirderOffStart()
 }
 void Player::GirderOffUpdate(float _Delta)
 {
+	if (MainRenderer->IsAnimationEnd())
+	{
+		ChangeState(PlayerState::Idle);
+	}
+}
+
+void Player::DonkeyOnStart()
+{
+	PrevMoveState = PlayerState::DonkeyOn;
+	ChangeAnimationState("DonkeyOn");
+}
+void Player::DonkeyOnUpdate(float _Delta)
+{
+	if (MainRenderer->IsAnimationEnd())
+	{
+		ChangeState(PlayerState::Donkey);
+	}
+}
+
+void Player::DonkeyStart()
+{
+	ChangeAnimationState("Donkey");
+}
+void Player::DonkeyUpdate(float _Delta)
+{
+	//ChangeAnimationState("DonkeyFire");
+
+	
+
+	// 마우스 이용, 마우스 좌클릭시 애니메이션 전환
+	if (GameEngineInput::IsDown(VK_LBUTTON))
+	{
+		TargetPos = MouseObject::GetPlayMousePos();
+		ChangeState(PlayerState::DonkeyFire);
+	}
+
+	if (MainRenderer->IsAnimation("Left_DonkeyFire") || MainRenderer->IsAnimation("Right_DonkeyFire"))
+	{
+		if (MainRenderer->IsAnimationEnd())
+		{
+			ChangeState(PlayerState::DonkeyFire);
+		}
+	}
+
+	if (GameEngineInput::IsDown('1'))
+	{
+		ChangeState(PlayerState::DonkeyOff);
+	}
+
+	InputMove();
+	ChangeWeapon();
+
+}
+
+void Player::DonkeyFireStart()
+{
+	ChangeAnimationState("DonkeyFire");
+}
+void Player::DonkeyFireUpdate(float _Delta)
+{
+	DamagingCheck();
+	if (MainRenderer->IsAnimationEnd())
+	{
+		CreateWeapon<Donkey>();
+		ChangeState(PlayerState::DonkeyOff);
+	}
+}
+
+void Player::DonkeyOffStart()
+{
+	ChangeAnimationState("DonkeyOff");
+}
+void Player::DonkeyOffUpdate(float _Delta)
+{
+	DamagingCheck();
+
 	if (MainRenderer->IsAnimationEnd())
 	{
 		ChangeState(PlayerState::Idle);

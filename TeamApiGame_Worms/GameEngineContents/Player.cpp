@@ -466,6 +466,22 @@ void Player::Start()
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("AirStrikeOnRight.bmp"), 1, 10);
 		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("AirStrikeFireLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("AirStrikeFireLeft.bmp"), 1, 10);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("AirStrikeFireRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("AirStrikeFireRight.bmp"), 1, 10);
+		}
 		if (false == ResourcesManager::GetInst().IsLoadTexture("AirStrikeOffLeft.bmp"))
 		{
 			GameEnginePath FilePath;
@@ -599,10 +615,15 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Left_TeleportOff", "teleportOffLeft.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_AirStrikeOn", "AirStrikeOnLeft.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_AirStrike", "AirStrikeOnLeft.bmp", 9, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_AirStrikeFire", "AirStrikeFireLeft.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_AirStrikeOff", "AirStrikeOffLeft.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_GirderOn", "girderOnLeft.bmp", 0, 14, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_Girder", "girderOnLeft.bmp", 14, 14, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_GirderOff", "girderOffLeft.bmp", 0, 14, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_DonkeyOn", "AirStrikeOnLeft.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_Donkey", "AirStrikeOnLeft.bmp", 9, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_DonkeyFire", "AirStrikeFireLeft.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_DonkeyOff", "AirStrikeOffLeft.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_GraveStone", "GraveStone.bmp", 0, 59, 0.1f, true);
 
 
@@ -635,10 +656,15 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Right_TeleportOff", "teleportOffRight.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_AirStrikeOn", "AirStrikeOnRight.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_AirStrike", "AirStrikeOnRight.bmp", 9, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_AirStrikeFire", "AirStrikeFireRight.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_AirStrikeOff", "AirStrikeOffRight.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_GirderOn", "girderOnRight.bmp", 0, 14, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_Girder", "girderOnRight.bmp", 14, 14, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_GirderOff", "girderOffRight.bmp", 0, 14, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_DonkeyOn", "AirStrikeOnRight.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_Donkey", "AirStrikeOnRight.bmp", 9, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_DonkeyFire", "AirStrikeFireRight.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_DonkeyOff", "AirStrikeOffRight.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_GraveStone", "GraveStone.bmp", 0, 59, 0.1f, true);
 
 		// BazookaAnimation
@@ -896,6 +922,18 @@ void Player::ChangeState(PlayerState _State)
 		case PlayerState::GirderOff:
 			GirderOffStart();
 			break;
+		case PlayerState::DonkeyOn:
+			DonkeyOnStart();
+			break;
+		case PlayerState::Donkey:
+			DonkeyStart();
+			break;
+		case PlayerState::DonkeyFire:
+			DonkeyFireStart();
+			break;
+		case PlayerState::DonkeyOff:
+			DonkeyOffStart();
+			break;
 		default:
 			break;
 		}
@@ -986,6 +1024,14 @@ void Player::StateUpdate(float _Delta)
 		return GirderUpdate(_Delta);
 	case PlayerState::GirderOff:
 		return GirderOffUpdate(_Delta);
+	case PlayerState::DonkeyOn:
+		return DonkeyOnUpdate(_Delta);
+	case PlayerState::Donkey:
+		return DonkeyUpdate(_Delta);
+	case PlayerState::DonkeyFire:
+		return DonkeyFireUpdate(_Delta);
+	case PlayerState::DonkeyOff:
+		return DonkeyOffUpdate(_Delta);
 	default:
 		break;
 	}
@@ -1199,7 +1245,8 @@ void Player::ChangeWeapon()
 
 	if (true == GameEngineInput::IsDown('9'))
 	{
-		ChangeState(PlayerState::GirderOn);
+		//ChangeState(PlayerState::GirderOn);
+		ChangeState(PlayerState::DonkeyOn);
 	}
 
 

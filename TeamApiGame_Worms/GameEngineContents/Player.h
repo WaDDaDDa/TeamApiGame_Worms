@@ -47,6 +47,10 @@ enum class PlayerState
 	GirderOn,
 	Girder,
 	GirderOff,
+	DonkeyOn,
+	Donkey,
+	DonkeyFire,
+	DonkeyOff,
 
 	DeathEnd,
 	Max
@@ -257,6 +261,18 @@ protected:
 
 	void GirderOffStart();
 	void GirderOffUpdate(float _Delta);
+
+	void DonkeyOnStart();
+	void DonkeyOnUpdate(float _Delta);
+
+	void DonkeyStart();
+	void DonkeyUpdate(float _Delta);
+
+	void DonkeyFireStart();
+	void DonkeyFireUpdate(float _Delta);
+
+	void DonkeyOffStart();
+	void DonkeyOffUpdate(float _Delta);
 
 	void SetDirPosNormalize();
 
