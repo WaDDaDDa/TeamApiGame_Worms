@@ -30,6 +30,7 @@ private:
 	std::string GroundPixelFileName = "";
 
 	float CloudRespawn = 0.0f;
+	float BackGroundEffectRespawn = 0.0f;
 
 	void PlayerSetting(size_t _PlayerCount);
 

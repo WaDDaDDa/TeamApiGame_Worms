@@ -9,6 +9,7 @@
 
 #include "ContentsEnum.h"
 #include "BackGround.h"
+#include "BackGroundEffect.h"
 #include "Ground.h"
 #include "Wave.h"
 #include "Wind.h"
@@ -110,9 +111,36 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 	}
 
 	{
+		
+		
 		Wind* PlayWind = CreateActor<Wind>();
 		
+		
 	}
+
+	{
+		for (size_t i = 0; i < 30; i++)
+		{
+			GameEngineActor* NewCloud = CreateActor<Cloud>(RenderOrder::BackGroundEffect);
+			float RandX = GameEngineRandom::MainRandom.RandomFloat(0.0f, BACKGROUND_SCALE.X);
+			float RandY = GameEngineRandom::MainRandom.RandomFloat(PLAY_GROUND_SCALE.hY() - 30.0f, PLAY_GROUND_SCALE.hY() + 30.0f);
+			NewCloud->SetPos({ RandX, RandY });
+		}
+	}
+
+	{
+		
+		for (size_t i = 0; i < 400; i++)
+		{
+			GameEngineActor* NewBackEffect = CreateActor<BackGroundEffect>();
+			float RandX=GameEngineRandom::MainRandom.RandomFloat(0.0f, BACKGROUND_SCALE.X);
+			float RandY = GameEngineRandom::MainRandom.RandomFloat(PLAY_GROUND_SCALE.hY(), 1800.0f);
+			NewBackEffect->SetPos({ RandX,RandY });
+		}
+		
+	}
+
+	
 
 	
 	// 플레이어 수만큼 랜덤으로 생성
@@ -185,6 +213,22 @@ void PlayLevel::Update(float _Delta)
 
 		}
 		CloudRespawn -= _Delta;
+		
+	}
+
+	//BackGroundEffect
+	{
+		
+			if (0.0f >= BackGroundEffectRespawn)
+			{
+				GameEngineActor* NewBackEffect = CreateActor<BackGroundEffect>(RenderOrder::BackGroundEffect);
+				float RandX = GameEngineRandom::MainRandom.RandomFloat(0.0f, BACKGROUND_SCALE.X);
+				NewBackEffect->SetPos({ RandX,PLAY_GROUND_SCALE.hY() });
+
+				BackGroundEffectRespawn = GameEngineRandom::MainRandom.RandomFloat(0.0f, 0.1f);
+			}
+		
+			BackGroundEffectRespawn -= _Delta;
 		
 	}
 
