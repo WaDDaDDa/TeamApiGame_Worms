@@ -51,6 +51,10 @@ enum class PlayerState
 	Donkey,
 	DonkeyFire,
 	DonkeyOff,
+	HolyGranadeOn,
+	HolyGranade,
+	HolyGranadeFire,
+	HolyGranadeOff,
 
 	Diving,
 	DeathEnd,
@@ -79,6 +83,7 @@ public:
 	Player& operator=(Player && _Other) noexcept = delete;
 
 	class GameEngineRenderer* MainRenderer = nullptr;
+	class GameEngineRenderer* CrossHairRenderer = nullptr;
 	static float4 DirPos;
 
 	static std::vector<Player*> GetAllPlayer()
@@ -276,6 +281,18 @@ protected:
 	void DonkeyOffStart();
 	void DonkeyOffUpdate(float _Delta);
 
+	void HolyGranadeOnStart();
+	void HolyGranadeOnUpdate(float _Delta);
+
+	void HolyGranadeStart();
+	void HolyGranadeUpdate(float _Delta);
+
+	void HolyGranadeFireStart();
+	void HolyGranadeFireUpdate(float _Delta);
+
+	void HolyGranadeOffStart();
+	void HolyGranadeOffUpdate(float _Delta);
+
 	void WinStart();
 	void WinUpdate(float _Delta);
 
@@ -288,6 +305,9 @@ protected:
 	void ChangeWeapon();
 	void DamagingCheck();
 
+	void ChangeCrossHairAnimation(const std::string& _State);
+	void ChangeCrossHairRenderPos(int _iCurAngle);
+
 	// Collision
 	GameEngineCollision* PlayerBodyCollision = nullptr;
 
@@ -299,7 +319,7 @@ private:
 	float PlayerSpeed = 200.0f;
 	float PlayerJumpPower = 400.0f;
 
-	float CurAngle = -45.0f;
+	float CurAngle = 0.0f;
 
 	PlayerState PrevMoveState = PlayerState::Idle;
 
@@ -335,6 +355,13 @@ private:
 
 	float4 TeleportPos = float4::ZERO;
 
+	// CrossHairPos ฐüทร
+	float4 CrossHairPos = float4::ZERO;
+	float LengthMulX = 0;
+	float LengthMulY = 0;
+
+	float LengthX = 92.0f;
+	float LengthY = 0;
 
 
 	// UI

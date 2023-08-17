@@ -13,6 +13,8 @@
 #include "BombEffect.h"
 #include "Donkey.h"
 #include "Hallelujah.h"
+#include "TestWeapon.h"
+#include "SuperSheep.h"
 
 
 #include <GameEnginePlatform/GameEngineInput.h>
@@ -67,6 +69,12 @@ void Player::IdleUpdate(float _Delta)
 	if (true != IsTurnPlayer)
 	{
 		return;
+	}
+
+	if (GameEngineInput::IsDown(VK_LBUTTON))
+	{
+		TargetPos = MouseObject::GetPlayMousePos();
+		CreateWeapon<TestWeapon>();
 	}
 
 	//if (true == GameEngineInput::IsPress(VK_LEFT)
@@ -278,7 +286,7 @@ void Player::DamagingStart()
 			}
 
 			// 데미지 UI 출력
-			DamageUI->UpdateData_PlayerDamageUI(PlayerInfoUI->GetPos(), Damaging);
+			DamageUI->UpdateData_PlayerDamageUI(PlayerInfoUI->GetPos(), static_cast<int>(Damaging));
 
 			this->Hp -= Damaging;
 
@@ -342,6 +350,7 @@ void Player::BazookaOnStart()
 {
 	PrevMoveState = PlayerState::BazookaOn;
 	ChangeAnimationState("BazookaOn");
+	CrossHairRenderer->On();
 }
 void Player::BazookaOnUpdate(float _Delta)
 {
@@ -379,11 +388,23 @@ void Player::BazookaUpdate(float _Delta)
 		if (true == GameEngineInput::IsPress(VK_UP))
 		{
 			CurAngle -= (5.625f * _Delta * 4.0f);
+			
+			LengthY -= (5.75f * _Delta * 4.0f);
 
+			if (0 <= LengthY)
+			{
+				LengthX += (5.75f * _Delta * 4.0f);
+			}
+			else
+			{
+				LengthX -= (5.75f * _Delta * 4.0f);
+			}
 
 			if (CurAngle <= RIGHT_UP_MAXANGEL)
 			{
 				CurAngle = RIGHT_UP_MAXANGEL;
+				LengthX = 0;
+				LengthY = -92;
 			}
 		}
 		if (true == GameEngineInput::IsPress(VK_DOWN))
@@ -541,6 +562,15 @@ void Player::BazookaUpdate(float _Delta)
 		ChangeAnimationState("Bazooka0");
 		break;
 	}
+
+	//ChangeCrossHairRenderPos(iCurAngle);
+
+	CrossHairPos = { LengthX, LengthY };
+	CrossHairPos.Normalize();
+	CrossHairPos *= 92;
+
+	CrossHairRenderer->SetRenderPos(CrossHairPos);
+
 
 	InputMove();
 	ChangeWeapon();
@@ -1074,8 +1104,7 @@ void Player::HomingMissileUpdate(float _Delta)
 
 void Player::HomingMissileFireStart()
 {
-	//CreateWeapon<HomingMissile>();
-	CreateWeapon<Donkey>();
+	CreateWeapon<HomingMissile>();
 }
 void Player::HomingMissileFireUpdate(float _Delta)
 {
@@ -1134,7 +1163,8 @@ void Player::SheepUpdate(float _Delta)
 
 void Player::SheepFireStart()
 {
-	CreateWeapon<Sheep>();
+	//CreateWeapon<Sheep>();
+	CreateWeapon<SuperSheep>();
 }
 void Player::SheepFireUpdate(float _Delta)
 {
@@ -1365,8 +1395,7 @@ void Player::GranadeUpdate(float _Delta)
 
 void Player::GranadeFireStart()
 {
-	//CreateWeapon<Grenade>();
-	CreateWeapon<Hallelujah>();
+	CreateWeapon<Grenade>();
 }
 void Player::GranadeFireUpdate(float _Delta)
 {
@@ -1656,6 +1685,238 @@ void Player::DonkeyOffUpdate(float _Delta)
 	if (MainRenderer->IsAnimationEnd())
 	{
 		ChangeState(PlayerState::Idle);
+	}
+}
+
+void Player::HolyGranadeOnStart()
+{
+	PrevMoveState = PlayerState::HolyGranade;
+	ChangeAnimationState("HolyGranadeOn");
+}
+void Player::HolyGranadeOnUpdate(float _Delta)
+{
+	if (MainRenderer->IsAnimationEnd())
+	{
+		ChangeState(PlayerState::HolyGranade);
+		return;
+	}
+	InputMove();
+}
+
+void Player::HolyGranadeStart()
+{
+	ChangeAnimationState("HolyGranade15");
+}
+void Player::HolyGranadeUpdate(float _Delta)
+{
+	DirCheck();
+
+	if (true != IsTurnPlayer)
+	{
+		ChangeState(PlayerState::HolyGranadeOff);
+		return;
+	}
+
+	if (true == GameEngineInput::IsDown('1'))
+	{
+		ChangeState(PlayerState::HolyGranadeOff);
+		return;
+	}
+
+	// 오른쪽 각도조절
+	if (PlayerDir::Right == Dir)
+	{
+		if (true == GameEngineInput::IsPress(VK_UP))
+		{
+			CurAngle -= (5.625f * _Delta * 4.0f);
+
+
+			if (CurAngle <= RIGHT_UP_MAXANGEL)
+			{
+				CurAngle = RIGHT_UP_MAXANGEL;
+			}
+		}
+		if (true == GameEngineInput::IsPress(VK_DOWN))
+		{
+			CurAngle += (5.625f * _Delta * 4.0f);
+			if (CurAngle >= RIGHT_DOWN_MAXANGEL)
+			{
+				CurAngle = RIGHT_DOWN_MAXANGEL;
+			}
+		}
+	}
+
+	// 왼쪽 각도조절
+	if (PlayerDir::Left == Dir)
+	{
+		if (true == GameEngineInput::IsPress(VK_UP))
+		{
+			CurAngle += (5.625f * _Delta * 4.0f);
+
+
+			if (CurAngle >= LEFT_UP_MAXANGEL)
+			{
+				CurAngle = LEFT_UP_MAXANGEL;
+			}
+		}
+		if (true == GameEngineInput::IsPress(VK_DOWN))
+		{
+			CurAngle -= (5.625f * _Delta * 4.0f);
+			if (CurAngle <= LEFT_DOWN_MAXANGEL)
+			{
+				CurAngle = LEFT_DOWN_MAXANGEL;
+			}
+		}
+	}
+
+
+	if (true == GameEngineInput::IsUp('A') || GameEngineInput::GetPressTime('A') >= MaxChargingTime)
+	{
+		ChargingTime = GameEngineInput::GetPressTime('A');
+
+		if (ChargingTime >= MaxChargingTime)
+		{
+			ChargingTime = MaxChargingTime;
+		}
+		GameEngineInput::ResetPressTime('A');
+
+		ChangeState(PlayerState::HolyGranadeFire);
+		return;
+	}
+
+	int iCurAngle = static_cast<int>(CurAngle);
+	// 애니메이션과 무기각도를 맞추기위한 중간 계산식.
+	// 무기각도가 -90에서 +되면서 270도까지로 되어있음.
+	if (PlayerDir::Left == Dir)
+	{
+		iCurAngle = 180 - iCurAngle;
+	}
+
+	switch (iCurAngle)
+	{
+	case -90:
+		ChangeAnimationState("HolyGranade31");
+		break;
+	case -84:
+		ChangeAnimationState("HolyGranade30");
+		break;
+	case -78:
+		ChangeAnimationState("HolyGranade29");
+		break;
+	case -73:
+		ChangeAnimationState("HolyGranade28");
+		break;
+	case -67:
+		ChangeAnimationState("HolyGranade27");
+		break;
+	case -61:
+		ChangeAnimationState("HolyGranade26");
+		break;
+	case -56:
+		ChangeAnimationState("HolyGranade25");
+		break;
+	case -50:
+		ChangeAnimationState("HolyGranade24");
+		break;
+	case -45:
+		ChangeAnimationState("HolyGranade23");
+		break;
+	case -39:
+		ChangeAnimationState("HolyGranade22");
+		break;
+	case -33:
+		ChangeAnimationState("HolyGranade21");
+		break;
+	case -28:
+		ChangeAnimationState("HolyGranade20");
+		break;
+	case -22:
+		ChangeAnimationState("HolyGranade19");
+		break;
+	case -16:
+		ChangeAnimationState("HolyGranade18");
+		break;
+	case -11:
+		ChangeAnimationState("HolyGranade17");
+		break;
+	case -5:
+		ChangeAnimationState("HolyGranade16");
+		break;
+	case 0:
+		ChangeAnimationState("HolyGranade15");
+		break;
+	case 5:
+		ChangeAnimationState("HolyGranade14");
+		break;
+	case 11:
+		ChangeAnimationState("HolyGranade13");
+		break;
+	case 16:
+		ChangeAnimationState("HolyGranade12");
+		break;
+	case 22:
+		ChangeAnimationState("HolyGranade11");
+		break;
+	case 28:
+		ChangeAnimationState("HolyGranade10");
+		break;
+	case 33:
+		ChangeAnimationState("HolyGranade9");
+		break;
+	case 39:
+		ChangeAnimationState("HolyGranade8");
+		break;
+	case 45:
+		ChangeAnimationState("HolyGranade7");
+		break;
+	case 50:
+		ChangeAnimationState("HolyGranade6");
+		break;
+	case 56:
+		ChangeAnimationState("HolyGranade5");
+		break;
+	case 61:
+		ChangeAnimationState("HolyGranade4");
+		break;
+	case 67:
+		ChangeAnimationState("HolyGranade3");
+		break;
+	case 73:
+		ChangeAnimationState("HolyGranade2");
+		break;
+	case 78:
+		ChangeAnimationState("HolyGranade1");
+		break;
+	case 84:
+		ChangeAnimationState("HolyGranade0");
+		break;
+	}
+
+	InputMove();
+	ChangeWeapon();
+}
+
+void Player::HolyGranadeFireStart()
+{
+	CreateWeapon<Hallelujah>();
+}
+void Player::HolyGranadeFireUpdate(float _Delta)
+{
+	DamagingCheck();
+	ChangeState(PlayerState::HolyGranadeOff);
+}
+
+void Player::HolyGranadeOffStart()
+{
+	ChangeAnimationState("HolyGranadeOff");
+}
+void Player::HolyGranadeOffUpdate(float _Delta)
+{
+	DamagingCheck();
+	if (MainRenderer->IsAnimationEnd())
+	{
+		ChangeState(PlayerState::Idle);
+		return;
 	}
 }
 

@@ -304,7 +304,7 @@ void Player::Start()
 		{
 			GameEnginePath FilePath;
 			FilePath.SetCurrentPath();
-			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveParentToExistsChild("ContentsResources");
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("sheepOnLeft.bmp"), 1, 10);
 		}
@@ -312,7 +312,7 @@ void Player::Start()
 		{
 			GameEnginePath FilePath;
 			FilePath.SetCurrentPath();
-			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveParentToExistsChild("ContentsResources");
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("sheepOnRight.bmp"), 1, 10);
 		}
@@ -320,7 +320,7 @@ void Player::Start()
 		{
 			GameEnginePath FilePath;
 			FilePath.SetCurrentPath();
-			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveParentToExistsChild("ContentsResources");
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("sheepOffLeft.bmp"), 1, 10);
 		}
@@ -328,7 +328,7 @@ void Player::Start()
 		{
 			GameEnginePath FilePath;
 			FilePath.SetCurrentPath();
-			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveParentToExistsChild("ContentsResources");
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("sheepOffRight.bmp"), 1, 10);
 		}
@@ -338,7 +338,7 @@ void Player::Start()
 		{
 			GameEnginePath FilePath;
 			FilePath.SetCurrentPath();
-			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveParentToExistsChild("ContentsResources");
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("grnOnLeft.bmp"), 1, 10);
 		}
@@ -346,7 +346,7 @@ void Player::Start()
 		{
 			GameEnginePath FilePath;
 			FilePath.SetCurrentPath();
-			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveParentToExistsChild("ContentsResources");
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("grnOnRight.bmp"), 1, 10);
 		}
@@ -370,7 +370,7 @@ void Player::Start()
 		{
 			GameEnginePath FilePath;
 			FilePath.SetCurrentPath();
-			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveParentToExistsChild("ContentsResources");
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("grnOffLeft.bmp"), 1, 10);
 		}
@@ -378,7 +378,7 @@ void Player::Start()
 		{
 			GameEnginePath FilePath;
 			FilePath.SetCurrentPath();
-			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveParentToExistsChild("ContentsResources");
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("grnOffRight.bmp"), 1, 10);
 		}
@@ -388,7 +388,7 @@ void Player::Start()
 		{
 			GameEnginePath FilePath;
 			FilePath.SetCurrentPath();
-			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveParentToExistsChild("ContentsResources");
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("teleportOnLeft.bmp"), 1, 10);
 		}
@@ -396,7 +396,7 @@ void Player::Start()
 		{
 			GameEnginePath FilePath;
 			FilePath.SetCurrentPath();
-			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveParentToExistsChild("ContentsResources");
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("teleportOnRight.bmp"), 1, 10);
 		}
@@ -404,7 +404,7 @@ void Player::Start()
 		{
 			GameEnginePath FilePath;
 			FilePath.SetCurrentPath();
-			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveParentToExistsChild("ContentsResources");
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("teleportFireLeft.bmp"), 1, 10);
 		}
@@ -412,7 +412,7 @@ void Player::Start()
 		{
 			GameEnginePath FilePath;
 			FilePath.SetCurrentPath();
-			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveParentToExistsChild("ContentsResources");
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("teleportFireRight.bmp"), 1, 10);
 		}
@@ -420,7 +420,7 @@ void Player::Start()
 		{
 			GameEnginePath FilePath;
 			FilePath.SetCurrentPath();
-			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveParentToExistsChild("ContentsResources");
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("teleportMoveLeft.bmp"), 1, 48);
 		}
@@ -428,7 +428,7 @@ void Player::Start()
 		{
 			GameEnginePath FilePath;
 			FilePath.SetCurrentPath();
-			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveParentToExistsChild("ContentsResources");
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("teleportMoveRight.bmp"), 1, 48);
 		}
@@ -436,7 +436,7 @@ void Player::Start()
 		{
 			GameEnginePath FilePath;
 			FilePath.SetCurrentPath();
-			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveParentToExistsChild("ContentsResources");
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("teleportOffLeft.bmp"), 1, 10);
 		}
@@ -444,7 +444,7 @@ void Player::Start()
 		{
 			GameEnginePath FilePath;
 			FilePath.SetCurrentPath();
-			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveParentToExistsChild("ContentsResources");
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("teleportOffRight.bmp"), 1, 10);
 		}
@@ -454,7 +454,7 @@ void Player::Start()
 		{
 			GameEnginePath FilePath;
 			FilePath.SetCurrentPath();
-			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveParentToExistsChild("ContentsResources");
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("AirStrikeOnLeft.bmp"), 1, 10);
 		}
@@ -462,7 +462,7 @@ void Player::Start()
 		{
 			GameEnginePath FilePath;
 			FilePath.SetCurrentPath();
-			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveParentToExistsChild("ContentsResources");
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("AirStrikeOnRight.bmp"), 1, 10);
 		}
@@ -470,7 +470,7 @@ void Player::Start()
 		{
 			GameEnginePath FilePath;
 			FilePath.SetCurrentPath();
-			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveParentToExistsChild("ContentsResources");
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("AirStrikeFireLeft.bmp"), 1, 10);
 		}
@@ -478,7 +478,7 @@ void Player::Start()
 		{
 			GameEnginePath FilePath;
 			FilePath.SetCurrentPath();
-			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveParentToExistsChild("ContentsResources");
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("AirStrikeFireRight.bmp"), 1, 10);
 		}
@@ -486,7 +486,7 @@ void Player::Start()
 		{
 			GameEnginePath FilePath;
 			FilePath.SetCurrentPath();
-			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveParentToExistsChild("ContentsResources");
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("AirStrikeOffLeft.bmp"), 1, 10);
 		}
@@ -494,7 +494,7 @@ void Player::Start()
 		{
 			GameEnginePath FilePath;
 			FilePath.SetCurrentPath();
-			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveParentToExistsChild("ContentsResources");
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("AirStrikeOffRight.bmp"), 1, 10);
 		}
@@ -504,7 +504,7 @@ void Player::Start()
 		{
 			GameEnginePath FilePath;
 			FilePath.SetCurrentPath();
-			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveParentToExistsChild("ContentsResources");
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("girderOnLeft.bmp"), 1, 15);
 		}
@@ -512,7 +512,7 @@ void Player::Start()
 		{
 			GameEnginePath FilePath;
 			FilePath.SetCurrentPath();
-			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveParentToExistsChild("ContentsResources");
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("girderOnRight.bmp"), 1, 15);
 		}
@@ -520,7 +520,7 @@ void Player::Start()
 		{
 			GameEnginePath FilePath;
 			FilePath.SetCurrentPath();
-			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveParentToExistsChild("ContentsResources");
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("girderOffLeft.bmp"), 1, 15);
 		}
@@ -528,10 +528,61 @@ void Player::Start()
 		{
 			GameEnginePath FilePath;
 			FilePath.SetCurrentPath();
-			FilePath.MoveParentToExistsChild("ContentsREsources");
+			FilePath.MoveParentToExistsChild("ContentsResources");
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("girderOffRight.bmp"), 1, 15);
 		}
+
+		// HolyGranade
+		if (false == ResourcesManager::GetInst().IsLoadTexture("HolyGranadeOnLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("HolyGranadeOnLeft.bmp"), 1, 10);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("HolyGranadeOnRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("HolyGranadeOnRight.bmp"), 1, 10);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("HolyGranadeOffLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("HolyGranadeOffLeft.bmp"), 1, 10);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("HolyGranadeOffRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("HolyGranadeOffRight.bmp"), 1, 10);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("HolyGranadeAimLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("HolyGranadeAimLeft.bmp"), 1, 32);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("HolyGranadeAimRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("HolyGranadeAimRight.bmp"), 1, 32);
+		}
+
 		
 		
 		// DamageFly
@@ -615,10 +666,29 @@ void Player::Start()
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("DivingRight.bmp"), 1, 3);
 		}
+
+		// CrossHairRenderer Resources
+		if (false == ResourcesManager::GetInst().IsLoadTexture("crshairb_L.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Misc\\Aim_Taget\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("crshairb_L.bmp"), 1, 32);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("crshairb_R.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Misc\\Aim_Taget\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("crshairb_R.bmp"), 1, 32);
+		}
 	}
 
 
 	MainRenderer = CreateRenderer(RenderOrder::Player);
+	CrossHairRenderer = CreateRenderer(RenderOrder::CrossHair);
 
 	// Animation
 	{
@@ -660,6 +730,8 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Left_Donkey", "AirStrikeOnLeft.bmp", 9, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_DonkeyFire", "AirStrikeFireLeft.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_DonkeyOff", "AirStrikeOffLeft.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_HolyGranadeOn", "HolyGranadeOnLeft.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_HolyGranadeOff", "HolyGranadeOffLeft.bmp", 0, 9, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_GraveStone", "GraveStone.bmp", 0, 59, 0.1f, true);
 		MainRenderer->CreateAnimation("Left_Win", "winLeft.bmp", 0, 13, 0.1f, true);
 		MainRenderer->CreateAnimation("Left_Diving1", "DivingLeft.bmp", 0, 2, 0.1f, false);
@@ -704,6 +776,8 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Right_Donkey", "AirStrikeOnRight.bmp", 9, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_DonkeyFire", "AirStrikeFireRight.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_DonkeyOff", "AirStrikeOffRight.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_HolyGranadeOn", "HolyGranadeOnRight.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_HolyGranadeOff", "HolyGranadeOffRight.bmp", 0, 9, 0.1f, false);
 		MainRenderer->CreateAnimation("Right_GraveStone", "GraveStone.bmp", 0, 59, 0.1f, true);
 		MainRenderer->CreateAnimation("Right_Win", "winRight.bmp", 0, 13, 0.1f, true);
 		MainRenderer->CreateAnimation("Right_Diving1", "DivingRight.bmp", 0, 2, 0.1f, false);
@@ -739,6 +813,19 @@ void Player::Start()
 			MainRenderer->CreateAnimation("Left_Granade" + std::to_string(i), "grnAimLeft.bmp", i, i, 0.1f, false);
 			MainRenderer->CreateAnimation("Right_Granade" + std::to_string(i), "grnAimRight.bmp", i, i, 0.1f, false);
 		}
+		// HolyGranadeAnimation
+		for (int i = 0; i < 32; i++)
+		{
+			MainRenderer->CreateAnimation("Left_HolyGranade" + std::to_string(i), "HolyGranadeAimLeft.bmp", i, i, 0.1f, false);
+			MainRenderer->CreateAnimation("Right_HolyGranade" + std::to_string(i), "HolyGranadeAimRight.bmp", i, i, 0.1f, false);
+		}
+
+		// CrossHairAnimation
+		for (int i = 0; i < 32; i++)
+		{
+			CrossHairRenderer->CreateAnimation("Left_CrossHair" + std::to_string(i), "crshairb_L.bmp", i, i, 0.1f, false);
+			CrossHairRenderer->CreateAnimation("Right_CrossHair" + std::to_string(i), "crshairb_R.bmp", i, i, 0.1f, false);
+		}
 	}
 	
 	{
@@ -754,6 +841,11 @@ void Player::Start()
 
 	Dir = PlayerDir::Right;
 	ChangeState(PlayerState::Idle);
+
+	// ±æÀÌ : 92
+	CrossHairRenderer->SetRenderPos({ 0 , -107 });
+	ChangeCrossHairAnimation("CrossHair0");
+	CrossHairRenderer->Off();
 
 
 
@@ -976,6 +1068,18 @@ void Player::ChangeState(PlayerState _State)
 		case PlayerState::DonkeyOff:
 			DonkeyOffStart();
 			break;
+		case PlayerState::HolyGranadeOn:
+			HolyGranadeOnStart();
+			break;
+		case PlayerState::HolyGranade:
+			HolyGranadeStart();
+			break;
+		case PlayerState::HolyGranadeFire:
+			HolyGranadeFireStart();
+			break;
+		case PlayerState::HolyGranadeOff:
+			HolyGranadeOffStart();
+			break;
 		case PlayerState::Win:
 			WinStart();
 			break;
@@ -1080,6 +1184,14 @@ void Player::StateUpdate(float _Delta)
 		return DonkeyFireUpdate(_Delta);
 	case PlayerState::DonkeyOff:
 		return DonkeyOffUpdate(_Delta);
+	case PlayerState::HolyGranadeOn:
+		return HolyGranadeOnUpdate(_Delta);
+	case PlayerState::HolyGranade:
+		return HolyGranadeUpdate(_Delta);
+	case PlayerState::HolyGranadeFire:
+		return HolyGranadeFireUpdate(_Delta);
+	case PlayerState::HolyGranadeOff:
+		return HolyGranadeOffUpdate(_Delta);
 	case PlayerState::Win:
 		return WinUpdate(_Delta);
 	case PlayerState::Diving:
@@ -1110,6 +1222,207 @@ void Player::ChangeAnimationState(const std::string& _State)
 	CurState = _State;
 	
 	MainRenderer->ChangeAnimation(AnimationName);
+}
+
+void Player::ChangeCrossHairAnimation(const std::string& _State)
+{
+	std::string AnimationName;
+	switch (Dir)
+	{
+	case PlayerDir::Right:
+		AnimationName = "Right_";
+		break;
+	case PlayerDir::Left:
+		AnimationName = "Left_";
+		break;
+	default:
+		break;
+	}
+
+	AnimationName += _State;
+	CrossHairRenderer->ChangeAnimation(AnimationName);
+}
+
+void Player::ChangeCrossHairRenderPos(int _iCurAngle)
+{
+	//CrossHairRenderer->SetRenderPos({ 0 , -107 });
+
+	float Length = 5.75f;
+	
+	switch (_iCurAngle)
+	{
+	case -90:
+		ChangeCrossHairAnimation("CrossHair31");
+		LengthMulX = 0;
+		LengthMulY = -16;
+		break;
+	case -84:
+		ChangeCrossHairAnimation("CrossHair30");
+		LengthMulX = 1;
+		LengthMulY = -15;
+		break;
+	case -78:
+		ChangeCrossHairAnimation("CrossHair29");
+		LengthMulX = 2;
+		LengthMulY = -14;
+		break;
+	case -73:
+		ChangeCrossHairAnimation("CrossHair28");
+		LengthMulX = 3;
+		LengthMulY = -13;
+		break;
+	case -67:
+		ChangeCrossHairAnimation("CrossHair27");
+		LengthMulX = 4;
+		LengthMulY = -12;
+		break;
+	case -61:
+		ChangeCrossHairAnimation("CrossHair26");
+		LengthMulX = 5;
+		LengthMulY = -11;
+		break;
+	case -56:
+		ChangeCrossHairAnimation("CrossHair25");
+		LengthMulX = 6;
+		LengthMulY = -10;
+		break;
+	case -50:
+		ChangeCrossHairAnimation("CrossHair24");
+		LengthMulX = 7;
+		LengthMulY = -9;
+		break;
+	case -45:
+		ChangeCrossHairAnimation("CrossHair23");
+		LengthMulX = 8;
+		LengthMulY = -8;
+		break;
+	case -39:
+		ChangeCrossHairAnimation("CrossHair22");
+		LengthMulX = 9;
+		LengthMulY = -7;
+		break;
+	case -33:
+		ChangeCrossHairAnimation("CrossHair21");
+		LengthMulX = 10;
+		LengthMulY = -6;
+		break;
+	case -28:
+		ChangeCrossHairAnimation("CrossHair20");
+		LengthMulX = 11;
+		LengthMulY = -5;
+		break;
+	case -22:
+		ChangeCrossHairAnimation("CrossHair19");
+		LengthMulX = 12;
+		LengthMulY = -4;
+		break;
+	case -16:
+		ChangeCrossHairAnimation("CrossHair18");
+		LengthMulX = 13;
+		LengthMulY = -3;
+		break;
+	case -11:
+		ChangeCrossHairAnimation("CrossHair17");
+		LengthMulX = 14;
+		LengthMulY = -2;
+		break;
+	case -5:
+		ChangeCrossHairAnimation("CrossHair16");
+		LengthMulX = 15;
+		LengthMulY = -1;
+		break;
+	case 0:
+		ChangeCrossHairAnimation("CrossHair15");
+		LengthMulX = 16;
+		LengthMulY = 0;
+		break;
+	case 5:
+		ChangeCrossHairAnimation("CrossHair14");
+		LengthMulX = 15;
+		LengthMulY = 1;
+		break;
+	case 11:
+		ChangeCrossHairAnimation("CrossHair13");
+		LengthMulX = 14;
+		LengthMulY = 2;
+		break;
+	case 16:
+		ChangeCrossHairAnimation("CrossHair12");
+		LengthMulX = 13;
+		LengthMulY = 3;
+		break;
+	case 22:
+		ChangeCrossHairAnimation("CrossHair11");
+		LengthMulX = 12;
+		LengthMulY = 4;
+		break;
+	case 28:
+		ChangeCrossHairAnimation("CrossHair10");
+		LengthMulX = 11;
+		LengthMulY = 5;
+		break;
+	case 33:
+		ChangeCrossHairAnimation("CrossHair9");
+		LengthMulX = 10;
+		LengthMulY = 6;
+		break;
+	case 39:
+		ChangeCrossHairAnimation("CrossHair8");
+		LengthMulX = 9;
+		LengthMulY = 7;
+		break;
+	case 45:
+		ChangeCrossHairAnimation("CrossHair7");
+		LengthMulX = 8;
+		LengthMulY = 8;
+		break;
+	case 50:
+		ChangeCrossHairAnimation("CrossHair6");
+		LengthMulX = 7;
+		LengthMulY = 9;
+		break;
+	case 56:
+		ChangeCrossHairAnimation("CrossHair5");
+		LengthMulX = 6;
+		LengthMulY = 10;
+		break;
+	case 61:
+		ChangeCrossHairAnimation("CrossHair4");
+		LengthMulX = 5;
+		LengthMulY = 11;
+		break;
+	case 67:
+		ChangeCrossHairAnimation("CrossHair3");
+		LengthMulX = 4;
+		LengthMulY = 12;
+		break;
+	case 73:
+		ChangeCrossHairAnimation("CrossHair2");
+		LengthMulX = 3;
+		LengthMulY = 13;
+		break;
+	case 78:
+		ChangeCrossHairAnimation("CrossHair1");
+		LengthMulX = 2;
+		LengthMulY = 14;
+		break;
+	case 84:
+		ChangeCrossHairAnimation("CrossHair0");
+		LengthMulX = 1;
+		LengthMulY = 15;
+		break;
+	}
+
+	if (Dir == PlayerDir::Left)
+	{
+		LengthMulX *= -1;
+	}
+
+	CrossHairPos = { Length * LengthMulX, Length * LengthMulY };
+	CrossHairPos.Normalize();
+	CrossHairPos *= 92;
+
+	CrossHairRenderer->SetRenderPos(CrossHairPos);
 }
 
 void Player::DirCheck()
@@ -1292,7 +1605,8 @@ void Player::ChangeWeapon()
 
 	if (true == GameEngineInput::IsDown('8'))
 	{
-		ChangeState(PlayerState::AirStrikeOn);
+		//ChangeState(PlayerState::AirStrikeOn);
+		ChangeState(PlayerState::HolyGranadeOn);
 	}
 
 	if (true == GameEngineInput::IsDown('9'))
