@@ -29,6 +29,7 @@ public:
 		class BombEffect* NewEffect = GetLevel()->CreateActor<EffectType>();
 		NewEffect->SetMaster(this);
 		NewEffect->SetDamage(WeaponDamage);
+		NewEffect->SetGroundTexture(GetGroundTexture());
 		return dynamic_cast<EffectType*>(NewEffect);
 	}
 
