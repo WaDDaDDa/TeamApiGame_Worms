@@ -130,7 +130,7 @@ void FlameEffect::FireUpdate(float _Delta)
 	GroundCheck(_Delta);
 	static float FireTick = 0.0f;
 	FireTick += _Delta;
-	if (FireTick >= 1.0f)
+	if (FireTick >= 1.2f)
 	{
 		PlayLevel* CurPlayLevel = dynamic_cast<PlayLevel*>(GetLevel());
 		CurPlayLevel->GetGround()->ContactGround(GetPos(), BombRange);
