@@ -3,6 +3,7 @@
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/GameEngineCamera.h>
+#include <GameEngineCore/GameEngineCore.h>
 #include "Player.h"
 #include "Wind.h"
 
@@ -40,6 +41,11 @@ void GameTurn::Init()
 
 void GameTurn::Update(float _Delta)
 {
+	if (Player::GameOverCheck() == true)
+	{
+		GameEngineCore::ChangeLevel("TitleLevel");
+	}
+
 	TurnTime = TurnPlayTime - GetLiveTime();
 	size_t PlayerCount = Player::GetAllPlayer().size();
 

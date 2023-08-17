@@ -138,6 +138,28 @@ public:
 		TurnPlayerIndex = _Index;
 	}
 
+	static bool GameOverCheck()
+	{
+		size_t Psize = AllPlayer.size();
+		size_t Value = 0;
+		for (size_t i = 0; i < Psize; i++)
+		{
+			if (PlayerState::DeathEnd == AllPlayer[i]->GetState())
+			{
+				Value++;
+			}
+		}
+
+		if (Value == Psize)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 protected:
 	PlayerState State = PlayerState::Max;
 	PlayerDir Dir = PlayerDir::Left;
