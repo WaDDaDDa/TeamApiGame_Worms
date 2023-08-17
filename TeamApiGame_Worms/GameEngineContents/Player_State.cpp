@@ -1081,8 +1081,7 @@ void Player::HomingMissileUpdate(float _Delta)
 
 void Player::HomingMissileFireStart()
 {
-	//CreateWeapon<HomingMissile>();
-	CreateWeapon<Donkey>();
+	CreateWeapon<HomingMissile>();
 }
 void Player::HomingMissileFireUpdate(float _Delta)
 {
@@ -1372,8 +1371,7 @@ void Player::GranadeUpdate(float _Delta)
 
 void Player::GranadeFireStart()
 {
-	//CreateWeapon<Grenade>();
-	CreateWeapon<Hallelujah>();
+	CreateWeapon<Grenade>();
 }
 void Player::GranadeFireUpdate(float _Delta)
 {

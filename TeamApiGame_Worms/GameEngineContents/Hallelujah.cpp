@@ -503,7 +503,6 @@ void Hallelujah::PrevBombUpdate(float _Delta)
 }
 
 
-
 void Hallelujah::BombStart()
 {
 	HallelujahBomb = CreateBombEffect<Range100>();
