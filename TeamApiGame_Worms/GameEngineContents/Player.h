@@ -319,7 +319,7 @@ private:
 	float PlayerSpeed = 200.0f;
 	float PlayerJumpPower = 400.0f;
 
-	float CurAngle = -45.0f;
+	float CurAngle = 0.0f;
 
 	PlayerState PrevMoveState = PlayerState::Idle;
 
@@ -359,6 +359,9 @@ private:
 	float4 CrossHairPos = float4::ZERO;
 	float LengthMulX = 0;
 	float LengthMulY = 0;
+
+	float LengthX = 92.0f;
+	float LengthY = 0;
 
 
 	// UI

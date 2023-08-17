@@ -388,11 +388,23 @@ void Player::BazookaUpdate(float _Delta)
 		if (true == GameEngineInput::IsPress(VK_UP))
 		{
 			CurAngle -= (5.625f * _Delta * 4.0f);
+			
+			LengthY -= (5.75f * _Delta * 4.0f);
 
+			if (0 <= LengthY)
+			{
+				LengthX += (5.75f * _Delta * 4.0f);
+			}
+			else
+			{
+				LengthX -= (5.75f * _Delta * 4.0f);
+			}
 
 			if (CurAngle <= RIGHT_UP_MAXANGEL)
 			{
 				CurAngle = RIGHT_UP_MAXANGEL;
+				LengthX = 0;
+				LengthY = -92;
 			}
 		}
 		if (true == GameEngineInput::IsPress(VK_DOWN))
@@ -551,7 +563,14 @@ void Player::BazookaUpdate(float _Delta)
 		break;
 	}
 
-	ChangeCrossHairRenderPos(iCurAngle);
+	//ChangeCrossHairRenderPos(iCurAngle);
+
+	CrossHairPos = { LengthX, LengthY };
+	CrossHairPos.Normalize();
+	CrossHairPos *= 92;
+
+	CrossHairRenderer->SetRenderPos(CrossHairPos);
+
 
 	InputMove();
 	ChangeWeapon();
