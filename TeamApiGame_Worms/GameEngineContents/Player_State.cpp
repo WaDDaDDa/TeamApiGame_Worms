@@ -218,6 +218,12 @@ void Player::FallingUpdate(float _Delta)
 		ChangeState(PlayerState::Idle);
 		return;
 	}
+
+	// 물에 닿으면 Diving 상태
+	if (false)
+	{
+		ChangeState(PlayerState::Diving);
+	}
 }
 
 void Player::DamagingStart()
@@ -1660,4 +1666,23 @@ void Player::WinStart()
 void Player::WinUpdate(float _Delta)
 {
 
+}
+
+void Player::DivingStart()
+{
+	ChangeAnimationState("Diving1");
+}
+void Player::DivingUpdate(float _Delta)
+{
+	if (MainRenderer->IsAnimationEnd())
+	{
+		if (MainRenderer->IsAnimation("Left_Diving1") || MainRenderer->IsAnimation("Right_Diving1"))
+		{
+			ChangeAnimationState("Diving2");
+		}
+		else if(MainRenderer->IsAnimation("Left_Diving2") || MainRenderer->IsAnimation("Right_Diving2"))
+		{
+			ChangeAnimationState("Diving1");
+		}
+	}
 }
