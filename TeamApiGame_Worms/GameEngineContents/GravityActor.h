@@ -46,9 +46,14 @@ public:
 		IsWind = true;
 	}
 
+
 protected:
 	virtual void CameraFocus(float _Delta);
 
+	void SetGravityPower(float _Power)
+	{
+		GravityPower = _Power;
+	}
 
 
 private:

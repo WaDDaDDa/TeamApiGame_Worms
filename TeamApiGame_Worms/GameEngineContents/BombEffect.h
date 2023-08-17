@@ -2,7 +2,7 @@
 #include <GameEngineCore/GameEngineActor.h>
 #include "Weapon.h"
 
-class BombEffect : public GameEngineActor
+class BombEffect : public GravityActor
 {
 public:
 	// constrcuter destructer

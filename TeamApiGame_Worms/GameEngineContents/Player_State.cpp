@@ -13,6 +13,7 @@
 #include "BombEffect.h"
 #include "Donkey.h"
 #include "Hallelujah.h"
+#include "TestWeapon.h"
 
 
 #include <GameEnginePlatform/GameEngineInput.h>
@@ -67,6 +68,12 @@ void Player::IdleUpdate(float _Delta)
 	if (true != IsTurnPlayer)
 	{
 		return;
+	}
+
+	if (GameEngineInput::IsDown(VK_LBUTTON))
+	{
+		TargetPos = MouseObject::GetPlayMousePos();
+		CreateWeapon<TestWeapon>();
 	}
 
 	//if (true == GameEngineInput::IsPress(VK_LEFT)
@@ -272,7 +279,7 @@ void Player::DamagingStart()
 			}
 
 			// 데미지 UI 출력
-			DamageUI->UpdateData_PlayerDamageUI(PlayerInfoUI->GetPos(), Damaging);
+			DamageUI->UpdateData_PlayerDamageUI(PlayerInfoUI->GetPos(), static_cast<int>(Damaging));
 
 			this->Hp -= Damaging;
 

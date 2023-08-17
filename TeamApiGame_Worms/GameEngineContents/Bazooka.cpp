@@ -9,12 +9,15 @@
 #include "Range75.h"
 #include "Range100.h"
 #include "FlyEffect.h"
+#include "FlameEffect.h"
+
 
 #include <GameEngineBase/GameEnginePath.h>
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/ResourcesManager.h>
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEngineCore/GameEnginecollision.h>
+#include <GameEngineBase/GameEngineRandom.h>
 
 Bazooka::Bazooka()
 {
@@ -312,6 +315,7 @@ void Bazooka::FlyUpdate(float _Delta)
 	if (EffectTime >= EffectInterval)
 	{
 		CreateBombEffect<FlyEffect>();
+		//CreateBombEffect<FlameEffect>();
 		EffectTime = 0.0f;
 	}
 
@@ -342,6 +346,7 @@ void Bazooka::FlyUpdate(float _Delta)
 void Bazooka::BombStart()
 {
 	BazookaBomb = CreateBombEffect<Range50>();
+
 	Renderer->Off();
 }
 

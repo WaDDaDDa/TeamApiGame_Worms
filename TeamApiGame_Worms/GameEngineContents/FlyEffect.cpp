@@ -47,7 +47,7 @@ void FlyEffect::Start()
 
 void FlyEffect::LevelStart()
 {
-
+	
 }
 
 void FlyEffect::Update(float _Delta)
