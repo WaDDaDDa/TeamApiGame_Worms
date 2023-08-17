@@ -91,6 +91,9 @@ private:
 
 	//void DirCheck();
 
+	bool AniInter = false;
+	float InterCheck = 0.0f;
+
 	void Start() override;
 	void LevelStart() override;
 	void Update(float _Delta) override;

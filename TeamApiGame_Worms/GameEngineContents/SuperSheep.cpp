@@ -48,6 +48,7 @@ void SuperSheep::Start()
 		FilePath.MoveParentToExistsChild("ContentsResources");
 		FilePath.MoveChild("ContentsResources\\Image\\Weapons\\");
 		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("aquashp1.bmp"), 1, 32);
+		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("aquashp2.bmp"), 1, 32);
 	}
 
 	
@@ -123,6 +124,72 @@ void SuperSheep::Start()
 		Renderer->CreateAnimation("9_SuperSheep_Fly", "aquashp1.bmp", 31, 31, 0.05f, false);
 	}
 
+	{
+		Renderer->CreateAnimation("8_SuperSheep_Fly2", "aquashp2.bmp", 0, 0, 0.05f, false);
+		// 78.75도
+		Renderer->CreateAnimation("7_SuperSheep_Fly2", "aquashp2.bmp", 1, 1, 0.05f, false);
+		// 67.5도
+		Renderer->CreateAnimation("6_SuperSheep_Fly2", "aquashp2.bmp", 2, 2, 0.05f, false);
+		// 56.25도
+		Renderer->CreateAnimation("5_SuperSheep_Fly2", "aquashp2.bmp", 3, 3, 0.05f, false);
+		// 45 도
+		Renderer->CreateAnimation("4_SuperSheep_Fly2", "aquashp2.bmp", 4, 4, 0.05f, false);
+		// 33.75도
+		Renderer->CreateAnimation("3_SuperSheep_Fly2", "aquashp2.bmp", 5, 5, 0.05f, false);
+		// 22,5도
+		Renderer->CreateAnimation("2_SuperSheep_Fly2", "aquashp2.bmp", 6, 6, 0.05f, false);
+		// 11.25도
+		Renderer->CreateAnimation("1_SuperSheep_Fly2", "aquashp2.bmp", 7, 7, 0.05f, false);
+		// 0도
+		Renderer->CreateAnimation("0_SuperSheep_Fly2", "aquashp2.bmp", 8, 8, 0.05f, false);
+		// -11.25도
+		Renderer->CreateAnimation("31_SuperSheep_Fly2", "aquashp2.bmp", 9, 9, 0.05f, false);
+		// -22.5도
+		Renderer->CreateAnimation("30_SuperSheep_Fly2", "aquashp2.bmp", 10, 10, 0.05f, false);
+		// -33.75도
+		Renderer->CreateAnimation("29_SuperSheep_Fly2", "aquashp2.bmp", 11, 11, 0.05f, false);
+		// -45도
+		Renderer->CreateAnimation("28_SuperSheep_Fly2", "aquashp2.bmp", 12, 12, 0.05f, false);
+		// -56.25도
+		Renderer->CreateAnimation("27_SuperSheep_Fly2", "aquashp2.bmp", 13, 13, 0.05f, false);
+		// -67.5도
+		Renderer->CreateAnimation("26_SuperSheep_Fly2", "aquashp2.bmp", 14, 14, 0.05f, false);
+		// -78.75도
+		Renderer->CreateAnimation("25_SuperSheep_Fly2", "aquashp2.bmp", 15, 15, 0.05f, false);
+		// -90 도
+		Renderer->CreateAnimation("24_SuperSheep_Fly2", "aquashp2.bmp", 16, 16, 0.05f, false);
+		// -101.25 도
+		Renderer->CreateAnimation("23_SuperSheep_Fly2", "aquashp2.bmp", 17, 17, 0.05f, false);
+		// -112.5도
+		Renderer->CreateAnimation("22_SuperSheep_Fly2", "aquashp2.bmp", 18, 18, 0.05f, false);
+		// -123.75도
+		Renderer->CreateAnimation("21_SuperSheep_Fly2", "aquashp2.bmp", 19, 19, 0.05f, false);
+		// -135도
+		Renderer->CreateAnimation("20_SuperSheep_Fly2", "aquashp2.bmp", 20, 20, 0.05f, false);
+		// -146.25도
+		Renderer->CreateAnimation("19_SuperSheep_Fly2", "aquashp2.bmp", 21, 21, 0.05f, false);
+		//-157.5
+		Renderer->CreateAnimation("18_SuperSheep_Fly2", "aquashp2.bmp", 22, 22, 0.05f, false);
+		//-168.75
+		Renderer->CreateAnimation("17_SuperSheep_Fly2", "aquashp2.bmp", 23, 23, 0.05f, false);
+		//-180
+		Renderer->CreateAnimation("16_SuperSheep_Fly2", "aquashp2.bmp", 24, 24, 0.05f, false);
+		//-191.25
+		Renderer->CreateAnimation("15_SuperSheep_Fly2", "aquashp2.bmp", 25, 25, 0.05f, false);
+		//-202.5
+		Renderer->CreateAnimation("14_SuperSheep_Fly2", "aquashp2.bmp", 26, 26, 0.05f, false);
+		//-213.75
+		Renderer->CreateAnimation("13_SuperSheep_Fly2", "aquashp2.bmp", 27, 27, 0.05f, false);
+		//-225
+		Renderer->CreateAnimation("12_SuperSheep_Fly2", "aquashp2.bmp", 28, 28, 0.05f, false);
+		//-236.25
+		Renderer->CreateAnimation("11_SuperSheep_Fly2", "aquashp2.bmp", 29, 29, 0.05f, false);
+		//-247.5
+		Renderer->CreateAnimation("10_SuperSheep_Fly2", "aquashp2.bmp", 30, 30, 0.05f, false);
+		//-258.75
+		Renderer->CreateAnimation("9_SuperSheep_Fly2", "aquashp2.bmp", 31, 31, 0.05f, false);
+	}
+
 	SetWeaponDamage(SuperSheepDamage);
 	SetWeaponSpeed(SuperSheepSpeed);
 
@@ -150,107 +217,217 @@ void SuperSheep::DirCheck()
 
 	std::string Text = "";
 
-	switch (static_cast<int>(CheckDir))
+	if (AniInter == true)
 	{
-	case 0:
-		Renderer->ChangeAnimation("0_SuperSheep_Fly");
-		break;
-	case 1:
-		Renderer->ChangeAnimation("1_SuperSheep_Fly");
-		break;
-	case 2:
-		Renderer->ChangeAnimation("2_SuperSheep_Fly");
-		break;
-	case 3:
-		Renderer->ChangeAnimation("3_SuperSheep_Fly");
-		break;
-	case 4:
-		Renderer->ChangeAnimation("4_SuperSheep_Fly");
-		break;
-	case 5:
-		Renderer->ChangeAnimation("5_SuperSheep_Fly");
-		break;
-	case 6:
-		Renderer->ChangeAnimation("6_SuperSheep_Fly");
-		break;
-	case 7:
-		Renderer->ChangeAnimation("7_SuperSheep_Fly");
-		break;
-	case 8:
-		Renderer->ChangeAnimation("8_SuperSheep_Fly");
-		break;
-	case 9:
-		Renderer->ChangeAnimation("9_SuperSheep_Fly");
-		break;
-	case 10:
-		Renderer->ChangeAnimation("10_SuperSheep_Fly");
-		break;
-	case 11:
-		Renderer->ChangeAnimation("11_SuperSheep_Fly");
-		break;
-	case 12:
-		Renderer->ChangeAnimation("12_SuperSheep_Fly");
-		break;
-	case 13:
-		Renderer->ChangeAnimation("13_SuperSheep_Fly");
-		break;
-	case 14:
-		Renderer->ChangeAnimation("14_SuperSheep_Fly");
-		break;
-	case 15:
-		Renderer->ChangeAnimation("15_SuperSheep_Fly");
-		break;
-	case 16:
-		Renderer->ChangeAnimation("16_SuperSheep_Fly");
-		break;
-	case 17:
-		Renderer->ChangeAnimation("17_SuperSheep_Fly");
-		break;
-	case 18:
-		Renderer->ChangeAnimation("18_SuperSheep_Fly");
-		break;
-	case 19:
-		Renderer->ChangeAnimation("19_SuperSheep_Fly");
-		break;
-	case 20:
-		Renderer->ChangeAnimation("20_SuperSheep_Fly");
-		break;
-	case 21:
-		Renderer->ChangeAnimation("21_SuperSheep_Fly");
-		break;
-	case 22:
-		Renderer->ChangeAnimation("22_SuperSheep_Fly");
-		break;
-	case 23:
-		Renderer->ChangeAnimation("23_SuperSheep_Fly");
-		break;
-	case 24:
-		Renderer->ChangeAnimation("24_SuperSheep_Fly");
-		break;
-	case 25:
-		Renderer->ChangeAnimation("25_SuperSheep_Fly");
-		break;
-	case 26:
-		Renderer->ChangeAnimation("26_SuperSheep_Fly");
-		break;
-	case 27:
-		Renderer->ChangeAnimation("27_SuperSheep_Fly");
-		break;
-	case 28:
-		Renderer->ChangeAnimation("28_SuperSheep_Fly");
-		break;
-	case 29:
-		Renderer->ChangeAnimation("29_SuperSheep_Fly");
-		break;
-	case 30:
-		Renderer->ChangeAnimation("30_SuperSheep_Fly");
-		break;
-	case 31:
-		Renderer->ChangeAnimation("31_SuperSheep_Fly");
-		break;
-	default:
-		break;
+		switch (static_cast<int>(CheckDir))
+		{
+		case 0:
+			Renderer->ChangeAnimation("0_SuperSheep_Fly");
+			break;
+		case 1:
+			Renderer->ChangeAnimation("1_SuperSheep_Fly");
+			break;
+		case 2:
+			Renderer->ChangeAnimation("2_SuperSheep_Fly");
+			break;
+		case 3:
+			Renderer->ChangeAnimation("3_SuperSheep_Fly");
+			break;
+		case 4:
+			Renderer->ChangeAnimation("4_SuperSheep_Fly");
+			break;
+		case 5:
+			Renderer->ChangeAnimation("5_SuperSheep_Fly");
+			break;
+		case 6:
+			Renderer->ChangeAnimation("6_SuperSheep_Fly");
+			break;
+		case 7:
+			Renderer->ChangeAnimation("7_SuperSheep_Fly");
+			break;
+		case 8:
+			Renderer->ChangeAnimation("8_SuperSheep_Fly");
+			break;
+		case 9:
+			Renderer->ChangeAnimation("9_SuperSheep_Fly");
+			break;
+		case 10:
+			Renderer->ChangeAnimation("10_SuperSheep_Fly");
+			break;
+		case 11:
+			Renderer->ChangeAnimation("11_SuperSheep_Fly");
+			break;
+		case 12:
+			Renderer->ChangeAnimation("12_SuperSheep_Fly");
+			break;
+		case 13:
+			Renderer->ChangeAnimation("13_SuperSheep_Fly");
+			break;
+		case 14:
+			Renderer->ChangeAnimation("14_SuperSheep_Fly");
+			break;
+		case 15:
+			Renderer->ChangeAnimation("15_SuperSheep_Fly");
+			break;
+		case 16:
+			Renderer->ChangeAnimation("16_SuperSheep_Fly");
+			break;
+		case 17:
+			Renderer->ChangeAnimation("17_SuperSheep_Fly");
+			break;
+		case 18:
+			Renderer->ChangeAnimation("18_SuperSheep_Fly");
+			break;
+		case 19:
+			Renderer->ChangeAnimation("19_SuperSheep_Fly");
+			break;
+		case 20:
+			Renderer->ChangeAnimation("20_SuperSheep_Fly");
+			break;
+		case 21:
+			Renderer->ChangeAnimation("21_SuperSheep_Fly");
+			break;
+		case 22:
+			Renderer->ChangeAnimation("22_SuperSheep_Fly");
+			break;
+		case 23:
+			Renderer->ChangeAnimation("23_SuperSheep_Fly");
+			break;
+		case 24:
+			Renderer->ChangeAnimation("24_SuperSheep_Fly");
+			break;
+		case 25:
+			Renderer->ChangeAnimation("25_SuperSheep_Fly");
+			break;
+		case 26:
+			Renderer->ChangeAnimation("26_SuperSheep_Fly");
+			break;
+		case 27:
+			Renderer->ChangeAnimation("27_SuperSheep_Fly");
+			break;
+		case 28:
+			Renderer->ChangeAnimation("28_SuperSheep_Fly");
+			break;
+		case 29:
+			Renderer->ChangeAnimation("29_SuperSheep_Fly");
+			break;
+		case 30:
+			Renderer->ChangeAnimation("30_SuperSheep_Fly");
+			break;
+		case 31:
+			Renderer->ChangeAnimation("31_SuperSheep_Fly");
+			break;
+		default:
+			break;
+		}
 	}
+
+	if (AniInter == false)
+	{
+		switch (static_cast<int>(CheckDir))
+		{
+		case 0:
+			Renderer->ChangeAnimation("0_SuperSheep_Fly2");
+			break;
+		case 1:
+			Renderer->ChangeAnimation("1_SuperSheep_Fly2");
+			break;
+		case 2:
+			Renderer->ChangeAnimation("2_SuperSheep_Fly2");
+			break;
+		case 3:
+			Renderer->ChangeAnimation("3_SuperSheep_Fly2");
+			break;
+		case 4:
+			Renderer->ChangeAnimation("4_SuperSheep_Fly2");
+			break;
+		case 5:
+			Renderer->ChangeAnimation("5_SuperSheep_Fly2");
+			break;
+		case 6:
+			Renderer->ChangeAnimation("6_SuperSheep_Fly2");
+			break;
+		case 7:
+			Renderer->ChangeAnimation("7_SuperSheep_Fly2");
+			break;
+		case 8:
+			Renderer->ChangeAnimation("8_SuperSheep_Fly2");
+			break;
+		case 9:
+			Renderer->ChangeAnimation("9_SuperSheep_Fly2");
+			break;
+		case 10:
+			Renderer->ChangeAnimation("10_SuperSheep_Fly2");
+			break;
+		case 11:
+			Renderer->ChangeAnimation("11_SuperSheep_Fly2");
+			break;
+		case 12:
+			Renderer->ChangeAnimation("12_SuperSheep_Fly2");
+			break;
+		case 13:
+			Renderer->ChangeAnimation("13_SuperSheep_Fly2");
+			break;
+		case 14:
+			Renderer->ChangeAnimation("14_SuperSheep_Fly2");
+			break;
+		case 15:
+			Renderer->ChangeAnimation("15_SuperSheep_Fly2");
+			break;
+		case 16:
+			Renderer->ChangeAnimation("16_SuperSheep_Fly2");
+			break;
+		case 17:
+			Renderer->ChangeAnimation("17_SuperSheep_Fly2");
+			break;
+		case 18:
+			Renderer->ChangeAnimation("18_SuperSheep_Fly2");
+			break;
+		case 19:
+			Renderer->ChangeAnimation("19_SuperSheep_Fly2");
+			break;
+		case 20:
+			Renderer->ChangeAnimation("20_SuperSheep_Fly2");
+			break;
+		case 21:
+			Renderer->ChangeAnimation("21_SuperSheep_Fly2");
+			break;
+		case 22:
+			Renderer->ChangeAnimation("22_SuperSheep_Fly2");
+			break;
+		case 23:
+			Renderer->ChangeAnimation("23_SuperSheep_Fly2");
+			break;
+		case 24:
+			Renderer->ChangeAnimation("24_SuperSheep_Fly2");
+			break;
+		case 25:
+			Renderer->ChangeAnimation("25_SuperSheep_Fly2");
+			break;
+		case 26:
+			Renderer->ChangeAnimation("26_SuperSheep_Fly2");
+			break;
+		case 27:
+			Renderer->ChangeAnimation("27_SuperSheep_Fly2");
+			break;
+		case 28:
+			Renderer->ChangeAnimation("28_SuperSheep_Fly2");
+			break;
+		case 29:
+			Renderer->ChangeAnimation("29_SuperSheep_Fly2");
+			break;
+		case 30:
+			Renderer->ChangeAnimation("30_SuperSheep_Fly2");
+			break;
+		case 31:
+			Renderer->ChangeAnimation("31_SuperSheep_Fly2");
+			break;
+		default:
+			break;
+		}
+	}
+	
+
 }
 
 
@@ -458,6 +635,13 @@ void SuperSheep::SuperFlyUpdate(float _Delta)
 	DirCheck();
 
 	RotateDir(_Delta);
+
+	InterCheck += _Delta;
+
+	if (InterCheck >= 0.5f)
+	{
+		AniInter = !AniInter;
+	}
 
 	if (true == GameEngineInput::IsDown(VK_LEFT))
 	{
