@@ -51,6 +51,10 @@ enum class PlayerState
 	Donkey,
 	DonkeyFire,
 	DonkeyOff,
+	HolyGranadeOn,
+	HolyGranade,
+	HolyGranadeFire,
+	HolyGranadeOff,
 
 	Diving,
 	DeathEnd,
@@ -275,6 +279,18 @@ protected:
 
 	void DonkeyOffStart();
 	void DonkeyOffUpdate(float _Delta);
+
+	void HolyGranadeOnStart();
+	void HolyGranadeOnUpdate(float _Delta);
+
+	void HolyGranadeStart();
+	void HolyGranadeUpdate(float _Delta);
+
+	void HolyGranadeFireStart();
+	void HolyGranadeFireUpdate(float _Delta);
+
+	void HolyGranadeOffStart();
+	void HolyGranadeOffUpdate(float _Delta);
 
 	void WinStart();
 	void WinUpdate(float _Delta);
