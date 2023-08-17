@@ -83,6 +83,7 @@ public:
 	Player& operator=(Player && _Other) noexcept = delete;
 
 	class GameEngineRenderer* MainRenderer = nullptr;
+	class GameEngineRenderer* CrossHairRenderer = nullptr;
 	static float4 DirPos;
 
 	static std::vector<Player*> GetAllPlayer()
@@ -304,6 +305,9 @@ protected:
 	void ChangeWeapon();
 	void DamagingCheck();
 
+	void ChangeCrossHairAnimation(const std::string& _State);
+	void ChangeCrossHairRenderPos(int _iCurAngle);
+
 	// Collision
 	GameEngineCollision* PlayerBodyCollision = nullptr;
 
@@ -351,6 +355,10 @@ private:
 
 	float4 TeleportPos = float4::ZERO;
 
+	// CrossHairPos ฐüทร
+	float4 CrossHairPos = float4::ZERO;
+	float LengthMulX = 0;
+	float LengthMulY = 0;
 
 
 	// UI

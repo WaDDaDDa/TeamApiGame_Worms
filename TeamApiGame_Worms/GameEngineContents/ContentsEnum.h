@@ -13,6 +13,7 @@ enum class RenderOrder
 	BackWave,
 	Ground,
 	Player,
+	CrossHair,
 	Weapon,
 	FrontWave,
 	Effect,

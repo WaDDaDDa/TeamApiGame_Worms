@@ -349,6 +349,7 @@ void Player::BazookaOnStart()
 {
 	PrevMoveState = PlayerState::BazookaOn;
 	ChangeAnimationState("BazookaOn");
+	CrossHairRenderer->On();
 }
 void Player::BazookaOnUpdate(float _Delta)
 {
@@ -548,6 +549,8 @@ void Player::BazookaUpdate(float _Delta)
 		ChangeAnimationState("Bazooka0");
 		break;
 	}
+
+	ChangeCrossHairRenderPos(iCurAngle);
 
 	InputMove();
 	ChangeWeapon();
