@@ -14,6 +14,7 @@
 #include "Donkey.h"
 #include "Hallelujah.h"
 #include "TestWeapon.h"
+#include "SuperSheep.h"
 
 
 #include <GameEnginePlatform/GameEngineInput.h>
@@ -1084,8 +1085,7 @@ void Player::HomingMissileUpdate(float _Delta)
 
 void Player::HomingMissileFireStart()
 {
-	//CreateWeapon<HomingMissile>();
-	CreateWeapon<Donkey>();
+	CreateWeapon<HomingMissile>();
 }
 void Player::HomingMissileFireUpdate(float _Delta)
 {
@@ -1144,7 +1144,8 @@ void Player::SheepUpdate(float _Delta)
 
 void Player::SheepFireStart()
 {
-	CreateWeapon<Sheep>();
+	//CreateWeapon<Sheep>();
+	CreateWeapon<SuperSheep>();
 }
 void Player::SheepFireUpdate(float _Delta)
 {
@@ -1375,8 +1376,7 @@ void Player::GranadeUpdate(float _Delta)
 
 void Player::GranadeFireStart()
 {
-	//CreateWeapon<Grenade>();
-	CreateWeapon<Hallelujah>();
+	CreateWeapon<Grenade>();
 }
 void Player::GranadeFireUpdate(float _Delta)
 {

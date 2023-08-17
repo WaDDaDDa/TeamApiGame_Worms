@@ -183,6 +183,9 @@
     <ClCompile Include="TestWeapon.cpp">
       <Filter>Weapon</Filter>
     </ClCompile>
+    <ClCompile Include="SuperSheep.cpp">
+      <Filter>Weapon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentCore.h" />
@@ -368,6 +371,9 @@
       <Filter>Effect</Filter>
     </ClInclude>
     <ClInclude Include="TestWeapon.h">
+      <Filter>Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="SuperSheep.h">
       <Filter>Weapon</Filter>
     </ClInclude>
   </ItemGroup>

@@ -132,13 +132,19 @@ void Donkey::FlyStart()
 void Donkey::FlyUpdate(float _Delta)
 {
 	GroundCheck(_Delta);
-
-	unsigned int Color = GetGroundColor(RGB(255, 255, 255));
-	if (Color == RGB(0, 0, 255))
+	float4 CheckPoint = float4::LEFT * 50.0f;
+	unsigned int Color = GetGroundColor(RGB(255, 255, 255), CheckPoint);
+	for (size_t i = 0; i < 100; i++)
 	{
-		ChangeState(DonkeyState::Jump);
-		return;
+		unsigned int Color = GetGroundColor(RGB(255, 255, 255), CheckPoint);
+		CheckPoint += float4::RIGHT;
+		if (Color == RGB(0, 0, 255))
+		{
+			ChangeState(DonkeyState::Jump);
+			return;
+		}
 	}
+
 
 	if (Color != RGB(255, 255, 255))
 	{
