@@ -194,6 +194,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Hallelujah.h" />
     <ClInclude Include="Hole.h">
       <SubType>
       </SubType>
@@ -305,6 +306,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Hallelujah.cpp" />
     <ClCompile Include="Hole.cpp">
       <SubType>
       </SubType>

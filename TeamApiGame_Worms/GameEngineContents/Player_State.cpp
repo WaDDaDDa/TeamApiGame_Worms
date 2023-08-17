@@ -12,6 +12,7 @@
 #include "Self_Bomb.h"
 #include "BombEffect.h"
 #include "Donkey.h"
+#include "Hallelujah.h"
 
 
 #include <GameEnginePlatform/GameEngineInput.h>
@@ -1358,7 +1359,8 @@ void Player::GranadeUpdate(float _Delta)
 
 void Player::GranadeFireStart()
 {
-	CreateWeapon<Grenade>();
+	//CreateWeapon<Grenade>();
+	CreateWeapon<Hallelujah>();
 }
 void Player::GranadeFireUpdate(float _Delta)
 {
