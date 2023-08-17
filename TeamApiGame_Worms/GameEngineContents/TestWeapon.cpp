@@ -116,11 +116,11 @@ void TestWeapon::ChangeState(TestWeaponState _State)
 
 void TestWeapon::FlyStart()
 {
-	for (size_t i = 0; i < 2000; i++)
+	for (size_t i = 0; i < 200; i++)
 	{
 		BombEffect* Flame = CreateBombEffect<FlameEffect>();
-		float FireX = GameEngineRandom::MainRandom.RandomFloat(-600.0f, 600.0f);
-		float FireY = (GameEngineRandom::MainRandom.RandomFloat(0.0f, 1000.0f));
+		float FireX = GameEngineRandom::MainRandom.RandomFloat(-300.0f, 300.0f);
+		float FireY = (GameEngineRandom::MainRandom.RandomFloat(0.0f, 600.0f));
 		Flame->SetGravityVector({ FireX, -FireY });
 	}
 }
