@@ -52,6 +52,7 @@ enum class PlayerState
 	DonkeyFire,
 	DonkeyOff,
 
+	Diving,
 	DeathEnd,
 	Win,
 	Max
@@ -277,6 +278,9 @@ protected:
 
 	void WinStart();
 	void WinUpdate(float _Delta);
+
+	void DivingStart();
+	void DivingUpdate(float _Delta);
 
 	void SetDirPosNormalize();
 

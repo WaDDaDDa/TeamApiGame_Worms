@@ -597,6 +597,24 @@ void Player::Start()
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("winRight.bmp"), 1, 14);
 		}
+
+		// Diving
+		if (false == ResourcesManager::GetInst().IsLoadTexture("DivingLeft.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("DivingLeft.bmp"), 1, 3);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("DivingRight.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("DivingRight.bmp"), 1, 3);
+		}
 	}
 
 
@@ -644,6 +662,8 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Left_DonkeyOff", "AirStrikeOffLeft.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_GraveStone", "GraveStone.bmp", 0, 59, 0.1f, true);
 		MainRenderer->CreateAnimation("Left_Win", "winLeft.bmp", 0, 13, 0.1f, true);
+		MainRenderer->CreateAnimation("Left_Diving1", "DivingLeft.bmp", 0, 2, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_Diving2", "DivingLeft.bmp", 2, 0, 0.1f, false);
 
 
 		// Right
@@ -686,6 +706,8 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Right_DonkeyOff", "AirStrikeOffRight.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_GraveStone", "GraveStone.bmp", 0, 59, 0.1f, true);
 		MainRenderer->CreateAnimation("Right_Win", "winRight.bmp", 0, 13, 0.1f, true);
+		MainRenderer->CreateAnimation("Right_Diving1", "DivingRight.bmp", 0, 2, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_Diving2", "DivingRight.bmp", 2, 0, 0.1f, false);
 
 		// BazookaAnimation
 		for (int i = 0; i < 32; i++)
@@ -957,6 +979,9 @@ void Player::ChangeState(PlayerState _State)
 		case PlayerState::Win:
 			WinStart();
 			break;
+		case PlayerState::Diving:
+			DivingStart();
+			break;
 		default:
 			break;
 		}
@@ -1057,6 +1082,8 @@ void Player::StateUpdate(float _Delta)
 		return DonkeyOffUpdate(_Delta);
 	case PlayerState::Win:
 		return WinUpdate(_Delta);
+	case PlayerState::Diving:
+		return DivingUpdate(_Delta);
 	default:
 		break;
 	}
