@@ -41,10 +41,8 @@ void GameTurn::Init()
 
 void GameTurn::Update(float _Delta)
 {
-	if (Player::GameOverCheck() == true)
-	{
-		GameEngineCore::ChangeLevel("TitleLevel");
-	}
+
+	GameOverCheck();
 
 	TurnTime = TurnPlayTime - GetLiveTime();
 	size_t PlayerCount = Player::GetAllPlayer().size();
@@ -191,4 +189,33 @@ void GameTurn::ChangeTurnPlayer(int _Value)
 	TurnPlayer = Player::GetAllPlayer()[_Value];
 	// 현재 플레이어 bool값 true로 변경
 	TurnPlayer->SwitchIsTurnPlayer();
+}
+
+bool GameTurn::GameOverCheck()
+{
+	size_t Psize = Player::GetAllPlayer().size();
+	size_t Value = 0;
+	for (size_t i = 0; i < Psize; i++)
+	{
+		if (PlayerState::DeathEnd == Player::GetAllPlayer()[i]->GetState())
+		{
+			Value++;
+		}
+	}
+
+	if (Value == Psize)
+	{
+		// 플레이어 전원 사망
+		GameEngineCore::ChangeLevel("TitleLevel");
+	}
+	else if (Value == Psize - 1)
+	{
+		// 플레이어 한명만 생존.
+		for (size_t i = 0; i < Psize; i++)
+		{
+			return true;
+		}
+	}
+
+	return false;
 }

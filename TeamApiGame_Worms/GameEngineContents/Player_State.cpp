@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "ContentsEnum.h"
 #include "MouseObject.h"
+#include "GameTurn.h"
 
 //¹«±â
 #include "Weapon.h"
@@ -70,6 +71,12 @@ void Player::IdleUpdate(float _Delta)
 	{
 		return;
 	}
+
+	if (true == GameTurn::GameOverCheck())
+	{
+		ChangeState(PlayerState::Win);
+	}
+	
 
 	if (GameEngineInput::IsDown(VK_LBUTTON))
 	{
