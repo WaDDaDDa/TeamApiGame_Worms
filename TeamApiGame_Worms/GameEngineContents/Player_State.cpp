@@ -106,7 +106,7 @@ void Player::IdleUpdate(float _Delta)
 
 	if (true == GameEngineInput::IsDown('S'))
 	{
-		ChangeState(PlayerState::Death);
+		ChangeState(PlayerState::Win);
 	}
 
 	InputMove();
