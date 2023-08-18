@@ -599,7 +599,7 @@ void SuperSheep::FlyUpdate(float _Delta)
 
 	if (Test >= 15.0f || true == Test1)
 	{
-		ChangeState(SuperSheepState::Bomb);
+		ChangeState(SuperSheepState::SuperFly);
 		return;
 	}
 
