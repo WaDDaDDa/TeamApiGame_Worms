@@ -21,7 +21,7 @@ void UI_PlayerDamage::Start()
 		GameEnginePath FilePath;
 		FilePath.SetCurrentPath();
 		FilePath.MoveParentToExistsChild("ContentsResources");
-		FilePath.MoveChild("ContentsResources\\UI\\\PlayerInfoUI\\");
+		FilePath.MoveChild("ContentsResources\\UI\\PlayerInfoUI\\");
 
 		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("UI_PlayerHPBase.bmp"));
 	}

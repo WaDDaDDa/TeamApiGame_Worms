@@ -295,7 +295,7 @@ void Player::DamagingStart()
 			// 데미지 UI 출력
 			DamageUI->UpdateData_PlayerDamageUI(PlayerInfoUI->GetPos(), static_cast<int>(Damaging));
 
-			this->Hp -= Damaging;
+			this->Hp -= static_cast<int>(Damaging);
 
 			UI_Box_AllTeamHpBar::GetAllTeamHpBarUI()->InitTeamHpBarData(TurnPlayerIndex, GetHp());
 
