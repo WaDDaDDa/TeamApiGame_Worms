@@ -219,6 +219,7 @@
     <ClInclude Include="Self_Bomb.h" />
     <ClInclude Include="Sheep.h" />
     <ClInclude Include="SuperSheep.h" />
+    <ClInclude Include="SuperSheepEffect.h" />
     <ClInclude Include="TestWeapon.h" />
     <ClInclude Include="TitleLevel.h">
       <SubType>
@@ -335,6 +336,7 @@
     <ClCompile Include="Self_Bomb.cpp" />
     <ClCompile Include="Sheep.cpp" />
     <ClCompile Include="SuperSheep.cpp" />
+    <ClCompile Include="SuperSheepEffect.cpp" />
     <ClCompile Include="TestWeapon.cpp" />
     <ClCompile Include="TitleLevel.cpp">
       <SubType>

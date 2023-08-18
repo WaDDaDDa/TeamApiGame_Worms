@@ -89,7 +89,8 @@ private:
 
 	class BombEffect* SuperSheepBomb = nullptr;
 
-	//void DirCheck();
+	float EffectTime = 0.0f;
+	float EffectInterval = 0.05f;
 
 	bool AniInter = false;
 	float InterCheck = 0.0f;

@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="ContentCore.cpp" />
     <ClCompile Include="GameTurn.cpp" />
     <ClCompile Include="Bazooka.cpp">
       <Filter>Weapon</Filter>
@@ -186,6 +185,10 @@
     <ClCompile Include="SuperSheep.cpp">
       <Filter>Weapon</Filter>
     </ClCompile>
+    <ClCompile Include="SuperSheepEffect.cpp">
+      <Filter>Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentCore.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentCore.h" />
@@ -375,6 +378,9 @@
     </ClInclude>
     <ClInclude Include="SuperSheep.h">
       <Filter>Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="SuperSheepEffect.h">
+      <Filter>Effect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

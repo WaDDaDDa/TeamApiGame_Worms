@@ -8,6 +8,7 @@
 #include "Range50.h"
 #include "Range75.h"
 #include "Range100.h"
+#include "SuperSheepEffect.h"
 
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineBase/GameEnginePath.h>
@@ -16,6 +17,7 @@
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEngineCore/GameEnginecollision.h>
 #include <GameEnginePlatform/GameEngineWindowTexture.h>
+#include <GameEngineBase/GameEngineRandom.h>
 
 SuperSheep::SuperSheep()
 {
@@ -633,6 +635,19 @@ void SuperSheep::SuperFlyStart()
 void SuperSheep::SuperFlyUpdate(float _Delta)
 {
 	DirCheck();
+
+	EffectTime += _Delta;
+
+	if (EffectTime >= EffectInterval)
+	{
+		for (size_t i = 0; i < 4; i++)
+		{
+			float EffectX = GameEngineRandom::MainRandom.RandomFloat(-10.0f, 10.0f);
+			float EffectY = GameEngineRandom::MainRandom.RandomFloat(-10.0f, 10.0f);
+			CreateBombEffect<SuperSheepEffect>({EffectX,EffectY});
+		}
+		EffectTime = 0.0f;
+	}
 
 	RotateDir(_Delta);
 

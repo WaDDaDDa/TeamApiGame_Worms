@@ -33,6 +33,14 @@ public:
 		return dynamic_cast<EffectType*>(NewEffect);
 	}
 
+	template <typename EffectType>
+	EffectType* CreateBombEffect(float4 _Pos)
+	{
+		EffectType* NewEffect = CreateBombEffect<EffectType>();
+		NewEffect->AddPos(_Pos);
+		return NewEffect;
+	}
+
 	void SetWeaponDamage(float _Value)
 	{
 		WeaponDamage = _Value;
