@@ -139,7 +139,6 @@ public:
 	}
 
 
-
 protected:
 	PlayerState State = PlayerState::Max;
 	PlayerDir Dir = PlayerDir::Left;

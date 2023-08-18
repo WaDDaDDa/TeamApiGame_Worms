@@ -56,6 +56,15 @@ void GameTurn::Update(float _Delta)
 	// Turn의시간이 다시 흐르고 Turn플레이어를 변경한다.
 	if (GetStopValue() == true && TurnPlayer->IsTurnPlayer == true)
 	{
+		for (size_t i = 0; i < PlayerCount; i++)
+		{
+			if (0 >= Player::GetAllPlayer()[static_cast<int>(i)]->GetHp() && PlayerState::DeathEnd != Player::GetAllPlayer()[static_cast<int>(i)]->GetState())
+			{
+				ChangeTurnPlayer(static_cast<int>(i));
+				return;
+			}
+		}
+
 		int PlayerStateCount = 0;
 		for (size_t i = 0; i < PlayerCount; i++)
 		{
@@ -65,8 +74,6 @@ void GameTurn::Update(float _Delta)
 			}
 		}
 
-
-
 		if (PlayerStateCount == PlayerCount)
 		{
 			// 무기사용이 종료되면 다시 플레이어로 돌아간다.
@@ -74,14 +81,6 @@ void GameTurn::Update(float _Delta)
 			ChangeTurnPlayer(_Delta);
 		}
 
-		for (size_t i = 0; i < PlayerCount; i++)
-		{
-			if (0 >= Player::GetAllPlayer()[static_cast<int>(i)]->GetHp() && PlayerState::DeathEnd != Player::GetAllPlayer()[static_cast<int>(i)]->GetState())
-			{
-				ChangeTurnPlayer(static_cast<int>(i));
-				return;
-			}
-		}
 	}
 
 	if (TurnPlayTime <= GetLiveTime())
