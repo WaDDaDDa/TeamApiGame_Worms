@@ -2,6 +2,7 @@
 #include "MouseObject.h"
 #include"PlayLevel.h"
 #include "Ground.h"
+#include "GameTurn.h"
 
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineRenderer.h>
@@ -76,9 +77,10 @@ void Grider::Start()
 
 void Grider::Update(float _Delta)
 {
-	if (PlayerState::Girder != GetMaster()->GetState())
+	if (PlayerState::Girder != GetMaster()->GetState() )
 	{
 		Death();
+		return;
 	}
 	
 
