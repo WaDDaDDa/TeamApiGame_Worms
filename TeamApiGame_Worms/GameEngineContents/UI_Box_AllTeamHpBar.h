@@ -28,6 +28,19 @@ public:
 		return AllTeamHpBars[_Index];
 	}
 
+	class IndexedTeamHpBar
+	{
+	public:
+		
+		float GetTeamHp() const
+		{
+			return m_TeamHp;
+		}
+
+		float m_TeamHp;
+		int m_Index;
+	};
+
 protected:
 	void Start() override;
 	void Update(float _Delta) override;
@@ -37,6 +50,8 @@ private:
 
 
 
+	std::vector<IndexedTeamHpBar> AllSortedTeamHpBars;
+
 
 	std::vector<UI_TeamHpBar*> AllTeamHpBars;
 	std::vector<float4> AllTeamHpBarPos;
@@ -45,8 +60,6 @@ private:
 	bool isEndAllHpBarSetting = false;
 
 	bool startSort = false;
-
-//	bool CompTeamHpBar(AllTeamHpBars& _Left, const UI_Box_AllTeamHpBar::AllTeamHpBars& _Right);
 
 	GameEngineRenderer* CurHpDebugRenderer = nullptr;
 	GameEngineRenderer* CurHpDebugRenderer2 = nullptr;

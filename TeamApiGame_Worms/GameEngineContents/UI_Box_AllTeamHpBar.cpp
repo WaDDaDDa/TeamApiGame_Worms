@@ -22,6 +22,7 @@ UI_Box_AllTeamHpBar::~UI_Box_AllTeamHpBar()
 
 void UI_Box_AllTeamHpBar::Start()
 {
+	// 디버그용
 	//CurHpDebugRenderer = CreateUIRenderer(RenderOrder::UI);
 	//CurHpDebugRenderer->SetRenderPos({ 100, 600 });
 
@@ -40,12 +41,11 @@ void UI_Box_AllTeamHpBar::Start()
 	//CurHpDebugRenderer6 = CreateUIRenderer(RenderOrder::UI);
 	//CurHpDebugRenderer6->SetRenderPos({ 100, 700 });
 
-
 }
 
-bool compare(int i, int j)
+bool CompareTeamHp(const UI_Box_AllTeamHpBar::IndexedTeamHpBar& _Left, const UI_Box_AllTeamHpBar::IndexedTeamHpBar& _Right)
 {
-	return i > j;
+	return _Left.GetTeamHp() > _Right.GetTeamHp();
 }
 
 void UI_Box_AllTeamHpBar::Update(float _Delta)
@@ -57,52 +57,28 @@ void UI_Box_AllTeamHpBar::Update(float _Delta)
 	//CurHpDebugRenderer5->SetText(std::to_string(static_cast<int>(GetAllTeamHpBarUI()->GetIndexHpBarUI(4)->GetCurHpBarAmount())));
 	//CurHpDebugRenderer6->SetText(std::to_string(static_cast<int>(GetAllTeamHpBarUI()->GetIndexHpBarUI(5)->GetCurHpBarAmount())));
 
+	//if (true == GameEngineInput::IsDown(VK_TAB))
+	//{
 
-
-	if (true == GameEngineInput::IsDown(VK_TAB))
-	{
-		AllTeamHpBarHpAmout.clear();
-
-		for (int i = 0; i < AllTeamHpBars.size(); i++)
+		// HP 값을 비교하기 위해 배열로 저장해줍니다. 
+		for (int i = 0; i < (int)AllSortedTeamHpBars.size(); i++)
 		{
-			AllTeamHpBarHpAmout.push_back(static_cast<int>(AllTeamHpBars[i]->GetCurHpBarAmount()));
+			AllSortedTeamHpBars[i].m_TeamHp = AllTeamHpBars[AllSortedTeamHpBars[i].m_Index]->GetCurHpBarAmount();
 		}
 
-	//	std::sort(AllTeamHpBarHpAmout.begin(), AllTeamHpBarHpAmout.end(), compare);
+		// 위에서 저장된 배열 안의 HP 값을 비교하여 내림차순으로 HP BAR를 정렬합니다.
+		std::sort(AllSortedTeamHpBars.begin(), AllSortedTeamHpBars.end(), CompareTeamHp);
 
-
-		startSort = true;
-
-
-
-	}
-
-
-	if (true == startSort)
-	{
-		for (int i = 0; i < AllTeamHpBarHpAmout.size(); i++)
+		for (int i = 0; i < (int)AllSortedTeamHpBars.size(); i++)
 		{
-			for (int j = i; j < AllTeamHpBarHpAmout.size(); j++)
-			{
-				if (AllTeamHpBarHpAmout[i] < AllTeamHpBarHpAmout[j])
-				{
-					float4 fTemp = AllTeamHpBars[i]->GetPos();
+			// 첫 번째로 정렬된 HpBar가 화면상 가장 위로 가도록 인덱스를 세팅합니다.
+			int HpBarIndex = AllSortedTeamHpBars[i].m_Index;
 
-					AllTeamHpBars[i]->SetPos(AllTeamHpBars[j]->GetPos());
+			// 정렬된 HP BAR의 이동 위치를 세팅해줍니다.
+			AllTeamHpBars[HpBarIndex]->InitMoveSortedHpbars(AllTeamHpBars[HpBarIndex]->GetPos(), AllTeamHpBarPos[i], 100.0f);
 
-					AllTeamHpBars[j]->SetPos(fTemp);
-				}
-			}
 		}
-
-		AllTeamHpBars;
-
-		startSort = false;
-
-
-	}
-
-
+	//}
 
 }
 
@@ -141,6 +117,8 @@ void UI_Box_AllTeamHpBar::AddTeamHpBar()
 		AllTeamHpBars[PlayerIndex]->SetMaxPlayerHp(InitPlayerHp);
 		AllTeamHpBars[PlayerIndex]->SetCurPlayerHp(InitPlayerHp);
 
+		AllSortedTeamHpBars.push_back({ AllTeamHpBars[PlayerIndex]->GetCurHpBarAmount(), PlayerIndex });
+
 		// 각 HP바의 색깔에 맞게 텍스처를 적용합니다.
 		switch (PlayerIndex)
 		{
@@ -178,6 +156,8 @@ void UI_Box_AllTeamHpBar::AddTeamHpBar()
 		default:
 			break;
 		}
+
+
 	}
 
 	isEndAllHpBarSetting = true;

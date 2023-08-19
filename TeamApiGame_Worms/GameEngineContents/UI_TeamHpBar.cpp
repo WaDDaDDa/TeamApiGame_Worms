@@ -134,6 +134,12 @@ void UI_TeamHpBar::Update(float _Delta)
 	// step4. 변경된 렌더러 스케일 값만큼 옮겨진 X값 위치를 변경해줍니다.
 	TeamHpRenderer->SetRenderPos({ 10.0f + (CurHpBarAmount / 2), TeamHpRenderer->GetRenderPos().Y });
 
+	// 현재 HP 값에 따라 내림차순 정렬된 HP Bar들을 순서에 맞춰서 위치를 이동시킵니다.
+	if (true == trigger_SortHp)
+	{
+		MoveSortedHpBars(_Delta);
+	}
+
 
 }
 
@@ -174,5 +180,37 @@ void UI_TeamHpBar::DecreaseHpBar()
 //	HpBarWidth = TeamHpRenderer->GetRenderScale().X;
 
 //	CurHpBarAmount = MaxHpBarAmount;
+
+}
+
+void UI_TeamHpBar::InitMoveSortedHpbars(float4 _StartPos, float4 _DestPos, float _MoveSpeed)
+{
+	StartMoveHpBarPos = _StartPos;
+	DestMoveHpBarPos = _DestPos;
+	MoveSpeed = _MoveSpeed;
+
+	MoveLerpDeltaTime = 0.0f;
+	
+	trigger_SortHp = true;
+}
+
+void UI_TeamHpBar::MoveSortedHpBars(float _Delta)
+{
+	MoveDeltaTime = _Delta;
+	MoveLerpDeltaTime += MoveDeltaTime;
+
+	CurHpBarPos = GetPos();
+
+	float4 NextHpBarPos = float4::LerpClimp(CurHpBarPos, DestMoveHpBarPos, MoveLerpDeltaTime);
+	SetPos(NextHpBarPos);
+
+	if (CurHpBarPos.X > DestMoveHpBarPos.X - 1.0f && CurHpBarPos.X < DestMoveHpBarPos.X + 1.0f &&
+		CurHpBarPos.Y > DestMoveHpBarPos.Y - 1.0f && CurHpBarPos.Y < DestMoveHpBarPos.Y + 1.0f)
+	{
+		SetPos(DestMoveHpBarPos);
+
+		trigger_SortHp = false;
+	}
+
 
 }

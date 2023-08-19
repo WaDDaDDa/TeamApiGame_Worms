@@ -37,14 +37,19 @@ public:
 		HpBarWidth = static_cast<float>(_HpBarWidth);
 	}
 
-
 	void InitDecreaseHpBar(int _DamagedHp);
 	void DecreaseHpBar();
+
+	void InitMoveSortedHpbars(float4 _StartPos, float4 _DestPos, float _MoveSpeed);
+	void MoveSortedHpBars(float _Delta);
 
 
 	GameEngineRenderer* TeamNameRenderer = nullptr;
 	GameEngineRenderer* TeamFlagRenderer = nullptr;
 	GameEngineRenderer* TeamHpRenderer = nullptr;
+
+
+
 
 protected:
 	void Start() override;
@@ -61,9 +66,19 @@ private:
 	float	TargetHpBarAmount	=	0.0f;
 	float	HpBarWidth			=	100.0f;
 
-	bool	trigger_UpdateHP = false;
+	float	MoveDeltaTime;
+	float	MoveSpeed;
+	float	MoveLerpDeltaTime = 0.0f;
 
-	int OriginScaleX = 100;
-	int CurScaleX = 100;
+	bool	trigger_UpdateHP = false;
+	bool	trigger_SortHp = false;
+
+	float4	StartMoveHpBarPos;
+	float4	DestMoveHpBarPos;
+	float4	CurHpBarPos;
+
+	int		OriginScaleX = 100;
+	int		CurScaleX = 100;
+
 
 };
