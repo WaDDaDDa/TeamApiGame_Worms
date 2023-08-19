@@ -79,8 +79,24 @@ void Grider::Update(float _Delta)
 {
 	if (PlayerState::Girder != GetMaster()->GetState() )
 	{
-		Death();
-		return;
+		size_t PlayerCount = Player::GetAllPlayer().size();
+		int PlayerStateCount = 0;
+		for (size_t i = 0; i < PlayerCount; i++)
+		{
+			if (PlayerState::Idle == Player::GetAllPlayer()[i]->GetState() || PlayerState::DeathEnd == Player::GetAllPlayer()[i]->GetState())
+			{
+				PlayerStateCount++;
+			}
+		}
+
+		if (PlayerStateCount == PlayerCount)
+		{
+			// 무기사용이 종료되면 다시 플레이어로 돌아간다.
+			Master->SwitchIsTurnPlayer();
+			Death();
+		}
+			return;
+
 	}
 	
 
