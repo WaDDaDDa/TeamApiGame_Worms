@@ -16,6 +16,7 @@
 #include "Hallelujah.h"
 #include "TestWeapon.h"
 #include "SuperSheep.h"
+#include "Grider.h"
 
 
 #include <GameEnginePlatform/GameEngineInput.h>
@@ -1593,11 +1594,16 @@ void Player::GirderOnUpdate(float _Delta)
 void Player::GirderStart()
 {
 	ChangeAnimationState("Girder");
+
+	CreateWeapon<Grider>();
 }
 void Player::GirderUpdate(float _Delta)
 {
 	// 보류
 	// 마우스 포인터 바꾸고 철근 좌우방향키로 회전, 180도 돌면은 크기 변환
+
+	
+	
 
 	if (GameEngineInput::IsDown('1'))
 	{

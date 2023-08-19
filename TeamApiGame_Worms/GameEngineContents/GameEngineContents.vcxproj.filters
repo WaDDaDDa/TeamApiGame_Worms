@@ -189,6 +189,9 @@
       <Filter>Effect</Filter>
     </ClCompile>
     <ClCompile Include="ContentCore.cpp" />
+    <ClCompile Include="Grider.cpp">
+      <Filter>Weapon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentCore.h" />
@@ -381,6 +384,9 @@
     </ClInclude>
     <ClInclude Include="SuperSheepEffect.h">
       <Filter>Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Grider.h">
+      <Filter>Weapon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

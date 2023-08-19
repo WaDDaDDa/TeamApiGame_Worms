@@ -191,6 +191,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Grenade.h" />
+    <ClInclude Include="Grider.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Ground.h">
       <SubType>
       </SubType>
@@ -307,6 +311,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Grenade.cpp" />
+    <ClCompile Include="Grider.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Ground.cpp">
       <SubType>
       </SubType>

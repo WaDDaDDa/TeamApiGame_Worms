@@ -1611,8 +1611,8 @@ void Player::ChangeWeapon()
 
 	if (true == GameEngineInput::IsDown('9'))
 	{
-		//ChangeState(PlayerState::GirderOn);
-		ChangeState(PlayerState::DonkeyOn);
+		ChangeState(PlayerState::GirderOn);
+		//ChangeState(PlayerState::DonkeyOn);
 	}
 
 
