@@ -686,6 +686,60 @@ void Player::Start()
 		}
 	}
 
+	{  //Grider ÀÌ¹ÌÁö
+		Gride_Renderer = CreateRenderer(GetOrder());
+
+		if (false == ResourcesManager::GetInst().IsLoadTexture("grdl0.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Weapons\\");
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl0.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl1.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl2.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl3.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl4.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl5.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl6.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl7.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl8.bmp"));
+
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds0.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds1.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds2.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds3.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds4.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds5.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds6.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds7.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds8.bmp"));
+
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl0b.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl1b.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl2b.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl3b.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl4b.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl5b.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl6b.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl7b.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl8b.bmp"));
+
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds0b.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds1b.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds2b.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds3b.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds4b.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds5b.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds6b.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds7b.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds8b.bmp"));
+		}
+
+		Gride_Renderer->SetTexture("grds0.bmp");
+		Gride_PixelTexture = ResourcesManager::GetInst().FindTexture("grds0b.bmp");
+		Gride_Renderer->Off();
+	}
 
 	MainRenderer = CreateRenderer(RenderOrder::Player);
 	CrossHairRenderer = CreateRenderer(RenderOrder::CrossHair);

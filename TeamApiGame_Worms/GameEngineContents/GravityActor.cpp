@@ -65,7 +65,6 @@ void GravityActor::CameraFocus(float _Delta)
 	// 키입력이있다면 마우스포커스 false
 	if (true == GameEngineInput::IsDown(VK_RETURN))
 	{
-		
 		MouseFocus = false;
 	}
 

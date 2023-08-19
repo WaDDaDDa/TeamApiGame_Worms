@@ -332,6 +332,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Player_Grider.cpp" />
     <ClCompile Include="Player_State.cpp" />
     <ClCompile Include="PlayLevel.cpp">
       <SubType>

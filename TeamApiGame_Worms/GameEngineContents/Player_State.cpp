@@ -2,6 +2,8 @@
 #include "ContentsEnum.h"
 #include "MouseObject.h"
 #include "GameTurn.h"
+#include "Ground.h"
+#include "PlayLevel.h"
 
 //무기
 #include "Weapon.h"
@@ -23,6 +25,8 @@
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEngineCore/GameEngineCollision.h>
+#include <GameEnginePlatform/GameEngineWindowTexture.h>
+
 
 // UI
 #include "UI_PlayerDamage.h"
@@ -1594,20 +1598,61 @@ void Player::GirderOnUpdate(float _Delta)
 void Player::GirderStart()
 {
 	ChangeAnimationState("Girder");
+	Gride_Renderer->On();
 
-	CreateWeapon<Grider>();
+	//CreateWeapon<Grider>();
 }
 void Player::GirderUpdate(float _Delta)
 {
 	// 보류
 	// 마우스 포인터 바꾸고 철근 좌우방향키로 회전, 180도 돌면은 크기 변환
 
+	if (true != IsTurnPlayer)
+	{
+		ChangeState(PlayerState::GirderOff);
+		return;
+	}
 	
-	
+	GroundCheck(_Delta);
+
+	Gride_Renderer->SetRenderPos(-GetPos() + MouseObject::GetPlayMousePos());
+
+	if (true == GameEngineInput::IsDown(VK_RIGHT))
+	{
+		GridState NewState = static_cast<GridState>(static_cast<int>(Gride_State) + 1);
+
+		if (18 == static_cast<int>(NewState))
+		{
+			NewState = GridState::s0;
+		}
+		ChangeGride_State(NewState);
+
+	}
+
+	if (true == GameEngineInput::IsDown(VK_LEFT))
+	{
+		GridState NewState = static_cast<GridState>(static_cast<int>(Gride_State) - 1);
+
+		if (-1 == static_cast<int>(NewState))
+		{
+			NewState = GridState::l8;
+		}
+
+		ChangeGride_State(NewState);
+	}
+
+	if (true == GameEngineInput::IsDown(VK_LBUTTON))
+	{
+		GameEngineWindowTexture* GroundTexture = dynamic_cast<PlayLevel*>(GetLevel())->GetGround()->GetGroundTexture();
+		GameEngineWindowTexture* GroundPIxelTexture = dynamic_cast<PlayLevel*>(GetLevel())->GetGround()->GetPixelGroundTexture();
+
+		GriderConstruct(GroundTexture, GroundPIxelTexture);
+	}
 
 	if (GameEngineInput::IsDown('1'))
 	{
 		ChangeState(PlayerState::GirderOff);
+		return;
 	}
 
 	ChangeWeapon();
@@ -1615,6 +1660,7 @@ void Player::GirderUpdate(float _Delta)
 
 void Player::GirderOffStart()
 {
+	Gride_Renderer->Off();
 	ChangeAnimationState("GirderOff");
 }
 void Player::GirderOffUpdate(float _Delta)

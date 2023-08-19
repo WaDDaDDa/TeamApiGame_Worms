@@ -192,6 +192,9 @@
     <ClCompile Include="Grider.cpp">
       <Filter>Weapon</Filter>
     </ClCompile>
+    <ClCompile Include="Player_Grider.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentCore.h" />

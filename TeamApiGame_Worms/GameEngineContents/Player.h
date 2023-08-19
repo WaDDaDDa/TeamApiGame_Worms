@@ -68,6 +68,31 @@ enum class PlayerDir
 	Right
 };
 
+
+enum class GridState
+{
+	s0,
+	s1,
+	s2,
+	s3,
+	s4,
+	s5,
+	s6,
+	s7,
+	s8,
+	l0,
+	l1,
+	l2,
+	l3,
+	l4,
+	l5,
+	l6,
+	l7,
+	l8
+
+};
+
+
 // Ό³Έν : 
 class Player : public GravityActor
 {
@@ -363,6 +388,15 @@ private:
 
 	float LengthX = 92.0f;
 	float LengthY = 0;
+
+	// Grider
+	void GriderConstruct(GameEngineWindowTexture* _GroundTexture, GameEngineWindowTexture* _GroundPixelTexture);
+	void ChangeGride_State(GridState _State);
+
+	GameEngineRenderer* Gride_Renderer = nullptr;
+	class GameEngineWindowTexture* Gride_PixelTexture = nullptr;
+
+	GridState Gride_State = GridState::s0;
 
 
 	// UI
