@@ -195,6 +195,12 @@
     <ClCompile Include="Player_Grider.cpp">
       <Filter>Player</Filter>
     </ClCompile>
+    <ClCompile Include="GameItem.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="HealItem.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentCore.h" />
@@ -391,6 +397,12 @@
     <ClInclude Include="Grider.h">
       <Filter>Weapon</Filter>
     </ClInclude>
+    <ClInclude Include="GameItem.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="HealItem.h">
+      <Filter>Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Weapon">
@@ -413,6 +425,9 @@
     </Filter>
     <Filter Include="Global">
       <UniqueIdentifier>{b0498c80-1ed4-40f8-9a23-8200e5f29969}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Item">
+      <UniqueIdentifier>{62b612e0-901b-4ffa-a870-6b4f85aa0b22}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

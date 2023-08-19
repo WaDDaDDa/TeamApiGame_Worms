@@ -181,6 +181,10 @@
     <ClInclude Include="Donkey.h" />
     <ClInclude Include="FlameEffect.h" />
     <ClInclude Include="FlyEffect.h" />
+    <ClInclude Include="GameItem.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="GameStateManager.h" />
     <ClInclude Include="GameTurn.h">
       <SubType>
@@ -200,6 +204,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Hallelujah.h" />
+    <ClInclude Include="HealItem.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Hole.h">
       <SubType>
       </SubType>
@@ -301,6 +309,10 @@
     <ClCompile Include="Donkey.cpp" />
     <ClCompile Include="FlameEffect.cpp" />
     <ClCompile Include="FlyEffect.cpp" />
+    <ClCompile Include="GameItem.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="GameStateManager.cpp" />
     <ClCompile Include="GameTurn.cpp">
       <SubType>
@@ -320,6 +332,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Hallelujah.cpp" />
+    <ClCompile Include="HealItem.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Hole.cpp">
       <SubType>
       </SubType>
