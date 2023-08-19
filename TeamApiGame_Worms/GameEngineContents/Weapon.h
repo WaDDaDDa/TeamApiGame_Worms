@@ -23,6 +23,12 @@ public:
 		SetPos(Master->GetPos() + float4{0, -15});
 	}
 
+	Player* GetMaster() const
+	{
+		return Master;
+	}
+
+
 	template <typename EffectType>
 	EffectType* CreateBombEffect()
 	{
