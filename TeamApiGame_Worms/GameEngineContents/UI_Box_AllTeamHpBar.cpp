@@ -5,6 +5,10 @@
 #include "Player.h"
 
 #include <GameEnginePlatform/GameEngineInput.h>
+#include <GameEnginePlatform/GameEngineWindow.h>
+#include "ContentsEnum.h"
+#include <algorithm>
+
 
 UI_Box_AllTeamHpBar* UI_Box_AllTeamHpBar::AllTeamHpBarUI = nullptr;
 UI_Box_AllTeamHpBar::UI_Box_AllTeamHpBar()
@@ -18,13 +22,90 @@ UI_Box_AllTeamHpBar::~UI_Box_AllTeamHpBar()
 
 void UI_Box_AllTeamHpBar::Start()
 {
+	//CurHpDebugRenderer = CreateUIRenderer(RenderOrder::UI);
+	//CurHpDebugRenderer->SetRenderPos({ 100, 600 });
 
+	//CurHpDebugRenderer2 = CreateUIRenderer(RenderOrder::UI);
+	//CurHpDebugRenderer2->SetRenderPos({ 100, 620 });
+
+	//CurHpDebugRenderer3 = CreateUIRenderer(RenderOrder::UI);
+	//CurHpDebugRenderer3->SetRenderPos({ 100, 640 });
+
+	//CurHpDebugRenderer4 = CreateUIRenderer(RenderOrder::UI);
+	//CurHpDebugRenderer4->SetRenderPos({ 100, 660 });
+
+	//CurHpDebugRenderer5 = CreateUIRenderer(RenderOrder::UI);
+	//CurHpDebugRenderer5->SetRenderPos({ 100, 680 });
+
+	//CurHpDebugRenderer6 = CreateUIRenderer(RenderOrder::UI);
+	//CurHpDebugRenderer6->SetRenderPos({ 100, 700 });
+
+
+}
+
+bool compare(int i, int j)
+{
+	return i > j;
 }
 
 void UI_Box_AllTeamHpBar::Update(float _Delta)
 {
+	//CurHpDebugRenderer->SetText(std::to_string(static_cast<int>(GetAllTeamHpBarUI()->GetIndexHpBarUI(0)->GetCurHpBarAmount())));
+	//CurHpDebugRenderer2->SetText(std::to_string(static_cast<int>(GetAllTeamHpBarUI()->GetIndexHpBarUI(1)->GetCurHpBarAmount())));
+	//CurHpDebugRenderer3->SetText(std::to_string(static_cast<int>(GetAllTeamHpBarUI()->GetIndexHpBarUI(2)->GetCurHpBarAmount())));
+	//CurHpDebugRenderer4->SetText(std::to_string(static_cast<int>(GetAllTeamHpBarUI()->GetIndexHpBarUI(3)->GetCurHpBarAmount())));
+	//CurHpDebugRenderer5->SetText(std::to_string(static_cast<int>(GetAllTeamHpBarUI()->GetIndexHpBarUI(4)->GetCurHpBarAmount())));
+	//CurHpDebugRenderer6->SetText(std::to_string(static_cast<int>(GetAllTeamHpBarUI()->GetIndexHpBarUI(5)->GetCurHpBarAmount())));
+
+
+
+	if (true == GameEngineInput::IsDown(VK_TAB))
+	{
+		AllTeamHpBarHpAmout.clear();
+
+		for (int i = 0; i < AllTeamHpBars.size(); i++)
+		{
+			AllTeamHpBarHpAmout.push_back(static_cast<int>(AllTeamHpBars[i]->GetCurHpBarAmount()));
+		}
+
+	//	std::sort(AllTeamHpBarHpAmout.begin(), AllTeamHpBarHpAmout.end(), compare);
+
+
+		startSort = true;
+
+
+
+	}
+
+
+	if (true == startSort)
+	{
+		for (int i = 0; i < AllTeamHpBarHpAmout.size(); i++)
+		{
+			for (int j = i; j < AllTeamHpBarHpAmout.size(); j++)
+			{
+				if (AllTeamHpBarHpAmout[i] < AllTeamHpBarHpAmout[j])
+				{
+					float4 fTemp = AllTeamHpBars[i]->GetPos();
+
+					AllTeamHpBars[i]->SetPos(AllTeamHpBars[j]->GetPos());
+
+					AllTeamHpBars[j]->SetPos(fTemp);
+				}
+			}
+		}
+
+		AllTeamHpBars;
+
+		startSort = false;
+
+
+	}
+
+
 
 }
+
 
 void UI_Box_AllTeamHpBar::AddTeamHpBar()
 {
@@ -35,7 +116,7 @@ void UI_Box_AllTeamHpBar::AddTeamHpBar()
 
 	// 플레이어가 6명인 경우
 	float4 StartPos = { 600, 600 };
-	
+
 	// 플레이어의 총 인원만큼 HP바를 생성합니다.
 	for (int PlayerIndex = 0; PlayerIndex < AllPlayerCount; PlayerIndex++)
 	{
@@ -47,9 +128,12 @@ void UI_Box_AllTeamHpBar::AddTeamHpBar()
 	{
 
 		// 각 HP바의 초기지점을 설정해줍니다.
-		AllTeamHpBars[PlayerIndex]->SetPos({StartPos.X, StartPos.Y + 20 * PlayerIndex });
-//		AllTeamHpBars[PlayerIndex]->SetHpBarWidth(StartPos.X);
-		AllTeamHpBars[PlayerIndex]->TeamHpRenderer->SetYPivot(StartPos.Y + 20 * PlayerIndex);
+		float4 initPos = { StartPos.X, StartPos.Y + 20 * PlayerIndex };
+		AllTeamHpBars[PlayerIndex]->SetPos(initPos);
+
+		// HP바 Sort에 사용할 초기 위치를 저장해줍니다.
+		AllTeamHpBarPos.push_back(initPos);
+
 
 		float InitPlayerHp = Player::GetAllPlayer()[PlayerIndex]->GetHp();
 
@@ -88,7 +172,7 @@ void UI_Box_AllTeamHpBar::AddTeamHpBar()
 		case 5:
 			AllTeamHpBars[PlayerIndex]->TeamNameRenderer->SetTexture("UI_BottomNameTagS.bmp");
 			AllTeamHpBars[PlayerIndex]->TeamHpRenderer->SetTexture("UI_BottomHPbarS.bmp");
-			
+
 			break;
 
 		default:
@@ -103,4 +187,11 @@ void UI_Box_AllTeamHpBar::AddTeamHpBar()
 void UI_Box_AllTeamHpBar::InitTeamHpBarData(int _Playerindex, int PlayerCurHp)
 {
 	AllTeamHpBars[_Playerindex]->InitDecreaseHpBar(PlayerCurHp);
+}
+
+void UI_Box_AllTeamHpBar::SortTeamHpBar()
+{
+
+
+
 }

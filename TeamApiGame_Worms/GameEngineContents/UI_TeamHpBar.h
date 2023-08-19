@@ -17,6 +17,11 @@ public:
 		return TeamHpBarUI;
 	}
 
+	float GetCurHpBarAmount() const
+	{
+		return CurHpBarAmount;
+	}
+
 	void SetMaxPlayerHp(int _MaxPlayerHp)
 	{
 		MaxHpBarAmount = static_cast<float>(_MaxPlayerHp);

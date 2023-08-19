@@ -16,6 +16,7 @@ public:
 
 	void AddTeamHpBar();
 	void InitTeamHpBarData(int _Playerindex, int PlayerCurHp);
+	void SortTeamHpBar();
 
 	static UI_Box_AllTeamHpBar* GetAllTeamHpBarUI()
 	{
@@ -35,8 +36,24 @@ private:
 	static UI_Box_AllTeamHpBar* AllTeamHpBarUI;
 
 
+
+
 	std::vector<UI_TeamHpBar*> AllTeamHpBars;
+	std::vector<float4> AllTeamHpBarPos;
+	std::vector<int> AllTeamHpBarHpAmout;
+
 	bool isEndAllHpBarSetting = false;
+
+	bool startSort = false;
+
+//	bool CompTeamHpBar(AllTeamHpBars& _Left, const UI_Box_AllTeamHpBar::AllTeamHpBars& _Right);
+
+	GameEngineRenderer* CurHpDebugRenderer = nullptr;
+	GameEngineRenderer* CurHpDebugRenderer2 = nullptr;
+	GameEngineRenderer* CurHpDebugRenderer3 = nullptr;
+	GameEngineRenderer* CurHpDebugRenderer4 = nullptr;
+	GameEngineRenderer* CurHpDebugRenderer5 = nullptr;
+	GameEngineRenderer* CurHpDebugRenderer6 = nullptr;
 
 };
 
