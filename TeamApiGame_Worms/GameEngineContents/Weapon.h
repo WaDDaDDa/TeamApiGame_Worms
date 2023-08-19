@@ -23,6 +23,12 @@ public:
 		SetPos(Master->GetPos() + float4{0, -15});
 	}
 
+	Player* GetMaster() const
+	{
+		return Master;
+	}
+
+
 	template <typename EffectType>
 	EffectType* CreateBombEffect()
 	{
@@ -31,6 +37,14 @@ public:
 		NewEffect->SetDamage(WeaponDamage);
 		NewEffect->SetGroundTexture(GetGroundTexture());
 		return dynamic_cast<EffectType*>(NewEffect);
+	}
+
+	template <typename EffectType>
+	EffectType* CreateBombEffect(float4 _Pos)
+	{
+		EffectType* NewEffect = CreateBombEffect<EffectType>();
+		NewEffect->AddPos(_Pos);
+		return NewEffect;
 	}
 
 	void SetWeaponDamage(float _Value)

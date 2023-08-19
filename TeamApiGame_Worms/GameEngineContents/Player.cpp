@@ -779,7 +779,7 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Right_HolyGranadeOn", "HolyGranadeOnRight.bmp", 0, 9, 0.1f, false);
 		MainRenderer->CreateAnimation("Right_HolyGranadeOff", "HolyGranadeOffRight.bmp", 0, 9, 0.1f, false);
 		MainRenderer->CreateAnimation("Right_GraveStone", "GraveStone.bmp", 0, 59, 0.1f, true);
-		MainRenderer->CreateAnimation("Right_Win", "winRight.bmp", 0, 13, 0.1f, true);
+		MainRenderer->CreateAnimation("Right_Win", "winRight.bmp", 0, 13, 0.03f, true);
 		MainRenderer->CreateAnimation("Right_Diving1", "DivingRight.bmp", 0, 2, 0.1f, false);
 		MainRenderer->CreateAnimation("Right_Diving2", "DivingRight.bmp", 2, 0, 0.1f, false);
 
@@ -1611,8 +1611,8 @@ void Player::ChangeWeapon()
 
 	if (true == GameEngineInput::IsDown('9'))
 	{
-		//ChangeState(PlayerState::GirderOn);
-		ChangeState(PlayerState::DonkeyOn);
+		ChangeState(PlayerState::GirderOn);
+		//ChangeState(PlayerState::DonkeyOn);
 	}
 
 

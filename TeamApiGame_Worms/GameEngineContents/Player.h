@@ -138,43 +138,6 @@ public:
 		TurnPlayerIndex = _Index;
 	}
 
-	static bool GameOverCheck()
-	{
-		size_t Psize = AllPlayer.size();
-		size_t Value = 0;
-		for (size_t i = 0; i < Psize; i++)
-		{
-			if (PlayerState::DeathEnd == AllPlayer[i]->GetState())
-			{
-				Value++;
-			}
-		}
-
-		if (Value == Psize)
-		{
-			// 플레이어 전원 사망
-			return true;
-		}
-		else if (Value == Psize-1)
-		{
-			// 플레이어 한명만 생존.
-			for (size_t i = 0; i < Psize; i++)
-			{
-				if (PlayerState::DeathEnd != AllPlayer[i]->GetState() && PlayerState::Win != AllPlayer[i]->GetState())
-				{
-					AllPlayer[i]->ChangeState(PlayerState::Win);
-					return false;
-				}
-			}
-		}
-		else
-		{
-			// 플레이어 두명이상 생존.
-			return false;
-		}
-	}
-
-
 
 protected:
 	PlayerState State = PlayerState::Max;

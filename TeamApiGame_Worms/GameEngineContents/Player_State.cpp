@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "ContentsEnum.h"
 #include "MouseObject.h"
+#include "GameTurn.h"
 
 //무기
 #include "Weapon.h"
@@ -15,6 +16,7 @@
 #include "Hallelujah.h"
 #include "TestWeapon.h"
 #include "SuperSheep.h"
+#include "Grider.h"
 
 
 #include <GameEnginePlatform/GameEngineInput.h>
@@ -71,6 +73,12 @@ void Player::IdleUpdate(float _Delta)
 		return;
 	}
 
+	if (true == GameTurn::GameOverCheck())
+	{
+		ChangeState(PlayerState::Win);
+	}
+	
+
 	if (GameEngineInput::IsDown(VK_LBUTTON))
 	{
 		TargetPos = MouseObject::GetPlayMousePos();
@@ -99,7 +107,7 @@ void Player::IdleUpdate(float _Delta)
 
 	if (true == GameEngineInput::IsDown('S'))
 	{
-		ChangeState(PlayerState::Death);
+		ChangeState(PlayerState::Win);
 	}
 
 	InputMove();
@@ -288,7 +296,7 @@ void Player::DamagingStart()
 			// 데미지 UI 출력
 			DamageUI->UpdateData_PlayerDamageUI(PlayerInfoUI->GetPos(), static_cast<int>(Damaging));
 
-			this->Hp -= Damaging;
+			this->Hp -= static_cast<int>(Damaging);
 
 			UI_Box_AllTeamHpBar::GetAllTeamHpBarUI()->InitTeamHpBarData(TurnPlayerIndex, GetHp());
 
@@ -1586,11 +1594,16 @@ void Player::GirderOnUpdate(float _Delta)
 void Player::GirderStart()
 {
 	ChangeAnimationState("Girder");
+
+	CreateWeapon<Grider>();
 }
 void Player::GirderUpdate(float _Delta)
 {
 	// 보류
 	// 마우스 포인터 바꾸고 철근 좌우방향키로 회전, 180도 돌면은 크기 변환
+
+	
+	
 
 	if (GameEngineInput::IsDown('1'))
 	{

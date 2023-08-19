@@ -191,6 +191,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Grenade.h" />
+    <ClInclude Include="Grider.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Ground.h">
       <SubType>
       </SubType>
@@ -219,6 +223,7 @@
     <ClInclude Include="Self_Bomb.h" />
     <ClInclude Include="Sheep.h" />
     <ClInclude Include="SuperSheep.h" />
+    <ClInclude Include="SuperSheepEffect.h" />
     <ClInclude Include="TestWeapon.h" />
     <ClInclude Include="TitleLevel.h">
       <SubType>
@@ -306,6 +311,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Grenade.cpp" />
+    <ClCompile Include="Grider.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Ground.cpp">
       <SubType>
       </SubType>
@@ -335,6 +344,7 @@
     <ClCompile Include="Self_Bomb.cpp" />
     <ClCompile Include="Sheep.cpp" />
     <ClCompile Include="SuperSheep.cpp" />
+    <ClCompile Include="SuperSheepEffect.cpp" />
     <ClCompile Include="TestWeapon.cpp" />
     <ClCompile Include="TitleLevel.cpp">
       <SubType>

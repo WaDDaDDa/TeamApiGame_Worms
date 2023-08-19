@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
+#include <GameEngineCore/GameEngineCore.h>
 
 class GameTurn : public GameEngineActor
 {
@@ -31,6 +32,8 @@ public:
     {
         return TurnTime;
     }
+
+    static bool GameOverCheck();
 
 protected:
 

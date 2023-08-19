@@ -109,7 +109,7 @@ void UI_Box_AllTeamHpBar::Update(float _Delta)
 
 void UI_Box_AllTeamHpBar::AddTeamHpBar()
 {
-	int AllPlayerCount = Player::GetAllPlayer().size();
+	int AllPlayerCount = static_cast<int>(Player::GetAllPlayer().size());
 
 	// 가장 밑부분 위치 메모
 	//	float4 StartPos = { 600, 700 };
@@ -135,7 +135,7 @@ void UI_Box_AllTeamHpBar::AddTeamHpBar()
 		AllTeamHpBarPos.push_back(initPos);
 
 
-		float InitPlayerHp = Player::GetAllPlayer()[PlayerIndex]->GetHp();
+		int InitPlayerHp = Player::GetAllPlayer()[PlayerIndex]->GetHp();
 
 		// 각 HP바의 Hp관련 값들을 초기 Player들의 Hp값으로 초기화 해줍니다.
 		AllTeamHpBars[PlayerIndex]->SetMaxPlayerHp(InitPlayerHp);

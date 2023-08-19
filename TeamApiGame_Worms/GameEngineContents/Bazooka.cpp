@@ -315,7 +315,6 @@ void Bazooka::FlyUpdate(float _Delta)
 	if (EffectTime >= EffectInterval)
 	{
 		CreateBombEffect<FlyEffect>();
-		//CreateBombEffect<FlameEffect>();
 		EffectTime = 0.0f;
 	}
 
