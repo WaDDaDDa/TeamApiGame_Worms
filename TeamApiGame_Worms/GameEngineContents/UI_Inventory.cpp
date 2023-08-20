@@ -6,6 +6,7 @@
 #include <GameEngineCore/GameEngineLevel.h>
 #include "ContentsEnum.h"
 #include "GameTurn.h"
+#include "UI_Mouse.h"
 
 #include <GameEnginePlatform/GameEngineWindow.h>
 
@@ -57,6 +58,8 @@ void UI_Inventory::Start()
 	//	Btn_Weapon_Bazooka->SetPos({ 1359, 347 });
 	//	Btn_Weapon_Bazooka->SetPos({ 1125, 347 }); // ON 최종 위치
 
+	MouseUI = GetLevel()->CreateActor<UI_Mouse>();
+
 }
 
 void UI_Inventory::Update(float _Delta)
@@ -69,6 +72,11 @@ void UI_Inventory::ShowInventory(bool _isActive, float _Delta)
 	// 활성 상태가 바뀜에 따라 위치를 전환합니다.
 	if (true == m_bIsActive && GetPos().X > 1185)
 	{
+		MouseUI->GetMouseUIRenderer()->On();
+		float4 MosuePos = { 1155, 373 };
+
+		GameEngineWindow::MainWindow.SetCursorPos(MosuePos);
+
 		float4 NextPos = GetPos() * float4::LEFT * _Delta;
 		AddPos(NextPos);
 
@@ -80,6 +88,8 @@ void UI_Inventory::ShowInventory(bool _isActive, float _Delta)
 
 	else if (false == m_bIsActive && GetPos().X < 1400)
 	{
+		MouseUI->GetMouseUIRenderer()->Off();
+
 		float4 NextPos = GetPos() * float4::RIGHT * _Delta;
 		AddPos(NextPos);
 

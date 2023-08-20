@@ -262,6 +262,11 @@ float4 GameEngineWindow::GetMousePos()
 	return float4{ static_cast<float>(MoniterPoint.x), static_cast<float>(MoniterPoint.y) };
 }
 
+void GameEngineWindow::SetCursorPos(float4 _CursorPos)
+{
+	SetPhysicalCursorPos(_CursorPos.X, _CursorPos.Y);
+}
+
 void GameEngineWindow::CursorOff()
 {
 	ShowCursor(FALSE);

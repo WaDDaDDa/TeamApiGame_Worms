@@ -24,7 +24,6 @@
 #include "UI_PlayerInfo.h"
 
 #pragma region UI에서 사용할 헤더 & 함수 전방 선언
-#include "UI_Mouse.h"
 #include "UI_Button.h"
 #include "UI_Inventory.h"
 #include "UI_Wind.h"
@@ -150,7 +149,7 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 	CreateActor<GameTurn>();
 
 #pragma region UI 세팅
-	CreateActor<UI_Mouse>();
+	//CreateActor<UI_Mouse>();
 
 	std::string StageNameTest = GameStateManager::GameState->GetStageName();
 

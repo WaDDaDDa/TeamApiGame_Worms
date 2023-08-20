@@ -2,6 +2,7 @@
 #include <GameEngineCore/GameEngineActor.h>
 #include <vector>
 #include "UI_Button.h"
+#include "UI_Mouse.h"
 
 class UI_Inventory : public GameEngineActor
 {
@@ -42,7 +43,7 @@ private:
 	GameEngineRenderer* MainRenderer = nullptr;
 	GameEngineRenderer* WeaponNameRenderer = nullptr;
 
-
+	UI_Mouse* MouseUI = nullptr;
 
 	UI_Button* Btn_Weapon_Bazooka = nullptr;
 
