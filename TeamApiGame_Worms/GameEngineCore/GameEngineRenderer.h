@@ -200,15 +200,18 @@ private:
 
 /////////////////////////////////// Text°ü·Ã
 public:
-	void SetText(const std::string& _Text, int _TextScale = 20, const std::string& _Face = "±¼¸²")
+	void SetText(const std::string& _Text, int _TextScale = 20, unsigned int _TextColor = RGB(255, 255, 255))
 	{
 		Text = _Text;
 		TextScale = _TextScale;
-		Face = _Face;
+		Face = "±¼¸²";
+		TextColor = _TextColor;
 	}
 
 private:
 	std::string Face;
 	int TextScale;
+	unsigned int TextColor = RGB(255, 255, 255);
+
 };
 

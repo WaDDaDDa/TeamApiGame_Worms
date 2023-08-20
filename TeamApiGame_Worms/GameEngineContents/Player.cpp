@@ -930,7 +930,7 @@ void Player::Update(float _Delta)
 
 	// UI 테스트용 임시 코드
 	PlayerInfoUI->SetPos({ GetPos().X - GetLevel()->GetMainCamera()->GetPos().X,  (GetPos().Y - GetLevel()->GetMainCamera()->GetPos().Y) - 70});
-	PlayerInfoUI->UpdateData_PlayerInfoUI(&Hp, IsTurnPlayer);
+	PlayerInfoUI->UpdateData_PlayerInfoUI(&Hp, IsTurnPlayer, TurnPlayerIndex);
 
 }
 
