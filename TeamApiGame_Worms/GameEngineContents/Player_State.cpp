@@ -75,7 +75,7 @@ void Player::IdleUpdate(float _Delta)
 		return;
 	}
 
-	if (true == GameTurn::GameOverCheck())
+	if (true == GameTurn::MainGameTurn->GameOverCheck())
 	{
 		ChangeState(PlayerState::Win);
 	}

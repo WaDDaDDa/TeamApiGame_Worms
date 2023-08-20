@@ -280,39 +280,39 @@ void PlayLevel::PlayerSetting(size_t _PlayerCount)
 		}
 	}
 
-	for (size_t i = 0; i < _PlayerCount; i++)
-	{
-		float PlayerSettingX = GameEngineRandom::MainRandom.RandomFloat(0, GroundPtr->GetPixelGroundTexture()->GetScale().X);
-		float PlayerSettingY = GameEngineRandom::MainRandom.RandomFloat(0, GroundPtr->GetPixelGroundTexture()->GetScale().Y);
+	//for (size_t i = 0; i < _PlayerCount; i++)
+	//{
+	//	float PlayerSettingX = GameEngineRandom::MainRandom.RandomFloat(0, GroundPtr->GetPixelGroundTexture()->GetScale().X);
+	//	float PlayerSettingY = GameEngineRandom::MainRandom.RandomFloat(0, GroundPtr->GetPixelGroundTexture()->GetScale().Y);
 
-		float4 CheckPos = { PlayerSettingX , PlayerSettingY };
-		unsigned int CheckColor = GroundPtr->GetPixelGroundTexture()->GetColor(RGB(255, 255, 255), CheckPos);
+	//	float4 CheckPos = { PlayerSettingX , PlayerSettingY };
+	//	unsigned int CheckColor = GroundPtr->GetPixelGroundTexture()->GetColor(RGB(255, 255, 255), CheckPos);
 
-		if (CheckColor == RGB(0, 0, 255))
-		{
-			HealItem* Hitem = CreateActor<HealItem>(RenderOrder::Item);
-			Hitem->SetGroundTexture(GroundPtr->GetPixelGroundTexture());
-			Hitem->SetPos(float4{ PlayerSettingX, 1200.0f });
-		}
-		else
-		{
-			while (CheckColor != RGB(0, 0, 255))
-			{
-				PlayerSettingX = GameEngineRandom::MainRandom.RandomFloat(0, GroundPtr->GetPixelGroundTexture()->GetScale().X);
-				PlayerSettingY = GameEngineRandom::MainRandom.RandomFloat(0, GroundPtr->GetPixelGroundTexture()->GetScale().Y);
+	//	if (CheckColor == RGB(0, 0, 255))
+	//	{
+	//		HealItem* Hitem = CreateActor<HealItem>(RenderOrder::Item);
+	//		Hitem->SetGroundTexture(GroundPtr->GetPixelGroundTexture());
+	//		Hitem->SetPos(float4{ PlayerSettingX, 1200.0f });
+	//	}
+	//	else
+	//	{
+	//		while (CheckColor != RGB(0, 0, 255))
+	//		{
+	//			PlayerSettingX = GameEngineRandom::MainRandom.RandomFloat(0, GroundPtr->GetPixelGroundTexture()->GetScale().X);
+	//			PlayerSettingY = GameEngineRandom::MainRandom.RandomFloat(0, GroundPtr->GetPixelGroundTexture()->GetScale().Y);
 
-				CheckPos = { PlayerSettingX , PlayerSettingY };
-				CheckColor = GroundPtr->GetPixelGroundTexture()->GetColor(RGB(255, 255, 255), CheckPos);
+	//			CheckPos = { PlayerSettingX , PlayerSettingY };
+	//			CheckColor = GroundPtr->GetPixelGroundTexture()->GetColor(RGB(255, 255, 255), CheckPos);
 
-				if (CheckColor == RGB(0, 0, 255))
-				{
-					HealItem* Hitem = CreateActor<HealItem>(RenderOrder::Item);
-					Hitem->SetGroundTexture(GroundPtr->GetPixelGroundTexture());
-					Hitem->SetPos(float4{ PlayerSettingX, 1200.0f });
-				}
-			}
-		}
-	}
+	//			if (CheckColor == RGB(0, 0, 255))
+	//			{
+	//				HealItem* Hitem = CreateActor<HealItem>(RenderOrder::Item);
+	//				Hitem->SetGroundTexture(GroundPtr->GetPixelGroundTexture());
+	//				Hitem->SetPos(float4{ PlayerSettingX, 1200.0f });
+	//			}
+	//		}
+	//	}
+	//}
 }
 
 

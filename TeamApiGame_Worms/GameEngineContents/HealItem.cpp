@@ -1,7 +1,7 @@
 #include "HealItem.h"
 
 
-
+#include "GameTurn.h"
 #include "ContentsEnum.h"
 
 #include <GameEngineBase/GameEnginePath.h>
@@ -30,14 +30,14 @@ void HealItem::Start()
 		FilePath.SetCurrentPath();
 		FilePath.MoveParentToExistsChild("ContentsResources");
 		FilePath.MoveChild("ContentsResources\\Image\\Misc\\Item\\");
-		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("mcrate0.bmp"), 1, 62);
+		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("mcrate0.bmp"), 1, 61);
 		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("mcrate1.bmp"), 1, 12);
 		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("mcrate2.bmp"), 1, 20);
 		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("mcratev.bmp"), 1, 12);
 	}
 	Renderer->SetTexture("Blank.bmp");
 	Renderer->SetRenderPos({ 0,-8.0f });
-	Renderer->CreateAnimation("HealItem_Create", "mcrate0.bmp", 0, 61, 0.05f, false);
+	Renderer->CreateAnimation("HealItem_Create", "mcrate0.bmp", 60, 0, 0.05f, false);
 	Renderer->CreateAnimation("HealItem_Idle", "mcrate1.bmp", 0, 11, 0.1f, true);
 	Renderer->CreateAnimation("HealItem_Fly", "mcrate2.bmp", 0, 19, 0.1f, false);
 	Renderer->CreateAnimation("HealItem_RFly", "mcrate2.bmp", 19, 0, 0.1f, false);
@@ -47,12 +47,12 @@ void HealItem::Start()
 		//Collision
 		BodyCollision = CreateCollision(CollisionOrder::Item);
 
-		BodyCollision->SetCollisionScale({ 10, 10 });
+		BodyCollision->SetCollisionScale({ 30, 30 });
 		BodyCollision->SetCollisionType(CollisionType::CirCle);
 		BodyCollision->SetCollisionPos({ 0,-8.0f });
 	}
 
-	ChangeState(HealItemState::Fly);
+	ChangeState(HealItemState::Create);
 }
 
 void HealItem::LevelStart()
@@ -122,19 +122,28 @@ void HealItem::ChangeState(HealItemState _State)
 
 void HealItem::CreateStart()
 {
+	Renderer->ChangeAnimation("HealItem_Create");
+	GameTurn::MainGameTurn->TurnPlayerAllOff();
 
+	IsTurnPlayer = true;
 }
 
 void HealItem::CreateUpdate(float _Delta)
 {
-
+	CameraFocus(_Delta);
+	GroundCheck(_Delta);
+	if (true == Renderer->IsAnimationEnd())
+	{
+		ChangeState(HealItemState::Idle);
+		return;
+	}
 }
 
 void HealItem::FlyStart()
 {
 	Renderer->ChangeAnimation("HealItem_Fly");
 	IsWindOn();
-	SetGravityPower(5.0f);
+	SetGravityPower(20.0f);
 }
 
 void HealItem::FlyUpdate(float _Delta)
@@ -162,9 +171,12 @@ void HealItem::FlyUpdate(float _Delta)
 
 void HealItem::IdleStart()
 {
+	IsTurnPlayer = false;
+
 	IsWindOff();
 	GravityReset();
 	Renderer->ChangeAnimation("HealItem_Idle");
+	GameTurn::MainGameTurn->StartTurnPlayer();
 }
 
 void HealItem::IdleUpdate(float _Delta)

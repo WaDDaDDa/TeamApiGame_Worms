@@ -21,6 +21,11 @@ public:
     HealItem& operator=(const HealItem& _Other) = delete;
     HealItem& operator=(HealItem&& _Other) noexcept = delete;
 
+    HealItemState GetState()
+    {
+        return State;
+    }
+
 protected:
     void ChangeState(HealItemState _State);
     void StateUpdate(float _Delta);
