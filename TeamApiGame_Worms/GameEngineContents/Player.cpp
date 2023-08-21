@@ -689,6 +689,16 @@ void Player::Start()
 			FilePath.MoveChild("ContentsResources\\Image\\Misc\\Aim_Taget\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("crshairb_R.bmp"), 1, 32);
 		}
+
+		// Gauge Resources
+		if (false == ResourcesManager::GetInst().IsLoadTexture("blob.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Effects\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("blob.bmp"), 1, 16);
+		}
 	}
 
 	{  //Grider ÀÌ¹ÌÁö
@@ -744,6 +754,59 @@ void Player::Start()
 		Gride_Renderer->SetTexture("grds0.bmp");
 		Gride_PixelTexture = ResourcesManager::GetInst().FindTexture("grds0b.bmp");
 		Gride_Renderer->Off();
+	}
+
+	// Gauge Texture
+	{
+		GaugeRenderer0 = CreateRenderer(RenderOrder::Gauge);
+		GaugeRenderer0->SetSprite("blob.bmp", 0);
+		GaugeRenderer0->SetRenderScale({ 64, 64 });
+		GaugeRenderer1 = CreateRenderer(RenderOrder::Gauge);
+		GaugeRenderer1->SetSprite("blob.bmp", 1);
+		GaugeRenderer1->SetRenderScale({ 64, 64 });
+		GaugeRenderer2 = CreateRenderer(RenderOrder::Gauge);
+		GaugeRenderer2->SetSprite("blob.bmp", 2);
+		GaugeRenderer2->SetRenderScale({ 64, 64 });
+		GaugeRenderer3 = CreateRenderer(RenderOrder::Gauge);
+		GaugeRenderer3->SetSprite("blob.bmp", 3);
+		GaugeRenderer3->SetRenderScale({ 64, 64 });
+		GaugeRenderer4 = CreateRenderer(RenderOrder::Gauge);
+		GaugeRenderer4->SetSprite("blob.bmp", 4);
+		GaugeRenderer4->SetRenderScale({ 64, 64 });
+		GaugeRenderer5 = CreateRenderer(RenderOrder::Gauge);
+		GaugeRenderer5->SetSprite("blob.bmp", 5);
+		GaugeRenderer5->SetRenderScale({ 64, 64 });
+		GaugeRenderer6 = CreateRenderer(RenderOrder::Gauge);
+		GaugeRenderer6->SetSprite("blob.bmp", 6);
+		GaugeRenderer6->SetRenderScale({ 64, 64 });
+		GaugeRenderer7 = CreateRenderer(RenderOrder::Gauge);
+		GaugeRenderer7->SetSprite("blob.bmp", 7);
+		GaugeRenderer7->SetRenderScale({ 64, 64 });
+		GaugeRenderer8 = CreateRenderer(RenderOrder::Gauge);
+		GaugeRenderer8->SetSprite("blob.bmp", 8);
+		GaugeRenderer8->SetRenderScale({ 64, 64 });
+		GaugeRenderer9 = CreateRenderer(RenderOrder::Gauge);
+		GaugeRenderer9->SetSprite("blob.bmp", 9);
+		GaugeRenderer9->SetRenderScale({ 64, 64 });
+		GaugeRenderer10 = CreateRenderer(RenderOrder::Gauge);
+		GaugeRenderer10->SetSprite("blob.bmp", 10);
+		GaugeRenderer10->SetRenderScale({ 64, 64 });
+		GaugeRenderer11 = CreateRenderer(RenderOrder::Gauge);
+		GaugeRenderer11->SetSprite("blob.bmp", 11);
+		GaugeRenderer11->SetRenderScale({ 64, 64 });
+		GaugeRenderer12 = CreateRenderer(RenderOrder::Gauge);
+		GaugeRenderer12->SetSprite("blob.bmp", 12);
+		GaugeRenderer12->SetRenderScale({ 64, 64 });
+		GaugeRenderer13 = CreateRenderer(RenderOrder::Gauge);
+		GaugeRenderer13->SetSprite("blob.bmp", 13);
+		GaugeRenderer13->SetRenderScale({ 64, 64 });
+		GaugeRenderer14 = CreateRenderer(RenderOrder::Gauge);
+		GaugeRenderer14->SetSprite("blob.bmp", 14);
+		GaugeRenderer14->SetRenderScale({ 64, 64 });
+		GaugeRenderer15 = CreateRenderer(RenderOrder::Gauge);
+		GaugeRenderer15->SetSprite("blob.bmp", 15);
+		GaugeRenderer15->SetRenderScale({ 64, 64 });
+		AllGaugeOff();
 	}
 
 	MainRenderer = CreateRenderer(RenderOrder::Player);
@@ -885,6 +948,7 @@ void Player::Start()
 			CrossHairRenderer->CreateAnimation("Left_CrossHair" + std::to_string(i), "crshairb_L.bmp", i, i, 0.1f, false);
 			CrossHairRenderer->CreateAnimation("Right_CrossHair" + std::to_string(i), "crshairb_R.bmp", i, i, 0.1f, false);
 		}
+
 	}
 	
 	{
@@ -1746,4 +1810,117 @@ void Player::ChangeAimAngle(float _Delta)
 			}
 		}
 	}
+
+}
+
+void Player::SetGauge(float _Delta)
+{
+	float4 GaugePos;
+	GaugePos = CrossHairPos;
+	GaugePos.Normalize();
+
+	if (0.1f <= ChargingTime)
+	{
+		GaugeRenderer0->On();
+		GaugeRenderer0->SetRenderPos({ GaugePos.X * 5.75f * 1, (GaugePos.Y * 5.75f * 1) - 15 });
+
+		float4 DebugPos = GaugeRenderer0->GetRenderPos();
+		int a = 0;
+	}
+	if (0.2f <= ChargingTime)
+	{
+		GaugeRenderer1->On();
+		GaugeRenderer1->SetRenderPos({ GaugePos.X * 5.75f * 2, (GaugePos.Y * 5.75f * 2) - 15 });
+	}
+	if (0.3f <= ChargingTime)
+	{
+		GaugeRenderer2->On();
+		GaugeRenderer2->SetRenderPos({ GaugePos.X * 5.75f * 3, (GaugePos.Y * 5.75f * 3) - 15 });
+	}
+	if (0.4f <= ChargingTime)
+	{
+		GaugeRenderer3->On();
+		GaugeRenderer3->SetRenderPos({ GaugePos.X * 5.75f * 4, (GaugePos.Y * 5.75f * 4) - 15 });
+	}
+	if (0.5f <= ChargingTime)
+	{
+		GaugeRenderer4->On();
+		GaugeRenderer4->SetRenderPos({ GaugePos.X * 5.75f * 5, (GaugePos.Y * 5.75f * 5) - 15 });
+	}
+	if (0.6f <= ChargingTime)
+	{
+		GaugeRenderer5->On();
+		GaugeRenderer5->SetRenderPos({ GaugePos.X * 5.75f * 6, (GaugePos.Y * 5.75f * 6) - 15 });
+	}
+	if (0.7f <= ChargingTime)
+	{
+		GaugeRenderer6->On();
+		GaugeRenderer6->SetRenderPos({ GaugePos.X * 5.75f * 7, (GaugePos.Y * 5.75f * 7) - 15 });
+	}
+	if (0.8f <= ChargingTime)
+	{
+		GaugeRenderer7->On();
+		GaugeRenderer7->SetRenderPos({ GaugePos.X * 5.75f * 8, (GaugePos.Y * 5.75f * 8) - 15 });
+	}
+	if (0.9f <= ChargingTime)
+	{
+		GaugeRenderer8->On();
+		GaugeRenderer8->SetRenderPos({ GaugePos.X * 5.75f * 9, (GaugePos.Y * 5.75f * 9) - 15 });
+	}
+	if (1.0f <= ChargingTime)
+	{
+		GaugeRenderer9->On();
+		GaugeRenderer9->SetRenderPos({ GaugePos.X * 5.75f * 10, (GaugePos.Y * 5.75f * 10) - 15 });
+	}
+	if (1.1f <= ChargingTime)
+	{
+		GaugeRenderer10->On();
+		GaugeRenderer10->SetRenderPos({ GaugePos.X * 5.75f * 11, (GaugePos.Y * 5.75f * 11) - 15 });
+	}
+	if (1.2f <= ChargingTime)
+	{
+		GaugeRenderer11->On();
+		GaugeRenderer11->SetRenderPos({ GaugePos.X * 5.75f * 12, (GaugePos.Y * 5.75f * 12) - 15 });
+	}
+	if (1.3f <= ChargingTime)
+	{
+		GaugeRenderer12->On();
+		GaugeRenderer12->SetRenderPos({ GaugePos.X * 5.75f * 13, (GaugePos.Y * 5.75f * 13) - 15 });
+	}
+	if (1.4f <= ChargingTime)
+	{
+		GaugeRenderer13->On();
+		GaugeRenderer13->SetRenderPos({ GaugePos.X * 5.75f * 14, (GaugePos.Y * 5.75f * 14) - 15 });
+	}
+	if (1.5f <= ChargingTime)
+	{
+		GaugeRenderer14->On();
+		GaugeRenderer14->SetRenderPos({ GaugePos.X * 5.75f * 15, (GaugePos.Y * 5.75f * 15) - 15 });
+	}
+	if (1.6f <= ChargingTime)
+	{
+		GaugeRenderer15->On();
+		GaugeRenderer15->SetRenderPos({ GaugePos.X * 5.75f * 16, (GaugePos.Y * 5.75f * 16) - 15 });
+	}
+
+}
+
+void Player::AllGaugeOff()
+{
+	GaugeRenderer0->Off();
+	GaugeRenderer1->Off();
+	GaugeRenderer2->Off();
+	GaugeRenderer3->Off();
+	GaugeRenderer4->Off();
+	GaugeRenderer5->Off();
+	GaugeRenderer6->Off();
+	GaugeRenderer7->Off();
+	GaugeRenderer8->Off();
+	GaugeRenderer9->Off();
+	GaugeRenderer10->Off();
+	GaugeRenderer11->Off();
+	GaugeRenderer12->Off();
+	GaugeRenderer13->Off();
+	GaugeRenderer14->Off();
+	GaugeRenderer15->Off();
 }

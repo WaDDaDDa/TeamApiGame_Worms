@@ -335,6 +335,8 @@ protected:
 	void ChangeCrossHairRenderPos(int _iCurAngle);
 
 	void ChangeAimAngle(float _Delta);
+	void SetGauge(float _Delta);
+	void AllGaugeOff();
 
 	// Collision
 	GameEngineCollision* PlayerBodyCollision = nullptr;
@@ -376,7 +378,7 @@ private:
 	float4 UpCheckPos = float4{ 0 , -20.0f };
 
 	float ChargingTime = 0.0f;
-	float MaxChargingTime = 3.0f;
+	float MaxChargingTime = 1.6f;
 
 	// 마우스로 클릭한 후 사용하는 무기의 마우스 클릭 좌표.
 	float4 TargetPos = float4::ZERO;
@@ -401,6 +403,28 @@ private:
 	class GameEngineWindowTexture* Gride_PixelTexture = nullptr;
 
 	GridState Gride_State = GridState::s0;
+
+	
+	// Gauge Renderer
+	GameEngineRenderer* GaugeRenderer0 = nullptr;
+	GameEngineRenderer* GaugeRenderer1 = nullptr;
+	GameEngineRenderer* GaugeRenderer2 = nullptr;
+	GameEngineRenderer* GaugeRenderer3 = nullptr;
+	GameEngineRenderer* GaugeRenderer4 = nullptr;
+	GameEngineRenderer* GaugeRenderer5 = nullptr;
+	GameEngineRenderer* GaugeRenderer6 = nullptr;
+	GameEngineRenderer* GaugeRenderer7 = nullptr;
+	GameEngineRenderer* GaugeRenderer8 = nullptr;
+	GameEngineRenderer* GaugeRenderer9 = nullptr;
+	GameEngineRenderer* GaugeRenderer10 = nullptr;
+	GameEngineRenderer* GaugeRenderer11 = nullptr;
+	GameEngineRenderer* GaugeRenderer12 = nullptr;
+	GameEngineRenderer* GaugeRenderer13 = nullptr;
+	GameEngineRenderer* GaugeRenderer14 = nullptr;
+	GameEngineRenderer* GaugeRenderer15 = nullptr;
+	
+	
+	
 
 
 	// UI

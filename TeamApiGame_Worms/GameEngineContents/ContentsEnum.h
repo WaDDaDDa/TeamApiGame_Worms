@@ -14,6 +14,7 @@ enum class RenderOrder
 	Ground,
 	Item,
 	Player,
+	Gauge,
 	CrossHair,
 	Weapon,
 	FrontWave,

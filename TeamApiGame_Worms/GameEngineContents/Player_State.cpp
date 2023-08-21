@@ -394,19 +394,28 @@ void Player::BazookaUpdate(float _Delta)
 
 	ChangeAimAngle(_Delta);
 
+	CrossHairPos = { LengthX, LengthY };
+	CrossHairPos.Normalize();
+	CrossHairPos *= 92;
 
 	if (true == GameEngineInput::IsUp('A') || GameEngineInput::GetPressTime('A') >= MaxChargingTime)
 	{
-		ChargingTime = GameEngineInput::GetPressTime('A');
 
 		if (ChargingTime >= MaxChargingTime)
 		{
 			ChargingTime = MaxChargingTime;
+			ChangeState(PlayerState::BazookaFire);
 		}
 		GameEngineInput::ResetPressTime('A');
 
 		ChangeState(PlayerState::BazookaFire);
 		return;
+	}
+
+	if (true == GameEngineInput::IsPress('A'))
+	{
+		ChargingTime = GameEngineInput::GetPressTime('A');
+		SetGauge(_Delta);
 	}
 
 	int iCurAngle = static_cast<int>(CurAngle);
@@ -517,9 +526,7 @@ void Player::BazookaUpdate(float _Delta)
 		break;
 	}
 
-	CrossHairPos = { LengthX, LengthY };
-	CrossHairPos.Normalize();
-	CrossHairPos *= 92;
+	
 
 	//CrossHairRenderer->SetRenderPos(CrossHairPos);
 	CrossHairRenderer->SetRenderPos(MainRenderer->GetRenderPos() + CrossHairPos);
@@ -533,6 +540,7 @@ void Player::BazookaUpdate(float _Delta)
 void Player::BazookaFireStart()
 {
 	CreateWeapon<Bazooka>();
+	AllGaugeOff();
 }
 
 void Player::BazookaFireUpdate(float _Delta)
@@ -598,6 +606,10 @@ void Player::UziUpdate(float _Delta)
 	}
 
 	ChangeAimAngle(_Delta);
+
+	CrossHairPos = { LengthX, LengthY };
+	CrossHairPos.Normalize();
+	CrossHairPos *= 92;
 
 	if (GameEngineInput::IsDown('A'))
 	{
@@ -744,9 +756,6 @@ void Player::UziUpdate(float _Delta)
 		break;
 	}
 
-	CrossHairPos = { LengthX, LengthY };
-	CrossHairPos.Normalize();
-	CrossHairPos *= 92;
 
 	//CrossHairRenderer->SetRenderPos(CrossHairPos);
 	CrossHairRenderer->SetRenderPos(MainRenderer->GetRenderPos() + CrossHairPos);
@@ -848,6 +857,10 @@ void Player::HomingMissileUpdate(float _Delta)
 
 	ChangeAimAngle(_Delta);
 
+	CrossHairPos = { LengthX, LengthY };
+	CrossHairPos.Normalize();
+	CrossHairPos *= 92;
+
 	if (GameEngineInput::IsDown(VK_LBUTTON))
 	{
 		TargetPos = MouseObject::GetPlayMousePos();
@@ -856,7 +869,6 @@ void Player::HomingMissileUpdate(float _Delta)
 
 	if (true == GameEngineInput::IsUp('A') || GameEngineInput::GetPressTime('A') >= MaxChargingTime)
 	{
-		ChargingTime = GameEngineInput::GetPressTime('A');
 
 		if (ChargingTime >= MaxChargingTime)
 		{
@@ -867,6 +879,12 @@ void Player::HomingMissileUpdate(float _Delta)
 
 		ChangeState(PlayerState::HomingMissileFire);
 		return;
+	}
+
+	if (true == GameEngineInput::IsPress('A'))
+	{
+		ChargingTime = GameEngineInput::GetPressTime('A');
+		SetGauge(_Delta);
 	}
 
 	int iCurAngle = static_cast<int>(CurAngle);
@@ -977,9 +995,6 @@ void Player::HomingMissileUpdate(float _Delta)
 		break;
 	}
 
-	CrossHairPos = { LengthX, LengthY };
-	CrossHairPos.Normalize();
-	CrossHairPos *= 92;
 
 	//CrossHairRenderer->SetRenderPos(CrossHairPos);
 	CrossHairRenderer->SetRenderPos(MainRenderer->GetRenderPos() + CrossHairPos);
@@ -993,6 +1008,7 @@ void Player::HomingMissileUpdate(float _Delta)
 void Player::HomingMissileFireStart()
 {
 	CreateWeapon<HomingMissile>();
+	AllGaugeOff();
 }
 void Player::HomingMissileFireUpdate(float _Delta)
 {
@@ -1112,9 +1128,12 @@ void Player::GranadeUpdate(float _Delta)
 
 	ChangeAimAngle(_Delta);
 
+	CrossHairPos = { LengthX, LengthY };
+	CrossHairPos.Normalize();
+	CrossHairPos *= 92;
+
 	if (true == GameEngineInput::IsUp('A') || GameEngineInput::GetPressTime('A') >= MaxChargingTime)
 	{
-		ChargingTime = GameEngineInput::GetPressTime('A');
 
 		if (ChargingTime >= MaxChargingTime)
 		{
@@ -1124,6 +1143,12 @@ void Player::GranadeUpdate(float _Delta)
 
 		ChangeState(PlayerState::GranadeFire);
 		return;
+	}
+
+	if (true == GameEngineInput::IsPress('A'))
+	{
+		ChargingTime = GameEngineInput::GetPressTime('A');
+		SetGauge(_Delta);
 	}
 
 	int iCurAngle = static_cast<int>(CurAngle);
@@ -1234,9 +1259,6 @@ void Player::GranadeUpdate(float _Delta)
 		break;
 	}
 
-	CrossHairPos = { LengthX, LengthY };
-	CrossHairPos.Normalize();
-	CrossHairPos *= 92;
 
 	//CrossHairRenderer->SetRenderPos(CrossHairPos);
 	CrossHairRenderer->SetRenderPos(MainRenderer->GetRenderPos() + CrossHairPos);
@@ -1250,6 +1272,7 @@ void Player::GranadeUpdate(float _Delta)
 void Player::GranadeFireStart()
 {
 	CreateWeapon<Grenade>();
+	AllGaugeOff();
 }
 void Player::GranadeFireUpdate(float _Delta)
 {
@@ -1628,9 +1651,12 @@ void Player::HolyGranadeUpdate(float _Delta)
 
 	ChangeAimAngle(_Delta);
 
+	CrossHairPos = { LengthX, LengthY };
+	CrossHairPos.Normalize();
+	CrossHairPos *= 92;
+
 	if (true == GameEngineInput::IsUp('A') || GameEngineInput::GetPressTime('A') >= MaxChargingTime)
 	{
-		ChargingTime = GameEngineInput::GetPressTime('A');
 
 		if (ChargingTime >= MaxChargingTime)
 		{
@@ -1640,6 +1666,12 @@ void Player::HolyGranadeUpdate(float _Delta)
 
 		ChangeState(PlayerState::HolyGranadeFire);
 		return;
+	}
+
+	if (true == GameEngineInput::IsPress('A'))
+	{
+		ChargingTime = GameEngineInput::GetPressTime('A');
+		SetGauge(_Delta);
 	}
 
 	int iCurAngle = static_cast<int>(CurAngle);
@@ -1750,9 +1782,6 @@ void Player::HolyGranadeUpdate(float _Delta)
 		break;
 	}
 
-	CrossHairPos = { LengthX, LengthY };
-	CrossHairPos.Normalize();
-	CrossHairPos *= 92;
 
 	//CrossHairRenderer->SetRenderPos(CrossHairPos);
 	CrossHairRenderer->SetRenderPos(MainRenderer->GetRenderPos() + CrossHairPos);
@@ -1766,6 +1795,7 @@ void Player::HolyGranadeUpdate(float _Delta)
 void Player::HolyGranadeFireStart()
 {
 	CreateWeapon<Hallelujah>();
+	AllGaugeOff();
 }
 void Player::HolyGranadeFireUpdate(float _Delta)
 {
