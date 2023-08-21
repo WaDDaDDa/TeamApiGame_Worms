@@ -45,7 +45,7 @@ void UI_Mouse::Start()
 	MainRenderer = CreateUIRenderer("UI_MOUSE.bmp", RenderOrder::Mouse);
 	MainRenderer->SetRenderScale({ MOUSE_WITDH, MOUSE_HEIGHT });
 
-	MainRenderer->Off();
+	//MainRenderer->Off();
 }
 
 void UI_Mouse::Update(float _Delta)
