@@ -5,6 +5,7 @@
 #include <GameEngineCore/GameEngineCollision.h>
 #include "ContentsEnum.h"
 #include <GameEnginePlatform/GameEngineInput.h>
+#include "GameStateManager.h"
 
 UI_WormMaxHp_Button::UI_WormMaxHp_Button()
 {
@@ -47,14 +48,14 @@ void UI_WormMaxHp_Button::Start()
 
 	MainRenderer->SetRenderScale({ 68, 68 });
 
-	MainRenderer->SetTexture("UI_Hp00.bmp");
+	MainRenderer->SetTexture("UI_Hp100.bmp");
 
 	MainCollision = CreateCollision(CollisionOrder::UI);
 	MainCollision->SetCollisionType(CollisionType::Rect);
 	MainCollision->SetCollisionScale({ 68, 68 });
 
 	ChangeState(BUTTON_STATE::BUTTON_STATE_UNHOVERED);
-
+	GameStateManager::GameState->SetPlayerMaxHp(100);
 }
 
 void UI_WormMaxHp_Button::Update(float _Delta)
@@ -65,11 +66,10 @@ void UI_WormMaxHp_Button::Update(float _Delta)
 
 void UI_WormMaxHp_Button::ChangeSelectValue()
 {
-	if (m_SelectIndex < 4)
+	if (m_SelectIndex < 2)
 	{
 		++m_SelectIndex;
 	}
-
 	else
 	{
 		m_SelectIndex = 0;
@@ -78,19 +78,18 @@ void UI_WormMaxHp_Button::ChangeSelectValue()
 	switch (m_SelectIndex)
 	{
 	case 0:
-		MainRenderer->SetTexture("UI_Hp00.bmp");
+		MainRenderer->SetTexture("UI_Hp100.bmp");
+		GameStateManager::GameState->SetPlayerMaxHp(100);
 		break;
 
 	case 1:
-		MainRenderer->SetTexture("UI_Hp100.bmp");
+		MainRenderer->SetTexture("UI_Hp150.bmp");
+		GameStateManager::GameState->SetPlayerMaxHp(150);
 		break;
 
 	case 2:
-		MainRenderer->SetTexture("UI_Hp150.bmp");
-		break;
-
-	case 3:
 		MainRenderer->SetTexture("UI_Hp200.bmp");
+		GameStateManager::GameState->SetPlayerMaxHp(200);
 		break;
 
 	default:

@@ -4,6 +4,7 @@
 #include "ContentsEnum.h"
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEnginePlatform/GameEngineInput.h>
+#include "GameStateManager.h"
 
 UI_TeamHpBar::UI_TeamHpBar()
 {
@@ -107,8 +108,11 @@ void UI_TeamHpBar::Start()
 	TeamNameRenderer->SetRenderPos({ -30, 0 });
 
 	TeamHpRenderer = CreateUIRenderer("UI_BottomHPbarB.bmp", RenderOrder::UI);
-	TeamHpRenderer->SetRenderScale({ 100, 17 });
+
+	float ScaleX = static_cast<float>(GameStateManager::GameState->GetWormMaxHp());
+	TeamHpRenderer->SetRenderScale({ ScaleX, 17 });
 	TeamHpRenderer->SetRenderPos({ 61, 0 });
+
 #pragma endregion
 
 }

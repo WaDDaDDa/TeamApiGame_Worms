@@ -68,6 +68,9 @@ void UI_TurnTime_Button::Start()
 	MainCollision->SetCollisionScale({ 68, 68 });
 
 	ChangeState(BUTTON_STATE::BUTTON_STATE_UNHOVERED);
+
+	// 아무것도 누르지 않았을 때의 기본값
+	GameStateManager::GameState->SetTurnTime(15.0f);
 }
 
 void UI_TurnTime_Button::Update(float _Delta)

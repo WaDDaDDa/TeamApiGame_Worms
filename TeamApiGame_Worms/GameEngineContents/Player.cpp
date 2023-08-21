@@ -13,6 +13,7 @@
 #include <GameEngineCore/GameEngineCollision.h>
 
 #include "UI_PlayerInfo.h"
+#include "GameStateManager.h"
 
 #define RIGHT_UP_MAXANGLE  -90
 #define RIGHT_DOWN_MAXANGLE  90
@@ -986,6 +987,9 @@ void Player::Start()
 		PlayerInfoUI->SetPlayerColorIndex(i);
 	}
 
+
+	Hp = GameStateManager::GameState->GetWormMaxHp();
+
 }
 
 
@@ -1026,7 +1030,7 @@ void Player::Render(float _Delta)
 
 	{
 		CollisionData Data;
-
+		
 		Data.Pos = ActorCameraPos() + LeftCheckPos;
 
 		Data.Scale = { 5,5 };
