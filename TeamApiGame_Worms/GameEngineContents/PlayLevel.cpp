@@ -98,11 +98,11 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 		
 		Wave2->SetPos({ -30.0f,1800.0f });
 		GameEngineActor* Wave3 = CreateActor<Wave>(RenderOrder::BackWave);
-		Wave3->SetPos({ -60.0f,1825.0f});
+		Wave3->SetPos({ 60.0f,1825.0f});
 		GameEngineActor* Wave4 = CreateActor<Wave>(RenderOrder::FrontWave);
 		Wave4->SetPos({ -90.0f,1850.0f});
 		GameEngineActor* Wave5 = CreateActor<Wave>(RenderOrder::FrontWave);
-		Wave5->SetPos({ -120.0f,1875.0f });
+		Wave5->SetPos({ 120.0f,1875.0f });
 		UnderWater* NewUnderWater = CreateActor<UnderWater>();
 		NewUnderWater->DrawAtStage(this);
 
