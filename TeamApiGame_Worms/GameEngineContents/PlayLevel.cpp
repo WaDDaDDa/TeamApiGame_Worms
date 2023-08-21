@@ -21,17 +21,15 @@
 #include "HealItem.h"
 
 #include "GameStateManager.h"
-#include "UI_PlayerInfo.h"
+
 
 #pragma region UI에서 사용할 헤더 & 함수 전방 선언
+#include "UI_PlayerInfo.h"
 #include "UI_Button.h"
 #include "UI_Inventory.h"
 #include "UI_Wind.h"
 #include "UI_Timer.h"
-
-
 #include "UI_Box_AllTeamHpBar.h"
-
 #include "ContentsDefine.h"
 
 void ChangeLevel(DWORD_PTR, DWORD_PTR);
@@ -144,13 +142,24 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 
 	                                     
 	// 플레이어 수만큼 랜덤으로 생성
-	PlayerSetting(6);
+	int TotalTeamNumber = GameStateManager::GameState->GetTeamNumber();
+
+	// 로비를 거치지 않고 바로 PlayLevel로 시작하는 경우 기본값으로 6을 넣어줍니다.
+	if (TotalTeamNumber == NULL)
+	{
+		PlayerSetting(6);
+	}
+
+	// 로비에서 세팅해준 팀 수 만큼 플레이어를 생성합니다.
+	else
+	{
+		PlayerSetting(TotalTeamNumber);
+	}
+
 
 	CreateActor<GameTurn>();
 
 #pragma region UI 세팅
-	//CreateActor<UI_Mouse>();
-
 	std::string StageNameTest = GameStateManager::GameState->GetStageName();
 
 	Inven = CreateActor<UI_Inventory>();
@@ -165,25 +174,7 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 
 
 	UI_Box_AllTeamHpBar* AllTeamHpBar = CreateActor<UI_Box_AllTeamHpBar>();
-//	AllTeamHpBar->InitTeamHpBarData();
 	AllTeamHpBar->AddTeamHpBar();
-
-
-	
-
-
-	//	AllTeamHpBar->SetPos({ 400, 700 });
-
-		//UI_TeamHpBar* TeamHp = CreateActor<UI_TeamHpBar>();
-
-		//TeamHp->SetPos({ 100, 100});
-
-
-		//// UI 세팅 테스트
-		//UI_Button* Btn_StartGame = CreateActor<UI_Button>();
-		//Btn_StartGame->InitButtonData("UI_Button_StartGame", float4{ UI_BUTTON_START_WITDH, UI_BUTTON_START_HEIGHT });
-		//Btn_StartGame->SetPos({ 400, 1000 });
-		//Btn_StartGame->SetClickedCallBack(ChangeLevel, 0, 0);
 #pragma endregion
 
 

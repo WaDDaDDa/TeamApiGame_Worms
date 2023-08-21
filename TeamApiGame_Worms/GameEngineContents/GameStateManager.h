@@ -48,6 +48,11 @@ public:
 		return m_iWormSelectMode;
 	}
 
+	int GetTeamNumber() const
+	{
+		return m_iTeamNumber;
+	}
+
 	bool GetUseTeleport() const
 	{
 		return m_bUseTeleport;
@@ -61,6 +66,11 @@ public:
 
 
 	// Setter
+	void SetTeamNumber(int _NewTeamNumber)
+	{
+		m_iTeamNumber = _NewTeamNumber;
+	}
+
 	void SetStageName(std::string _StageName)
 	{
 		StageName = _StageName;
@@ -92,6 +102,7 @@ private:
 	int			m_iWinConditions	= 0;
 	int			m_iWormMaxHp		= 100;
 	int			m_iWormSelectMode	= 0;	
+	int			m_iTeamNumber		= 0;
 	bool		m_bUseTeleport		= false;
 
 };

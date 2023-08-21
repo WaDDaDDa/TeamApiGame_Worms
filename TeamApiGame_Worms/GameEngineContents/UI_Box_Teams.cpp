@@ -2,6 +2,8 @@
 
 #include <GameEngineCore/ResourcesManager.h>
 #include <GameEngineCore/GameEngineRenderer.h>
+#include "GameStateManager.h"
+
 #include "ContentsEnum.h"
 
 UI_Box_Teams::UI_Box_Teams()
@@ -30,7 +32,7 @@ void UI_Box_Teams::Start()
 
 	MainRenderer->SetTexture("UI_Teams.bmp");
 
-
+	GameStateManager::GameState->SetTeamNumber(6);
 }
 
 void UI_Box_Teams::Update(float _Delta)
