@@ -55,6 +55,10 @@ enum class PlayerState
 	HolyGranade,
 	HolyGranadeFire,
 	HolyGranadeOff,
+	SuperSheepOn,
+	SuperSheep,
+	SuperSheepFire,
+	SuperSheepOff,
 
 	Diving,
 	DeathEnd,
@@ -318,6 +322,18 @@ protected:
 
 	void HolyGranadeOffStart();
 	void HolyGranadeOffUpdate(float _Delta);
+
+	void SuperSheepOnStart();
+	void SuperSheepOnUpdate(float _Delta);
+	
+	void SuperSheepStart();
+	void SuperSheepUpdate(float _Delta);
+
+	void SuperSheepFireStart();
+	void SuperSheepFireUpdate(float _Delta);
+
+	void SuperSheepOffStart();
+	void SuperSheepOffUpdate(float _Delta);
 
 	void WinStart();
 	void WinUpdate(float _Delta);

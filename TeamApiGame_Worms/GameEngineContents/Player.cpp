@@ -854,6 +854,9 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Left_DonkeyOff", "AirStrikeOffLeft.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_HolyGranadeOn", "HolyGranadeOnLeft.bmp", 0, 9, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_HolyGranadeOff", "HolyGranadeOffLeft.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_SuperSheepOn", "sheepOnLeft.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_SuperSheep", "sheepOnLeft.bmp", 9, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_SuperSheepOff", "sheepOffLeft.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_GraveStone", "GraveStone.bmp", 0, 59, 0.1f, true);
 		MainRenderer->CreateAnimation("Left_Win", "winLeft.bmp", 0, 13, 0.1f, true);
 		MainRenderer->CreateAnimation("Left_Diving1", "DivingLeft.bmp", 0, 2, 0.1f, false);
@@ -900,6 +903,9 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Right_DonkeyOff", "AirStrikeOffRight.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_HolyGranadeOn", "HolyGranadeOnRight.bmp", 0, 9, 0.1f, false);
 		MainRenderer->CreateAnimation("Right_HolyGranadeOff", "HolyGranadeOffRight.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_SuperSheepOn", "sheepOnRight.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_SuperSheep", "sheepOnRight.bmp", 9, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_SuperSheepOff", "sheepOffRight.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_GraveStone", "GraveStone.bmp", 0, 59, 0.1f, true);
 		MainRenderer->CreateAnimation("Right_Win", "winRight.bmp", 0, 13, 0.03f, true);
 		MainRenderer->CreateAnimation("Right_Diving1", "DivingRight.bmp", 0, 2, 0.1f, false);
@@ -1203,6 +1209,15 @@ void Player::ChangeState(PlayerState _State)
 		case PlayerState::HolyGranadeOff:
 			HolyGranadeOffStart();
 			break;
+		case PlayerState::SuperSheepOn:
+			SuperSheepOnStart();
+			break;
+		case PlayerState::SuperSheep:
+			SuperSheepStart();
+			break;
+		case PlayerState::SuperSheepOff:
+			SuperSheepOffStart();
+			break;
 		case PlayerState::Win:
 			WinStart();
 			break;
@@ -1315,6 +1330,12 @@ void Player::StateUpdate(float _Delta)
 		return HolyGranadeFireUpdate(_Delta);
 	case PlayerState::HolyGranadeOff:
 		return HolyGranadeOffUpdate(_Delta);
+	case PlayerState::SuperSheepOn:
+		return SuperSheepOnUpdate(_Delta);
+	case PlayerState::SuperSheep:
+		return SuperSheepUpdate(_Delta);
+	case PlayerState::SuperSheepOff:
+		return SuperSheepOffUpdate(_Delta);
 	case PlayerState::Win:
 		return WinUpdate(_Delta);
 	case PlayerState::Diving:

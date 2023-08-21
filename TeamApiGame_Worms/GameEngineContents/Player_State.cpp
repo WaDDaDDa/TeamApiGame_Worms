@@ -1818,6 +1818,64 @@ void Player::HolyGranadeOffUpdate(float _Delta)
 	}
 }
 
+void Player::SuperSheepOnStart()
+{
+	PrevMoveState = PlayerState::SuperSheepOn;
+	ChangeAnimationState("SuperSheepOn");
+}
+void Player::SuperSheepOnUpdate(float _Delta)
+{
+	if (MainRenderer->IsAnimationEnd())
+	{
+		ChangeState(PlayerState::SuperSheep);
+	}
+
+	InputMove();
+}
+
+void Player::SuperSheepStart()
+{
+	ChangeAnimationState("SuperSheep");
+}
+void Player::SuperSheepUpdate(float _Delta)
+{
+	if (GameEngineInput::IsDown('1'))
+	{
+		ChangeState(PlayerState::SuperSheepOff);
+	}
+
+	if (GameEngineInput::IsDown('A'))
+	{
+		ChangeState(PlayerState::SuperSheepFire);
+	}
+
+	InputMove();
+	ChangeWeapon();
+}
+
+void Player::SuperSheepFireStart()
+{
+	CreateWeapon<SuperSheep>();
+}
+void Player::SuperSheepFireUpdate(float _Delta)
+{
+	DamagingCheck();
+	ChangeState(PlayerState::SuperSheepOff);
+}
+
+void Player::SuperSheepOffStart()
+{
+	ChangeAnimationState("SuperSheepOff");
+}
+void Player::SuperSheepOffUpdate(float _Delta)
+{
+	DamagingCheck();
+	if (MainRenderer->IsAnimationEnd())
+	{
+		ChangeState(PlayerState::Idle);
+	}
+}
+
 void Player::WinStart()
 {
 	ChangeAnimationState("Win");
