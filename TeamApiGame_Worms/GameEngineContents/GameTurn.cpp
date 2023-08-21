@@ -14,6 +14,7 @@
 
 #include "UI_Timer.h"
 #include "UI_Box_AllTeamHpBar.h"
+#include "GameStateManager.h"
 
 GameTurn* GameTurn::MainGameTurn;
 float GameTurn::TurnTime = 0.0f;
@@ -43,6 +44,8 @@ void GameTurn::Init()
 	{
 		Player::GetAllPlayer()[i]->SetTurnPlayerIndex(static_cast<int>(i));
 	}
+
+	TurnPlayTime = GameStateManager::GameState->GetTurnTime();
 }
 
 void GameTurn::Update(float _Delta)

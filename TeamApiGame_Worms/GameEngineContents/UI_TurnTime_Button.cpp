@@ -4,6 +4,7 @@
 #include <GameEngineCore/GameEngineCollision.h>
 #include "ContentsEnum.h"
 #include <GameEnginePlatform/GameEngineInput.h>
+#include "GameStateManager.h"
 
 UI_TurnTime_Button::UI_TurnTime_Button()
 {
@@ -77,7 +78,7 @@ void UI_TurnTime_Button::Update(float _Delta)
 
 void UI_TurnTime_Button::ChangeSelectValue()
 {
-	if (m_SelectIndex < 6)
+	if (m_SelectIndex < 5)
 	{
 		++m_SelectIndex;
 	}
@@ -91,30 +92,32 @@ void UI_TurnTime_Button::ChangeSelectValue()
 	{
 	case 0:
 		MainRenderer->SetTexture("UI_TurnTime_0.bmp");
+		GameStateManager::GameState->SetTurnTime(15.0f);
 		break;
 
 	case 1:
 		MainRenderer->SetTexture("UI_TurnTime_1.bmp");
+		GameStateManager::GameState->SetTurnTime(20.0f);
 		break;
 
 	case 2:
 		MainRenderer->SetTexture("UI_TurnTime_2.bmp");
+		GameStateManager::GameState->SetTurnTime(30.0f);
 		break;
 
 	case 3:
 		MainRenderer->SetTexture("UI_TurnTime_3.bmp");
+		GameStateManager::GameState->SetTurnTime(45.0f);
 		break;
 
 	case 4:
 		MainRenderer->SetTexture("UI_TurnTime_4.bmp");
+		GameStateManager::GameState->SetTurnTime(60.0f);
 		break;
 
 	case 5:
 		MainRenderer->SetTexture("UI_TurnTime_5.bmp");
-		break;
-
-	case 6:
-		MainRenderer->SetTexture("UI_TurnTime_6.bmp");
+		GameStateManager::GameState->SetTurnTime(90.0f);
 		break;
 
 	default:

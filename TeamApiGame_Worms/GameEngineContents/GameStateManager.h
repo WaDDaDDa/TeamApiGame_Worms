@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <GameEngineCore/GameEngineActor.h>
+#include "GameTurn.h"
 
 class GameStateManager : public GameEngineActor
 {
@@ -60,7 +61,6 @@ public:
 
 
 	// Setter
-	// 매개변수로 enum을 받는게 더 나을 수도
 	void SetRoundTime()
 	{
 
@@ -71,6 +71,11 @@ public:
 		StageName = _StageName;
 	}
 
+	void SetTurnTime(float _SetTurnPlayTime)
+	{
+		m_fTurnTime = _SetTurnPlayTime;
+	}
+
 
 protected:
 	void Start() override;
@@ -78,14 +83,15 @@ protected:
 	
 private:
 
+	GameTurn* Gameturn = nullptr;
+
 	//스테이지 이름은 .bmp를 뺀다. 
 	std::string StageName			= "MapBooks";
 	float		m_fRoundTime		= 0.0f;
-	float		m_fTurnTime			= 0.0f;
+	float		m_fTurnTime			= 20.0f;
 	int			m_iWinConditions	= 0;
 	int			m_iWormMaxHp		= 0;
 	int			m_iWormSelectMode	= 0;	// enum 타입으로 선언하는 거 고려해보기
 	bool		m_bUseTeleport		= false;
 
 };
-
