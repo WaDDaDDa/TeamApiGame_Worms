@@ -334,6 +334,8 @@ protected:
 	void ChangeCrossHairAnimation(const std::string& _State);
 	void ChangeCrossHairRenderPos(int _iCurAngle);
 
+	void ChangeAimAngle(float _Delta);
+
 	// Collision
 	GameEngineCollision* PlayerBodyCollision = nullptr;
 
@@ -388,6 +390,8 @@ private:
 
 	float LengthX = 92.0f;
 	float LengthY = 0;
+
+	float AngleSpeed = 5.0f;
 
 	// Grider
 	void GriderConstruct(GameEngineWindowTexture* _GroundTexture, GameEngineWindowTexture* _GroundPixelTexture);

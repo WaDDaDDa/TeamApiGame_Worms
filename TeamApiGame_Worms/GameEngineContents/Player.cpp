@@ -14,6 +14,11 @@
 
 #include "UI_PlayerInfo.h"
 
+#define RIGHT_UP_MAXANGLE  -90
+#define RIGHT_DOWN_MAXANGLE  90
+#define LEFT_UP_MAXANGLE 270
+#define LEFT_DOWN_MAXANGLE 90
+
 std::vector<Player*> Player::AllPlayer;
 
 float4 Player::DirPos = float4::ZERO;
@@ -897,7 +902,7 @@ void Player::Start()
 	ChangeState(PlayerState::Idle);
 
 	// 길이 : 92
-	CrossHairRenderer->SetRenderPos({ 0 , -107 });
+	//CrossHairRenderer->SetRenderPos({ 0 , -107 });
 	ChangeCrossHairAnimation("CrossHair0");
 	CrossHairRenderer->Off();
 
@@ -1299,184 +1304,105 @@ void Player::ChangeCrossHairAnimation(const std::string& _State)
 
 void Player::ChangeCrossHairRenderPos(int _iCurAngle)
 {
-	//CrossHairRenderer->SetRenderPos({ 0 , -107 });
-
-	float Length = 5.75f;
-	
 	switch (_iCurAngle)
 	{
 	case -90:
 		ChangeCrossHairAnimation("CrossHair31");
-		LengthMulX = 0;
-		LengthMulY = -16;
 		break;
 	case -84:
 		ChangeCrossHairAnimation("CrossHair30");
-		LengthMulX = 1;
-		LengthMulY = -15;
 		break;
 	case -78:
 		ChangeCrossHairAnimation("CrossHair29");
-		LengthMulX = 2;
-		LengthMulY = -14;
 		break;
 	case -73:
 		ChangeCrossHairAnimation("CrossHair28");
-		LengthMulX = 3;
-		LengthMulY = -13;
 		break;
 	case -67:
 		ChangeCrossHairAnimation("CrossHair27");
-		LengthMulX = 4;
-		LengthMulY = -12;
 		break;
 	case -61:
 		ChangeCrossHairAnimation("CrossHair26");
-		LengthMulX = 5;
-		LengthMulY = -11;
 		break;
 	case -56:
 		ChangeCrossHairAnimation("CrossHair25");
-		LengthMulX = 6;
-		LengthMulY = -10;
 		break;
 	case -50:
 		ChangeCrossHairAnimation("CrossHair24");
-		LengthMulX = 7;
-		LengthMulY = -9;
 		break;
 	case -45:
 		ChangeCrossHairAnimation("CrossHair23");
-		LengthMulX = 8;
-		LengthMulY = -8;
 		break;
 	case -39:
 		ChangeCrossHairAnimation("CrossHair22");
-		LengthMulX = 9;
-		LengthMulY = -7;
 		break;
 	case -33:
 		ChangeCrossHairAnimation("CrossHair21");
-		LengthMulX = 10;
-		LengthMulY = -6;
 		break;
 	case -28:
 		ChangeCrossHairAnimation("CrossHair20");
-		LengthMulX = 11;
-		LengthMulY = -5;
 		break;
 	case -22:
 		ChangeCrossHairAnimation("CrossHair19");
-		LengthMulX = 12;
-		LengthMulY = -4;
 		break;
 	case -16:
 		ChangeCrossHairAnimation("CrossHair18");
-		LengthMulX = 13;
-		LengthMulY = -3;
 		break;
 	case -11:
 		ChangeCrossHairAnimation("CrossHair17");
-		LengthMulX = 14;
-		LengthMulY = -2;
 		break;
 	case -5:
 		ChangeCrossHairAnimation("CrossHair16");
-		LengthMulX = 15;
-		LengthMulY = -1;
 		break;
 	case 0:
 		ChangeCrossHairAnimation("CrossHair15");
-		LengthMulX = 16;
-		LengthMulY = 0;
 		break;
 	case 5:
 		ChangeCrossHairAnimation("CrossHair14");
-		LengthMulX = 15;
-		LengthMulY = 1;
 		break;
 	case 11:
 		ChangeCrossHairAnimation("CrossHair13");
-		LengthMulX = 14;
-		LengthMulY = 2;
 		break;
 	case 16:
 		ChangeCrossHairAnimation("CrossHair12");
-		LengthMulX = 13;
-		LengthMulY = 3;
 		break;
 	case 22:
 		ChangeCrossHairAnimation("CrossHair11");
-		LengthMulX = 12;
-		LengthMulY = 4;
 		break;
 	case 28:
 		ChangeCrossHairAnimation("CrossHair10");
-		LengthMulX = 11;
-		LengthMulY = 5;
 		break;
 	case 33:
 		ChangeCrossHairAnimation("CrossHair9");
-		LengthMulX = 10;
-		LengthMulY = 6;
 		break;
 	case 39:
 		ChangeCrossHairAnimation("CrossHair8");
-		LengthMulX = 9;
-		LengthMulY = 7;
 		break;
 	case 45:
 		ChangeCrossHairAnimation("CrossHair7");
-		LengthMulX = 8;
-		LengthMulY = 8;
 		break;
 	case 50:
 		ChangeCrossHairAnimation("CrossHair6");
-		LengthMulX = 7;
-		LengthMulY = 9;
 		break;
 	case 56:
 		ChangeCrossHairAnimation("CrossHair5");
-		LengthMulX = 6;
-		LengthMulY = 10;
 		break;
 	case 61:
 		ChangeCrossHairAnimation("CrossHair4");
-		LengthMulX = 5;
-		LengthMulY = 11;
 		break;
 	case 67:
 		ChangeCrossHairAnimation("CrossHair3");
-		LengthMulX = 4;
-		LengthMulY = 12;
 		break;
 	case 73:
 		ChangeCrossHairAnimation("CrossHair2");
-		LengthMulX = 3;
-		LengthMulY = 13;
 		break;
 	case 78:
 		ChangeCrossHairAnimation("CrossHair1");
-		LengthMulX = 2;
-		LengthMulY = 14;
 		break;
 	case 84:
 		ChangeCrossHairAnimation("CrossHair0");
-		LengthMulX = 1;
-		LengthMulY = 15;
 		break;
 	}
-
-	if (Dir == PlayerDir::Left)
-	{
-		LengthMulX *= -1;
-	}
-
-	CrossHairPos = { Length * LengthMulX, Length * LengthMulY };
-	CrossHairPos.Normalize();
-	CrossHairPos *= 92;
-
-	CrossHairRenderer->SetRenderPos(CrossHairPos);
 }
 
 void Player::DirCheck()
@@ -1501,6 +1427,11 @@ void Player::DirCheck()
 		}
 		Dir = CurDir;
 		CurAngle = 180 - CurAngle;
+
+		if (LengthX >= 0)
+		{
+			LengthX *= -1;
+		}
 		ChangeAnimationState(CurState);
 		return;
 	}
@@ -1514,6 +1445,11 @@ void Player::DirCheck()
 		}
 		Dir = CurDir;
 		CurAngle = 180 - CurAngle;
+
+		if (LengthX <= 0)
+		{
+			LengthX *= -1;
+		}
 		ChangeAnimationState(CurState);
 		return;
 	}
@@ -1605,9 +1541,12 @@ void Player::Movement(float _Delta)
 
 void Player::InputMove()
 {
+	
 	if (true == GameEngineInput::IsPress(VK_LEFT)
 		|| true == GameEngineInput::IsPress(VK_RIGHT))
 	{
+
+		CrossHairRenderer->Off();
 		DirCheck();
 		ChangeState(PlayerState::Move);
 		return;
@@ -1615,6 +1554,7 @@ void Player::InputMove()
 
 	if (true == GameEngineInput::IsDown(VK_SPACE))
 	{
+		CrossHairRenderer->Off();
 		ChangeState(PlayerState::JumpReady);
 		return;
 	}
@@ -1625,6 +1565,7 @@ void Player::ChangeWeapon()
 	if (true == GameEngineInput::IsDown('2'))
 	{
 		ChangeState(PlayerState::BazookaOn);
+		return;
 	}
 	
 	if (true == GameEngineInput::IsDown('3'))
@@ -1661,12 +1602,14 @@ void Player::ChangeWeapon()
 	{
 		//ChangeState(PlayerState::AirStrikeOn);
 		ChangeState(PlayerState::HolyGranadeOn);
+		return;
 	}
 
 	if (true == GameEngineInput::IsDown('9'))
 	{
 		ChangeState(PlayerState::GirderOn);
 		//ChangeState(PlayerState::DonkeyOn);
+		return;
 	}
 
 
@@ -1703,5 +1646,104 @@ void Player::DamagingCheck()
 	else
 	{
 		DamageCount = 0;
+	}
+}
+
+void Player::ChangeAimAngle(float _Delta)
+{
+	// 오른쪽 각도 조절
+	if (PlayerDir::Right == Dir)
+	{
+		if (true == GameEngineInput::IsPress(VK_UP))
+		{
+			CurAngle -= (5.625f * _Delta * AngleSpeed);
+			LengthY -= (5.75f * _Delta * AngleSpeed);
+
+			if (0 <= LengthY)
+			{
+				LengthX += (5.75f * _Delta * AngleSpeed);
+			}
+			else
+			{
+				LengthX -= (5.75f * _Delta * AngleSpeed);
+			}
+
+			if (CurAngle <= RIGHT_UP_MAXANGLE)
+			{
+				CurAngle = RIGHT_UP_MAXANGLE;
+				LengthX = 0;
+				LengthY = -92;
+			}
+		}
+
+		if (true == GameEngineInput::IsPress(VK_DOWN))
+		{
+			CurAngle += (5.625f * _Delta * AngleSpeed);
+			LengthY += (5.75f * _Delta * AngleSpeed);
+
+			if (0 <= LengthY)
+			{
+				LengthX -= (5.75f * _Delta * AngleSpeed);
+			}
+			else
+			{
+				LengthX += (5.75f * _Delta * AngleSpeed);
+			}
+
+			if (CurAngle >= RIGHT_DOWN_MAXANGLE)
+			{
+				CurAngle = RIGHT_DOWN_MAXANGLE;
+				LengthX = 0;
+				LengthY = 92;
+			}
+		}
+	}
+
+	// 왼쪽 각도조절
+	if (PlayerDir::Left == Dir)
+	{
+		if (true == GameEngineInput::IsPress(VK_UP))
+		{		
+			CurAngle += (5.625f * _Delta * AngleSpeed);
+			LengthY -= (5.75f * _Delta * AngleSpeed);
+
+			if (0 <= LengthY)
+			{
+				LengthX -= (5.75f * _Delta * AngleSpeed);
+			}
+			else
+			{
+				LengthX += (5.75f * _Delta * AngleSpeed);
+			}
+
+			if (CurAngle >= LEFT_UP_MAXANGLE)
+			{
+				CurAngle = LEFT_UP_MAXANGLE;
+				LengthX = 0;
+				LengthY = -92;
+			}
+		}
+		
+		if (true == GameEngineInput::IsPress(VK_DOWN))
+		{
+			CurAngle -= (5.625f * _Delta * AngleSpeed);
+			LengthY += (5.75f * _Delta * AngleSpeed);
+
+			if (0 <= LengthY)
+			{
+				LengthX += (5.75f * _Delta * AngleSpeed);
+			}
+			else
+			{
+				LengthX -= (5.75f * _Delta * AngleSpeed);
+			}
+
+			if (CurAngle <= LEFT_DOWN_MAXANGLE)
+			{
+				CurAngle = LEFT_DOWN_MAXANGLE;
+				LengthX = 0;
+				LengthY = -92;
+			}
+		}
 	}
 }

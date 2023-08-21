@@ -392,63 +392,7 @@ void Player::BazookaUpdate(float _Delta)
 		return;
 	}
 
-	// 오른쪽 각도조절
-	if (PlayerDir::Right == Dir)
-	{
-		if (true == GameEngineInput::IsPress(VK_UP))
-		{
-			CurAngle -= (5.625f * _Delta * 4.0f);
-			
-			LengthY -= (5.75f * _Delta * 4.0f);
-
-			if (0 <= LengthY)
-			{
-				LengthX += (5.75f * _Delta * 4.0f);
-			}
-			else
-			{
-				LengthX -= (5.75f * _Delta * 4.0f);
-			}
-
-			if (CurAngle <= RIGHT_UP_MAXANGEL)
-			{
-				CurAngle = RIGHT_UP_MAXANGEL;
-				LengthX = 0;
-				LengthY = -92;
-			}
-		}
-		if (true == GameEngineInput::IsPress(VK_DOWN))
-		{
-			CurAngle += (5.625f * _Delta * 4.0f);
-			if (CurAngle >= RIGHT_DOWN_MAXANGEL)
-			{
-				CurAngle = RIGHT_DOWN_MAXANGEL;
-			}
-		}
-	}
-
-	// 왼쪽 각도조절
-	if (PlayerDir::Left == Dir)
-	{
-		if (true == GameEngineInput::IsPress(VK_UP))
-		{
-			CurAngle += (5.625f * _Delta * 4.0f);
-
-
-			if (CurAngle >= LEFT_UP_MAXANGEL)
-			{
-				CurAngle = LEFT_UP_MAXANGEL;
-			}
-		}
-		if (true == GameEngineInput::IsPress(VK_DOWN))
-		{
-			CurAngle -= (5.625f * _Delta * 4.0f);
-			if (CurAngle <= LEFT_DOWN_MAXANGEL)
-			{
-				CurAngle = LEFT_DOWN_MAXANGEL;
-			}
-		}
-	}
+	ChangeAimAngle(_Delta);
 
 
 	if (true == GameEngineInput::IsUp('A') || GameEngineInput::GetPressTime('A') >= MaxChargingTime)
@@ -573,14 +517,14 @@ void Player::BazookaUpdate(float _Delta)
 		break;
 	}
 
-	//ChangeCrossHairRenderPos(iCurAngle);
-
 	CrossHairPos = { LengthX, LengthY };
 	CrossHairPos.Normalize();
 	CrossHairPos *= 92;
 
-	CrossHairRenderer->SetRenderPos(CrossHairPos);
+	//CrossHairRenderer->SetRenderPos(CrossHairPos);
+	CrossHairRenderer->SetRenderPos(MainRenderer->GetRenderPos() + CrossHairPos);
 
+	ChangeCrossHairRenderPos(iCurAngle);
 
 	InputMove();
 	ChangeWeapon();
@@ -601,6 +545,7 @@ void Player::BazookaFireUpdate(float _Delta)
 
 void Player::BazookaOffStart()
 {
+	CrossHairRenderer->Off();
 	ChangeAnimationState("BazookaOff");
 }
 
@@ -619,6 +564,7 @@ void Player::UziOnStart()
 {
 	PrevMoveState = PlayerState::UziOn;
 	ChangeAnimationState("UziOn");
+	CrossHairRenderer->On();
 }
 void Player::UziOnUpdate(float _Delta)
 {
@@ -651,51 +597,7 @@ void Player::UziUpdate(float _Delta)
 		return;
 	}
 
-	// 오른쪽 각도조절
-	if (PlayerDir::Right == Dir)
-	{
-		if (true == GameEngineInput::IsPress(VK_UP))
-		{
-			CurAngle -= (5.625f * _Delta * 4.0f);
-
-			if (CurAngle <= RIGHT_UP_MAXANGEL)
-			{
-				CurAngle = RIGHT_UP_MAXANGEL;
-			}
-		}
-		if (true == GameEngineInput::IsPress(VK_DOWN))
-		{
-			CurAngle += (5.625f * _Delta * 4.0f);
-
-			if (CurAngle >= RIGHT_DOWN_MAXANGEL)
-			{
-				CurAngle = RIGHT_DOWN_MAXANGEL;
-			}
-		}
-	}
-
-	// 왼쪽 각도조절
-	if (PlayerDir::Left == Dir)
-	{
-		if (true == GameEngineInput::IsPress(VK_UP))
-		{
-			CurAngle += (5.625f * _Delta * 4.0f);
-
-			if (CurAngle >= LEFT_UP_MAXANGEL)
-			{
-				CurAngle = LEFT_UP_MAXANGEL;
-			}
-		}
-		if (true == GameEngineInput::IsPress(VK_DOWN))
-		{
-			CurAngle -= (5.625f * _Delta * 4.0f);
-
-			if (CurAngle <= LEFT_DOWN_MAXANGEL)
-			{
-				CurAngle = LEFT_DOWN_MAXANGEL;
-			}
-		}
-	}
+	ChangeAimAngle(_Delta);
 
 	if (GameEngineInput::IsDown('A'))
 	{
@@ -842,6 +744,15 @@ void Player::UziUpdate(float _Delta)
 		break;
 	}
 
+	CrossHairPos = { LengthX, LengthY };
+	CrossHairPos.Normalize();
+	CrossHairPos *= 92;
+
+	//CrossHairRenderer->SetRenderPos(CrossHairPos);
+	CrossHairRenderer->SetRenderPos(MainRenderer->GetRenderPos() + CrossHairPos);
+
+	ChangeCrossHairRenderPos(iCurAngle);
+
 	InputMove();
 	ChangeWeapon();
 }
@@ -885,6 +796,7 @@ void Player::UziFireUpdate(float _Delta)
 
 void Player::UziOffStart()
 {
+	CrossHairRenderer->Off();
 	ChangeAnimationState("UziOff");
 }
 void Player::UziOffUpdate(float _Delta)
@@ -901,6 +813,7 @@ void Player::HomingMissileOnStart()
 {
 	PrevMoveState = PlayerState::HomingMissileOn;
 	ChangeAnimationState("HomingMissileOn");
+	CrossHairRenderer->On();
 }
 void Player::HomingMissileOnUpdate(float _Delta)
 {
@@ -933,51 +846,7 @@ void Player::HomingMissileUpdate(float _Delta)
 		return;
 	}
 
-	// 오른쪽 각도조절
-	if (PlayerDir::Right == Dir)
-	{
-		if (true == GameEngineInput::IsPress(VK_UP))
-		{
-			CurAngle -= (5.625f * _Delta * 4.0f);
-
-
-			if (CurAngle <= RIGHT_UP_MAXANGEL)
-			{
-				CurAngle = RIGHT_UP_MAXANGEL;
-			}
-		}
-		if (true == GameEngineInput::IsPress(VK_DOWN))
-		{
-			CurAngle += (5.625f * _Delta * 4.0f);
-			if (CurAngle >= RIGHT_DOWN_MAXANGEL)
-			{
-				CurAngle = RIGHT_DOWN_MAXANGEL;
-			}
-		}
-	}
-
-	// 왼쪽 각도조절
-	if (PlayerDir::Left == Dir)
-	{
-		if (true == GameEngineInput::IsPress(VK_UP))
-		{
-			CurAngle += (5.625f * _Delta * 4.0f);
-
-
-			if (CurAngle >= LEFT_UP_MAXANGEL)
-			{
-				CurAngle = LEFT_UP_MAXANGEL;
-			}
-		}
-		if (true == GameEngineInput::IsPress(VK_DOWN))
-		{
-			CurAngle -= (5.625f * _Delta * 4.0f);
-			if (CurAngle <= LEFT_DOWN_MAXANGEL)
-			{
-				CurAngle = LEFT_DOWN_MAXANGEL;
-			}
-		}
-	}
+	ChangeAimAngle(_Delta);
 
 	if (GameEngineInput::IsDown(VK_LBUTTON))
 	{
@@ -1108,6 +977,15 @@ void Player::HomingMissileUpdate(float _Delta)
 		break;
 	}
 
+	CrossHairPos = { LengthX, LengthY };
+	CrossHairPos.Normalize();
+	CrossHairPos *= 92;
+
+	//CrossHairRenderer->SetRenderPos(CrossHairPos);
+	CrossHairRenderer->SetRenderPos(MainRenderer->GetRenderPos() + CrossHairPos);
+
+	ChangeCrossHairRenderPos(iCurAngle);
+
 	InputMove();
 	ChangeWeapon();
 }
@@ -1124,6 +1002,7 @@ void Player::HomingMissileFireUpdate(float _Delta)
 
 void Player::HomingMissileOffStart()
 {
+	CrossHairRenderer->Off();
 	ChangeAnimationState("HomingMissileOff");
 }
 void Player::HomingMissileOffUpdate(float _Delta)
@@ -1199,6 +1078,7 @@ void Player::GranadeOnStart()
 {
 	PrevMoveState = PlayerState::GranadeOn;
 	ChangeAnimationState("GranadeOn");
+	CrossHairRenderer->On();
 }
 void Player::GranadeOnUpdate(float _Delta)
 {
@@ -1230,52 +1110,7 @@ void Player::GranadeUpdate(float _Delta)
 		return;
 	}
 
-	// 오른쪽 각도조절
-	if (PlayerDir::Right == Dir)
-	{
-		if (true == GameEngineInput::IsPress(VK_UP))
-		{
-			CurAngle -= (5.625f * _Delta * 4.0f);
-
-
-			if (CurAngle <= RIGHT_UP_MAXANGEL)
-			{
-				CurAngle = RIGHT_UP_MAXANGEL;
-			}
-		}
-		if (true == GameEngineInput::IsPress(VK_DOWN))
-		{
-			CurAngle += (5.625f * _Delta * 4.0f);
-			if (CurAngle >= RIGHT_DOWN_MAXANGEL)
-			{
-				CurAngle = RIGHT_DOWN_MAXANGEL;
-			}
-		}
-	}
-
-	// 왼쪽 각도조절
-	if (PlayerDir::Left == Dir)
-	{
-		if (true == GameEngineInput::IsPress(VK_UP))
-		{
-			CurAngle += (5.625f * _Delta * 4.0f);
-
-
-			if (CurAngle >= LEFT_UP_MAXANGEL)
-			{
-				CurAngle = LEFT_UP_MAXANGEL;
-			}
-		}
-		if (true == GameEngineInput::IsPress(VK_DOWN))
-		{
-			CurAngle -= (5.625f * _Delta * 4.0f);
-			if (CurAngle <= LEFT_DOWN_MAXANGEL)
-			{
-				CurAngle = LEFT_DOWN_MAXANGEL;
-			}
-		}
-	}
-
+	ChangeAimAngle(_Delta);
 
 	if (true == GameEngineInput::IsUp('A') || GameEngineInput::GetPressTime('A') >= MaxChargingTime)
 	{
@@ -1399,6 +1234,15 @@ void Player::GranadeUpdate(float _Delta)
 		break;
 	}
 
+	CrossHairPos = { LengthX, LengthY };
+	CrossHairPos.Normalize();
+	CrossHairPos *= 92;
+
+	//CrossHairRenderer->SetRenderPos(CrossHairPos);
+	CrossHairRenderer->SetRenderPos(MainRenderer->GetRenderPos() + CrossHairPos);
+
+	ChangeCrossHairRenderPos(iCurAngle);
+
 	InputMove();
 	ChangeWeapon();
 }
@@ -1415,6 +1259,7 @@ void Player::GranadeFireUpdate(float _Delta)
 
 void Player::GranadeOffStart()
 {
+	CrossHairRenderer->Off();
 	ChangeAnimationState("GranadeOff");
 }
 void Player::GranadeOffUpdate(float _Delta)
@@ -1749,6 +1594,7 @@ void Player::HolyGranadeOnStart()
 {
 	PrevMoveState = PlayerState::HolyGranade;
 	ChangeAnimationState("HolyGranadeOn");
+	CrossHairRenderer->On();
 }
 void Player::HolyGranadeOnUpdate(float _Delta)
 {
@@ -1780,52 +1626,7 @@ void Player::HolyGranadeUpdate(float _Delta)
 		return;
 	}
 
-	// 오른쪽 각도조절
-	if (PlayerDir::Right == Dir)
-	{
-		if (true == GameEngineInput::IsPress(VK_UP))
-		{
-			CurAngle -= (5.625f * _Delta * 4.0f);
-
-
-			if (CurAngle <= RIGHT_UP_MAXANGEL)
-			{
-				CurAngle = RIGHT_UP_MAXANGEL;
-			}
-		}
-		if (true == GameEngineInput::IsPress(VK_DOWN))
-		{
-			CurAngle += (5.625f * _Delta * 4.0f);
-			if (CurAngle >= RIGHT_DOWN_MAXANGEL)
-			{
-				CurAngle = RIGHT_DOWN_MAXANGEL;
-			}
-		}
-	}
-
-	// 왼쪽 각도조절
-	if (PlayerDir::Left == Dir)
-	{
-		if (true == GameEngineInput::IsPress(VK_UP))
-		{
-			CurAngle += (5.625f * _Delta * 4.0f);
-
-
-			if (CurAngle >= LEFT_UP_MAXANGEL)
-			{
-				CurAngle = LEFT_UP_MAXANGEL;
-			}
-		}
-		if (true == GameEngineInput::IsPress(VK_DOWN))
-		{
-			CurAngle -= (5.625f * _Delta * 4.0f);
-			if (CurAngle <= LEFT_DOWN_MAXANGEL)
-			{
-				CurAngle = LEFT_DOWN_MAXANGEL;
-			}
-		}
-	}
-
+	ChangeAimAngle(_Delta);
 
 	if (true == GameEngineInput::IsUp('A') || GameEngineInput::GetPressTime('A') >= MaxChargingTime)
 	{
@@ -1949,6 +1750,15 @@ void Player::HolyGranadeUpdate(float _Delta)
 		break;
 	}
 
+	CrossHairPos = { LengthX, LengthY };
+	CrossHairPos.Normalize();
+	CrossHairPos *= 92;
+
+	//CrossHairRenderer->SetRenderPos(CrossHairPos);
+	CrossHairRenderer->SetRenderPos(MainRenderer->GetRenderPos() + CrossHairPos);
+
+	ChangeCrossHairRenderPos(iCurAngle);
+
 	InputMove();
 	ChangeWeapon();
 }
@@ -1965,6 +1775,7 @@ void Player::HolyGranadeFireUpdate(float _Delta)
 
 void Player::HolyGranadeOffStart()
 {
+	CrossHairRenderer->Off();
 	ChangeAnimationState("HolyGranadeOff");
 }
 void Player::HolyGranadeOffUpdate(float _Delta)
@@ -2004,3 +1815,4 @@ void Player::DivingUpdate(float _Delta)
 		}
 	}
 }
+
