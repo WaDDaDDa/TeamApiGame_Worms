@@ -18,12 +18,12 @@
 #include "GameTurn.h"
 #include "MouseObject.h"
 #include "Cloud.h"
+#include "HealItem.h"
 
 #include "GameStateManager.h"
 #include "UI_PlayerInfo.h"
 
 #pragma region UI에서 사용할 헤더 & 함수 전방 선언
-#include "UI_Mouse.h"
 #include "UI_Button.h"
 #include "UI_Inventory.h"
 #include "UI_Wind.h"
@@ -149,7 +149,7 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 	CreateActor<GameTurn>();
 
 #pragma region UI 세팅
-	CreateActor<UI_Mouse>();
+	//CreateActor<UI_Mouse>();
 
 	std::string StageNameTest = GameStateManager::GameState->GetStageName();
 
@@ -279,6 +279,40 @@ void PlayLevel::PlayerSetting(size_t _PlayerCount)
 			}
 		}
 	}
+
+	//for (size_t i = 0; i < _PlayerCount; i++)
+	//{
+	//	float PlayerSettingX = GameEngineRandom::MainRandom.RandomFloat(0, GroundPtr->GetPixelGroundTexture()->GetScale().X);
+	//	float PlayerSettingY = GameEngineRandom::MainRandom.RandomFloat(0, GroundPtr->GetPixelGroundTexture()->GetScale().Y);
+
+	//	float4 CheckPos = { PlayerSettingX , PlayerSettingY };
+	//	unsigned int CheckColor = GroundPtr->GetPixelGroundTexture()->GetColor(RGB(255, 255, 255), CheckPos);
+
+	//	if (CheckColor == RGB(0, 0, 255))
+	//	{
+	//		HealItem* Hitem = CreateActor<HealItem>(RenderOrder::Item);
+	//		Hitem->SetGroundTexture(GroundPtr->GetPixelGroundTexture());
+	//		Hitem->SetPos(float4{ PlayerSettingX, 1200.0f });
+	//	}
+	//	else
+	//	{
+	//		while (CheckColor != RGB(0, 0, 255))
+	//		{
+	//			PlayerSettingX = GameEngineRandom::MainRandom.RandomFloat(0, GroundPtr->GetPixelGroundTexture()->GetScale().X);
+	//			PlayerSettingY = GameEngineRandom::MainRandom.RandomFloat(0, GroundPtr->GetPixelGroundTexture()->GetScale().Y);
+
+	//			CheckPos = { PlayerSettingX , PlayerSettingY };
+	//			CheckColor = GroundPtr->GetPixelGroundTexture()->GetColor(RGB(255, 255, 255), CheckPos);
+
+	//			if (CheckColor == RGB(0, 0, 255))
+	//			{
+	//				HealItem* Hitem = CreateActor<HealItem>(RenderOrder::Item);
+	//				Hitem->SetGroundTexture(GroundPtr->GetPixelGroundTexture());
+	//				Hitem->SetPos(float4{ PlayerSettingX, 1200.0f });
+	//			}
+	//		}
+	//	}
+	//}
 }
 
 

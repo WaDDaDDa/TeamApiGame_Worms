@@ -9,11 +9,14 @@
 #include <GameEngineCore/GameEngineLevel.h>
 #pragma endregion
 
-#define MOUSE_WITDH 24
-#define MOUSE_HEIGHT 24
+#define MOUSE_WITDH 16
+#define MOUSE_HEIGHT 16
+
+UI_Mouse* UI_Mouse::MouseUI = nullptr;
 
 UI_Mouse::UI_Mouse()
 {
+	MouseUI = this;
 }
 
 UI_Mouse::~UI_Mouse()
@@ -42,6 +45,7 @@ void UI_Mouse::Start()
 	MainRenderer = CreateUIRenderer("UI_MOUSE.bmp", RenderOrder::Mouse);
 	MainRenderer->SetRenderScale({ MOUSE_WITDH, MOUSE_HEIGHT });
 
+	//MainRenderer->Off();
 }
 
 void UI_Mouse::Update(float _Delta)

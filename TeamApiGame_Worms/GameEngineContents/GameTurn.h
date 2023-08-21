@@ -21,7 +21,7 @@ public:
     void ChangeTurnPlayer(float _Delta);
     void ChangeTurnPlayer(int _Value);
 
-    static GameTurn MainGameTurn;
+    static GameTurn* MainGameTurn;
 
     float GetTurnPlayTime() const
     {
@@ -33,12 +33,20 @@ public:
         return TurnTime;
     }
 
-    static bool GameOverCheck();
+    bool GameOverCheck();
+
+    void TurnPlayerAllOff();
+
+    void StartTurnPlayer();
+
+    void CreateItem(size_t _Count = 1);
+
 
 protected:
 
 private:
     Player* TurnPlayer = nullptr;
+    class HealItem* Hitem = nullptr;
 
     void Start() override;
     void Init();

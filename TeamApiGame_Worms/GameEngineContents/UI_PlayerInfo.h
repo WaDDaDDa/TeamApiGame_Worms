@@ -20,7 +20,7 @@ public:
 	void SetPlayerColorIndex(int _ColorIndex);
 
 //	void UpdateData_PlayerInfoUI(float4* _PlayerPos, int* _PlayerHp, bool _IsTurnPlayer);
-	void UpdateData_PlayerInfoUI(int* _PlayerHp, bool _IsTurnPlayer);
+	void UpdateData_PlayerInfoUI(int* _PlayerHp, bool _IsTurnPlayer, int _PlayerIndex);
 
 protected:
 	void Start() override;
@@ -47,6 +47,9 @@ private:
 	float4		CurPlayerPos = float4::ZERO;
 
 	// 플레이어의 컬러를 결정하기 위한 인덱스
-	int			PlayerColorIndex = 0;
+	int			 PlayerColorIndex = 0;
+
+	// 텍스트 컬러를 결정하기 위한 인덱스
+	unsigned int TextColor = 0;
 	
 };

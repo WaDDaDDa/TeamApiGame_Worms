@@ -46,6 +46,11 @@ public:
 		IsWind = true;
 	}
 
+	void IsWindOff()
+	{
+		IsWind = false;
+	}
+
 
 protected:
 	virtual void CameraFocus(float _Delta);
@@ -67,6 +72,7 @@ public:
 	void GravityReset()
 	{
 		GravityVector = float4::ZERO;
+		GravityPower = 1000.0f;
 	}
 
 	float4 GetGravityVector()

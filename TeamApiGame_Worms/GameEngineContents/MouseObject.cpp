@@ -22,7 +22,7 @@ MouseObject::~MouseObject()
 
 void MouseObject::Start()
 {
-	CrossHairRenderer = CreateRenderer(RenderOrder::Mouse);
+//	CrossHairRenderer = CreateRenderer(RenderOrder::Mouse);
 
 	if(false == ResourcesManager::GetInst().IsLoadTexture("CrossHair.bmp"))
 	{
@@ -33,8 +33,8 @@ void MouseObject::Start()
 		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("CrossHair.bmp"));
 	}
 
-	CrossHairRenderer->SetTexture("CrossHair.bmp");
-	CrossHairRenderer->SetRenderScaleToTexture();
+	//CrossHairRenderer->SetTexture("CrossHair.bmp");
+	//CrossHairRenderer->SetRenderScaleToTexture();
 
 	Collision = CreateCollision(CollisionOrder::Mouse);
 	Collision->SetCollisionScale({ 10, 10 });

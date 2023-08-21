@@ -14,6 +14,11 @@
 
 #include "UI_PlayerInfo.h"
 
+#define RIGHT_UP_MAXANGLE  -90
+#define RIGHT_DOWN_MAXANGLE  90
+#define LEFT_UP_MAXANGLE 270
+#define LEFT_DOWN_MAXANGLE 90
+
 std::vector<Player*> Player::AllPlayer;
 
 float4 Player::DirPos = float4::ZERO;
@@ -684,8 +689,125 @@ void Player::Start()
 			FilePath.MoveChild("ContentsResources\\Image\\Misc\\Aim_Taget\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("crshairb_R.bmp"), 1, 32);
 		}
+
+		// Gauge Resources
+		if (false == ResourcesManager::GetInst().IsLoadTexture("blob.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Effects\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("blob.bmp"), 1, 16);
+		}
 	}
 
+	{  //Grider 이미지
+		Gride_Renderer = CreateRenderer(GetOrder());
+
+		if (false == ResourcesManager::GetInst().IsLoadTexture("grdl0.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Weapons\\");
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl0.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl1.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl2.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl3.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl4.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl5.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl6.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl7.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl8.bmp"));
+
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds0.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds1.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds2.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds3.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds4.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds5.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds6.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds7.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds8.bmp"));
+
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl0b.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl1b.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl2b.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl3b.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl4b.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl5b.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl6b.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl7b.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grdl8b.bmp"));
+
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds0b.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds1b.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds2b.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds3b.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds4b.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds5b.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds6b.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds7b.bmp"));
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("grds8b.bmp"));
+		}
+
+		Gride_Renderer->SetTexture("grds0.bmp");
+		Gride_PixelTexture = ResourcesManager::GetInst().FindTexture("grds0b.bmp");
+		Gride_Renderer->Off();
+	}
+
+	// Gauge Texture
+	{
+		GaugeRenderer0 = CreateRenderer(RenderOrder::Gauge);
+		GaugeRenderer0->SetSprite("blob.bmp", 0);
+		GaugeRenderer0->SetRenderScale({ 64, 64 });
+		GaugeRenderer1 = CreateRenderer(RenderOrder::Gauge);
+		GaugeRenderer1->SetSprite("blob.bmp", 1);
+		GaugeRenderer1->SetRenderScale({ 64, 64 });
+		GaugeRenderer2 = CreateRenderer(RenderOrder::Gauge);
+		GaugeRenderer2->SetSprite("blob.bmp", 2);
+		GaugeRenderer2->SetRenderScale({ 64, 64 });
+		GaugeRenderer3 = CreateRenderer(RenderOrder::Gauge);
+		GaugeRenderer3->SetSprite("blob.bmp", 3);
+		GaugeRenderer3->SetRenderScale({ 64, 64 });
+		GaugeRenderer4 = CreateRenderer(RenderOrder::Gauge);
+		GaugeRenderer4->SetSprite("blob.bmp", 4);
+		GaugeRenderer4->SetRenderScale({ 64, 64 });
+		GaugeRenderer5 = CreateRenderer(RenderOrder::Gauge);
+		GaugeRenderer5->SetSprite("blob.bmp", 5);
+		GaugeRenderer5->SetRenderScale({ 64, 64 });
+		GaugeRenderer6 = CreateRenderer(RenderOrder::Gauge);
+		GaugeRenderer6->SetSprite("blob.bmp", 6);
+		GaugeRenderer6->SetRenderScale({ 64, 64 });
+		GaugeRenderer7 = CreateRenderer(RenderOrder::Gauge);
+		GaugeRenderer7->SetSprite("blob.bmp", 7);
+		GaugeRenderer7->SetRenderScale({ 64, 64 });
+		GaugeRenderer8 = CreateRenderer(RenderOrder::Gauge);
+		GaugeRenderer8->SetSprite("blob.bmp", 8);
+		GaugeRenderer8->SetRenderScale({ 64, 64 });
+		GaugeRenderer9 = CreateRenderer(RenderOrder::Gauge);
+		GaugeRenderer9->SetSprite("blob.bmp", 9);
+		GaugeRenderer9->SetRenderScale({ 64, 64 });
+		GaugeRenderer10 = CreateRenderer(RenderOrder::Gauge);
+		GaugeRenderer10->SetSprite("blob.bmp", 10);
+		GaugeRenderer10->SetRenderScale({ 64, 64 });
+		GaugeRenderer11 = CreateRenderer(RenderOrder::Gauge);
+		GaugeRenderer11->SetSprite("blob.bmp", 11);
+		GaugeRenderer11->SetRenderScale({ 64, 64 });
+		GaugeRenderer12 = CreateRenderer(RenderOrder::Gauge);
+		GaugeRenderer12->SetSprite("blob.bmp", 12);
+		GaugeRenderer12->SetRenderScale({ 64, 64 });
+		GaugeRenderer13 = CreateRenderer(RenderOrder::Gauge);
+		GaugeRenderer13->SetSprite("blob.bmp", 13);
+		GaugeRenderer13->SetRenderScale({ 64, 64 });
+		GaugeRenderer14 = CreateRenderer(RenderOrder::Gauge);
+		GaugeRenderer14->SetSprite("blob.bmp", 14);
+		GaugeRenderer14->SetRenderScale({ 64, 64 });
+		GaugeRenderer15 = CreateRenderer(RenderOrder::Gauge);
+		GaugeRenderer15->SetSprite("blob.bmp", 15);
+		GaugeRenderer15->SetRenderScale({ 64, 64 });
+		AllGaugeOff();
+	}
 
 	MainRenderer = CreateRenderer(RenderOrder::Player);
 	CrossHairRenderer = CreateRenderer(RenderOrder::CrossHair);
@@ -732,6 +854,9 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Left_DonkeyOff", "AirStrikeOffLeft.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_HolyGranadeOn", "HolyGranadeOnLeft.bmp", 0, 9, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_HolyGranadeOff", "HolyGranadeOffLeft.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_SuperSheepOn", "sheepOnLeft.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_SuperSheep", "sheepOnLeft.bmp", 9, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_SuperSheepOff", "sheepOffLeft.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_GraveStone", "GraveStone.bmp", 0, 59, 0.1f, true);
 		MainRenderer->CreateAnimation("Left_Win", "winLeft.bmp", 0, 13, 0.1f, true);
 		MainRenderer->CreateAnimation("Left_Diving1", "DivingLeft.bmp", 0, 2, 0.1f, false);
@@ -778,6 +903,9 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Right_DonkeyOff", "AirStrikeOffRight.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_HolyGranadeOn", "HolyGranadeOnRight.bmp", 0, 9, 0.1f, false);
 		MainRenderer->CreateAnimation("Right_HolyGranadeOff", "HolyGranadeOffRight.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_SuperSheepOn", "sheepOnRight.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_SuperSheep", "sheepOnRight.bmp", 9, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_SuperSheepOff", "sheepOffRight.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_GraveStone", "GraveStone.bmp", 0, 59, 0.1f, true);
 		MainRenderer->CreateAnimation("Right_Win", "winRight.bmp", 0, 13, 0.03f, true);
 		MainRenderer->CreateAnimation("Right_Diving1", "DivingRight.bmp", 0, 2, 0.1f, false);
@@ -826,6 +954,7 @@ void Player::Start()
 			CrossHairRenderer->CreateAnimation("Left_CrossHair" + std::to_string(i), "crshairb_L.bmp", i, i, 0.1f, false);
 			CrossHairRenderer->CreateAnimation("Right_CrossHair" + std::to_string(i), "crshairb_R.bmp", i, i, 0.1f, false);
 		}
+
 	}
 	
 	{
@@ -843,7 +972,7 @@ void Player::Start()
 	ChangeState(PlayerState::Idle);
 
 	// 길이 : 92
-	CrossHairRenderer->SetRenderPos({ 0 , -107 });
+	//CrossHairRenderer->SetRenderPos({ 0 , -107 });
 	ChangeCrossHairAnimation("CrossHair0");
 	CrossHairRenderer->Off();
 
@@ -876,7 +1005,7 @@ void Player::Update(float _Delta)
 
 	// UI 테스트용 임시 코드
 	PlayerInfoUI->SetPos({ GetPos().X - GetLevel()->GetMainCamera()->GetPos().X,  (GetPos().Y - GetLevel()->GetMainCamera()->GetPos().Y) - 70});
-	PlayerInfoUI->UpdateData_PlayerInfoUI(&Hp, IsTurnPlayer);
+	PlayerInfoUI->UpdateData_PlayerInfoUI(&Hp, IsTurnPlayer, TurnPlayerIndex);
 
 }
 
@@ -1080,6 +1209,15 @@ void Player::ChangeState(PlayerState _State)
 		case PlayerState::HolyGranadeOff:
 			HolyGranadeOffStart();
 			break;
+		case PlayerState::SuperSheepOn:
+			SuperSheepOnStart();
+			break;
+		case PlayerState::SuperSheep:
+			SuperSheepStart();
+			break;
+		case PlayerState::SuperSheepOff:
+			SuperSheepOffStart();
+			break;
 		case PlayerState::Win:
 			WinStart();
 			break;
@@ -1192,6 +1330,12 @@ void Player::StateUpdate(float _Delta)
 		return HolyGranadeFireUpdate(_Delta);
 	case PlayerState::HolyGranadeOff:
 		return HolyGranadeOffUpdate(_Delta);
+	case PlayerState::SuperSheepOn:
+		return SuperSheepOnUpdate(_Delta);
+	case PlayerState::SuperSheep:
+		return SuperSheepUpdate(_Delta);
+	case PlayerState::SuperSheepOff:
+		return SuperSheepOffUpdate(_Delta);
 	case PlayerState::Win:
 		return WinUpdate(_Delta);
 	case PlayerState::Diving:
@@ -1245,184 +1389,105 @@ void Player::ChangeCrossHairAnimation(const std::string& _State)
 
 void Player::ChangeCrossHairRenderPos(int _iCurAngle)
 {
-	//CrossHairRenderer->SetRenderPos({ 0 , -107 });
-
-	float Length = 5.75f;
-	
 	switch (_iCurAngle)
 	{
 	case -90:
 		ChangeCrossHairAnimation("CrossHair31");
-		LengthMulX = 0;
-		LengthMulY = -16;
 		break;
 	case -84:
 		ChangeCrossHairAnimation("CrossHair30");
-		LengthMulX = 1;
-		LengthMulY = -15;
 		break;
 	case -78:
 		ChangeCrossHairAnimation("CrossHair29");
-		LengthMulX = 2;
-		LengthMulY = -14;
 		break;
 	case -73:
 		ChangeCrossHairAnimation("CrossHair28");
-		LengthMulX = 3;
-		LengthMulY = -13;
 		break;
 	case -67:
 		ChangeCrossHairAnimation("CrossHair27");
-		LengthMulX = 4;
-		LengthMulY = -12;
 		break;
 	case -61:
 		ChangeCrossHairAnimation("CrossHair26");
-		LengthMulX = 5;
-		LengthMulY = -11;
 		break;
 	case -56:
 		ChangeCrossHairAnimation("CrossHair25");
-		LengthMulX = 6;
-		LengthMulY = -10;
 		break;
 	case -50:
 		ChangeCrossHairAnimation("CrossHair24");
-		LengthMulX = 7;
-		LengthMulY = -9;
 		break;
 	case -45:
 		ChangeCrossHairAnimation("CrossHair23");
-		LengthMulX = 8;
-		LengthMulY = -8;
 		break;
 	case -39:
 		ChangeCrossHairAnimation("CrossHair22");
-		LengthMulX = 9;
-		LengthMulY = -7;
 		break;
 	case -33:
 		ChangeCrossHairAnimation("CrossHair21");
-		LengthMulX = 10;
-		LengthMulY = -6;
 		break;
 	case -28:
 		ChangeCrossHairAnimation("CrossHair20");
-		LengthMulX = 11;
-		LengthMulY = -5;
 		break;
 	case -22:
 		ChangeCrossHairAnimation("CrossHair19");
-		LengthMulX = 12;
-		LengthMulY = -4;
 		break;
 	case -16:
 		ChangeCrossHairAnimation("CrossHair18");
-		LengthMulX = 13;
-		LengthMulY = -3;
 		break;
 	case -11:
 		ChangeCrossHairAnimation("CrossHair17");
-		LengthMulX = 14;
-		LengthMulY = -2;
 		break;
 	case -5:
 		ChangeCrossHairAnimation("CrossHair16");
-		LengthMulX = 15;
-		LengthMulY = -1;
 		break;
 	case 0:
 		ChangeCrossHairAnimation("CrossHair15");
-		LengthMulX = 16;
-		LengthMulY = 0;
 		break;
 	case 5:
 		ChangeCrossHairAnimation("CrossHair14");
-		LengthMulX = 15;
-		LengthMulY = 1;
 		break;
 	case 11:
 		ChangeCrossHairAnimation("CrossHair13");
-		LengthMulX = 14;
-		LengthMulY = 2;
 		break;
 	case 16:
 		ChangeCrossHairAnimation("CrossHair12");
-		LengthMulX = 13;
-		LengthMulY = 3;
 		break;
 	case 22:
 		ChangeCrossHairAnimation("CrossHair11");
-		LengthMulX = 12;
-		LengthMulY = 4;
 		break;
 	case 28:
 		ChangeCrossHairAnimation("CrossHair10");
-		LengthMulX = 11;
-		LengthMulY = 5;
 		break;
 	case 33:
 		ChangeCrossHairAnimation("CrossHair9");
-		LengthMulX = 10;
-		LengthMulY = 6;
 		break;
 	case 39:
 		ChangeCrossHairAnimation("CrossHair8");
-		LengthMulX = 9;
-		LengthMulY = 7;
 		break;
 	case 45:
 		ChangeCrossHairAnimation("CrossHair7");
-		LengthMulX = 8;
-		LengthMulY = 8;
 		break;
 	case 50:
 		ChangeCrossHairAnimation("CrossHair6");
-		LengthMulX = 7;
-		LengthMulY = 9;
 		break;
 	case 56:
 		ChangeCrossHairAnimation("CrossHair5");
-		LengthMulX = 6;
-		LengthMulY = 10;
 		break;
 	case 61:
 		ChangeCrossHairAnimation("CrossHair4");
-		LengthMulX = 5;
-		LengthMulY = 11;
 		break;
 	case 67:
 		ChangeCrossHairAnimation("CrossHair3");
-		LengthMulX = 4;
-		LengthMulY = 12;
 		break;
 	case 73:
 		ChangeCrossHairAnimation("CrossHair2");
-		LengthMulX = 3;
-		LengthMulY = 13;
 		break;
 	case 78:
 		ChangeCrossHairAnimation("CrossHair1");
-		LengthMulX = 2;
-		LengthMulY = 14;
 		break;
 	case 84:
 		ChangeCrossHairAnimation("CrossHair0");
-		LengthMulX = 1;
-		LengthMulY = 15;
 		break;
 	}
-
-	if (Dir == PlayerDir::Left)
-	{
-		LengthMulX *= -1;
-	}
-
-	CrossHairPos = { Length * LengthMulX, Length * LengthMulY };
-	CrossHairPos.Normalize();
-	CrossHairPos *= 92;
-
-	CrossHairRenderer->SetRenderPos(CrossHairPos);
 }
 
 void Player::DirCheck()
@@ -1447,6 +1512,11 @@ void Player::DirCheck()
 		}
 		Dir = CurDir;
 		CurAngle = 180 - CurAngle;
+
+		if (LengthX >= 0)
+		{
+			LengthX *= -1;
+		}
 		ChangeAnimationState(CurState);
 		return;
 	}
@@ -1460,6 +1530,11 @@ void Player::DirCheck()
 		}
 		Dir = CurDir;
 		CurAngle = 180 - CurAngle;
+
+		if (LengthX <= 0)
+		{
+			LengthX *= -1;
+		}
 		ChangeAnimationState(CurState);
 		return;
 	}
@@ -1551,9 +1626,12 @@ void Player::Movement(float _Delta)
 
 void Player::InputMove()
 {
+	
 	if (true == GameEngineInput::IsPress(VK_LEFT)
 		|| true == GameEngineInput::IsPress(VK_RIGHT))
 	{
+
+		CrossHairRenderer->Off();
 		DirCheck();
 		ChangeState(PlayerState::Move);
 		return;
@@ -1561,6 +1639,7 @@ void Player::InputMove()
 
 	if (true == GameEngineInput::IsDown(VK_SPACE))
 	{
+		CrossHairRenderer->Off();
 		ChangeState(PlayerState::JumpReady);
 		return;
 	}
@@ -1571,6 +1650,7 @@ void Player::ChangeWeapon()
 	if (true == GameEngineInput::IsDown('2'))
 	{
 		ChangeState(PlayerState::BazookaOn);
+		return;
 	}
 	
 	if (true == GameEngineInput::IsDown('3'))
@@ -1607,12 +1687,14 @@ void Player::ChangeWeapon()
 	{
 		//ChangeState(PlayerState::AirStrikeOn);
 		ChangeState(PlayerState::HolyGranadeOn);
+		return;
 	}
 
 	if (true == GameEngineInput::IsDown('9'))
 	{
 		ChangeState(PlayerState::GirderOn);
 		//ChangeState(PlayerState::DonkeyOn);
+		return;
 	}
 
 
@@ -1650,4 +1732,216 @@ void Player::DamagingCheck()
 	{
 		DamageCount = 0;
 	}
+}
+
+void Player::ChangeAimAngle(float _Delta)
+{
+	// 오른쪽 각도 조절
+	if (PlayerDir::Right == Dir)
+	{
+		if (true == GameEngineInput::IsPress(VK_UP))
+		{
+			CurAngle -= (5.625f * _Delta * AngleSpeed);
+			LengthY -= (5.75f * _Delta * AngleSpeed);
+
+			if (0 <= LengthY)
+			{
+				LengthX += (5.75f * _Delta * AngleSpeed);
+			}
+			else
+			{
+				LengthX -= (5.75f * _Delta * AngleSpeed);
+			}
+
+			if (CurAngle <= RIGHT_UP_MAXANGLE)
+			{
+				CurAngle = RIGHT_UP_MAXANGLE;
+				LengthX = 0;
+				LengthY = -92;
+			}
+		}
+
+		if (true == GameEngineInput::IsPress(VK_DOWN))
+		{
+			CurAngle += (5.625f * _Delta * AngleSpeed);
+			LengthY += (5.75f * _Delta * AngleSpeed);
+
+			if (0 <= LengthY)
+			{
+				LengthX -= (5.75f * _Delta * AngleSpeed);
+			}
+			else
+			{
+				LengthX += (5.75f * _Delta * AngleSpeed);
+			}
+
+			if (CurAngle >= RIGHT_DOWN_MAXANGLE)
+			{
+				CurAngle = RIGHT_DOWN_MAXANGLE;
+				LengthX = 0;
+				LengthY = 92;
+			}
+		}
+	}
+
+	// 왼쪽 각도조절
+	if (PlayerDir::Left == Dir)
+	{
+		if (true == GameEngineInput::IsPress(VK_UP))
+		{		
+			CurAngle += (5.625f * _Delta * AngleSpeed);
+			LengthY -= (5.75f * _Delta * AngleSpeed);
+
+			if (0 <= LengthY)
+			{
+				LengthX -= (5.75f * _Delta * AngleSpeed);
+			}
+			else
+			{
+				LengthX += (5.75f * _Delta * AngleSpeed);
+			}
+
+			if (CurAngle >= LEFT_UP_MAXANGLE)
+			{
+				CurAngle = LEFT_UP_MAXANGLE;
+				LengthX = 0;
+				LengthY = -92;
+			}
+		}
+		
+		if (true == GameEngineInput::IsPress(VK_DOWN))
+		{
+			CurAngle -= (5.625f * _Delta * AngleSpeed);
+			LengthY += (5.75f * _Delta * AngleSpeed);
+
+			if (0 <= LengthY)
+			{
+				LengthX += (5.75f * _Delta * AngleSpeed);
+			}
+			else
+			{
+				LengthX -= (5.75f * _Delta * AngleSpeed);
+			}
+
+			if (CurAngle <= LEFT_DOWN_MAXANGLE)
+			{
+				CurAngle = LEFT_DOWN_MAXANGLE;
+				LengthX = 0;
+				LengthY = -92;
+			}
+		}
+	}
+
+}
+
+void Player::SetGauge(float _Delta)
+{
+	float4 GaugePos;
+	GaugePos = CrossHairPos;
+	GaugePos.Normalize();
+
+	if (0.1f <= ChargingTime)
+	{
+		GaugeRenderer0->On();
+		GaugeRenderer0->SetRenderPos({ GaugePos.X * 5.75f * 1, (GaugePos.Y * 5.75f * 1) - 15 });
+
+		float4 DebugPos = GaugeRenderer0->GetRenderPos();
+		int a = 0;
+	}
+	if (0.2f <= ChargingTime)
+	{
+		GaugeRenderer1->On();
+		GaugeRenderer1->SetRenderPos({ GaugePos.X * 5.75f * 2, (GaugePos.Y * 5.75f * 2) - 15 });
+	}
+	if (0.3f <= ChargingTime)
+	{
+		GaugeRenderer2->On();
+		GaugeRenderer2->SetRenderPos({ GaugePos.X * 5.75f * 3, (GaugePos.Y * 5.75f * 3) - 15 });
+	}
+	if (0.4f <= ChargingTime)
+	{
+		GaugeRenderer3->On();
+		GaugeRenderer3->SetRenderPos({ GaugePos.X * 5.75f * 4, (GaugePos.Y * 5.75f * 4) - 15 });
+	}
+	if (0.5f <= ChargingTime)
+	{
+		GaugeRenderer4->On();
+		GaugeRenderer4->SetRenderPos({ GaugePos.X * 5.75f * 5, (GaugePos.Y * 5.75f * 5) - 15 });
+	}
+	if (0.6f <= ChargingTime)
+	{
+		GaugeRenderer5->On();
+		GaugeRenderer5->SetRenderPos({ GaugePos.X * 5.75f * 6, (GaugePos.Y * 5.75f * 6) - 15 });
+	}
+	if (0.7f <= ChargingTime)
+	{
+		GaugeRenderer6->On();
+		GaugeRenderer6->SetRenderPos({ GaugePos.X * 5.75f * 7, (GaugePos.Y * 5.75f * 7) - 15 });
+	}
+	if (0.8f <= ChargingTime)
+	{
+		GaugeRenderer7->On();
+		GaugeRenderer7->SetRenderPos({ GaugePos.X * 5.75f * 8, (GaugePos.Y * 5.75f * 8) - 15 });
+	}
+	if (0.9f <= ChargingTime)
+	{
+		GaugeRenderer8->On();
+		GaugeRenderer8->SetRenderPos({ GaugePos.X * 5.75f * 9, (GaugePos.Y * 5.75f * 9) - 15 });
+	}
+	if (1.0f <= ChargingTime)
+	{
+		GaugeRenderer9->On();
+		GaugeRenderer9->SetRenderPos({ GaugePos.X * 5.75f * 10, (GaugePos.Y * 5.75f * 10) - 15 });
+	}
+	if (1.1f <= ChargingTime)
+	{
+		GaugeRenderer10->On();
+		GaugeRenderer10->SetRenderPos({ GaugePos.X * 5.75f * 11, (GaugePos.Y * 5.75f * 11) - 15 });
+	}
+	if (1.2f <= ChargingTime)
+	{
+		GaugeRenderer11->On();
+		GaugeRenderer11->SetRenderPos({ GaugePos.X * 5.75f * 12, (GaugePos.Y * 5.75f * 12) - 15 });
+	}
+	if (1.3f <= ChargingTime)
+	{
+		GaugeRenderer12->On();
+		GaugeRenderer12->SetRenderPos({ GaugePos.X * 5.75f * 13, (GaugePos.Y * 5.75f * 13) - 15 });
+	}
+	if (1.4f <= ChargingTime)
+	{
+		GaugeRenderer13->On();
+		GaugeRenderer13->SetRenderPos({ GaugePos.X * 5.75f * 14, (GaugePos.Y * 5.75f * 14) - 15 });
+	}
+	if (1.5f <= ChargingTime)
+	{
+		GaugeRenderer14->On();
+		GaugeRenderer14->SetRenderPos({ GaugePos.X * 5.75f * 15, (GaugePos.Y * 5.75f * 15) - 15 });
+	}
+	if (1.6f <= ChargingTime)
+	{
+		GaugeRenderer15->On();
+		GaugeRenderer15->SetRenderPos({ GaugePos.X * 5.75f * 16, (GaugePos.Y * 5.75f * 16) - 15 });
+	}
+
+}
+
+void Player::AllGaugeOff()
+{
+	GaugeRenderer0->Off();
+	GaugeRenderer1->Off();
+	GaugeRenderer2->Off();
+	GaugeRenderer3->Off();
+	GaugeRenderer4->Off();
+	GaugeRenderer5->Off();
+	GaugeRenderer6->Off();
+	GaugeRenderer7->Off();
+	GaugeRenderer8->Off();
+	GaugeRenderer9->Off();
+	GaugeRenderer10->Off();
+	GaugeRenderer11->Off();
+	GaugeRenderer12->Off();
+	GaugeRenderer13->Off();
+	GaugeRenderer14->Off();
+	GaugeRenderer15->Off();
 }

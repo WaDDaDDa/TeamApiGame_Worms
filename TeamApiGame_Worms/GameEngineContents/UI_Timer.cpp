@@ -72,7 +72,7 @@ void UI_Timer::Start()
 void UI_Timer::Update(float _Delta)
 {
 
-	int CurTurnTime = static_cast<int>(GameTurn::MainGameTurn.GetTurnTime());
+	int CurTurnTime = static_cast<int>(GameTurn::MainGameTurn->GetTurnTime());
 	TimerTextRenderer->SetText(std::to_string(CurTurnTime));
 
 	if (CurTurnTime < 10)

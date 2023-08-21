@@ -55,6 +55,10 @@ enum class PlayerState
 	HolyGranade,
 	HolyGranadeFire,
 	HolyGranadeOff,
+	SuperSheepOn,
+	SuperSheep,
+	SuperSheepFire,
+	SuperSheepOff,
 
 	Diving,
 	DeathEnd,
@@ -67,6 +71,31 @@ enum class PlayerDir
 	Left,
 	Right
 };
+
+
+enum class GridState
+{
+	s0,
+	s1,
+	s2,
+	s3,
+	s4,
+	s5,
+	s6,
+	s7,
+	s8,
+	l0,
+	l1,
+	l2,
+	l3,
+	l4,
+	l5,
+	l6,
+	l7,
+	l8
+
+};
+
 
 // 설명 : 
 class Player : public GravityActor
@@ -294,6 +323,18 @@ protected:
 	void HolyGranadeOffStart();
 	void HolyGranadeOffUpdate(float _Delta);
 
+	void SuperSheepOnStart();
+	void SuperSheepOnUpdate(float _Delta);
+	
+	void SuperSheepStart();
+	void SuperSheepUpdate(float _Delta);
+
+	void SuperSheepFireStart();
+	void SuperSheepFireUpdate(float _Delta);
+
+	void SuperSheepOffStart();
+	void SuperSheepOffUpdate(float _Delta);
+
 	void WinStart();
 	void WinUpdate(float _Delta);
 
@@ -308,6 +349,10 @@ protected:
 
 	void ChangeCrossHairAnimation(const std::string& _State);
 	void ChangeCrossHairRenderPos(int _iCurAngle);
+
+	void ChangeAimAngle(float _Delta);
+	void SetGauge(float _Delta);
+	void AllGaugeOff();
 
 	// Collision
 	GameEngineCollision* PlayerBodyCollision = nullptr;
@@ -349,7 +394,7 @@ private:
 	float4 UpCheckPos = float4{ 0 , -20.0f };
 
 	float ChargingTime = 0.0f;
-	float MaxChargingTime = 3.0f;
+	float MaxChargingTime = 1.6f;
 
 	// 마우스로 클릭한 후 사용하는 무기의 마우스 클릭 좌표.
 	float4 TargetPos = float4::ZERO;
@@ -363,6 +408,39 @@ private:
 
 	float LengthX = 92.0f;
 	float LengthY = 0;
+
+	float AngleSpeed = 5.0f;
+
+	// Grider
+	void GriderConstruct(GameEngineWindowTexture* _GroundTexture, GameEngineWindowTexture* _GroundPixelTexture);
+	void ChangeGride_State(GridState _State);
+
+	GameEngineRenderer* Gride_Renderer = nullptr;
+	class GameEngineWindowTexture* Gride_PixelTexture = nullptr;
+
+	GridState Gride_State = GridState::s0;
+
+	
+	// Gauge Renderer
+	GameEngineRenderer* GaugeRenderer0 = nullptr;
+	GameEngineRenderer* GaugeRenderer1 = nullptr;
+	GameEngineRenderer* GaugeRenderer2 = nullptr;
+	GameEngineRenderer* GaugeRenderer3 = nullptr;
+	GameEngineRenderer* GaugeRenderer4 = nullptr;
+	GameEngineRenderer* GaugeRenderer5 = nullptr;
+	GameEngineRenderer* GaugeRenderer6 = nullptr;
+	GameEngineRenderer* GaugeRenderer7 = nullptr;
+	GameEngineRenderer* GaugeRenderer8 = nullptr;
+	GameEngineRenderer* GaugeRenderer9 = nullptr;
+	GameEngineRenderer* GaugeRenderer10 = nullptr;
+	GameEngineRenderer* GaugeRenderer11 = nullptr;
+	GameEngineRenderer* GaugeRenderer12 = nullptr;
+	GameEngineRenderer* GaugeRenderer13 = nullptr;
+	GameEngineRenderer* GaugeRenderer14 = nullptr;
+	GameEngineRenderer* GaugeRenderer15 = nullptr;
+	
+	
+	
 
 
 	// UI

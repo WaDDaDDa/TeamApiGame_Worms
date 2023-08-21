@@ -1,16 +1,21 @@
 #include "GameTurn.h"
 #include <GameEnginePlatform/GameEngineWindow.h>
+#include <GameEnginePlatform/GameEngineWindowTexture.h>
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/GameEngineCamera.h>
 #include <GameEngineCore/GameEngineCore.h>
+#include <GameEngineBase/GameEngineRandom.h>
 #include "Player.h"
 #include "Wind.h"
+#include "Ground.h"
+#include "HealItem.h"
+#include "ContentsEnum.h"
 
 #include "UI_Timer.h"
 #include "UI_Box_AllTeamHpBar.h"
 
-GameTurn GameTurn::MainGameTurn;
+GameTurn* GameTurn::MainGameTurn;
 float GameTurn::TurnTime = 0.0f;
 
 GameTurn::GameTurn()
@@ -25,6 +30,7 @@ GameTurn::~GameTurn()
 
 void GameTurn::Start()
 {
+	MainGameTurn = this;
 	TurnPlayer = Player::GetAllPlayer()[StartValue];
 	TurnPlayer->SwitchIsTurnPlayer();
 	Init();
@@ -41,11 +47,12 @@ void GameTurn::Init()
 
 void GameTurn::Update(float _Delta)
 {
-
+	TurnPlayer = Player::GetAllPlayer()[StartValue];
 	GameOverCheck();
 
 	TurnTime = TurnPlayTime - GetLiveTime();
 	size_t PlayerCount = Player::GetAllPlayer().size();
+
 
 	// 턴플레이어인데 무기사용으로 IsTurnPlayer가 false가되면 Turn의 시간을 멈춘다.
 	if (TurnPlayer->IsTurnPlayer == false)
@@ -173,6 +180,11 @@ void GameTurn::ChangeTurnPlayer(float _Delta)
 	// 현재 플레이어 bool값 true로 변경
 	TurnPlayer->SwitchIsTurnPlayer();
 
+	if (GameEngineRandom::MainRandom.RandomInt(0 , 1) == 1)
+	{
+		CreateItem();
+	}
+
 	// 타이머 UI의 색깔을 현재 TurnPlayer에 맞게 변환
 	UI_Timer::GetTimerUI()->ChangeTimerColor(StartValue);
 
@@ -217,4 +229,65 @@ bool GameTurn::GameOverCheck()
 	}
 
 	return false;
+}
+
+void GameTurn::TurnPlayerAllOff()
+{
+	StopLiveTime();
+
+	size_t PlayerCount = Player::GetAllPlayer().size();
+	for (size_t i = 0; i < PlayerCount; i++)
+	{
+		Player::GetAllPlayer()[i]->IsTurnPlayer = false;
+	}
+}
+
+void GameTurn::StartTurnPlayer()
+{
+	GoLiveTime();
+	TurnPlayer->IsTurnPlayer = true;
+}
+
+void GameTurn::CreateItem(size_t _Count)
+{
+	GameEngineWindowTexture* GTexture = TurnPlayer->GetGroundTexture();
+	float PlayerSettingX = GameEngineRandom::MainRandom.RandomFloat(0, GTexture->GetScale().X);
+	float PlayerSettingY = GameEngineRandom::MainRandom.RandomFloat(0, GTexture->GetScale().Y);
+
+	float4 CheckPos = { PlayerSettingX , PlayerSettingY };
+	unsigned int CheckColor = GTexture->GetColor(RGB(255, 255, 255), CheckPos);
+
+	for (size_t i = 0; i < _Count; i++)
+	{
+		float PlayerSettingX = GameEngineRandom::MainRandom.RandomFloat(0, GTexture->GetScale().X);
+		float PlayerSettingY = GameEngineRandom::MainRandom.RandomFloat(0, GTexture->GetScale().Y);
+
+		float4 CheckPos = { PlayerSettingX , PlayerSettingY };
+		unsigned int CheckColor = GTexture->GetColor(RGB(255, 255, 255), CheckPos);
+
+		if (CheckColor == RGB(0, 0, 255))
+		{
+			Hitem = GetLevel()->CreateActor<HealItem>(RenderOrder::Item);
+			Hitem->SetGroundTexture(GTexture);
+			Hitem->SetPos(float4{ PlayerSettingX, PlayerSettingY });
+		}
+		else
+		{
+			while (CheckColor != RGB(0, 0, 255))
+			{
+				PlayerSettingX = GameEngineRandom::MainRandom.RandomFloat(0, GTexture->GetScale().X);
+				PlayerSettingY = GameEngineRandom::MainRandom.RandomFloat(0, GTexture->GetScale().Y);
+
+				CheckPos = { PlayerSettingX , PlayerSettingY };
+				CheckColor = GTexture->GetColor(RGB(255, 255, 255), CheckPos);
+
+				if (CheckColor == RGB(0, 0, 255))
+				{
+					Hitem = GetLevel()->CreateActor<HealItem>(RenderOrder::Item);
+					Hitem->SetGroundTexture(GTexture);
+					Hitem->SetPos(float4{ PlayerSettingX, PlayerSettingY });
+				}
+			}
+		}
+	}
 }

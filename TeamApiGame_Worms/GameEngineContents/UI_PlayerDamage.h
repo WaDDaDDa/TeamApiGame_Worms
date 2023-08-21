@@ -12,7 +12,7 @@ public:
 	UI_PlayerDamage& operator=(const UI_PlayerDamage& _Other) = delete;
 	UI_PlayerDamage& operator=(UI_PlayerDamage&& _Other) noexcept = delete;
 
-	void UpdateData_PlayerDamageUI(float4 _TargetPos, int _PlayerDamage);
+	void UpdateData_PlayerDamageUI(float4 _TargetPos, int _PlayerDamage, int _PlayerIndex);
 
 protected:
 	void Start() override;

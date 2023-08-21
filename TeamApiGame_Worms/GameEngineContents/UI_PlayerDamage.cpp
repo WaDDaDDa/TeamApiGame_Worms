@@ -2,6 +2,8 @@
 #include <GameEngineCore/ResourcesManager.h>
 #include <GameEngineCore/GameEngineRenderer.h>
 #include "ContentsEnum.h"
+#include "ContentsDefine.h"
+#include <GameEnginePlatform/GameEngineWindow.h>
 
 UI_PlayerDamage::UI_PlayerDamage()
 {
@@ -48,8 +50,10 @@ void UI_PlayerDamage::Update(float _Delta)
 	}
 }
 
-void UI_PlayerDamage::UpdateData_PlayerDamageUI(float4 _TargetPos, int _PlayerDamage)
+void UI_PlayerDamage::UpdateData_PlayerDamageUI(float4 _TargetPos, int _PlayerDamage, int _PlayerIndex)
 {
+	HDC hdc = GameEngineWindow::MainWindow.GetBackBuffer()->GetImageDC();
+
 	MainRenderer->SetRenderPos(_TargetPos);
 
 	if (_PlayerDamage > 10)
@@ -62,5 +66,36 @@ void UI_PlayerDamage::UpdateData_PlayerDamageUI(float4 _TargetPos, int _PlayerDa
 	}
 
 	int Damage = static_cast<int>(_PlayerDamage);
-	DamageTextRenderer->SetText(std::to_string(Damage));
+
+	switch (_PlayerIndex)
+	{
+	case 0:
+		DamageTextRenderer->SetText(std::to_string(Damage), 20, PLAYER_COLOR_RED);
+		break;
+
+	case 1:
+		DamageTextRenderer->SetText(std::to_string(Damage), 20, PLAYER_COLOR_BLUE);
+		break;
+
+	case 2:
+		DamageTextRenderer->SetText(std::to_string(Damage), 20, PLAYER_COLOR_GREEN);
+		break;
+
+	case 3:
+		DamageTextRenderer->SetText(std::to_string(Damage), 20, PLAYER_COLOR_YELLOW);
+		break;
+
+	case 4:
+		DamageTextRenderer->SetText(std::to_string(Damage), 20, PLAYER_COLOR_PINK);
+		break;
+
+	case 5:
+		DamageTextRenderer->SetText(std::to_string(Damage), 20, PLAYER_COLOR_CYAN);
+		break;
+
+	default:
+		break;
+	}
+
+
 }

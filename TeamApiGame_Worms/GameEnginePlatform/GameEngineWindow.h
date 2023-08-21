@@ -60,6 +60,9 @@ public:
 	void ClearBackBuffer();
 	void DoubleBuffering();
 
+	void SetCursorPos(float4 _CursorPos);
+
+
 	void CursorOff();
 
 	static bool IsFocus() 

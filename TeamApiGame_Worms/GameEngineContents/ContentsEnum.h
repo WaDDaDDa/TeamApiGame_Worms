@@ -12,7 +12,9 @@ enum class RenderOrder
 	BackGroundEffect,
 	BackWave,
 	Ground,
+	Item,
 	Player,
+	Gauge,
 	CrossHair,
 	Weapon,
 	FrontWave,
@@ -27,6 +29,7 @@ enum class CollisionOrder
 	PlayerBody,
 	Weapon,
 	Bomb,
+	Item,
 	UI,
 	Mouse,
 };

@@ -5,6 +5,7 @@
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/GameEngineCamera.h>
 #include "ContentsEnum.h"
+#include "ContentsDefine.h"
 #include "GameTurn.h"
 
 UI_PlayerInfo* UI_PlayerInfo::PlayerInfoUI = nullptr;
@@ -209,7 +210,7 @@ void UI_PlayerInfo::SetPlayerColorIndex(int _ColorIndex)
 
 }
 
-void UI_PlayerInfo::UpdateData_PlayerInfoUI(int* _PlayerHp, bool _IsTurnPlayer)
+void UI_PlayerInfo::UpdateData_PlayerInfoUI(int* _PlayerHp, bool _IsTurnPlayer, int _PlayerIndex)
 {
 	PlayerHp = _PlayerHp;
 	CurPlayerHp = *_PlayerHp;
@@ -228,15 +229,45 @@ void UI_PlayerInfo::UpdateData_PlayerInfoUI(int* _PlayerHp, bool _IsTurnPlayer)
 		PlayerHpTextRenderer->SetRenderPos({ -5, 12 });
 	}
 
+	switch (_PlayerIndex)
+	{
+	case 0:
+		TextColor = PLAYER_COLOR_RED;
+		break;
+
+	case 1:
+		TextColor = PLAYER_COLOR_BLUE;
+		break;
+
+	case 2:
+		TextColor = PLAYER_COLOR_GREEN;
+		break;
+
+	case 3:
+		TextColor = PLAYER_COLOR_YELLOW;
+		break;
+
+	case 4:
+		TextColor = PLAYER_COLOR_PINK;
+		break;
+
+	case 5:
+		TextColor = PLAYER_COLOR_CYAN;
+		break;
+
+	default:
+		break;
+	}
+
 	// 현재 플레이어 HP 값을 텍스트로 출력합니다. 
 	// 혹시 플레이어의 체력이 음수가 된 상태라면 0으로 고정하여 출력해줍니다.
 	if (CurPlayerHp <= 0)
 	{
-		PlayerHpTextRenderer->SetText("0", 16);
+		PlayerHpTextRenderer->SetText("0", 16, TextColor);
 	}
 	else
 	{
-		PlayerHpTextRenderer->SetText(std::to_string(CurPlayerHp), 16);
+		PlayerHpTextRenderer->SetText(std::to_string(CurPlayerHp), 16, TextColor);
 	}
 
 	// 현재 플레이어가 턴 플레이어라면 화살표 UI를 활성, 아닌 경우 비활성합니다.

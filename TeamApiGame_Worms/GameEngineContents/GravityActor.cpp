@@ -62,8 +62,9 @@ void GravityActor::CameraFocus(float _Delta)
 	float MouseX = MousePos.X;
 	float MouseY = MousePos.Y;
 
+
 	// 키입력이있다면 마우스포커스 false
-	if (true == GameEngineInput::AllKeyCheck())
+	if (true == GameEngineInput::IsDown(VK_RETURN))
 	{
 		MouseFocus = false;
 	}
