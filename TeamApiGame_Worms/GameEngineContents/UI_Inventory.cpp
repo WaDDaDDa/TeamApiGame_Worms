@@ -59,7 +59,7 @@ void UI_Inventory::Start()
 	//	Btn_Weapon_Bazooka->SetPos({ 1125, 347 }); // ON 최종 위치
 
 	MouseUI = GetLevel()->CreateActor<UI_Mouse>();
-
+	MouseUI->GetMouseUIRenderer()->Off();
 }
 
 void UI_Inventory::Update(float _Delta)
@@ -103,6 +103,9 @@ void UI_Inventory::ShowInventory(bool _isActive, float _Delta)
 
 void ChangeWeapon(DWORD_PTR, DWORD_PTR)
 {
+
+//	GameTurn::MainGameTurn.GetTurnPlayer()->ChangeWeapon();
+
 	// 여기에 현재 플레이어의 웨폰 타입을 변경하는 함수를 넣어주면 됩니다.
 	// 매개변수로 Enum타입을 받아 내부에서 ChangeState(PlayerState::BazookaOn); 같이 특정 웨폰의 Enum에 맞게 무기를 변경해줄 생각인데
 	// 구조 파악을 더 해보고 최종 결정하겠습니다
