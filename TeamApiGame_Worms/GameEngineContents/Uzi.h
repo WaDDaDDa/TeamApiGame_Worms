@@ -46,7 +46,7 @@ protected:
 
 
 private:
-	float UziDamage = 10.0f;
+	float UziDamage = 5.0f;
 	//float UziSpeed = 2000.0f;
 	float UziSpeed = 700.0f;
 

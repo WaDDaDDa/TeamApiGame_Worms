@@ -38,6 +38,7 @@
 void Player::IdleStart()
 {
 	ChangeAnimationState("Idle");
+	CrossHairRenderer->Off();
 
 	//PlayerBodyCollision->On();
 }
@@ -309,6 +310,59 @@ void Player::DamagingStart()
 		SetGravityVector(GravityDir * 250.0f);
 	}
 
+	if (true == PlayerBodyCollision->Collision(CollisionOrder::ShotHit, _Col
+		, CollisionType::Rect
+		, CollisionType::CirCle
+	))
+	{
+		float4 WeaponPos = float4::ZERO;
+		float4 GravityDir = float4::ZERO;
+
+		float4 WeaponPlayerPos = float4::ZERO;
+		float WeaponDamage = 0.0f;
+
+		for (size_t i = 0; i < _Col.size(); i++)
+		{
+			GameEngineCollision* Collision = _Col[i];
+
+			GameEngineActor* Actor = Collision->GetActor();
+
+			BombEffect* Effect = dynamic_cast<BombEffect*>(Collision->GetActor());
+
+			WeaponDamage = Effect->GetDamage();
+
+			WeaponPos = Actor->GetPos();
+
+			Collision->Off();
+
+			//PlayerBodyCollision->Off();
+		}
+		GravityDir = GetPos() - WeaponPos;
+		GravityDir.Normalize();
+		GravityDir += float4::UP;
+
+
+		// Damage 받는 부분
+		{
+			WeaponPlayerPos = GetPos() - WeaponPos;
+
+			float Damaging = WeaponDamage - (WeaponPlayerPos.Size());
+
+			if (0 >= Damaging)
+			{
+				Damaging = 5;
+			}
+
+			// 데미지 UI 출력
+			DamageUI->UpdateData_PlayerDamageUI(PlayerInfoUI->GetPos(), static_cast<int>(Damaging), Player::TurnPlayerIndex);
+
+			this->Hp -= static_cast<int>(Damaging);
+
+			UI_Box_AllTeamHpBar::GetAllTeamHpBarUI()->InitTeamHpBarData(TurnPlayerIndex, Hp);
+		}
+
+		SetGravityVector(GravityDir * 250.0f);
+	}
 }
 void Player::DamagingUpdate(float _Delta)
 {

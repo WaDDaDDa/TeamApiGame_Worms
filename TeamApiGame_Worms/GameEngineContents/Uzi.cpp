@@ -8,6 +8,7 @@
 #include "Range50.h"
 #include "Range75.h"
 #include "Range100.h"
+#include "ShotHit.h"
 
 #include <GameEngineBase/GameEnginePath.h>
 #include <GameEngineCore/GameEngineLevel.h>
@@ -273,7 +274,8 @@ void Uzi::FlyUpdate(float _Delta)
 
 void Uzi::BombStart()
 {
-	UziBomb = CreateBombEffect<Range25>();
+	//UziBomb = CreateBombEffect<Range25>();
+	UziBomb = CreateBombEffect<ShotHit>();
 	Renderer->Off();
 }
 

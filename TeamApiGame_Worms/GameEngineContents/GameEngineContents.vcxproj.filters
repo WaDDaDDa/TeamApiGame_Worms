@@ -201,6 +201,9 @@
     <ClCompile Include="HealItem.cpp">
       <Filter>Item</Filter>
     </ClCompile>
+    <ClCompile Include="ShotHit.cpp">
+      <Filter>Effect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentCore.h" />
@@ -402,6 +405,9 @@
     </ClInclude>
     <ClInclude Include="HealItem.h">
       <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ShotHit.h">
+      <Filter>Effect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -230,6 +230,10 @@
     <ClInclude Include="Range75.h" />
     <ClInclude Include="Self_Bomb.h" />
     <ClInclude Include="Sheep.h" />
+    <ClInclude Include="ShotHit.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="SuperSheep.h" />
     <ClInclude Include="SuperSheepEffect.h" />
     <ClInclude Include="TestWeapon.h" />
@@ -360,6 +364,10 @@
     <ClCompile Include="Range75.cpp" />
     <ClCompile Include="Self_Bomb.cpp" />
     <ClCompile Include="Sheep.cpp" />
+    <ClCompile Include="ShotHit.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="SuperSheep.cpp" />
     <ClCompile Include="SuperSheepEffect.cpp" />
     <ClCompile Include="TestWeapon.cpp" />

@@ -39,6 +39,8 @@ public:
 		return BombDamage;
 	}
 
+	void SetShotHitRange(float4 _ShotHitRange);
+
 protected:
 	class GameEngineCollision* BombCollision = nullptr;
 	GameEngineRenderer* Renderer = nullptr;
