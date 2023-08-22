@@ -84,7 +84,8 @@ void Player::IdleUpdate(float _Delta)
 	if (GameEngineInput::IsDown('T'))
 	{
 		TargetPos = MouseObject::GetPlayMousePos();
-		CreateWeapon<TestWeapon>();
+		//CreateWeapon<TestWeapon>();
+		CreateWeapon<Donkey>();
 	}
 
 	//if (true == GameEngineInput::IsPress(VK_LEFT)

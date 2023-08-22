@@ -156,6 +156,8 @@ void Grenade::StateUpdate(float _Delta)
 		return BombUpdate(_Delta);
 	case GrenadeState::Damage:
 		return DamageUpdate(_Delta);
+	case GrenadeState::InWater:
+		return InWaterUpdate(_Delta);
 	case GrenadeState::Max:
 		return MaxUpdate(_Delta);
 	default:
@@ -186,6 +188,9 @@ void Grenade::ChangeState(GrenadeState _State)
 			break;
 		case GrenadeState::Damage:
 			DamageStart();
+			break;
+		case GrenadeState::InWater:
+			InWaterStart();
 			break;
 		case GrenadeState::Max:
 			MaxStart();
@@ -391,6 +396,22 @@ void Grenade::TongTong(float4 _Pos)
 		return;
 	}
 
+	//if (LastDeg <= 181.0f || LastDeg >= 179.0f)
+	//{
+	//	float4 Test = CurCravityVector;
+	//	Test.Y = -Test.Y;
+	//	SetGravityVector(Test * 0.6f);
+	//	return;
+	//}
+
+	//if (LastDeg <= 91.0f || LastDeg >= 89.0f)
+	//{
+ //		float4 Test = CurCravityVector;
+	//	Test.X = -Test.X;
+	//	SetGravityVector(Test * 0.6f);
+	//	return;
+	//}
+
 	// CurCravityVector.Y = 0.0f;
 	float4 Test = -CurCravityVector;
 	Test = Test.GetRotationToDegZ(-(LastDeg + LastDeg));
@@ -434,6 +455,13 @@ void Grenade::IdleUpdate(float _Delta)
 	if (GetLiveTime() >= 3.0f)
 	{
 		ChangeState(GrenadeState::Bomb);
+		return;
+	}
+
+	// 물에 빠짐
+	if (GetPos().Y >= 1875)
+	{
+		ChangeState(GrenadeState::InWater);
 		return;
 	}
 }
@@ -481,6 +509,13 @@ void Grenade::FlyUpdate(float _Delta)
 	if (GetLiveTime() >= 5.0f)
 	{
 		ChangeState(GrenadeState::Bomb);
+		return;
+	}
+
+	// 물에 빠짐
+	if (GetPos().Y >= 1875)
+	{
+		ChangeState(GrenadeState::InWater);
 		return;
 	}
 }
@@ -541,6 +576,41 @@ void Grenade::DamageUpdate(float _Delta)
 		// 무기사용이 종료되면 다시 플레이어로 돌아간다.
 		Master->SwitchIsTurnPlayer();
 		Death();
+	}
+}
+
+
+void Grenade::InWaterStart()
+{
+	SetGravityVector(float4::DOWN);
+	IsWindOff();
+	SetGravityPower(100.0f);
+	DirCheck();
+}
+
+void Grenade::InWaterUpdate(float _Delta)
+{
+	Gravity(_Delta);
+
+	if (GetLiveTime() >= 3.0f)
+	{
+		size_t PlayerCount = Player::GetAllPlayer().size();
+		int PlayerStateCount = 0;
+		for (size_t i = 0; i < PlayerCount; i++)
+		{
+			if (PlayerState::Idle == Player::GetAllPlayer()[i]->GetState() || PlayerState::DeathEnd == Player::GetAllPlayer()[i]->GetState())
+			{
+				PlayerStateCount++;
+			}
+		}
+
+		if (PlayerStateCount == PlayerCount)
+		{
+			// 무기사용이 종료되면 다시 플레이어로 돌아간다.
+			Master->SwitchIsTurnPlayer();
+			Death();
+		}
+		return;
 	}
 }
 

@@ -9,6 +9,7 @@ enum class HallelujahState
 	PrevBomb,
 	Bomb,
 	Damage, //플레이어가 대미지입고 정리되는 단계
+	InWater,
 	Max,
 };
 
@@ -50,6 +51,8 @@ protected:
 	void BombUpdate(float _Delta);
 	void DamageStart();
 	void DamageUpdate(float _Delta);
+	void InWaterStart();
+	void InWaterUpdate(float _Delta);
 	void MaxStart();
 	void MaxUpdate(float _Delta);
 

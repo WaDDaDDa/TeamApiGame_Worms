@@ -158,6 +158,8 @@ void HomingMissile::StateUpdate(float _Delta)
 		return BombUpdate(_Delta);
 	case HomingMissileState::Damage:
 		return DamageUpdate(_Delta);
+	case HomingMissileState::InWater:
+		return InWaterUpdate(_Delta);
 	case HomingMissileState::Max:
 		return MaxUpdate(_Delta);
 	default:
@@ -182,6 +184,9 @@ void HomingMissile::ChangeState(HomingMissileState _State)
 			break;
 		case HomingMissileState::Damage:
 			DamageStart();
+			break;
+		case HomingMissileState::InWater:
+			InWaterStart();
 			break;
 		case HomingMissileState::Max:
 			MaxStart();
@@ -346,6 +351,13 @@ void HomingMissile::FlyUpdate(float _Delta)
 		ChangeState(HomingMissileState::Bomb);
 		return;
 	}
+
+	// 물에 빠짐
+	if (GetPos().Y >= 1875)
+	{
+		ChangeState(HomingMissileState::InWater);
+		return;
+	}
 }
 
 void HomingMissile::RockOnFlyStart()
@@ -382,6 +394,13 @@ void HomingMissile::RockOnFlyUpdate(float _Delta)
 	))
 	{
 		ChangeState(HomingMissileState::Bomb);
+		return;
+	}
+
+	// 물에 빠짐
+	if (GetPos().Y >= 1875)
+	{
+		ChangeState(HomingMissileState::InWater);
 		return;
 	}
 }
@@ -423,6 +442,40 @@ void HomingMissile::DamageUpdate(float _Delta)
 		// 무기사용이 종료되면 다시 플레이어로 돌아간다.
 		Master->SwitchIsTurnPlayer();
 		Death();
+	}
+}
+
+void HomingMissile::InWaterStart()
+{
+	SetGravityVector(float4::DOWN);
+	IsWindOff();
+	SetGravityPower(100.0f);
+	DirCheck();
+}
+
+void HomingMissile::InWaterUpdate(float _Delta)
+{
+	Gravity(_Delta);
+
+	if (GetLiveTime() >= 3.0f)
+	{
+		size_t PlayerCount = Player::GetAllPlayer().size();
+		int PlayerStateCount = 0;
+		for (size_t i = 0; i < PlayerCount; i++)
+		{
+			if (PlayerState::Idle == Player::GetAllPlayer()[i]->GetState() || PlayerState::DeathEnd == Player::GetAllPlayer()[i]->GetState())
+			{
+				PlayerStateCount++;
+			}
+		}
+
+		if (PlayerStateCount == PlayerCount)
+		{
+			// 무기사용이 종료되면 다시 플레이어로 돌아간다.
+			Master->SwitchIsTurnPlayer();
+			Death();
+		}
+		return;
 	}
 }
 

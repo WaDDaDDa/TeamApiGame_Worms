@@ -156,6 +156,8 @@ void Hallelujah::StateUpdate(float _Delta)
 		return BombUpdate(_Delta);
 	case HallelujahState::Damage:
 		return DamageUpdate(_Delta);
+	case HallelujahState::InWater:
+		return InWaterUpdate(_Delta);
 	case HallelujahState::Max:
 		return MaxUpdate(_Delta);
 	default:
@@ -186,6 +188,9 @@ void Hallelujah::ChangeState(HallelujahState _State)
 			break;
 		case HallelujahState::Damage:
 			DamageStart();
+			break;
+		case HallelujahState::InWater:
+			InWaterStart();
 			break;
 		case HallelujahState::Max:
 			MaxStart();
@@ -436,6 +441,12 @@ void Hallelujah::IdleUpdate(float _Delta)
 		ChangeState(HallelujahState::Bomb);
 		return;
 	}
+	// 물에 빠짐
+	if (GetPos().Y >= 1875)
+	{
+		ChangeState(HallelujahState::InWater);
+		return;
+	}
 }
 
 void Hallelujah::FlyStart()
@@ -481,6 +492,13 @@ void Hallelujah::FlyUpdate(float _Delta)
 	if (GetLiveTime() >= 5.0f)
 	{
 		ChangeState(HallelujahState::Bomb);
+		return;
+	}
+
+	// 물에 빠짐
+	if (GetPos().Y >= 1875)
+	{
+		ChangeState(HallelujahState::InWater);
 		return;
 	}
 }
@@ -542,6 +560,42 @@ void Hallelujah::DamageUpdate(float _Delta)
 		Death();
 	}
 }
+
+
+void Hallelujah::InWaterStart()
+{
+	SetGravityVector(float4::DOWN);
+	IsWindOff();
+	SetGravityPower(100.0f);
+	DirCheck();
+}
+
+void Hallelujah::InWaterUpdate(float _Delta)
+{
+	Gravity(_Delta);
+
+	if (GetLiveTime() >= 3.0f)
+	{
+		size_t PlayerCount = Player::GetAllPlayer().size();
+		int PlayerStateCount = 0;
+		for (size_t i = 0; i < PlayerCount; i++)
+		{
+			if (PlayerState::Idle == Player::GetAllPlayer()[i]->GetState() || PlayerState::DeathEnd == Player::GetAllPlayer()[i]->GetState())
+			{
+				PlayerStateCount++;
+			}
+		}
+
+		if (PlayerStateCount == PlayerCount)
+		{
+			// 무기사용이 종료되면 다시 플레이어로 돌아간다.
+			Master->SwitchIsTurnPlayer();
+			Death();
+		}
+		return;
+	}
+}
+
 
 void Hallelujah::MaxStart()
 {

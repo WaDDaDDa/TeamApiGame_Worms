@@ -51,7 +51,7 @@ void HealItem::Start()
 		BodyCollision = CreateCollision(CollisionOrder::Item);
 
 		BodyCollision->SetCollisionScale({ 30, 30 });
-		BodyCollision->SetCollisionType(CollisionType::CirCle);
+		BodyCollision->SetCollisionType(CollisionType::Rect);
 		BodyCollision->SetCollisionPos({ 0,-8.0f });
 	}
 
@@ -187,8 +187,9 @@ void HealItem::IdleUpdate(float _Delta)
 	GroundCheck(_Delta);
 
 	std::vector<GameEngineCollision*> _Col;
+
 	if (true == BodyCollision->Collision(CollisionOrder::PlayerBody, _Col
-		, CollisionType::CirCle
+		, CollisionType::Rect
 		, CollisionType::Rect)/* ||
 		true == PlayerBodyCollision->Collision(CollisionOrder::Weapon, _Col
 		, CollisionType::Rect
@@ -211,7 +212,7 @@ void HealItem::IdleUpdate(float _Delta)
 	}
 
 	if (true == BodyCollision->Collision(CollisionOrder::Bomb, _Col
-		, CollisionType::CirCle
+		, CollisionType::Rect
 		, CollisionType::CirCle)/* ||
 		true == PlayerBodyCollision->Collision(CollisionOrder::Weapon, _Col
 		, CollisionType::Rect

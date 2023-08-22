@@ -152,6 +152,8 @@ void Bazooka::StateUpdate(float _Delta)
 		return BombUpdate(_Delta);
 	case BazookaState::Damage:
 		return DamageUpdate(_Delta);
+	case BazookaState::InWater:
+		return InWaterUpdate(_Delta);
 	case BazookaState::Max:
 		return MaxUpdate(_Delta);
 	default:
@@ -173,6 +175,9 @@ void Bazooka::ChangeState(BazookaState _State)
 			break;
 		case BazookaState::Damage:
 			DamageStart();
+			break;
+		case BazookaState::InWater:
+			InWaterStart();
 			break;
 		case BazookaState::Max:
 			MaxStart();
@@ -324,6 +329,12 @@ void Bazooka::FlyUpdate(float _Delta)
 		ChangeState(BazookaState::Bomb);
 		return;
 	}
+	// 물에 빠짐
+	if (GetPos().Y >= 1875)
+	{
+		ChangeState(BazookaState::InWater);
+		return;
+	}
 
 	if (GetLiveTime() >= 0.1f)
 	{
@@ -380,6 +391,40 @@ void Bazooka::DamageUpdate(float _Delta)
 		// 무기사용이 종료되면 다시 플레이어로 돌아간다.
 		Master->SwitchIsTurnPlayer();
 		Death();
+	}
+}
+
+void Bazooka::InWaterStart()
+{
+	SetGravityVector(float4::DOWN);
+	IsWindOff();
+	SetGravityPower(100.0f);
+	DirCheck();
+}
+
+void Bazooka::InWaterUpdate(float _Delta)
+{
+	Gravity(_Delta);
+
+	if (GetLiveTime() >= 3.0f)
+	{
+		size_t PlayerCount = Player::GetAllPlayer().size();
+		int PlayerStateCount = 0;
+		for (size_t i = 0; i < PlayerCount; i++)
+		{
+			if (PlayerState::Idle == Player::GetAllPlayer()[i]->GetState() || PlayerState::DeathEnd == Player::GetAllPlayer()[i]->GetState())
+			{
+				PlayerStateCount++;
+			}
+		}
+
+		if (PlayerStateCount == PlayerCount)
+		{
+			// 무기사용이 종료되면 다시 플레이어로 돌아간다.
+			Master->SwitchIsTurnPlayer();
+			Death();
+		}
+		return;
 	}
 }
 
