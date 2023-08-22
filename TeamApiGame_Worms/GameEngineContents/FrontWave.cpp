@@ -1,4 +1,4 @@
-#include "Wave.h"
+#include "FrontWave.h"
 #include "ContentsEnum.h"
 
 #include<GameEnginePlatform/GameEngineWindowTexture.h>
@@ -6,36 +6,36 @@
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEnginePlatform/GameEngineInput.h>
 
-Wave::Wave()
+FrontWave::FrontWave()
 {
 }
 
-Wave::~Wave()
+FrontWave::~FrontWave()
 {
 }
 
-void Wave::Start()
+void FrontWave::Start()
 {
 
-	if (false == ResourcesManager::GetInst().IsLoadTexture("Water_sprite.bmp"))
+	if (false == ResourcesManager::GetInst().IsLoadTexture("Water_sprite_surfice.bmp"))
 	{
 		GameEnginePath FilePath;
 		FilePath.SetCurrentPath();
 		FilePath.MoveParentToExistsChild("ContentsResources");
 		FilePath.MoveChild("ContentsResources\\Texture\\Map\\");
 
-		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("Water_sprite.bmp"), 1, 11);
+		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("Water_sprite_surfice.bmp"), 1, 11);
 	}
-	GameEngineWindowTexture* Texture = ResourcesManager::GetInst().FindTexture("Water_sprite.bmp");
+	GameEngineWindowTexture* Texture = ResourcesManager::GetInst().FindTexture("Water_sprite_surfice.bmp");
 
 	Renderer1 = CreateRenderer();
 	Renderer2 = CreateRenderer();
-	
-	Renderer1->CreateAnimation("Wave", "Water_sprite.Bmp", 0, 10, 0.05f, true);
-	Renderer1->ChangeAnimation("Wave");
-	
-	Renderer2->CreateAnimation("Wave", "Water_sprite.Bmp", 0, 10, 0.05f, true);
-	Renderer2->ChangeAnimation("Wave");
+
+	Renderer1->CreateAnimation("FrontWave", "Water_sprite_surfice.Bmp", 0, 10, 0.05f, true);
+	Renderer1->ChangeAnimation("FrontWave");
+
+	Renderer2->CreateAnimation("FrontWave", "Water_sprite_surfice.Bmp", 0, 10, 0.05f, true);
+	Renderer2->ChangeAnimation("FrontWave");
 
 	Renderer2->SetRenderPos({ Texture->GetScale().X,0.0f });
 	Renderer1->SetOrder(GetOrder());
@@ -43,7 +43,7 @@ void Wave::Start()
 
 }
 
-void Wave::Update(float _Delta)
+void FrontWave::Update(float _Delta)
 {
 	if (true == GameEngineInput::IsDown('J'))
 	{
@@ -57,7 +57,7 @@ void Wave::Update(float _Delta)
 			Renderer1->On();
 			Renderer2->On();
 		}
-		
+
 	}
 
 }

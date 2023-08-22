@@ -56,7 +56,7 @@
     <ClCompile Include="UnderWater.cpp">
       <Filter>Map</Filter>
     </ClCompile>
-    <ClCompile Include="Wave.cpp">
+    <ClCompile Include="BackWave.cpp">
       <Filter>Map</Filter>
     </ClCompile>
     <ClCompile Include="UI_Box_AllTeamHpBar.cpp">
@@ -204,6 +204,9 @@
     <ClCompile Include="ShotHit.cpp">
       <Filter>Effect</Filter>
     </ClCompile>
+    <ClCompile Include="FrontWave.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentCore.h" />
@@ -262,7 +265,7 @@
     <ClInclude Include="UnderWater.h">
       <Filter>Map</Filter>
     </ClInclude>
-    <ClInclude Include="Wave.h">
+    <ClInclude Include="BackWave.h">
       <Filter>Map</Filter>
     </ClInclude>
     <ClInclude Include="UI_Box_AllTeamHpBar.h">
@@ -408,6 +411,9 @@
     </ClInclude>
     <ClInclude Include="ShotHit.h">
       <Filter>Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="FrontWave.h">
+      <Filter>Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

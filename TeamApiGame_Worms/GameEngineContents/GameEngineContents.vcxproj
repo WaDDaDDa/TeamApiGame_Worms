@@ -181,6 +181,10 @@
     <ClInclude Include="Donkey.h" />
     <ClInclude Include="FlameEffect.h" />
     <ClInclude Include="FlyEffect.h" />
+    <ClInclude Include="FrontWave.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="GameItem.h">
       <SubType>
       </SubType>
@@ -275,7 +279,7 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Uzi.h" />
-    <ClInclude Include="Wave.h">
+    <ClInclude Include="BackWave.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -313,6 +317,10 @@
     <ClCompile Include="Donkey.cpp" />
     <ClCompile Include="FlameEffect.cpp" />
     <ClCompile Include="FlyEffect.cpp" />
+    <ClCompile Include="FrontWave.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="GameItem.cpp">
       <SubType>
       </SubType>
@@ -409,7 +417,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Uzi.cpp" />
-    <ClCompile Include="Wave.cpp">
+    <ClCompile Include="BackWave.cpp">
       <SubType>
       </SubType>
     </ClCompile>
