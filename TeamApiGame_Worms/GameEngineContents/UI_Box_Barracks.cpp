@@ -6,11 +6,15 @@
 
 #include "GameStateManager.h"
 
+#include "UI_Box_Teams.h"
+
 #include "ContentsEnum.h"
 #include <GameEnginePlatform/GameEngineInput.h>
 
+UI_Box_Barracks* UI_Box_Barracks::BoxBarracksUI = nullptr;
 UI_Box_Barracks::UI_Box_Barracks()
 {
+	BoxBarracksUI = this;
 }
 
 UI_Box_Barracks::~UI_Box_Barracks()
@@ -139,6 +143,7 @@ void UI_Box_Barracks::Start()
 
 void UI_Box_Barracks::Update(float _Delta)
 {
+	MainRenderer->SetText(std::to_string(m_SelectIndex));
 	StateUpdate();
 	CheckButtonCollision();
 }
@@ -157,6 +162,9 @@ void UI_Box_Barracks::AddPlayerTeam()
 
 	ChangePlayerTeamLayout(m_SelectIndex);
 
+
+	UI_Box_Teams::BoxTeamUI->ChangePlayerTeamLayout(m_SelectIndex);
+
 	GameStateManager::GameState->SetTeamNumber(m_SelectIndex);
 	
 	ChangeState(BUTTON_STATE::BUTTON_STATE_HOVERED);
@@ -164,6 +172,7 @@ void UI_Box_Barracks::AddPlayerTeam()
 
 void UI_Box_Barracks::ChangePlayerTeamLayout(int _CurPlayerSelectIndex)
 {
+
 	for (size_t i = 0; i < _CurPlayerSelectIndex; i++)
 	{
 		AllTeamRenderers[i]->Off();
