@@ -255,7 +255,7 @@ void Uzi::FlyUpdate(float _Delta)
 
 	}
 
-	if (GetLiveTime() >= 0.1f)
+	if (GetLiveTime() >= 0.05f)
 	{
 		BodyCollision->On();
 	}

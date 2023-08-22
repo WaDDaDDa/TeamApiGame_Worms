@@ -28,7 +28,6 @@ public:
 		return Master;
 	}
 
-
 	template <typename EffectType>
 	EffectType* CreateBombEffect()
 	{

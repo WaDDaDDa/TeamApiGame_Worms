@@ -105,6 +105,8 @@ void FlameEffect::Update(float _Delta)
 
 void FlameEffect::FlyStart()
 {
+	SetDamage(5.0f);
+
 	Renderer->ChangeAnimation("FlameEffect");
 }
 

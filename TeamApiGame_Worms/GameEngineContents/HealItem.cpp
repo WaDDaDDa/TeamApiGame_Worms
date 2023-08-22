@@ -3,11 +3,14 @@
 
 #include "GameTurn.h"
 #include "ContentsEnum.h"
+#include "Player.h"
+#include "FlameEffect.h"
 
 #include <GameEngineBase/GameEnginePath.h>
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/ResourcesManager.h>
 #include <GameEngineCore/GameEngineRenderer.h>
+#include <GameEngineBase/GameEngineRandom.h>
 #include <GameEngineCore/GameEnginecollision.h>
 
 HealItem::HealItem()
@@ -182,16 +185,60 @@ void HealItem::IdleStart()
 void HealItem::IdleUpdate(float _Delta)
 {
 	GroundCheck(_Delta);
+
+	std::vector<GameEngineCollision*> _Col;
+	if (true == BodyCollision->Collision(CollisionOrder::PlayerBody, _Col
+		, CollisionType::CirCle
+		, CollisionType::Rect)/* ||
+		true == PlayerBodyCollision->Collision(CollisionOrder::Weapon, _Col
+		, CollisionType::Rect
+		, CollisionType::CirCle)*/
+		)
+	{
+		for (size_t i = 0; i < _Col.size(); i++)
+		{
+			GameEngineCollision* Collison = _Col[i];
+
+			GameEngineActor* Actor = Collison->GetActor();
+
+			Player* Actor1 = dynamic_cast<Player*>(Actor);
+			if (Actor1->IsTurnPlayer == true)
+			{
+				Actor1->HealHp();
+				Death();
+			}
+		}
+	}
+
+	if (true == BodyCollision->Collision(CollisionOrder::Bomb, _Col
+		, CollisionType::CirCle
+		, CollisionType::CirCle)/* ||
+		true == PlayerBodyCollision->Collision(CollisionOrder::Weapon, _Col
+		, CollisionType::Rect
+		, CollisionType::CirCle)*/
+		)
+	{
+		ChangeState(HealItemState::Col);
+		return;
+	}
 }
 
 void HealItem::ColStart()
 {
-
+	for (size_t i = 0; i < 50; i++)
+	{
+		FlameEffect* Flame = GetLevel()->CreateActor<FlameEffect>();
+		Flame->SetPos(GetPos());
+		float FireX = GameEngineRandom::MainRandom.RandomFloat(-300.0f, 300.0f);
+		float FireY = (GameEngineRandom::MainRandom.RandomFloat(0.0f, 600.0f));
+		Flame->SetGroundTexture(GetGroundTexture());
+		Flame->SetGravityVector({ FireX, -FireY });
+	}
 }
 
 void HealItem::ColUpdate(float _Delta)
 {
-
+	Death();
 }
 
 void HealItem::MaxStart()

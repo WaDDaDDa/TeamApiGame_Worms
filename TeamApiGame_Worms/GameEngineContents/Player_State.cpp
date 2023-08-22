@@ -1544,6 +1544,7 @@ void Player::GirderUpdate(float _Delta)
 		{
 			NewState = GridState::s0;
 		}
+
 		ChangeGride_State(NewState);
 
 	}

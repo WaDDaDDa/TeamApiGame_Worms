@@ -125,6 +125,11 @@ public:
 		return Hp;
 	}
 
+	void HealHp()
+	{
+		Hp += 25;
+	}
+
 	float GetCurAngle()
 	{
 		return CurAngle;
