@@ -33,3 +33,18 @@ enum class CollisionOrder
 	UI,
 	Mouse,
 };
+
+enum class WeaponEnum
+{
+	Bazooka,
+	Uzi,
+	HomingMissile,
+	Sheep,
+	Granade,
+	Teleport,
+	AirStrike,
+	Girder,
+	Donkey,
+	HolyGranade,
+	SuperSheep,
+};
