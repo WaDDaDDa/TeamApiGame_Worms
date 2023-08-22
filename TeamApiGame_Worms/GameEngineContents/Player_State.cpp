@@ -1105,6 +1105,12 @@ void Player::SheepStart()
 }
 void Player::SheepUpdate(float _Delta)
 {
+	if (true != IsTurnPlayer)
+	{
+		ChangeState(PlayerState::SheepOff);
+		return;
+	}
+
 	if (GameEngineInput::IsDown('1'))
 	{
 		ChangeState(PlayerState::SheepOff);
@@ -1368,6 +1374,12 @@ void Player::TeleportStart()
 }
 void Player::TeleportUpdate(float _Delta)
 {
+	if (true != IsTurnPlayer)
+	{
+		ChangeState(PlayerState::TeleportOff);
+		return;
+	}
+
 	unsigned int ColorCheck;
 	// 마우스 이용, 마우스 좌클릭시 애니메이션 전환
 	if (GameEngineInput::IsDown(VK_LBUTTON))
@@ -1456,6 +1468,11 @@ void Player::AirStrikeStart()
 }
 void Player::AirStrikeUpdate(float _Delta)
 {
+	if (true != IsTurnPlayer)
+	{
+		ChangeState(PlayerState::AirStrikeOff);
+		return;
+	}
 	// 마우스 위치 이용해서 목표 설정
 	// 하늘에서 미사일 5개 스폰
 
@@ -1609,6 +1626,11 @@ void Player::DonkeyStart()
 }
 void Player::DonkeyUpdate(float _Delta)
 {
+	if (true != IsTurnPlayer)
+	{
+		ChangeState(PlayerState::DonkeyOff);
+		return;
+	}
 	//ChangeAnimationState("DonkeyFire");
 
 	
@@ -1892,6 +1914,12 @@ void Player::SuperSheepStart()
 }
 void Player::SuperSheepUpdate(float _Delta)
 {
+	if (true != IsTurnPlayer)
+	{
+		ChangeState(PlayerState::SuperSheepOff);
+		return;
+	}
+
 	if (GameEngineInput::IsDown('1'))
 	{
 		ChangeState(PlayerState::SuperSheepOff);

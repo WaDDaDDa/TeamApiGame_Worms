@@ -1701,6 +1701,12 @@ void Player::ChangeWeapon()
 		return;
 	}
 
+	if (true == GameEngineInput::IsDown('O'))
+	{
+		ChangeState(PlayerState::DonkeyOn);
+		return;
+	}
+
 
 
 	//Debug Key
