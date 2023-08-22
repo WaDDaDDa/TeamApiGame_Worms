@@ -50,7 +50,7 @@ void GameTurn::Init()
 
 void GameTurn::Update(float _Delta)
 {
-	TurnPlayer = Player::GetAllPlayer()[StartValue];
+	//TurnPlayer = Player::GetAllPlayer()[StartValue];
 	GameOverCheck();
 
 	TurnTime = TurnPlayTime - GetLiveTime();
