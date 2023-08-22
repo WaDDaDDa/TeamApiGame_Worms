@@ -11,7 +11,9 @@
 #include "BackGround.h"
 #include "BackGroundEffect.h"
 #include "Ground.h"
-#include "Wave.h"
+#include "BackWave.h"
+#include "FrontWave.h"
+
 #include "Wind.h"
 #include "UnderWater.h"
 #include "Player.h"
@@ -90,17 +92,17 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 
 
 		
-		Wave* Wave1 = CreateActor<Wave>(RenderOrder::BackWave);
-		Wave1->SetPos({ 0.0f,1775.0f });
-		GameEngineActor* Wave2 = CreateActor<Wave>(RenderOrder::BackWave);
+		GameEngineActor* Wave1 = CreateActor<BackWave>(RenderOrder::BackWave);
+		Wave1->SetPos({ 0.0f,1800.0f });
+		GameEngineActor* Wave2 = CreateActor<BackWave>(RenderOrder::BackWave);
 		
-		Wave2->SetPos({ -30.0f,1800.0f });
-		GameEngineActor* Wave3 = CreateActor<Wave>(RenderOrder::BackWave);
-		Wave3->SetPos({ 60.0f,1825.0f});
-		GameEngineActor* Wave4 = CreateActor<Wave>(RenderOrder::FrontWave);
-		Wave4->SetPos({ -90.0f,1850.0f});
-		GameEngineActor* Wave5 = CreateActor<Wave>(RenderOrder::FrontWave);
-		Wave5->SetPos({ 120.0f,1875.0f });
+		Wave2->SetPos({ -30.0f,1825.0f });
+		GameEngineActor* Wave3 = CreateActor<BackWave>(RenderOrder::FrontWave);
+		Wave3->SetPos({ 60.0f,1850.0f });
+		GameEngineActor* Wave4 = CreateActor<FrontWave>(RenderOrder::FrontWave);
+		Wave4->SetPos({ -90.0f,1875.0f });
+		GameEngineActor* Wave5 = CreateActor<FrontWave>(RenderOrder::FrontWave);
+		Wave5->SetPos({ 120.0f,1900.0f });
 		UnderWater* NewUnderWater = CreateActor<UnderWater>();
 		NewUnderWater->DrawAtStage(this);
 
