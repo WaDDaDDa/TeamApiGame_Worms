@@ -84,6 +84,10 @@ void Player::IdleUpdate(float _Delta)
 	if (GameEngineInput::IsDown(VK_LBUTTON))
 	{
 		TargetPos = MouseObject::GetPlayMousePos();
+	}
+	
+	if (GameEngineInput::IsDown('T'))
+	{
 		CreateWeapon<TestWeapon>();
 	}
 
