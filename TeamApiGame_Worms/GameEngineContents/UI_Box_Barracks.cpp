@@ -2,9 +2,12 @@
 
 #include <GameEngineCore/ResourcesManager.h>
 #include <GameEngineCore/GameEngineRenderer.h>
+#include <GameEngineCore/GameEngineCollision.h>
+
+#include "GameStateManager.h"
+
 #include "ContentsEnum.h"
-#include "UI_Button.h"
-#include <GameEngineCore/GameEngineLevel.h>
+#include <GameEnginePlatform/GameEngineInput.h>
 
 UI_Box_Barracks::UI_Box_Barracks()
 {
@@ -16,6 +19,7 @@ UI_Box_Barracks::~UI_Box_Barracks()
 
 void UI_Box_Barracks::Start()
 {
+#pragma region 리소스 로딩
 	GameEnginePath FilePath;
 	FilePath.SetCurrentPath();
 	FilePath.MoveParentToExistsChild("ContentsResources");
@@ -58,37 +62,190 @@ void UI_Box_Barracks::Start()
 		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("UI_Teams_6Up.bmp"));
 	}
 
-	MainRenderer = CreateRenderer(RenderOrder::UI);
+#pragma endregion
+
+#pragma region 렌더러 초기 세팅
+
+	MainRenderer = CreateRenderer("UI_Barracks.bmp", RenderOrder::UI);
 	MainRenderer->SetRenderScale({ 530, 250 });
-	MainRenderer->SetTexture("UI_Barracks.bmp");
 
+	MainCollision = CreateCollision(CollisionOrder::UI);
+	MainCollision->SetCollisionType(CollisionType::Rect);
+	MainCollision->SetCollisionScale({ 480, 180 });
+	MainCollision->SetCollisionPos({ 0, 18 });
 
-	// Box 내부의 버튼 세팅
-	UI_Button* TestButton = GetLevel()->CreateActor<UI_Button>();
-	TestButton->InitButtonData("UI_Teams_1Up", { 80, 24 }, false);
-	TestButton->SetPos({ 740, 342 });
+	float4 StartPos = { -190, -55 };
 
-	UI_Button* TestButton2 = GetLevel()->CreateActor<UI_Button>();
-	TestButton2->InitButtonData("UI_Teams_2Up", { 80, 24 }, false);
-	TestButton2->SetPos({ 740, 372 });
+	// 플레이어 최대 인원만큼 렌더러를 생성합니다.
+	for (int PlayerIndex = 0; PlayerIndex < 6; PlayerIndex++)
+	{
+		GameEngineRenderer* TeamRenderer = CreateRenderer(RenderOrder::UI);
+		TeamRenderer->SetRenderScale({ 80, 24 });
+		float4 initPos = { StartPos.X, StartPos.Y + 30 * PlayerIndex };
 
-	UI_Button* TestButton3 = GetLevel()->CreateActor<UI_Button>();
-	TestButton3->InitButtonData("UI_Teams_3Up", { 80, 24 }, false);
-	TestButton3->SetPos({ 740, 402 });
+		switch (PlayerIndex)
+		{
+		case 0:
+			TeamRenderer->SetTexture("UI_Teams_1Up.bmp");
+			TeamRenderer->SetRenderPos(initPos);
+			AllTeamRenderers.push_back(TeamRenderer);
+			AllTeamRenderPos.push_back(initPos);
+			break;
 
-	UI_Button* TestButton4 = GetLevel()->CreateActor<UI_Button>();
-	TestButton4->InitButtonData("UI_Teams_4Up", { 80, 24 }, false);
-	TestButton4->SetPos({ 740, 432 });
+		case 1:
+			TeamRenderer->SetTexture("UI_Teams_2Up.bmp");
+			TeamRenderer->SetRenderPos(initPos);
+			AllTeamRenderers.push_back(TeamRenderer);
+			AllTeamRenderPos.push_back(initPos);
+			break;
 
-	UI_Button* TestButton5 = GetLevel()->CreateActor<UI_Button>();
-	TestButton5->InitButtonData("UI_Teams_5Up", { 80, 24 }, false);
-	TestButton5->SetPos({ 740, 462 });
+		case 2:
+			TeamRenderer->SetTexture("UI_Teams_3Up.bmp");
+			TeamRenderer->SetRenderPos(initPos);
+			AllTeamRenderers.push_back(TeamRenderer);
+			AllTeamRenderPos.push_back(initPos);
+			break;
 
-	UI_Button* TestButton6 = GetLevel()->CreateActor<UI_Button>();
-	TestButton6->InitButtonData("UI_Teams_6Up", { 80, 24 }, false);
-	TestButton6->SetPos({ 740, 492 });
+		case 3:
+			TeamRenderer->SetTexture("UI_Teams_4Up.bmp");
+			TeamRenderer->SetRenderPos(initPos);
+			AllTeamRenderers.push_back(TeamRenderer);
+			AllTeamRenderPos.push_back(initPos);
+			break;
+
+		case 4:
+			TeamRenderer->SetTexture("UI_Teams_5Up.bmp");
+			TeamRenderer->SetRenderPos(initPos);
+			AllTeamRenderers.push_back(TeamRenderer);
+			AllTeamRenderPos.push_back(initPos);
+			break;
+
+		case 5:
+			TeamRenderer->SetTexture("UI_Teams_6Up.bmp");
+			TeamRenderer->SetRenderPos(initPos);
+			AllTeamRenderers.push_back(TeamRenderer);
+			AllTeamRenderPos.push_back(initPos);
+			break;
+
+		default:
+			break;
+		}
+	}
+
+#pragma endregion
+
+	ChangeState(BUTTON_STATE::BUTTON_STATE_UNHOVERED);
 }
 
 void UI_Box_Barracks::Update(float _Delta)
 {
+	StateUpdate();
+	CheckButtonCollision();
 }
+
+void UI_Box_Barracks::AddPlayerTeam()
+{
+	if (m_SelectIndex < 5)
+	{
+		++m_SelectIndex;
+	}
+
+	else
+	{
+		m_SelectIndex = 6;
+	}
+
+	ChangePlayerTeamLayout(m_SelectIndex);
+
+	GameStateManager::GameState->SetTeamNumber(m_SelectIndex);
+	
+	ChangeState(BUTTON_STATE::BUTTON_STATE_HOVERED);
+}
+
+void UI_Box_Barracks::ChangePlayerTeamLayout(int _CurPlayerSelectIndex)
+{
+	for (size_t i = 0; i < _CurPlayerSelectIndex; i++)
+	{
+		AllTeamRenderers[i]->Off();
+
+		for (size_t j = _CurPlayerSelectIndex; j < AllTeamRenderers.size(); j++)
+		{
+			AllTeamRenderers[j]->SetRenderPos(AllTeamRenderPos[j - i - 1]);
+		}
+	}
+}
+
+void UI_Box_Barracks::StateUpdate()
+{
+	switch (ButtonState)
+	{
+	case BUTTON_STATE::BUTTON_STATE_HOVERED:
+		CheckButtonClick();
+		break;
+
+	case BUTTON_STATE::BUTTON_STATE_UNHOVERED:
+		break;
+
+	case BUTTON_STATE::BUTTON_STATE_CLICKED:
+		AddPlayerTeam();
+		break;
+
+	default:
+		break;
+	}
+}
+
+void UI_Box_Barracks::ChangeState(BUTTON_STATE _ButtonState)
+{
+	ButtonState = _ButtonState;
+}
+
+void UI_Box_Barracks::CheckButtonClick()
+{
+	if (true == GameEngineInput::IsDown(VK_LBUTTON))
+	{
+		ChangeState(BUTTON_STATE::BUTTON_STATE_CLICKED);
+	}
+
+	if (true == GameEngineInput::IsFree(VK_LBUTTON) && true == GameEngineInput::IsFree(VK_RBUTTON))
+	{
+		ChangeState(BUTTON_STATE::BUTTON_STATE_HOVERED);
+	}
+}
+
+
+void UI_Box_Barracks::CheckButtonCollision()
+{
+	if (nullptr != MainCollision)
+	{
+
+		MainCollision->CollisionCallBack
+		(
+			CollisionOrder::Mouse
+			, CollisionType::Rect // _this의 충돌체 타입
+			, CollisionType::CirCle // _Other의 충돌체 타입
+			, [](GameEngineCollision* _this, GameEngineCollision* _Other)
+			{
+				GameEngineActor* thisActor = _this->GetActor();
+				UI_Box_Barracks* ButtonPtr = dynamic_cast<UI_Box_Barracks*>(thisActor);
+
+				ButtonPtr->ChangeState(BUTTON_STATE::BUTTON_STATE_HOVERED);
+			}
+
+			, [](GameEngineCollision* _this, GameEngineCollision* _Other)
+				{
+
+				}
+
+				, [](GameEngineCollision* _this, GameEngineCollision* _Other)
+					{
+						GameEngineActor* thisActor = _this->GetActor();
+						UI_Box_Barracks* ButtonPtr = dynamic_cast<UI_Box_Barracks*>(thisActor);
+
+						ButtonPtr->ChangeState(BUTTON_STATE::BUTTON_STATE_UNHOVERED);
+					}
+				);
+
+	}
+}
+

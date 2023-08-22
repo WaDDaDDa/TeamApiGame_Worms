@@ -110,7 +110,6 @@ void UI_Box_AllTeamHpBar::AddTeamHpBar()
 		// HP바 Sort에 사용할 초기 위치를 저장해줍니다.
 		AllTeamHpBarPos.push_back(initPos);
 
-
 		int InitPlayerHp = Player::GetAllPlayer()[PlayerIndex]->GetHp();
 
 		// 각 HP바의 Hp관련 값들을 초기 Player들의 Hp값으로 초기화 해줍니다.

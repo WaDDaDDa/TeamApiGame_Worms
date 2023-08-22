@@ -179,12 +179,6 @@ void UI_TeamHpBar::DecreaseHpBar()
 	// step0. Hp바를 변동시킬 수 있는 상황인지 먼저 체크하여 활성화해줍니다.
 	trigger_UpdateHP = true;
 
-	// *** 추후 이 값을 변동시킬 것
-	// *** Scale.X의 기본값이 될 값을 설정해줍니다. (추후에 입력받은 값으로 바뀌도록 변경할 예정)
-//	HpBarWidth = TeamHpRenderer->GetRenderScale().X;
-
-//	CurHpBarAmount = MaxHpBarAmount;
-
 }
 
 void UI_TeamHpBar::InitMoveSortedHpbars(float4 _StartPos, float4 _DestPos, float _MoveSpeed)

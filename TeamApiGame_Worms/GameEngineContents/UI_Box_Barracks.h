@@ -1,7 +1,8 @@
 #pragma once
-#include <GameEngineCore/GameEngineActor.h>
+#include "UI_Button.h"
+#include <vector>
 
-class UI_Box_Barracks : public GameEngineActor
+class UI_Box_Barracks : public UI_Button
 {
 public:
 	UI_Box_Barracks();
@@ -12,11 +13,27 @@ public:
 	UI_Box_Barracks& operator=(const UI_Box_Barracks& _Other) = delete;
 	UI_Box_Barracks& operator=(UI_Box_Barracks&& _Other) noexcept = delete;
 
+	void AddPlayerTeam();
+	void ChangePlayerTeamLayout(int _CurPlayerSelectIndex);
+
+	void StateUpdate();
+	void CheckButtonCollision();
+	void CheckButtonClick();
+
+	void ChangeState(BUTTON_STATE _ButtonState);
+
+	int m_SelectIndex = 0;
+
 protected:
 	void Start() override;
 	void Update(float _Delta) override;
 
 private:
+	std::vector<GameEngineRenderer*> AllTeamRenderers;
+	std::vector<float4> AllTeamRenderPos;
+
+	GameEngineCollision* MainCollision = nullptr;
+
 	GameEngineRenderer* MainRenderer = nullptr;
 
 };
