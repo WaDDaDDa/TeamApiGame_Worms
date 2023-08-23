@@ -402,6 +402,7 @@ private:
 	float4 LeftCheckPos = float4{ -5.0f, -10.0f };
 	float4 RightCheckPos = float4{ 5.0f, -10.0f };
 	float4 UpCheckPos = float4{ 0 , -20.0f };
+	float4 DownCheckPos = float4{ 0, 5.0f };
 
 	float ChargingTime = 0.0f;
 	float MaxChargingTime = 3.0f;

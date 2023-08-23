@@ -207,6 +207,9 @@
     <ClCompile Include="FrontWave.cpp">
       <Filter>Map</Filter>
     </ClCompile>
+    <ClCompile Include="BackLand.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentCore.h" />
@@ -413,6 +416,9 @@
       <Filter>Effect</Filter>
     </ClInclude>
     <ClInclude Include="FrontWave.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="BackLand.h">
       <Filter>Map</Filter>
     </ClInclude>
   </ItemGroup>

@@ -334,7 +334,6 @@ void Player::DamagingStart()
 			WeaponPos = Actor->GetPos();
 
 			Collision->Off();
-
 			//PlayerBodyCollision->Off();
 		}
 		float4 PlayerGetPos = GetPos();
@@ -384,9 +383,8 @@ void Player::DamagingUpdate(float _Delta)
 			Dir = PlayerDir::Left;
 		}
 
-
 		GravityDirMul = (GravityDir.Y + 1) * 90;
-		GravityDir.Y += _Delta * 1.5;
+		GravityDir.Y += _Delta;
 
 		int iGravityDirMul = static_cast<int>(GravityDirMul);
 
@@ -492,9 +490,151 @@ void Player::DamagingUpdate(float _Delta)
 	}
 
 
-	unsigned int Color = GetGroundColor(RGB(255, 255, 255));
+	// Uzi 연속 인식
+	{
+		UI_PlayerDamage* DamageUI = GetLevel()->CreateActor<UI_PlayerDamage>();
+		std::vector<GameEngineCollision*> _Col;
+		if (true == PlayerBodyCollision->Collision(CollisionOrder::ShotHit, _Col
+			, CollisionType::Rect
+			, CollisionType::CirCle
+		))
+		{
+			float4 WeaponPos = float4::ZERO;
 
-	if (RGB(255, 255, 255) != Color)
+			float4 WeaponPlayerPos = float4::ZERO;
+			float WeaponDamage = 0.0f;
+
+			for (size_t i = 0; i < _Col.size(); i++)
+			{
+				GameEngineCollision* Collision = _Col[i];
+
+				GameEngineActor* Actor = Collision->GetActor();
+
+				BombEffect* Effect = dynamic_cast<BombEffect*>(Collision->GetActor());
+
+				WeaponDamage = Effect->GetDamage();
+
+				WeaponPos = Actor->GetPos();
+
+				Collision->Off();
+				//PlayerBodyCollision->Off();
+			}
+			float4 PlayerGetPos = GetPos();
+			PlayerGetPos.Y -= 15.0f;
+			GravityDir = PlayerGetPos - WeaponPos;
+			GravityDir.Normalize();
+			GravityDir += float4::UP;
+
+
+			// Damage 받는 부분
+			{
+				WeaponPlayerPos = GetPos() - WeaponPos;
+
+				float Damaging = WeaponDamage - (WeaponPlayerPos.Size());
+
+				if (0 >= Damaging)
+				{
+					Damaging = 1;
+				}
+
+				// 데미지 UI 출력
+				DamageUI->UpdateData_PlayerDamageUI(PlayerInfoUI->GetPos(), static_cast<int>(Damaging), Player::TurnPlayerIndex);
+
+				this->Hp -= static_cast<int>(Damaging);
+
+				UI_Box_AllTeamHpBar::GetAllTeamHpBarUI()->InitTeamHpBarData(TurnPlayerIndex, Hp);
+			}
+
+			SetGravityVector(GravityDir * 150.0f);
+		}
+
+	}
+
+
+	unsigned int DownCheckColor = GetGroundColor(RGB(255, 255, 255), DownCheckPos);
+	unsigned int UpCheckColor = GetGroundColor(RGB(255, 255, 255), UpCheckPos);
+	unsigned int LeftCheckColor = GetGroundColor(RGB(255, 255, 255), LeftCheckPos);
+	unsigned int RightCheckColor = GetGroundColor(RGB(255, 255, 255), RightCheckPos);
+
+	if (RGB(255, 255, 255) != UpCheckColor)
+	{
+		SetGravityVector({ GravityDir.X, 1.0f });
+
+		unsigned int CheckColor = GetGroundColor(RGB(255, 255, 255), UpCheckPos);
+
+		while (CheckColor != RGB(255, 255, 255))
+		{
+			CheckColor = GetGroundColor(RGB(255, 255, 255), UpCheckPos);
+			AddPos(float4::DOWN);
+		}
+	}
+
+	if (RGB(255, 255, 255) != LeftCheckColor)
+	{
+		if (0 >= GravityDir.X)
+		{
+			SetGravityVector({ -GravityDir.X , GravityDir.Y });
+		}
+		else
+		{
+			SetGravityVector(GravityDir);
+		}
+
+		unsigned int CheckColor = GetGroundColor(RGB(255, 255, 255), LeftCheckPos);
+
+		while (CheckColor != RGB(255, 255, 255))
+		{
+			CheckColor = GetGroundColor(RGB(255, 255, 255), LeftCheckPos);
+			AddPos(float4::RIGHT);
+		}
+	}
+
+	if (RGB(255, 255, 255) != RightCheckColor)
+	{
+		if (0 <= GravityDir.X)
+		{
+			SetGravityVector({ -GravityDir.X, GravityDir.Y });
+		}
+		else
+		{
+			SetGravityVector(GravityDir);
+		}
+
+		unsigned int CheckColor = GetGroundColor(RGB(255, 255, 255), RightCheckPos);
+
+		while (CheckColor != RGB(255, 255, 255))
+		{
+			CheckColor = GetGroundColor(RGB(255, 255, 255), RightCheckPos);
+			AddPos(float4::LEFT);
+		}
+	}
+
+	
+	
+
+	//if (RGB(255, 255, 255) == Color)
+	//{
+	//	Gravity(_Delta);
+	//}
+	//else // 모두흰색이 아니다 = 땅에닿아있다.
+	//{
+	//	unsigned int CheckColor = GetGroundColor(RGB(255, 255, 255), float4::UP);
+
+	//	// 체크중 어느하나라도  흰색이 아니라면 한칸올리기 반복한다.
+	//	while (CheckColor != RGB(255, 255, 255))
+	//	{
+	//		CheckColor = GetGroundColor(RGB(255, 255, 255), float4::UP);
+
+	//		AddPos(float4::UP);
+	//	}
+
+	//	GravityReset();
+	//}
+
+
+
+
+	if (RGB(255, 255, 255) != DownCheckColor)
 	{
 		GravityReset();
 		//ChangeState(PlayerState::Death);

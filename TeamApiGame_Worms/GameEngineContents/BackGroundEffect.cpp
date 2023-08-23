@@ -109,7 +109,7 @@ void BackGroundEffect::Update(float _Delta)
 
 	{
 		if (-10.0f > GetPos().X ||
-			BACKGROUND_SCALE.X + 10.0f < GetPos().X ||
+			PLAY_GROUND_SCALE.X + 10.0f < GetPos().X ||
 			1870.0f<GetPos().Y)
 		{
 			Death();
