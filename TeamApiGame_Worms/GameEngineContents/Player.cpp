@@ -11,6 +11,7 @@
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/GameEngineCamera.h>
 #include <GameEngineCore/GameEngineCollision.h>
+#include <GameEnginePlatform/GameEngineSound.h>
 
 #include "UI_PlayerInfo.h"
 #include "GameStateManager.h"
@@ -963,6 +964,23 @@ void Player::Start()
 			CrossHairRenderer->CreateAnimation("Right_CrossHair" + std::to_string(i), "crshairb_R.bmp", i, i, 0.1f, false);
 		}
 
+	}
+
+
+
+	// 폭발 사운드 로드
+	if (nullptr == GameEngineSound::FindSound("Explosion1.WAV"))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Explosion1.WAV"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Explosion2.WAV"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Explosion3.WAV"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("splish.WAV"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("THROWRELEASE.WAV"));
 	}
 	
 	{

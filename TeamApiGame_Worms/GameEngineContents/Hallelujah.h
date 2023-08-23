@@ -1,5 +1,6 @@
 #pragma once
 #include "Weapon.h"
+#include <GameEnginePlatform/GameEngineSound.h>
 
 enum class HallelujahState
 {
@@ -83,6 +84,8 @@ private:
 	void Render(float _Delta) override;
 	void LevelStart() override;
 	void Update(float _Delta) override;
+
+	GameEngineSoundPlayer SoundEffect;
 
 };
 
