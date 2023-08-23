@@ -1755,6 +1755,7 @@ void Player::DamagingCheck()
 			GameEngineCollision* Collison = _Col[i];
 
 			GameEngineActor* Actor = Collison->GetActor();
+
 		}
 		ChangeState(PlayerState::Damaging);
 	}
