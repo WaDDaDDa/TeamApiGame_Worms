@@ -376,6 +376,11 @@ private:
 
 	int DamageCount = 0;
 
+	float4 GravityDir = float4::ZERO;
+
+	float GravityDirMul = 0;
+	
+
 	// Uzi ฐüทร
 	int UziAnimationNumber = 0;
 	int UziCount = 0;

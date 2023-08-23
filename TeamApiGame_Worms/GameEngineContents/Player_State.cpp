@@ -247,7 +247,7 @@ void Player::FallingUpdate(float _Delta)
 
 void Player::DamagingStart()
 {
-	ChangeAnimationState("Damaging");
+	ChangeAnimationState("Damaging0");
 
 	// 데미지 UI 생성
 	UI_PlayerDamage* DamageUI = GetLevel()->CreateActor<UI_PlayerDamage>();
@@ -259,7 +259,6 @@ void Player::DamagingStart()
 	))
 	{
 		float4 WeaponPos = float4::ZERO;
-		float4 GravityDir = float4::ZERO;
 
 		float4 WeaponPlayerPos = float4::ZERO;
 		float WeaponDamage = 0.0f;
@@ -280,7 +279,9 @@ void Player::DamagingStart()
 			
 			//PlayerBodyCollision->Off();
 		}
-		GravityDir = GetPos() - WeaponPos;
+		float4 PlayerGetPos = GetPos();
+		PlayerGetPos.Y -= 15.0f;
+		GravityDir = PlayerGetPos - WeaponPos;
 		GravityDir.Normalize();
 		GravityDir += float4::UP;
 
@@ -316,7 +317,6 @@ void Player::DamagingStart()
 	))
 	{
 		float4 WeaponPos = float4::ZERO;
-		float4 GravityDir = float4::ZERO;
 
 		float4 WeaponPlayerPos = float4::ZERO;
 		float WeaponDamage = 0.0f;
@@ -337,7 +337,9 @@ void Player::DamagingStart()
 
 			//PlayerBodyCollision->Off();
 		}
-		GravityDir = GetPos() - WeaponPos;
+		float4 PlayerGetPos = GetPos();
+		PlayerGetPos.Y -= 15.0f;
+		GravityDir = PlayerGetPos - WeaponPos;
 		GravityDir.Normalize();
 		GravityDir += float4::UP;
 
@@ -350,7 +352,7 @@ void Player::DamagingStart()
 
 			if (0 >= Damaging)
 			{
-				Damaging = 5;
+				Damaging = 1;
 			}
 
 			// 데미지 UI 출력
@@ -361,12 +363,134 @@ void Player::DamagingStart()
 			UI_Box_AllTeamHpBar::GetAllTeamHpBarUI()->InitTeamHpBarData(TurnPlayerIndex, Hp);
 		}
 
-		SetGravityVector(GravityDir * 250.0f);
+		SetGravityVector(GravityDir * 150.0f);
 	}
+	ResetLiveTime();
 }
 void Player::DamagingUpdate(float _Delta)
 {
-	GroundCheck(_Delta);
+	//GroundCheck(_Delta);
+
+	Gravity(_Delta);
+
+	// Damaging Angle -> ChangeAnimation
+	{
+		if (0 <= GravityDir.X)
+		{
+			Dir = PlayerDir::Right;
+		}
+		if (0 > GravityDir.X)
+		{
+			Dir = PlayerDir::Left;
+		}
+
+
+		GravityDirMul = (GravityDir.Y + 1) * 90;
+		GravityDir.Y += _Delta * 1.5;
+
+		int iGravityDirMul = static_cast<int>(GravityDirMul);
+
+		switch (iGravityDirMul)
+		{
+		case -90:
+			ChangeAnimationState("Damaging0");
+			break;
+		case -84:
+			ChangeAnimationState("Damaging1");
+			break;
+		case -78:
+			ChangeAnimationState("Damaging2");
+			break;
+		case -73:
+			ChangeAnimationState("Damaging3");
+			break;
+		case -67:
+			ChangeAnimationState("Damaging4");
+			break;
+		case -61:
+			ChangeAnimationState("Damaging5");
+			break;
+		case -56:
+			ChangeAnimationState("Damaging6");
+			break;
+		case -50:
+			ChangeAnimationState("Damaging7");
+			break;
+		case -45:
+			ChangeAnimationState("Damaging8");
+			break;
+		case -39:
+			ChangeAnimationState("Damaging9");
+			break;
+		case -33:
+			ChangeAnimationState("Damaging10");
+			break;
+		case -28:
+			ChangeAnimationState("Damaging11");
+			break;
+		case -22:
+			ChangeAnimationState("Damaging12");
+			break;
+		case -16:
+			ChangeAnimationState("Damaging13");
+			break;
+		case -11:
+			ChangeAnimationState("Damaging14");
+			break;
+		case -5:
+			ChangeAnimationState("Damaging15");
+			break;
+		case 0:
+			ChangeAnimationState("Damaging16");
+			break;
+		case 5:
+			ChangeAnimationState("Damaging17");
+			break;
+		case 11:
+			ChangeAnimationState("Damaging18");
+			break;
+		case 16:
+			ChangeAnimationState("Damaging19");
+			break;
+		case 22:
+			ChangeAnimationState("Damaging20");
+			break;
+		case 28:
+			ChangeAnimationState("Damaging21");
+			break;
+		case 33:
+			ChangeAnimationState("Damaging22");
+			break;
+		case 39:
+			ChangeAnimationState("Damaging23");
+			break;
+		case 45:
+			ChangeAnimationState("Damaging24");
+			break;
+		case 50:
+			ChangeAnimationState("Damaging25");
+			break;
+		case 56:
+			ChangeAnimationState("Damaging26");
+			break;
+		case 61:
+			ChangeAnimationState("Damaging27");
+			break;
+		case 67:
+			ChangeAnimationState("Damaging28");
+			break;
+		case 73:
+			ChangeAnimationState("Damaging29");
+			break;
+		case 78:
+			ChangeAnimationState("Damaging30");
+			break;
+		case 84:
+			ChangeAnimationState("Damaging31");
+			break;
+		}
+	}
+
 
 	unsigned int Color = GetGroundColor(RGB(255, 255, 255));
 

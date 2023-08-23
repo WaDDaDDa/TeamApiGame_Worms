@@ -912,6 +912,13 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Right_Diving1", "DivingRight.bmp", 0, 2, 0.1f, false);
 		MainRenderer->CreateAnimation("Right_Diving2", "DivingRight.bmp", 2, 0, 0.1f, false);
 
+		// DamagingAnimation
+		for (int i = 0; i < 32; i++)
+		{
+			MainRenderer->CreateAnimation("Left_Damaging" + std::to_string(i), "wfly1_L.bmp", i, i, 0.1f, false);
+			MainRenderer->CreateAnimation("Right_Damaging" + std::to_string(i), "wfly1_R.bmp", i, i, 0.1f, false);
+		}
+
 		// BazookaAnimation
 		for (int i = 0; i < 32; i++)
 		{
