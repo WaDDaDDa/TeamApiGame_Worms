@@ -1863,7 +1863,7 @@ void Player::SetGauge(float _Delta)
 	GaugePos = CrossHairPos;
 	GaugePos.Normalize();
 
-	if (0.1f <= ChargingTime)
+	if (MaxChargingTime / 16 * 1 <= ChargingTime)
 	{
 		GaugeRenderer0->On();
 		GaugeRenderer0->SetRenderPos({ GaugePos.X * 5.75f * 1, (GaugePos.Y * 5.75f * 1) - 15 });
@@ -1871,77 +1871,77 @@ void Player::SetGauge(float _Delta)
 		float4 DebugPos = GaugeRenderer0->GetRenderPos();
 		int a = 0;
 	}
-	if (0.2f <= ChargingTime)
+	if (MaxChargingTime / 16 * 2 <= ChargingTime)
 	{
 		GaugeRenderer1->On();
 		GaugeRenderer1->SetRenderPos({ GaugePos.X * 5.75f * 2, (GaugePos.Y * 5.75f * 2) - 15 });
 	}
-	if (0.3f <= ChargingTime)
+	if (MaxChargingTime / 16 * 3 <= ChargingTime)
 	{
 		GaugeRenderer2->On();
 		GaugeRenderer2->SetRenderPos({ GaugePos.X * 5.75f * 3, (GaugePos.Y * 5.75f * 3) - 15 });
 	}
-	if (0.4f <= ChargingTime)
+	if (MaxChargingTime / 16 * 4 <= ChargingTime)
 	{
 		GaugeRenderer3->On();
 		GaugeRenderer3->SetRenderPos({ GaugePos.X * 5.75f * 4, (GaugePos.Y * 5.75f * 4) - 15 });
 	}
-	if (0.5f <= ChargingTime)
+	if (MaxChargingTime / 16 * 5 <= ChargingTime)
 	{
 		GaugeRenderer4->On();
 		GaugeRenderer4->SetRenderPos({ GaugePos.X * 5.75f * 5, (GaugePos.Y * 5.75f * 5) - 15 });
 	}
-	if (0.6f <= ChargingTime)
+	if (MaxChargingTime / 16 * 6 <= ChargingTime)
 	{
 		GaugeRenderer5->On();
 		GaugeRenderer5->SetRenderPos({ GaugePos.X * 5.75f * 6, (GaugePos.Y * 5.75f * 6) - 15 });
 	}
-	if (0.7f <= ChargingTime)
+	if (MaxChargingTime / 16 * 7 <= ChargingTime)
 	{
 		GaugeRenderer6->On();
 		GaugeRenderer6->SetRenderPos({ GaugePos.X * 5.75f * 7, (GaugePos.Y * 5.75f * 7) - 15 });
 	}
-	if (0.8f <= ChargingTime)
+	if (MaxChargingTime / 16 * 8 <= ChargingTime)
 	{
 		GaugeRenderer7->On();
 		GaugeRenderer7->SetRenderPos({ GaugePos.X * 5.75f * 8, (GaugePos.Y * 5.75f * 8) - 15 });
 	}
-	if (0.9f <= ChargingTime)
+	if (MaxChargingTime / 16 * 9 <= ChargingTime)
 	{
 		GaugeRenderer8->On();
 		GaugeRenderer8->SetRenderPos({ GaugePos.X * 5.75f * 9, (GaugePos.Y * 5.75f * 9) - 15 });
 	}
-	if (1.0f <= ChargingTime)
+	if (MaxChargingTime / 16 * 10 <= ChargingTime)
 	{
 		GaugeRenderer9->On();
 		GaugeRenderer9->SetRenderPos({ GaugePos.X * 5.75f * 10, (GaugePos.Y * 5.75f * 10) - 15 });
 	}
-	if (1.1f <= ChargingTime)
+	if (MaxChargingTime / 16 * 11 <= ChargingTime)
 	{
 		GaugeRenderer10->On();
 		GaugeRenderer10->SetRenderPos({ GaugePos.X * 5.75f * 11, (GaugePos.Y * 5.75f * 11) - 15 });
 	}
-	if (1.2f <= ChargingTime)
+	if (MaxChargingTime / 16 * 12 <= ChargingTime)
 	{
 		GaugeRenderer11->On();
 		GaugeRenderer11->SetRenderPos({ GaugePos.X * 5.75f * 12, (GaugePos.Y * 5.75f * 12) - 15 });
 	}
-	if (1.3f <= ChargingTime)
+	if (MaxChargingTime / 16 * 13 <= ChargingTime)
 	{
 		GaugeRenderer12->On();
 		GaugeRenderer12->SetRenderPos({ GaugePos.X * 5.75f * 13, (GaugePos.Y * 5.75f * 13) - 15 });
 	}
-	if (1.4f <= ChargingTime)
+	if (MaxChargingTime / 16 * 14 <= ChargingTime)
 	{
 		GaugeRenderer13->On();
 		GaugeRenderer13->SetRenderPos({ GaugePos.X * 5.75f * 14, (GaugePos.Y * 5.75f * 14) - 15 });
 	}
-	if (1.5f <= ChargingTime)
+	if (MaxChargingTime / 16 * 15 <= ChargingTime)
 	{
 		GaugeRenderer14->On();
 		GaugeRenderer14->SetRenderPos({ GaugePos.X * 5.75f * 15, (GaugePos.Y * 5.75f * 15) - 15 });
 	}
-	if (1.6f <= ChargingTime)
+	if (MaxChargingTime / 16 * 16 <= ChargingTime)
 	{
 		GaugeRenderer15->On();
 		GaugeRenderer15->SetRenderPos({ GaugePos.X * 5.75f * 16, (GaugePos.Y * 5.75f * 16) - 15 });

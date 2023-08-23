@@ -399,7 +399,7 @@ private:
 	float4 UpCheckPos = float4{ 0 , -20.0f };
 
 	float ChargingTime = 0.0f;
-	float MaxChargingTime = 1.6f;
+	float MaxChargingTime = 3.0f;
 
 	// 마우스로 클릭한 후 사용하는 무기의 마우스 클릭 좌표.
 	float4 TargetPos = float4::ZERO;
