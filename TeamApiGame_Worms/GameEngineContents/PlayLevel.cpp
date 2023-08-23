@@ -10,12 +10,13 @@
 #include "ContentsEnum.h"
 #include "BackGround.h"
 #include "BackGroundEffect.h"
+#include "BackLand.h"
 #include "Ground.h"
 #include "BackWave.h"
 #include "FrontWave.h"
+#include "UnderWater.h"
 
 #include "Wind.h"
-#include "UnderWater.h"
 #include "Player.h"
 #include "GameTurn.h"
 #include "MouseObject.h"
@@ -90,7 +91,7 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 		
 		BackGroundPtr->VerticalPatternInit("gradient.Bmp", {5000.0f,2000.0f});
 
-
+		GameEngineActor* NewBackLand = CreateActor<BackLand>(RenderOrder::BackLand);
 		
 		GameEngineActor* Wave1 = CreateActor<BackWave>(RenderOrder::BackWave);
 		Wave1->SetPos({ 0.0f,1800.0f });
@@ -119,10 +120,10 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 	}
 
 	{
-		for (size_t i = 0; i < 30; i++)
+		for (size_t i = 0; i < 15; i++)
 		{
 			GameEngineActor* NewCloud = CreateActor<Cloud>(RenderOrder::BackGroundEffect);
-			float RandX = GameEngineRandom::MainRandom.RandomFloat(0.0f, BACKGROUND_SCALE.X);
+			float RandX = GameEngineRandom::MainRandom.RandomFloat(0.0f, PLAY_GROUND_SCALE.X);
 			float RandY = GameEngineRandom::MainRandom.RandomFloat(PLAY_GROUND_SCALE.hY() - 30.0f, PLAY_GROUND_SCALE.hY() + 30.0f);
 			NewCloud->SetPos({ RandX, RandY });
 		}
@@ -130,10 +131,10 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 
 	{
 		
-		for (size_t i = 0; i < 400; i++)
+		for (size_t i = 0; i < 150 ;i++)
 		{
 			GameEngineActor* NewBackEffect = CreateActor<BackGroundEffect>();
-			float RandX=GameEngineRandom::MainRandom.RandomFloat(0.0f, BACKGROUND_SCALE.X);
+			float RandX=GameEngineRandom::MainRandom.RandomFloat(0.0f, PLAY_GROUND_SCALE.X);
 			float RandY = GameEngineRandom::MainRandom.RandomFloat(PLAY_GROUND_SCALE.hY(), 1800.0f);
 			NewBackEffect->SetPos({ RandX,RandY });
 		}
@@ -202,7 +203,7 @@ void PlayLevel::Update(float _Delta)
 		if (0.0f >= CloudRespawn)
 		{
 			GameEngineActor* NewCloud = CreateActor<Cloud>(RenderOrder::BackGroundEffect);
-			CloudRespawn = GameEngineRandom::MainRandom.RandomFloat(0.0f, 4.0f);
+			CloudRespawn = GameEngineRandom::MainRandom.RandomFloat(0.0f, 5.0f);
 
 		}
 		CloudRespawn -= _Delta;
@@ -215,10 +216,10 @@ void PlayLevel::Update(float _Delta)
 			if (0.0f >= BackGroundEffectRespawn)
 			{
 				GameEngineActor* NewBackEffect = CreateActor<BackGroundEffect>(RenderOrder::BackGroundEffect);
-				float RandX = GameEngineRandom::MainRandom.RandomFloat(0.0f, BACKGROUND_SCALE.X);
+				float RandX = GameEngineRandom::MainRandom.RandomFloat(0.0f, PLAY_GROUND_SCALE.X);
 				NewBackEffect->SetPos({ RandX,PLAY_GROUND_SCALE.hY() });
 
-				BackGroundEffectRespawn = GameEngineRandom::MainRandom.RandomFloat(0.0f, 0.1f);
+				BackGroundEffectRespawn = GameEngineRandom::MainRandom.RandomFloat(0.0f, 0.2f);
 			}
 		
 			BackGroundEffectRespawn -= _Delta;

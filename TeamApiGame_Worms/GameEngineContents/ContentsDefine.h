@@ -13,5 +13,5 @@
 #define PLAYER_COLOR_CYAN      RGB(128, 254, 252)
 
 
-#define BACKGROUND_SCALE float4{5000.0f,2000.0f}
+
 #define PLAY_GROUND_SCALE float4{3000.0f,2000.0f}

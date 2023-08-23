@@ -15,6 +15,38 @@ Hole::~Hole()
 {
 }
 
+void Hole::Start()
+{
+
+	if (false == ResourcesManager::GetInst().IsLoadTexture("MagentaHole.Bmp"))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		GameEnginePath FolderPath = FilePath;
+
+		FilePath.MoveChild("ContentsResources\\Texture\\");
+
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("MagentaHole.Bmp"));
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("PixelMagentaHole.Bmp"));
+
+
+	}
+	 
+
+	Texture = ResourcesManager::GetInst().FindTexture("MagentaHole.Bmp");
+	PixelTexture = ResourcesManager::GetInst().FindTexture("PixelMagentaHole.Bmp");
+
+
+	{
+		GameEngineCollision* Collision = CreateCollision(CollisionOrder::Bomb);
+		Collision->SetCollisionType(CollisionType::CirCle);
+		Collision->SetCollisionScale(Scale);
+
+	}
+
+}
+
 void Hole::AddHoleAtGround(GameEngineRenderer* _GroundTexture, GameEngineRenderer* _GroundPixelTexture)
 {
 	if (nullptr == Texture)
@@ -54,35 +86,4 @@ float Hole::GetDistanceFromHoleCenter(float4 _Pos)
 	return Vector.Size();
 }
 
-void Hole::Start()
-{
-
-	if (false == ResourcesManager::GetInst().IsLoadTexture("MagentaHole.Bmp"))
-	{
-		GameEnginePath FilePath;
-		FilePath.SetCurrentPath();
-		FilePath.MoveParentToExistsChild("ContentsResources");
-		GameEnginePath FolderPath = FilePath;
-
-		FilePath.MoveChild("ContentsResources\\Texture\\");
-
-		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("MagentaHole.Bmp"));
-		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("PixelMagentaHole.Bmp"));
-
-
-	}
-	 
-
-	Texture = ResourcesManager::GetInst().FindTexture("MagentaHole.Bmp");
-	PixelTexture = ResourcesManager::GetInst().FindTexture("PixelMagentaHole.Bmp");
-
-
-	{
-		GameEngineCollision* Collision = CreateCollision(CollisionOrder::Bomb);
-		Collision->SetCollisionType(CollisionType::CirCle);
-		Collision->SetCollisionScale(Scale);
-
-	}
-
-}
 
