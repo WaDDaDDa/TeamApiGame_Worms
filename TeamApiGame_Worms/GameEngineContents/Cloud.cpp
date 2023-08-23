@@ -117,7 +117,7 @@ void Cloud::Start()
 
 	if (float4::LEFT == Dir)
 	{
-		SetPos({ BACKGROUND_SCALE.X+20.0f,YRandom });
+		SetPos({ PLAY_GROUND_SCALE.X+20.0f,YRandom });
 	}
 	else if (float4::RIGHT == Dir)
 	{
@@ -131,7 +131,7 @@ void Cloud::Start()
 
 void Cloud::Update(float _Delta)
 {
-	if (GetPos().X <= (-40.0f) || GetPos().X >= BACKGROUND_SCALE.X + 40.0f)
+	if (GetPos().X <= (-40.0f) || GetPos().X >= PLAY_GROUND_SCALE.X + 40.0f)
 	{
 		Death();
 	}

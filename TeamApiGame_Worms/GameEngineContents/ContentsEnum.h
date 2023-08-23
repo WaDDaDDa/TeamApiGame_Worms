@@ -10,6 +10,7 @@ enum class RenderOrder
 {
 	BackGround,
 	BackGroundEffect,
+	BackLand,
 	BackWave,
 	Ground,
 	Item,
