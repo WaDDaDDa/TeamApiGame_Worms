@@ -551,9 +551,90 @@ void Player::DamagingUpdate(float _Delta)
 	}
 
 
-	unsigned int Color = GetGroundColor(RGB(255, 255, 255));
+	unsigned int DownCheckColor = GetGroundColor(RGB(255, 255, 255), DownCheckPos);
+	unsigned int UpCheckColor = GetGroundColor(RGB(255, 255, 255), UpCheckPos);
+	unsigned int LeftCheckColor = GetGroundColor(RGB(255, 255, 255), LeftCheckPos);
+	unsigned int RightCheckColor = GetGroundColor(RGB(255, 255, 255), RightCheckPos);
 
-	if (RGB(255, 255, 255) != Color)
+	if (RGB(255, 255, 255) != UpCheckColor)
+	{
+		SetGravityVector({ GravityDir.X, 1.0f });
+
+		unsigned int CheckColor = GetGroundColor(RGB(255, 255, 255), UpCheckPos);
+
+		while (CheckColor != RGB(255, 255, 255))
+		{
+			CheckColor = GetGroundColor(RGB(255, 255, 255), UpCheckPos);
+			AddPos(float4::DOWN);
+		}
+	}
+
+	if (RGB(255, 255, 255) != LeftCheckColor)
+	{
+		if (0 >= GravityDir.X)
+		{
+			SetGravityVector({ -GravityDir.X , GravityDir.Y });
+		}
+		else
+		{
+			SetGravityVector(GravityDir);
+		}
+
+		unsigned int CheckColor = GetGroundColor(RGB(255, 255, 255), LeftCheckPos);
+
+		while (CheckColor != RGB(255, 255, 255))
+		{
+			CheckColor = GetGroundColor(RGB(255, 255, 255), LeftCheckPos);
+			AddPos(float4::RIGHT);
+		}
+	}
+
+	if (RGB(255, 255, 255) != RightCheckColor)
+	{
+		if (0 <= GravityDir.X)
+		{
+			SetGravityVector({ -GravityDir.X, GravityDir.Y });
+		}
+		else
+		{
+			SetGravityVector(GravityDir);
+		}
+
+		unsigned int CheckColor = GetGroundColor(RGB(255, 255, 255), RightCheckPos);
+
+		while (CheckColor != RGB(255, 255, 255))
+		{
+			CheckColor = GetGroundColor(RGB(255, 255, 255), RightCheckPos);
+			AddPos(float4::LEFT);
+		}
+	}
+
+	
+	
+
+	//if (RGB(255, 255, 255) == Color)
+	//{
+	//	Gravity(_Delta);
+	//}
+	//else // 모두흰색이 아니다 = 땅에닿아있다.
+	//{
+	//	unsigned int CheckColor = GetGroundColor(RGB(255, 255, 255), float4::UP);
+
+	//	// 체크중 어느하나라도  흰색이 아니라면 한칸올리기 반복한다.
+	//	while (CheckColor != RGB(255, 255, 255))
+	//	{
+	//		CheckColor = GetGroundColor(RGB(255, 255, 255), float4::UP);
+
+	//		AddPos(float4::UP);
+	//	}
+
+	//	GravityReset();
+	//}
+
+
+
+
+	if (RGB(255, 255, 255) != DownCheckColor)
 	{
 		GravityReset();
 		//ChangeState(PlayerState::Death);
