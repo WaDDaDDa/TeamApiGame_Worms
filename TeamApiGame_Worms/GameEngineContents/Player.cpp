@@ -1876,7 +1876,7 @@ void Player::ChangeAimAngle(float _Delta)
 			{
 				CurAngle = LEFT_DOWN_MAXANGLE;
 				LengthX = 0;
-				LengthY = -92;
+				LengthY = 92;
 			}
 		}
 	}
