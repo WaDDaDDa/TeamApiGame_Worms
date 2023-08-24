@@ -818,7 +818,7 @@ void Player::Start()
 	{
 		// Left
 		MainRenderer->CreateAnimation("Left_Idle", "idleLeft.bmp", 0, 5, 0.1f, true);
-		MainRenderer->CreateAnimation("Left_Move", "walkLeft.bmp", 0, 14, 0.1f, true);
+		MainRenderer->CreateAnimation("Left_Move", "walkLeft.bmp", 0, 14, 0.05f, true);
 		MainRenderer->CreateAnimation("Left_JumpReady", "jumpReadyLeft.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_JumpUp", "flyUpLeft.bmp", 0, 1, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_Jump", "flyLinkLeft.bmp", 0, 6, 0.1f, false);
@@ -854,20 +854,20 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Left_Donkey", "AirStrikeOnLeft.bmp", 9, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_DonkeyFire", "AirStrikeFireLeft.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_DonkeyOff", "AirStrikeOffLeft.bmp", 0, 9, 0.05f, false);
-		MainRenderer->CreateAnimation("Left_HolyGranadeOn", "HolyGranadeOnLeft.bmp", 0, 9, 0.1f, false);
-		MainRenderer->CreateAnimation("Left_HolyGranadeOff", "HolyGranadeOffLeft.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_HolyGranadeOn", "HolyGranadeOnLeft.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_HolyGranadeOff", "HolyGranadeOffLeft.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_SuperSheepOn", "sheepOnLeft.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_SuperSheep", "sheepOnLeft.bmp", 9, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_SuperSheepOff", "sheepOffLeft.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_GraveStone", "GraveStone.bmp", 0, 59, 0.1f, true);
-		MainRenderer->CreateAnimation("Left_Win", "winLeft.bmp", 0, 13, 0.1f, true);
+		MainRenderer->CreateAnimation("Left_Win", "winLeft.bmp", 0, 13, 0.03f, true);
 		MainRenderer->CreateAnimation("Left_Diving1", "DivingLeft.bmp", 0, 2, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_Diving2", "DivingLeft.bmp", 2, 0, 0.1f, false);
 
 
 		// Right
-		MainRenderer->CreateAnimation("Right_Idle", "idleRight.bmp", 0, 5, 0.2f, true);
-		MainRenderer->CreateAnimation("Right_Move", "walkRight.bmp", 0, 14, 0.2f, true);
+		MainRenderer->CreateAnimation("Right_Idle", "idleRight.bmp", 0, 5, 0.1f, true);
+		MainRenderer->CreateAnimation("Right_Move", "walkRight.bmp", 0, 14, 0.05f, true);
 		MainRenderer->CreateAnimation("Right_JumpReady", "jumpReadyRight.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_JumpUp", "flyUpRight.bmp", 0, 1, 0.1f, false);
 		MainRenderer->CreateAnimation("Right_Jump", "flyLinkRight.bmp", 0, 6, 0.1f, false);
@@ -903,8 +903,8 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Right_Donkey", "AirStrikeOnRight.bmp", 9, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_DonkeyFire", "AirStrikeFireRight.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_DonkeyOff", "AirStrikeOffRight.bmp", 0, 9, 0.05f, false);
-		MainRenderer->CreateAnimation("Right_HolyGranadeOn", "HolyGranadeOnRight.bmp", 0, 9, 0.1f, false);
-		MainRenderer->CreateAnimation("Right_HolyGranadeOff", "HolyGranadeOffRight.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_HolyGranadeOn", "HolyGranadeOnRight.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_HolyGranadeOff", "HolyGranadeOffRight.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_SuperSheepOn", "sheepOnRight.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_SuperSheep", "sheepOnRight.bmp", 9, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_SuperSheepOff", "sheepOffRight.bmp", 0, 9, 0.05f, false);

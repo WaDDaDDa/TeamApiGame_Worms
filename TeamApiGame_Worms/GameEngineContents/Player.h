@@ -380,6 +380,7 @@ private:
 
 	float GravityDirMul = 0;
 	
+	bool IsDiving = false;
 
 	// Uzi ฐüทร
 	int UziAnimationNumber = 0;

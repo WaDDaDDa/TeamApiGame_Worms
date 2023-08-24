@@ -239,7 +239,7 @@ void Player::FallingUpdate(float _Delta)
 	}
 
 	// 물에 닿으면 Diving 상태
-	if (false)
+	if (1875.0f <= GetPos().Y)
 	{
 		ChangeState(PlayerState::Diving);
 	}
@@ -642,6 +642,11 @@ void Player::DamagingUpdate(float _Delta)
 		return;
 	}
 
+	if (1875.0f <= GetPos().Y)
+	{
+		ChangeState(PlayerState::Diving);
+	}
+
 	/*if (0 >= Hp)
 	{
 		ChangeState(PlayerState::Death);
@@ -668,10 +673,19 @@ void Player::DeathEndStart()
 	// 묘비 상태로 중력에는 영향을 받고있어야함.
 	// Death();
 	ChangeAnimationState("GraveStone");
+	MainRenderer->SetRenderScaleToTexture();
+	GravityReset();
 }
 void Player::DeathEndUpdate(float _Delta)
 {
-	GroundCheck(_Delta);
+	if (false == IsDiving)
+	{
+		GroundCheck(_Delta);
+	}
+	else
+	{
+		Gravity(_Delta);
+	}
 }
 
 void Player::BazookaOnStart()
@@ -693,6 +707,7 @@ void Player::BazookaOnUpdate(float _Delta)
 void Player::BazookaStart()
 {
 	ChangeAnimationState("Bazooka15");
+	CrossHairRenderer->On();
 }
 void Player::BazookaUpdate(float _Delta)
 {
@@ -906,6 +921,7 @@ void Player::UziOnUpdate(float _Delta)
 void Player::UziStart()
 {
 	ChangeAnimationState("Uzi15");
+	CrossHairRenderer->On();
 }
 void Player::UziUpdate(float _Delta)
 {
@@ -1156,6 +1172,7 @@ void Player::HomingMissileOnUpdate(float _Delta)
 void Player::HomingMissileStart()
 {
 	ChangeAnimationState("HomingMissile15");
+	CrossHairRenderer->On();
 }
 void Player::HomingMissileUpdate(float _Delta)
 {
@@ -1353,6 +1370,7 @@ void Player::SheepOnStart()
 {
 	PrevMoveState = PlayerState::SheepOn;
 	ChangeAnimationState("SheepOn");
+	CrossHairRenderer->Off();
 }
 void Player::SheepOnUpdate(float _Delta)
 {
@@ -1433,6 +1451,7 @@ void Player::GranadeOnUpdate(float _Delta)
 void Player::GranadeStart()
 {
 	ChangeAnimationState("Granade15");
+	CrossHairRenderer->On();
 }
 void Player::GranadeUpdate(float _Delta)
 {
@@ -1622,6 +1641,7 @@ void Player::TeleportOnStart()
 {
 	PrevMoveState = PlayerState::TeleportOn;
 	ChangeAnimationState("TeleportOn");
+	CrossHairRenderer->Off();
 }
 void Player::TeleportOnUpdate(float _Delta)
 {
@@ -1716,6 +1736,7 @@ void Player::AirStrikeOnStart()
 {
 	PrevMoveState = PlayerState::AirStrikeOn;
 	ChangeAnimationState("AirStrikeOn");
+	CrossHairRenderer->Off();
 }
 void Player::AirStrikeOnUpdate(float _Delta)
 {
@@ -1787,6 +1808,7 @@ void Player::GirderOnStart()
 {
 	// Girder 상태 이동 불가
 	ChangeAnimationState("GirderOn");
+	CrossHairRenderer->Off();
 }
 void Player::GirderOnUpdate(float _Delta)
 {
@@ -1877,6 +1899,7 @@ void Player::DonkeyOnStart()
 {
 	PrevMoveState = PlayerState::DonkeyOn;
 	ChangeAnimationState("DonkeyOn");
+	CrossHairRenderer->Off();
 }
 void Player::DonkeyOnUpdate(float _Delta)
 {
@@ -1973,6 +1996,7 @@ void Player::HolyGranadeOnUpdate(float _Delta)
 void Player::HolyGranadeStart()
 {
 	ChangeAnimationState("HolyGranade15");
+	CrossHairRenderer->On();
 }
 void Player::HolyGranadeUpdate(float _Delta)
 {
@@ -2163,6 +2187,7 @@ void Player::SuperSheepOnStart()
 {
 	PrevMoveState = PlayerState::SuperSheepOn;
 	ChangeAnimationState("SuperSheepOn");
+	CrossHairRenderer->Off();
 }
 void Player::SuperSheepOnUpdate(float _Delta)
 {
@@ -2235,9 +2260,24 @@ void Player::WinUpdate(float _Delta)
 void Player::DivingStart()
 {
 	ChangeAnimationState("Diving1");
+	MainRenderer->SetRenderScaleToTexture();
+	MainRenderer->SetRenderPos({ 0, 0 });
+	IsDiving = true;
 }
 void Player::DivingUpdate(float _Delta)
 {
+	// y -> 1875 ~ 2000
+	if (2030 >= GetPos().Y)
+	{
+		SetPos({ GetPos().X, GetPos().Y + (30 * _Delta)});
+	}
+	else
+	{
+		ChangeState(PlayerState::DeathEnd);
+	}
+
+
+
 	if (MainRenderer->IsAnimationEnd())
 	{
 		if (MainRenderer->IsAnimation("Left_Diving1") || MainRenderer->IsAnimation("Right_Diving1"))
@@ -2250,4 +2290,3 @@ void Player::DivingUpdate(float _Delta)
 		}
 	}
 }
-
