@@ -1822,6 +1822,20 @@ void Player::DamagingCheck()
 		}
 		ChangeState(PlayerState::Damaging);
 	}
+	else if (true == PlayerBodyCollision->Collision(CollisionOrder::Flame, _Col
+		, CollisionType::Rect
+		, CollisionType::CirCle)
+		)
+	{
+		for (size_t i = 0; i < _Col.size(); i++)
+		{
+			GameEngineCollision* Collison = _Col[i];
+
+			GameEngineActor* Actor = Collison->GetActor();
+
+		}
+		ChangeState(PlayerState::Damaging);
+	}
 	else
 	{
 		DamageCount = 0;

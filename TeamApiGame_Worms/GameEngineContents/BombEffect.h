@@ -41,6 +41,8 @@ public:
 
 	void SetShotHitRange(float4 _ShotHitRange);
 
+	void SetFlameRange(float4 _FlameRange);
+
 protected:
 	class GameEngineCollision* BombCollision = nullptr;
 	GameEngineRenderer* Renderer = nullptr;
