@@ -172,6 +172,11 @@ public:
 		TurnPlayerIndex = _Index;
 	}
 
+	bool GetIsDiving()
+	{
+		return IsDiving;
+	}
+
 
 protected:
 	PlayerState State = PlayerState::Max;
