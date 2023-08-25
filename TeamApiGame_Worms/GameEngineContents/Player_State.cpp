@@ -137,8 +137,8 @@ void Player::IdleUpdate(float _Delta)
 	if (GameEngineInput::IsDown('T'))
 	{
 		TargetPos = MouseObject::GetPlayMousePos();
-		//CreateWeapon<TestWeapon>();
-		CreateWeapon<Donkey>();
+		CreateWeapon<TestWeapon>();
+		//CreateWeapon<Donkey>();
 	}
 
 	//if (true == GameEngineInput::IsPress(VK_LEFT)
@@ -891,7 +891,7 @@ void Player::BazookaUpdate(float _Delta)
 	CrossHairPos.Normalize();
 	CrossHairPos *= 92;
 
-	if (true == GameEngineInput::IsUp('A') || GameEngineInput::GetPressTime('A') >= MaxChargingTime)
+	if (true == GameEngineInput::IsUp('A') || ChargingTime >= MaxChargingTime)
 	{
 
 		if (ChargingTime >= MaxChargingTime)
@@ -899,7 +899,7 @@ void Player::BazookaUpdate(float _Delta)
 			ChargingTime = MaxChargingTime;
 			ChangeState(PlayerState::BazookaFire);
 		}
-		GameEngineInput::ResetPressTime('A');
+		ChargingTime = 0.0f;
 
 		ChangeState(PlayerState::BazookaFire);
 		return;
@@ -907,7 +907,7 @@ void Player::BazookaUpdate(float _Delta)
 
 	if (true == GameEngineInput::IsPress('A'))
 	{
-		ChargingTime = GameEngineInput::GetPressTime('A');
+		ChargingTime += _Delta;
 		SetGauge(_Delta);
 	}
 
@@ -1362,15 +1362,14 @@ void Player::HomingMissileUpdate(float _Delta)
 	}
 
 
-	if (true == GameEngineInput::IsUp('A') || GameEngineInput::GetPressTime('A') >= MaxChargingTime)
+	if (true == GameEngineInput::IsUp('A') || ChargingTime >= MaxChargingTime)
 	{
 
 		if (ChargingTime >= MaxChargingTime)
 		{
 			ChargingTime = MaxChargingTime;
 		}
-
-		GameEngineInput::ResetPressTime('A');
+		ChargingTime = 0.0f;
 
 		ChangeState(PlayerState::HomingMissileFire);
 		return;
@@ -1378,7 +1377,7 @@ void Player::HomingMissileUpdate(float _Delta)
 
 	if (true == GameEngineInput::IsPress('A'))
 	{
-		ChargingTime = GameEngineInput::GetPressTime('A');
+		ChargingTime += _Delta;
 		SetGauge(_Delta);
 	}
 
@@ -1635,14 +1634,14 @@ void Player::GranadeUpdate(float _Delta)
 	CrossHairPos.Normalize();
 	CrossHairPos *= 92;
 
-	if (true == GameEngineInput::IsUp('A') || GameEngineInput::GetPressTime('A') >= MaxChargingTime)
+	if (true == GameEngineInput::IsUp('A') || ChargingTime >= MaxChargingTime)
 	{
 
 		if (ChargingTime >= MaxChargingTime)
 		{
 			ChargingTime = MaxChargingTime;
 		}
-		GameEngineInput::ResetPressTime('A');
+		ChargingTime = 0.0f;
 
 		ChangeState(PlayerState::GranadeFire);
 		return;
@@ -1650,7 +1649,7 @@ void Player::GranadeUpdate(float _Delta)
 
 	if (true == GameEngineInput::IsPress('A'))
 	{
-		ChargingTime = GameEngineInput::GetPressTime('A');
+		ChargingTime += _Delta;
 		SetGauge(_Delta);
 	}
 
@@ -2180,14 +2179,14 @@ void Player::HolyGranadeUpdate(float _Delta)
 	CrossHairPos.Normalize();
 	CrossHairPos *= 92;
 
-	if (true == GameEngineInput::IsUp('A') || GameEngineInput::GetPressTime('A') >= MaxChargingTime)
+	if (true == GameEngineInput::IsUp('A') || ChargingTime >= MaxChargingTime)
 	{
 
 		if (ChargingTime >= MaxChargingTime)
 		{
 			ChargingTime = MaxChargingTime;
 		}
-		GameEngineInput::ResetPressTime('A');
+		ChargingTime = 0.0f;
 
 		ChangeState(PlayerState::HolyGranadeFire);
 		return;
@@ -2195,7 +2194,7 @@ void Player::HolyGranadeUpdate(float _Delta)
 
 	if (true == GameEngineInput::IsPress('A'))
 	{
-		ChargingTime = GameEngineInput::GetPressTime('A');
+		ChargingTime += _Delta;
 		SetGauge(_Delta);
 	}
 
