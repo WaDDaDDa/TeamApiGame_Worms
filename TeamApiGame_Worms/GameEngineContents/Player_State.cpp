@@ -899,7 +899,6 @@ void Player::BazookaUpdate(float _Delta)
 			ChargingTime = MaxChargingTime;
 			ChangeState(PlayerState::BazookaFire);
 		}
-		ChargingTime = 0.0f;
 
 		ChangeState(PlayerState::BazookaFire);
 		return;
@@ -1369,7 +1368,6 @@ void Player::HomingMissileUpdate(float _Delta)
 		{
 			ChargingTime = MaxChargingTime;
 		}
-		ChargingTime = 0.0f;
 
 		ChangeState(PlayerState::HomingMissileFire);
 		return;
@@ -1641,7 +1639,6 @@ void Player::GranadeUpdate(float _Delta)
 		{
 			ChargingTime = MaxChargingTime;
 		}
-		ChargingTime = 0.0f;
 
 		ChangeState(PlayerState::GranadeFire);
 		return;
@@ -2186,7 +2183,6 @@ void Player::HolyGranadeUpdate(float _Delta)
 		{
 			ChargingTime = MaxChargingTime;
 		}
-		ChargingTime = 0.0f;
 
 		ChangeState(PlayerState::HolyGranadeFire);
 		return;

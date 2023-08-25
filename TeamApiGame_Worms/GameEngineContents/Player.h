@@ -143,6 +143,7 @@ public:
 		// 무기사용으로 
 		class Weapon* NewWeapon = GetLevel()->CreateActor<WeaponType>();
 		float ChargeRatio = ChargingTime / MaxChargingTime;
+		ChargingTime = 0.0f;
 		NewWeapon->SetChargingSpeed(ChargeRatio);
 		// 플레이어의 제어권을 끄고
 		SwitchIsTurnPlayer();
