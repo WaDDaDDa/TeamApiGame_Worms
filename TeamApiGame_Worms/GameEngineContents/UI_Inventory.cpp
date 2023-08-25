@@ -194,58 +194,58 @@ void ChageSelectWeapon(int _SelectedWeapon)
 	{
 	case WeaponEnum::Bazooka:
 		UI_Inventory::InventoryUI->GetInventoryUI()->GetWeaponNameRenderer()->SetText("Bazooka", 14);
-		
-		// 여기서 현재 턴 플레이어의 상태를 변경해서 최종적으로 선택한 Enum값에 맞는 무기를 사용하도록 합니다.
-		// CurTurnPlayer->
+		CurTurnPlayer->ChangeState(PlayerState::BazookaOn);
 		break;
 
 	case WeaponEnum::HomingMissile:
 		UI_Inventory::InventoryUI->GetInventoryUI()->GetWeaponNameRenderer()->SetText("Homing Missile", 14);
+		CurTurnPlayer->ChangeState(PlayerState::HomingMissileOn);
 
 		break;
 
 	case WeaponEnum::Granade:
 		UI_Inventory::InventoryUI->GetInventoryUI()->GetWeaponNameRenderer()->SetText("Grenade", 14);
-
+		CurTurnPlayer->ChangeState(PlayerState::GranadeOn);
 		break;
 
 	case WeaponEnum::Uzi:
 		UI_Inventory::InventoryUI->GetInventoryUI()->GetWeaponNameRenderer()->SetText("Uzi", 14);
-
+		CurTurnPlayer->ChangeState(PlayerState::UziOn);
 		break;
 
 	case WeaponEnum::Sheep:
 		UI_Inventory::InventoryUI->GetInventoryUI()->GetWeaponNameRenderer()->SetText("Sheep", 14);
-
+		CurTurnPlayer->ChangeState(PlayerState::SheepOn);
 		break;
 
 	case WeaponEnum::SuperSheep:
 		UI_Inventory::InventoryUI->GetInventoryUI()->GetWeaponNameRenderer()->SetText("Super Sheep", 14);
-
+		CurTurnPlayer->ChangeState(PlayerState::SuperSheepOn);
 		break;
 
 	case WeaponEnum::AirStrike:
 		UI_Inventory::InventoryUI->GetInventoryUI()->GetWeaponNameRenderer()->SetText("Air Strike", 14);
-
+		CurTurnPlayer->ChangeState(PlayerState::AirStrikeOn);
 		break;
 
 	case WeaponEnum::Girder:
 		UI_Inventory::InventoryUI->GetInventoryUI()->GetWeaponNameRenderer()->SetText("Girder", 14);
-
+		CurTurnPlayer->ChangeState(PlayerState::GirderOn);
 		break;
 
 	case WeaponEnum::Teleport:
 		UI_Inventory::InventoryUI->GetInventoryUI()->GetWeaponNameRenderer()->SetText("Teleport", 14);
+		CurTurnPlayer->ChangeState(PlayerState::TeleportOn);
 		break;
 
 	case WeaponEnum::HolyGranade:
 		UI_Inventory::InventoryUI->GetInventoryUI()->GetWeaponNameRenderer()->SetText("Holy Hand Grenade", 14);
-
+		CurTurnPlayer->ChangeState(PlayerState::HolyGranadeOn);
 		break;
 
 	case WeaponEnum::Donkey:
 		UI_Inventory::InventoryUI->GetInventoryUI()->GetWeaponNameRenderer()->SetText("Concrete Donkey", 14);
-
+		CurTurnPlayer->ChangeState(PlayerState::DonkeyOn);
 		break;
 
 	default:

@@ -178,13 +178,14 @@ public:
 		return IsDiving;
 	}
 
+	void ChangeState(PlayerState _State);
 
 protected:
 	PlayerState State = PlayerState::Max;
 	PlayerDir Dir = PlayerDir::Left;
 	std::string CurState = "";
 
-	void ChangeState(PlayerState _State);
+
 	void StateUpdate(float _Delta);
 	void ChangeAnimationState(const std::string& _State);
 
