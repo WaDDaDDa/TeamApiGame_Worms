@@ -1080,7 +1080,7 @@ void Player::UziOnUpdate(float _Delta)
 
 void Player::UziStart()
 {
-	ChangeAnimationState("Uzi15");
+	ChangeAnimationState("Uzi" + std::to_string(UziAnimationNumber));
 	CrossHairRenderer->On();
 }
 void Player::UziUpdate(float _Delta)
@@ -1105,10 +1105,7 @@ void Player::UziUpdate(float _Delta)
 	CrossHairPos.Normalize();
 	CrossHairPos *= 92;
 
-	if (GameEngineInput::IsDown('A'))
-	{
-		ChangeState(PlayerState::UziFire);
-	}
+	
 
 	int iCurAngle = static_cast<int>(CurAngle);
 	// 애니메이션과 무기각도를 맞추기위한 중간 계산식.
@@ -1255,6 +1252,11 @@ void Player::UziUpdate(float _Delta)
 	CrossHairRenderer->SetRenderPos(MainRenderer->GetRenderPos() + CrossHairPos);
 
 	ChangeCrossHairRenderPos(iCurAngle);
+
+	if (GameEngineInput::IsDown('A'))
+	{
+		ChangeState(PlayerState::UziFire);
+	}
 
 	InputMove();
 	ChangeWeapon();
