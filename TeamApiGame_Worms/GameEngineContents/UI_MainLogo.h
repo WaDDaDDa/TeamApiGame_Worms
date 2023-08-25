@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
+#include <GameEnginePlatform/GameEngineSound.h>
 #include <vector>
 
 class UI_MainLogo : public GameEngineActor
@@ -42,4 +43,7 @@ private:
 
 	float	textTimer = 0.0f;
 	int		textIndex = 0;
+
+
+	GameEngineSoundPlayer EFFECTPlayer_Font;
 };

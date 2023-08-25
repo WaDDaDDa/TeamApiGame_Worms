@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineLevel.h>
+#include <GameEnginePlatform/GameEngineSound.h>
 
 #include "UI_IntroLogo.h"
 #include "UI_MainLogo.h"
@@ -41,8 +42,12 @@ private:
 	void Title_ShowTitle_Update(float _Delta);
 	void Title_Main_Update(float _Delta);
 
+	void LevelEnd(GameEngineLevel* _NextLevel) override;
 
 	UI_IntroLogo* IntroLogo = nullptr;
 	UI_MainLogo* MainLogo = nullptr;
+
+	GameEngineSoundPlayer BGMPlayer;
+	GameEngineSoundPlayer EFFECTPlayer_Bomb;
 
 };
