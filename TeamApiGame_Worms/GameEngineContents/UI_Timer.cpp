@@ -59,7 +59,7 @@ void UI_Timer::Start()
 
 
 	// 렌더러 설정
-	MainRenderer = CreateUIRenderer("UI_TimerWindowB.bmp", RenderOrder::UI);
+	MainRenderer = CreateUIRenderer("UI_TimerWindowR.bmp", RenderOrder::UI);
 	MainRenderer->SetRenderScale({ 56, 42 });
 
 	// 타이머 폰트 렌더러 설정

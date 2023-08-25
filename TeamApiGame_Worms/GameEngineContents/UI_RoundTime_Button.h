@@ -26,9 +26,4 @@ protected:
 
 	void ChangeState(BUTTON_STATE _ButtonState);
 
-private:
-
 };
-
-
-

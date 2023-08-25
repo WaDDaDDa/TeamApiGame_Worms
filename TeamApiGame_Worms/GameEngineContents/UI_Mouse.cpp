@@ -50,7 +50,7 @@ void UI_Mouse::Start()
 void UI_Mouse::Update(float _Delta)
 {
 	float4 MosuePos = GameEngineWindow::MainWindow.GetMousePos();
-	MainRenderer->SetRenderPos(MosuePos);
+	MainRenderer->SetRenderPos({ MosuePos.X + 5, MosuePos.Y + 5 });
 }
 
 void UI_Mouse::Render(float _Delta)
