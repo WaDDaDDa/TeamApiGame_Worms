@@ -543,7 +543,7 @@ void Hallelujah::PrevBombUpdate(float _Delta)
 void Hallelujah::BombStart()
 {
 	HallelujahBomb = CreateBombEffect<Range100>();
-	SoundEffect = GameEngineSound::SoundPlay("Explosion1.WAV");
+	SoundEffect = GameEngineSound::SoundPlay("Explosion3.WAV");
 	Renderer->Off();
 }
 

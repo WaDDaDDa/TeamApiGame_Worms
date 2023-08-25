@@ -31,6 +31,8 @@ void Self_Bomb::Start()
 	SetWeaponDamage(Self_BombDamage);
 	SetWeaponSpeed(Self_BombSpeed);
 
+	SoundEffect = GameEngineSound::SoundPlay("Explosion2.WAV");
+
 	ChangeState(Self_BombState::Max);
 }
 

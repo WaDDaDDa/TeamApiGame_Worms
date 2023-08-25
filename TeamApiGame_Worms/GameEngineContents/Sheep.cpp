@@ -40,6 +40,16 @@ void Sheep::Start()
 		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("sheepwlk2.bmp"), 1, 8);
 	}
 
+	// 사운드 로드
+	if (nullptr == GameEngineSound::FindSound("sheepbaa.WAV"))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("sheepbaa.WAV"));
+	}
 	
 	Renderer->SetTexture("Blank.bmp");
 	Renderer->SetScaleRatio(1.2f);
@@ -273,6 +283,8 @@ void Sheep::FlyUpdate(float _Delta)
 
 void Sheep::JumpStart()
 {
+	SoundEffect = GameEngineSound::SoundPlay("sheepbaa.WAV");
+
 	if (DirState == SheepDir::Right)
 	{
 		SetGravityVector(float4::UP * SheepJumpPower + float4::RIGHT * SheepSpeed);
@@ -320,6 +332,8 @@ void Sheep::JumpUpdate(float _Delta)
 void Sheep::BombStart()
 {
 	SheepBomb = CreateBombEffect<Range75>();
+	SoundEffect = GameEngineSound::SoundPlay("Explosion2.WAV");
+
 	Renderer->Off();
 }
 

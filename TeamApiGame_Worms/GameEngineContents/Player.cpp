@@ -1026,6 +1026,7 @@ void Player::Start()
 		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Explosion3.WAV"));
 		GameEngineSound::SoundLoad(FilePath.PlusFilePath("splish.WAV"));
 		GameEngineSound::SoundLoad(FilePath.PlusFilePath("THROWRELEASE.WAV"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("petrol.WAV"));
 	}
 	
 	{

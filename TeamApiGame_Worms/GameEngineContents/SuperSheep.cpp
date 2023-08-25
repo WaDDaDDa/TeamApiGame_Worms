@@ -711,6 +711,8 @@ void SuperSheep::SuperFlyUpdate(float _Delta)
 
 void SuperSheep::JumpStart()
 {
+	SoundEffect = GameEngineSound::SoundPlay("sheepbaa.WAV");
+
 	if (DirState == SuperSheepDir::Right)
 	{
 		SetGravityVector(float4::UP * SuperSheepJumpPower + float4::RIGHT * SuperSheepSpeed);
@@ -758,6 +760,8 @@ void SuperSheep::JumpUpdate(float _Delta)
 void SuperSheep::BombStart()
 {
 	SuperSheepBomb = CreateBombEffect<Range75>();
+	SoundEffect = GameEngineSound::SoundPlay("Explosion2.WAV");
+
 	Renderer->Off();
 }
 

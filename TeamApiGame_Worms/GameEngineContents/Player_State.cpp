@@ -1579,9 +1579,9 @@ void Player::SheepUpdate(float _Delta)
 
 void Player::SheepFireStart()
 {
-	//CreateWeapon<Sheep>();
-	CreateWeapon<SuperSheep>();
+	CreateWeapon<Sheep>();
 }
+
 void Player::SheepFireUpdate(float _Delta)
 {
 	DamagingCheck();

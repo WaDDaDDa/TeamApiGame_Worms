@@ -1,6 +1,7 @@
 #pragma once
 #include "GravityActor.h"
 #include "Player.h"
+#include <GameEnginePlatform/GameEngineSound.h>
 
 // 설명 : 
 class Weapon : public GravityActor
@@ -67,6 +68,9 @@ public:
 	}
 
 protected:
+
+	GameEngineSoundPlayer SoundEffect;
+
 	Player* Master = nullptr;
 
 	// 무기의 대미지

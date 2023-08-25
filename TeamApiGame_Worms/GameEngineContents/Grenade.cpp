@@ -39,6 +39,19 @@ void Grenade::Start()
 		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("grenade.bmp"), 1, 32);
 	}
 
+	// 사운드 로드
+	if (nullptr == GameEngineSound::FindSound("Grenadeimpact.WAV"))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Grenadeimpact.WAV"));
+	}
+
+	SoundEffect = GameEngineSound::SoundPlay("THROWRELEASE.WAV");
+
 	
 	Renderer->SetTexture("Blank.bmp");
 
@@ -110,6 +123,8 @@ void Grenade::Start()
 	Renderer->CreateAnimation("9_Grenade_Fly", "grenade.bmp", 31, 31, 0.05f, false);
 	//// -270
 	//Renderer->CreateAnimation("Grenade_Fly", "grenade.bmp", 32, 32, 0.05f, false);
+
+
 
 	{
 		//Collision
@@ -345,6 +360,8 @@ void Grenade::GroundCheck(float _Delta)
 
 void Grenade::TongTong(float4 _Pos)
 {
+	SoundEffect = GameEngineSound::SoundPlay("Grenadeimpact.WAV");
+
 	unsigned int CheckColor = GetGroundColor(RGB(255, 255, 255));
 
 	float4 CurCravityVector = GetGravityVector();
@@ -542,6 +559,7 @@ void Grenade::PrevBombUpdate(float _Delta)
 void Grenade::BombStart()
 {
 	GrenadeBomb = CreateBombEffect<Range75>();
+	SoundEffect = GameEngineSound::SoundPlay("Explosion2.WAV");
 	Renderer->Off();
 }
 
@@ -582,6 +600,8 @@ void Grenade::DamageUpdate(float _Delta)
 
 void Grenade::InWaterStart()
 {
+	SoundEffect = GameEngineSound::SoundPlay("splish.WAV");
+
 	SetGravityVector(float4::DOWN);
 	IsWindOff();
 	SetGravityPower(100.0f);
