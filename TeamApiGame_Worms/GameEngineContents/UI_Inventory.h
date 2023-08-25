@@ -22,7 +22,14 @@ public:
 		return m_bIsActive;
 	}
 
-	GameEngineRenderer* GetWeaponNameRenderer()
+	static UI_Inventory* InventoryUI;
+
+	UI_Inventory* GetInventoryUI()
+	{
+		return InventoryUI;
+	}
+
+	GameEngineRenderer* GetWeaponNameRenderer() const
 	{
 		return WeaponNameRenderer;
 	}
@@ -40,12 +47,12 @@ protected:
 	void Update(float _Delta) override;
 
 private:
+
+
 	GameEngineRenderer* MainRenderer = nullptr;
 	GameEngineRenderer* WeaponNameRenderer = nullptr;
 
 	UI_Mouse* MouseUI = nullptr;
-
-	UI_Button* Btn_Weapon_Bazooka = nullptr;
 
 	bool m_bIsActive = false;
 

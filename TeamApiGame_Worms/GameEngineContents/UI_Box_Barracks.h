@@ -48,4 +48,3 @@ private:
 	GameEngineRenderer* MainRenderer = nullptr;
 
 };
-

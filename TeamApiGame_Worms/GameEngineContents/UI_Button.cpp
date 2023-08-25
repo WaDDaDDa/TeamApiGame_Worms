@@ -40,7 +40,7 @@ void UI_Button::Update(float _Delta)
 	MainCollision->SetCollisionPos(GetLevel()->GetMainCamera()->GetPos());
 }
 
-UI_Button& UI_Button::InitButtonData(const std::string _ButtonName, float4 _ButtonScale, bool _UseHighlighter)
+UI_Button& UI_Button::InitButtonData(const std::string& _ButtonName, float4 _ButtonScale, bool _UseHighlighter)
 {
 	// 이름 설정
 	std::string ButtonName = _ButtonName;
@@ -99,6 +99,7 @@ void UI_Button::HighlighterOn()
 	{
 		MainRenderer->SetTexture(HighlighterName);
 	}
+
 }
 
 void UI_Button::HighlighterOff()
@@ -176,6 +177,11 @@ void UI_Button::ClickedMouseButtonDown()
 	if (nullptr != m_pFunc)
 	{
 		m_pFunc(m_param1, m_param2);
+	}
+
+	if (nullptr != m_pFuncEnum)
+	{
+		m_pFuncEnum(m_iEnumValue);
 	}
 }
 
