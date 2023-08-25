@@ -31,6 +31,7 @@ enum class CollisionOrder
 	Weapon,
 	Bomb,
 	ShotHit,
+	Flame,
 	Item,
 	UI,
 	Mouse,
