@@ -452,18 +452,28 @@ void Player::DamagingStart()
 		GravityDir.Normalize();
 		GravityDir += float4::UP;
 
-
-		// Damage 받는 부분
+		if (0.5f <= GetLiveTime())
 		{
-			WeaponPlayerPos = GetPos() - WeaponPos;
-
-			// 데미지 UI 출력
 			DamageUI->UpdateData_PlayerDamageUI(PlayerInfoUI->GetPos(), static_cast<int>(WeaponDamage), Player::TurnPlayerIndex);
 
 			this->Hp -= static_cast<int>(WeaponDamage);
 
 			UI_Box_AllTeamHpBar::GetAllTeamHpBarUI()->InitTeamHpBarData(TurnPlayerIndex, Hp);
+
+			ResetLiveTime();
 		}
+
+		// Damage 받는 부분
+		//{
+		//	WeaponPlayerPos = GetPos() - WeaponPos;
+
+		//	// 데미지 UI 출력
+		//	DamageUI->UpdateData_PlayerDamageUI(PlayerInfoUI->GetPos(), static_cast<int>(WeaponDamage), Player::TurnPlayerIndex);
+
+		//	this->Hp -= static_cast<int>(WeaponDamage);
+
+		//	UI_Box_AllTeamHpBar::GetAllTeamHpBarUI()->InitTeamHpBarData(TurnPlayerIndex, Hp);
+		//}
 
 		SetGravityVector(GravityDir * 100.0f);
 	}
