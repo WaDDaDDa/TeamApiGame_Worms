@@ -57,6 +57,39 @@ void Player::Start()
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("idleRight.bmp"), 1, 6);
 		}
 
+		if (false == ResourcesManager::GetInst().IsLoadTexture("IdleHp100Left.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("IdleHp100Left.bmp"), 1, 20);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("IdleHp100Right.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("IdleHp100Right.bmp"), 1, 20);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("IdleHp30Left.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("IdleHp30Left.bmp"), 1, 13);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("IdleHp30Right.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("IdleHp30Right.bmp"), 1, 13);
+		}
+
 		if (false == ResourcesManager::GetInst().IsLoadTexture("walkLeft.bmp"))
 		{
 			GameEnginePath FilePath;
@@ -817,7 +850,13 @@ void Player::Start()
 	// Animation
 	{
 		// Left
-		MainRenderer->CreateAnimation("Left_Idle", "idleLeft.bmp", 0, 5, 0.1f, true);
+		MainRenderer->CreateAnimation("Left_Idle", "idleLeft.bmp", 0, 5, 0.05f, true);
+		MainRenderer->CreateAnimation("Left_Blink1", "idleLeft.bmp", 0, 5, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_Blink2", "idleLeft.bmp", 5, 0, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_IdleHp100_1", "IdleHp100Left.bmp", 0, 19, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_IdleHp100_2", "IdleHp100Left.bmp", 19, 0, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_IdleHp30_1", "IdleHp30Left.bmp", 0, 12, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_IdleHp30_2", "IdleHp30Left.bmp", 12, 0, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_Move", "walkLeft.bmp", 0, 14, 0.05f, true);
 		MainRenderer->CreateAnimation("Left_JumpReady", "jumpReadyLeft.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_JumpUp", "flyUpLeft.bmp", 0, 1, 0.1f, false);
@@ -866,7 +905,13 @@ void Player::Start()
 
 
 		// Right
-		MainRenderer->CreateAnimation("Right_Idle", "idleRight.bmp", 0, 5, 0.1f, true);
+		MainRenderer->CreateAnimation("Right_Idle", "idleRight.bmp", 0, 5, 0.05f, true);
+		MainRenderer->CreateAnimation("Right_Blink1", "idleRight.bmp", 0, 5, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_Blink2", "idleRight.bmp", 5, 0, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_IdleHp100_1", "IdleHp100Right.bmp", 0, 19, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_IdleHp100_2", "IdleHp100Right.bmp", 19, 0, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_IdleHp30_1", "IdleHp30Right.bmp", 0, 12, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_IdleHp30_2", "IdleHp30Right.bmp", 12, 0, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_Move", "walkRight.bmp", 0, 14, 0.05f, true);
 		MainRenderer->CreateAnimation("Right_JumpReady", "jumpReadyRight.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_JumpUp", "flyUpRight.bmp", 0, 1, 0.1f, false);

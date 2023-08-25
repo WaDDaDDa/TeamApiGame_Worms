@@ -382,6 +382,8 @@ private:
 	
 	bool IsDiving = false;
 
+	int IdleCount = 0;
+
 	// Uzi ฐüทร
 	int UziAnimationNumber = 0;
 	int UziCount = 0;

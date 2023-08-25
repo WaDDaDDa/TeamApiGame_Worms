@@ -37,7 +37,17 @@
 
 void Player::IdleStart()
 {
-	ChangeAnimationState("Idle");
+	//ChangeAnimationState("Idle");
+
+	if (30 <= Hp)
+	{
+		ChangeAnimationState("IdleHp100_1");
+	}
+	else
+	{
+		ChangeAnimationState("IdleHp30_1");
+	}
+
 	CrossHairRenderer->Off();
 
 	//PlayerBodyCollision->On();
@@ -69,6 +79,49 @@ void Player::IdleUpdate(float _Delta)
 	{
 		ChangeState(PlayerState::Falling);
 		return;
+	}
+
+	if (MainRenderer->IsAnimationEnd())
+	{
+		if (MainRenderer->IsAnimation("Left_IdleHp100_1") || MainRenderer->IsAnimation("Right_IdleHp100_1"))
+		{
+			ChangeAnimationState("IdleHp100_2");
+		}
+		else if (MainRenderer->IsAnimation("Left_IdleHp100_2") || MainRenderer->IsAnimation("Right_IdleHp100_2"))
+		{
+			ChangeAnimationState("IdleHp100_1");
+			IdleCount++;
+		}
+		else if (MainRenderer->IsAnimation("Left_IdleHp30_1") || MainRenderer->IsAnimation("Right_IdleHp30_1"))
+		{
+			ChangeAnimationState("IdleHp30_2");
+		}
+		else if (MainRenderer->IsAnimation("Left_IdleHp30_2") || MainRenderer->IsAnimation("Right_Idlehp30_2"))
+		{
+			ChangeAnimationState("IdleHp30_1");
+			IdleCount++;
+		}
+		else if (MainRenderer->IsAnimation("Left_Blink1") || MainRenderer->IsAnimation("Right_Blink1"))
+		{
+			ChangeAnimationState("Blink2");
+		}
+		else if (MainRenderer->IsAnimation("Left_Blink2") || MainRenderer->IsAnimation("Right_Blink2"))
+		{
+			if (30 <= Hp)
+			{
+				ChangeAnimationState("IdleHp100_1");
+			}
+			else
+			{
+				ChangeAnimationState("IdleHp30_1");
+			}
+		}
+	}
+
+	if (3 <= IdleCount)
+	{
+		IdleCount = 0;
+		ChangeAnimationState("Blink1");
 	}
 
 	if (true != IsTurnPlayer)
@@ -118,7 +171,7 @@ void Player::IdleUpdate(float _Delta)
 
 	
 	
-
+	
 }
 
 void Player::MoveStart()
