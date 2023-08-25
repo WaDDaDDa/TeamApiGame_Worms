@@ -737,7 +737,10 @@ void Player::DeathEndUpdate(float _Delta)
 	}
 	else
 	{
-		Gravity(_Delta);
+		if (2150.0f > GetPos().Y)
+		{
+			Gravity(_Delta);
+		}
 	}
 }
 
