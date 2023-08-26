@@ -1727,36 +1727,42 @@ void Player::ChangeWeapon()
 
 	if (true == GameEngineInput::IsDown('2'))
 	{
+		Gride_Renderer->Off();
 		ChangeState(PlayerState::BazookaOn);
 		return;
 	}
 	
 	if (true == GameEngineInput::IsDown('3'))
 	{
+		Gride_Renderer->Off();
 		ChangeState(PlayerState::UziOn);
 		return;
 	}
 
 	if (true == GameEngineInput::IsDown('4'))
 	{
+		Gride_Renderer->Off();
 		ChangeState(PlayerState::HomingMissileOn);
 		return;
 	}
 
 	if (true == GameEngineInput::IsDown('5'))
 	{
+		Gride_Renderer->Off();
 		ChangeState(PlayerState::SheepOn);
 		return;
 	}
 
 	if (true == GameEngineInput::IsDown('6'))
 	{
+		Gride_Renderer->Off();
 		ChangeState(PlayerState::GranadeOn);
 		return;
 	}
 
 	if (true == GameEngineInput::IsDown('7'))
 	{
+		Gride_Renderer->Off();
 		ChangeState(PlayerState::TeleportOn);
 		return;
 	}
@@ -1764,6 +1770,7 @@ void Player::ChangeWeapon()
 	if (true == GameEngineInput::IsDown('8'))
 	{
 		//ChangeState(PlayerState::AirStrikeOn);
+		Gride_Renderer->Off();
 		ChangeState(PlayerState::HolyGranadeOn);
 		return;
 	}
@@ -1777,6 +1784,7 @@ void Player::ChangeWeapon()
 
 	if (true == GameEngineInput::IsDown('O'))
 	{
+		Gride_Renderer->Off();
 		ChangeState(PlayerState::DonkeyOn);
 		return;
 	}
