@@ -34,6 +34,7 @@ enum class CollisionOrder
 	Item,
 	UI,
 	Mouse,
+	BackEffect,
 };
 
 enum class WeaponEnum

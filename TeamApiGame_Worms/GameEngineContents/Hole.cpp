@@ -80,7 +80,7 @@ float Hole::GetDistanceFromHoleCenter(float4 _Pos)
 
 	if (Scale.Size()<=Vector.Size())
 	{
-		return -1;
+		return -1.0f;
 	}
 	
 	return Vector.Size();

@@ -7,6 +7,7 @@
 #include <GameEngineCore/ResourcesManager.h>
 #include <GameEngineBase/GameEngineRandom.h>
 #include <GameEnginePlatform/GameEngineWindow.h>
+#include <GameEngineCore/GameEngineCollision.h>
 
 #define CHANGINGWINDTIME 0.5f
 
@@ -46,10 +47,51 @@ void BackGroundEffect::Start()
 	
 	HorizonVector = Dir* HorizonPower;
 
+	
+	{
+		Collision = CreateCollision(CollisionOrder::BackEffect);
+		Collision->SetCollisionType(CollisionType::Point);
+
+
+	}
+
 }
 
 void BackGroundEffect::Update(float _Delta)
 {
+	float4 MoveVector = float4::ZERO;
+
+	std::vector<GameEngineCollision*> _Col;
+	if (true == Collision->Collision(CollisionOrder::Bomb, _Col, CollisionType::Point, CollisionType::CirCle))
+	{
+
+		inBoom = true;
+		CurTime = 0.0f;
+		
+		for (size_t i = 0; i < _Col.size(); i++)
+		{
+			GameEngineCollision* Collison = _Col[i];
+			
+			GameEngineActor* Actor = Collison->GetActor();
+			BoomVector = (GetPos() - Actor->GetPos()).NormalizeReturn() *100.0f;
+		}
+	}
+
+
+	if (true == inBoom)
+	{
+		MoveVector=float4::LerpClimp(BoomVector, float4::ZERO, CurTime / CHANGINGWINDTIME);
+		CurTime += _Delta;
+		AddPos(MoveVector * _Delta);
+		if (float4::ZERO == MoveVector)
+		{
+			BoomVector == float4::ZERO;
+			CurTime = 0.0f;
+			inBoom = false;
+		}
+		return;
+	}
+
 
 	{
 		if (WindCheck != Wind::GetWind()->GetWindVector())
@@ -104,7 +146,9 @@ void BackGroundEffect::Update(float _Delta)
 
 		float4 DownVector = float4::DOWN * DownPower * _Delta;
 
-		AddPos(DownVector + (HorizonVector * _Delta));
+		MoveVector = DownVector + (HorizonVector * _Delta);
+
+		AddPos(MoveVector);
 	}
 
 	{
@@ -123,16 +167,4 @@ void BackGroundEffect::Update(float _Delta)
 void BackGroundEffect::Render(float _Delta)
 {
 
-	/*{
-		HDC dc = GameEngineWindow::MainWindow.GetBackBuffer()->GetImageDC();
-
-		std::string Text2 = "HorizonVector : ";
-		Text2 += std::to_string(HorizonVector.X);
-
-		 
-
-
-
-		TextOutA(dc, 2, 40, Text2.c_str(), static_cast<int>(Text2.size()));
-	}*/
 }

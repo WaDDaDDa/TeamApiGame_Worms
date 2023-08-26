@@ -89,7 +89,7 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 
 		BackGroundPtr = CreateActor<BackGround>(RenderOrder::Player);
 		
-		BackGroundPtr->VerticalPatternInit("gradient.Bmp", {5000.0f,2000.0f});
+		BackGroundPtr->VerticalPatternInit("gradient.Bmp", {3000.0f,2000.0f});
 
 		GameEngineActor* NewBackLand = CreateActor<BackLand>(RenderOrder::BackLand);
 		

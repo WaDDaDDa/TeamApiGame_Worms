@@ -25,10 +25,12 @@ private:
 	float DownPower = 0.0f;
 	float HorizonPower = 0.0f;
 	float4 HorizonVector = float4::ZERO;
-
+	
+	float4 BoomVector = float4::ZERO;
 	float CurTime = 0.0f;
 	
-
+	class GameEngineCollision* Collision = nullptr;
+	bool inBoom = false;
 
 	void Start() override;
 	void Update(float _Delta) override;
