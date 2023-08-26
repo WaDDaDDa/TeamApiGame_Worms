@@ -3,8 +3,11 @@
 #include <GameEngineCore/GameEngineRenderer.h>
 #include "ContentsEnum.h"
 
+
+UI_Lobby_SelectTitle* UI_Lobby_SelectTitle::LobbyTitleUI = nullptr;
 UI_Lobby_SelectTitle::UI_Lobby_SelectTitle()
 {
+	LobbyTitleUI = this;
 }
 
 UI_Lobby_SelectTitle::~UI_Lobby_SelectTitle()
@@ -29,6 +32,10 @@ void UI_Lobby_SelectTitle::Start()
 	MainRenderer = CreateUIRenderer("UI_MenuSel_Title.bmp", RenderOrder::UI);
 	MainRenderer->SetRenderScale({ 640, 200 });
 	MainRenderer->SetRenderPos({ 640, 100 });
+
+	MainTextRenderer = CreateUIRenderer(RenderOrder::UI);
+	MainTextRenderer->SetText(" ", 28, RGB(0, 255, 255));
+	MainTextRenderer->SetRenderPos({ 200, 650 });
 
 }
 

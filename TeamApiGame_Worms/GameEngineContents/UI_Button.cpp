@@ -20,6 +20,20 @@ UI_Button::~UI_Button()
 
 void UI_Button::Start()
 {
+	GameEnginePath FilePath;
+	FilePath.SetCurrentPath();
+	FilePath.MoveParentToExistsChild("ContentsResources");
+	FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+
+	if (nullptr == GameEngineSound::FindSound("KEYCLICK.WAV"))
+	{
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("KEYCLICK.WAV"));
+	}
+
+	if (nullptr == GameEngineSound::FindSound("CursorSelect.wav"))
+	{
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("CursorSelect.wav"));
+	}
 
 }
 
@@ -100,6 +114,10 @@ void UI_Button::HighlighterOn()
 		MainRenderer->SetTexture(HighlighterName);
 	}
 
+	if (nullptr != m_pFuncString)
+	{
+		m_pFuncString(m_sTextValue);
+	}
 }
 
 void UI_Button::HighlighterOff()
@@ -154,6 +172,8 @@ void UI_Button::CheckButtonCollision()
 				UI_Button* ButtonPtr = dynamic_cast<UI_Button*>(thisActor);
 
 				ButtonPtr->ChangeState(BUTTON_STATE::BUTTON_STATE_HOVERED);
+
+				ButtonPtr->EFFECT_Player_Hover = GameEngineSound::SoundPlay("KEYCLICK.WAV");
 			}
 
 			, [](GameEngineCollision* _this, GameEngineCollision* _Other)
@@ -167,6 +187,7 @@ void UI_Button::CheckButtonCollision()
 				UI_Button* ButtonPtr = dynamic_cast<UI_Button*>(thisActor);
 
 				ButtonPtr->ChangeState(BUTTON_STATE::BUTTON_STATE_UNHOVERED);
+				ButtonPtr->EFFECT_Player_Hover.Stop();
 			}
 			);
 
@@ -190,11 +211,13 @@ void UI_Button::CheckButtonClick()
 {
 	if (true == GameEngineInput::IsDown(VK_LBUTTON))
 	{
+		EFFECT_Player_Click = GameEngineSound::SoundPlay("CursorSelect.wav");
 		ChangeState(BUTTON_STATE::BUTTON_STATE_CLICKED);
 	}
 
 	if (true == GameEngineInput::IsFree(VK_LBUTTON) && true == GameEngineInput::IsFree(VK_RBUTTON))
 	{
+		EFFECT_Player_Click.Stop();
 		ChangeState(BUTTON_STATE::BUTTON_STATE_HOVERED);
 	}
 }

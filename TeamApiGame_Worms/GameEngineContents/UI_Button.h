@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
+#include <GameEnginePlatform/GameEngineSound.h>
 
 typedef void(*BTN_FUNC) (DWORD_PTR, DWORD_PTR);
 
@@ -35,11 +36,25 @@ public:
 		m_pFuncEnum = _pFuncEnum;
 	}
 
+	void SetHoverCallBackString(void(*_pFuncString)(const std::string& m_sTextValue))
+	{
+		m_pFuncString = _pFuncString;
+	}
+
+
 	template<typename EnumValue>
 	void SetEnumValue(EnumValue _EnumValue)
 	{
 		m_iEnumValue = static_cast<int>(_EnumValue);
 	}
+
+	void SetTextValue(const std::string& _TextValue)
+	{
+		m_sTextValue = _TextValue;
+	}
+
+	
+
 
 	UI_Button& InitButtonData(const std::string& _ButtonImage, float4 _ButtonScale, bool _UseHighlighter);
 
@@ -100,5 +115,13 @@ private:
 
 	int m_iEnumValue = 0;
 
+	std::string m_sTextValue;
+
 	void(*m_pFuncEnum)(int _iWeaponEnum) = nullptr;
+
+	void(*m_pFuncString)(const std::string& _NewText) = nullptr;
+
+	GameEngineSoundPlayer EFFECT_Player_Hover;
+	GameEngineSoundPlayer EFFECT_Player_Click;
+
 };
