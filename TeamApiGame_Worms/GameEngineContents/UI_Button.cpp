@@ -125,6 +125,7 @@ void UI_Button::StateUpdate()
 
 	case BUTTON_STATE::BUTTON_STATE_CLICKED:
 		ClickedMouseButtonDown();
+		ChangeState(BUTTON_STATE::BUTTON_STATE_HOVERED);
 		break;
 
 	default:

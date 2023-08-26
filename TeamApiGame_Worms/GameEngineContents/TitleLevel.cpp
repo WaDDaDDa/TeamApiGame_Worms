@@ -130,6 +130,7 @@ void TitleLevel::Title_ShowTitle_Start()
 void TitleLevel::Title_Main_Start()
 {
 	EFFECTPlayer_Bomb = GameEngineSound::SoundPlay("meganuke.wav");
+	BGMPlayer.Stop();
 	BGMPlayer = GameEngineSound::SoundPlay("Worms_TitleScreen.mp3");
 	IntroLogo->ChangeState_Main_Back();
 	MainLogo->On();
