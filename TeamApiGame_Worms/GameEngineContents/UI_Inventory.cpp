@@ -137,6 +137,14 @@ void UI_Inventory::Start()
 	Btn_Weapon_ConcreteDonkey->SetClickedCallBackEnum(ChageSelectWeapon);
 	AllWeaponButtons.push_back(Btn_Weapon_ConcreteDonkey);
 
+
+	for (int i = 0; i < AllWeaponButtons.size(); i++)
+	{
+		AllWeaponButtons[i]->Off();
+	}
+
+
+
 #pragma endregion
 
 	MouseUI = GetLevel()->CreateActor<UI_Mouse>();
@@ -165,6 +173,7 @@ void UI_Inventory::ShowInventory(bool _isActive, float _Delta)
 		for (int i = 0; i < AllWeaponButtons.size(); i++)
 		{
 			AllWeaponButtons[i]->AddPos(NextPos);
+			AllWeaponButtons[i]->On();
 		}
 	}
 
@@ -178,6 +187,7 @@ void UI_Inventory::ShowInventory(bool _isActive, float _Delta)
 		for (int i = 0; i < AllWeaponButtons.size(); i++)
 		{
 			AllWeaponButtons[i]->AddPos(NextPos);
+			AllWeaponButtons[i]->Off();
 		}
 	}
 
