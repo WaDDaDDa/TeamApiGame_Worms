@@ -1990,8 +1990,6 @@ void Player::GirderStart()
 {
 	ChangeAnimationState("Girder");
 	Gride_Renderer->On();
-
-	//CreateWeapon<Grider>();
 }
 void Player::GirderUpdate(float _Delta)
 {
@@ -2010,6 +2008,8 @@ void Player::GirderUpdate(float _Delta)
 
 	if (true == GameEngineInput::IsDown(VK_RIGHT))
 	{
+		GameEngineSound::SoundPlay("GIRDERIMPACT.WAV");
+
 		GridState NewState = static_cast<GridState>(static_cast<int>(Gride_State) + 1);
 
 		if (18 == static_cast<int>(NewState))
@@ -2023,6 +2023,8 @@ void Player::GirderUpdate(float _Delta)
 
 	if (true == GameEngineInput::IsDown(VK_LEFT))
 	{
+		GameEngineSound::SoundPlay("GIRDERIMPACT.WAV");
+
 		GridState NewState = static_cast<GridState>(static_cast<int>(Gride_State) - 1);
 
 		if (-1 == static_cast<int>(NewState))
@@ -2035,6 +2037,7 @@ void Player::GirderUpdate(float _Delta)
 
 	if (true == GameEngineInput::IsDown(VK_LBUTTON))
 	{
+		GameEngineSound::SoundPlay("GIRDERIMPACT.WAV");
 		GameEngineWindowTexture* GroundTexture = dynamic_cast<PlayLevel*>(GetLevel())->GetGround()->GetGroundTexture();
 		GameEngineWindowTexture* GroundPIxelTexture = dynamic_cast<PlayLevel*>(GetLevel())->GetGround()->GetPixelGroundTexture();
 
@@ -2381,11 +2384,13 @@ void Player::SuperSheepUpdate(float _Delta)
 	if (GameEngineInput::IsDown('1'))
 	{
 		ChangeState(PlayerState::SuperSheepOff);
+		return;
 	}
 
 	if (GameEngineInput::IsDown('A'))
 	{
 		ChangeState(PlayerState::SuperSheepFire);
+		return;
 	}
 
 	InputMove();

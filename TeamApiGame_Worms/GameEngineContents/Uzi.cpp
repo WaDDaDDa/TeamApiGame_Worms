@@ -39,6 +39,16 @@ void Uzi::Start()
 		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("uzicase.bmp"), 1, 16);
 	}
 
+	// 사운드 로드
+	if (nullptr == GameEngineSound::FindSound("Uzifire.WAV"))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Uzifire.WAV"));
+	}
 	
 	{
 		//Collision
@@ -53,6 +63,7 @@ void Uzi::Start()
 
 	Renderer->CreateAnimation("Uzi_Fly", "uzicase.bmp", 0, 15, 0.05f, true);
 
+	SoundEffect = GameEngineSound::SoundPlay("Uzifire.WAV");
 
 	SetWeaponDamage(UziDamage);
 	SetWeaponSpeed(UziSpeed);

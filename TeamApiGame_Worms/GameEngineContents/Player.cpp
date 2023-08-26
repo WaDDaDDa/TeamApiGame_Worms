@@ -1027,6 +1027,8 @@ void Player::Start()
 		GameEngineSound::SoundLoad(FilePath.PlusFilePath("splish.WAV"));
 		GameEngineSound::SoundLoad(FilePath.PlusFilePath("THROWRELEASE.WAV"));
 		GameEngineSound::SoundLoad(FilePath.PlusFilePath("petrol.WAV"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("GIRDERIMPACT.WAV"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("TELEPORT.WAV"));
 	}
 	
 	{
@@ -1722,6 +1724,7 @@ void Player::InputMove()
 
 void Player::ChangeWeapon()
 {
+
 	if (true == GameEngineInput::IsDown('2'))
 	{
 		ChangeState(PlayerState::BazookaOn);

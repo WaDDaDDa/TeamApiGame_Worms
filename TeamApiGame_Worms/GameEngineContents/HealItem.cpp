@@ -128,6 +128,8 @@ void HealItem::CreateStart()
 	Renderer->ChangeAnimation("HealItem_Create");
 	GameTurn::MainGameTurn->TurnPlayerAllOff();
 
+	GameEngineSound::SoundPlay("TELEPORT.WAV");
+
 	IsTurnPlayer = true;
 }
 
