@@ -1292,6 +1292,9 @@ void Player::ChangeState(PlayerState _State)
 		case PlayerState::SuperSheep:
 			SuperSheepStart();
 			break;
+		case PlayerState::SuperSheepFire:
+			SuperSheepFireStart();
+			break;
 		case PlayerState::SuperSheepOff:
 			SuperSheepOffStart();
 			break;
@@ -1411,6 +1414,8 @@ void Player::StateUpdate(float _Delta)
 		return SuperSheepOnUpdate(_Delta);
 	case PlayerState::SuperSheep:
 		return SuperSheepUpdate(_Delta);
+	case PlayerState::SuperSheepFire:
+		return SuperSheepFireUpdate(_Delta);
 	case PlayerState::SuperSheepOff:
 		return SuperSheepOffUpdate(_Delta);
 	case PlayerState::Win:
