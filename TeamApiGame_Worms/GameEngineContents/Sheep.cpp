@@ -40,6 +40,16 @@ void Sheep::Start()
 		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("sheepwlk2.bmp"), 1, 8);
 	}
 
+	// 사운드 로드
+	if (nullptr == GameEngineSound::FindSound("sheepbaa.WAV"))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("sheepbaa.WAV"));
+	}
 	
 	Renderer->SetTexture("Blank.bmp");
 	Renderer->SetScaleRatio(1.2f);
@@ -79,6 +89,8 @@ void Sheep::StateUpdate(float _Delta)
 		return BombUpdate(_Delta);
 	case SheepState::Damage:
 		return DamageUpdate(_Delta);
+	case SheepState::InWater:
+		return InWaterUpdate(_Delta);
 	case SheepState::Max:
 		return MaxUpdate(_Delta);
 	default:
@@ -107,6 +119,9 @@ void Sheep::ChangeState(SheepState _State)
 		case SheepState::Damage:
 			DamageStart();
 			break;
+		case SheepState::InWater:
+			InWaterStart();
+			break;
 		case SheepState::Max:
 			MaxStart();
 			break;
@@ -115,7 +130,7 @@ void Sheep::ChangeState(SheepState _State)
 		}
 	}
 
-	//ResetLiveTime();
+	ResetLiveTime();
 
 	State = _State;
 }
@@ -184,42 +199,6 @@ void Sheep::Movement(float _Delta)
 	// 플레이어가 공중이면
 	if (Color == RGB(255, 255, 255))
 	{
-		// 움직일 예정의 곳도 공중인지 체크한다.
-		//if (RGB(255, 255, 255) == GetGroundColor(RGB(255, 255, 255), MovePos1))
-		//{
-		//	// 움직일 곳 또한 공중이라면
-		//	float4 XPos = float4::ZERO;
-		//	float4 Dir = MovePos1.X >= 0.0f ? float4::RIGHT : float4::LEFT;
-		//	while (RGB(0, 0, 255) != GetGroundColor(RGB(255, 255, 255), MovePos1 + XPos))
-		//	{
-		//		XPos += Dir;
-
-		//		if (abs(XPos.X) > 20.0f)
-		//		{
-		//			break;
-		//		}
-		//	}
-
-		//	float4 YPos = float4::ZERO;
-		//	while (RGB(0, 0, 255) != GetGroundColor(RGB(255, 255, 255), MovePos1 + YPos))
-		//	{
-		//		YPos.Y += 1;
-
-		//		if (YPos.Y > 30.0f)
-		//		{
-		//			break;
-		//		}
-		//	}
-
-		//	if (abs(XPos.X) >= YPos.Y)
-		//	{
-		//		while (RGB(0, 0, 255) != GetGroundColor(RGB(255, 255, 255), MovePos1))
-		//		{
-		//			MovePos1.Y += 1;
-		//		}
-		//	}
-
-		//}
 		AddPos(MovePos1);
 	}
 }
@@ -269,10 +248,18 @@ void Sheep::FlyUpdate(float _Delta)
 		return;
 	}
 
+	if (GetPos().Y >= 1875)
+	{
+		ChangeState(SheepState::InWater);
+		return;
+	}
+
 }
 
 void Sheep::JumpStart()
 {
+	SoundEffect = GameEngineSound::SoundPlay("sheepbaa.WAV");
+
 	if (DirState == SheepDir::Right)
 	{
 		SetGravityVector(float4::UP * SheepJumpPower + float4::RIGHT * SheepSpeed);
@@ -314,12 +301,19 @@ void Sheep::JumpUpdate(float _Delta)
 		return;
 	}
 
+	if (GetPos().Y >= 1875)
+	{
+		ChangeState(SheepState::InWater);
+		return;
+	}
 
 }
 
 void Sheep::BombStart()
 {
 	SheepBomb = CreateBombEffect<Range75>();
+	SoundEffect = GameEngineSound::SoundPlay("Explosion2.WAV");
+
 	Renderer->Off();
 }
 
@@ -354,6 +348,39 @@ void Sheep::DamageUpdate(float _Delta)
 		// 무기사용이 종료되면 다시 플레이어로 돌아간다.
 		Master->SwitchIsTurnPlayer();
 		Death();
+	}
+}
+
+void Sheep::InWaterStart()
+{
+	SoundEffect = GameEngineSound::SoundPlay("splish.WAV");
+	SetGravityVector(float4::DOWN);
+	SetGravityPower(100.0f);
+}
+
+void Sheep::InWaterUpdate(float _Delta)
+{
+	Gravity(_Delta);
+
+	if (GetLiveTime() >= 3.0f)
+	{
+		size_t PlayerCount = Player::GetAllPlayer().size();
+		int PlayerStateCount = 0;
+		for (size_t i = 0; i < PlayerCount; i++)
+		{
+			if (PlayerState::Idle == Player::GetAllPlayer()[i]->GetState() || PlayerState::DeathEnd == Player::GetAllPlayer()[i]->GetState())
+			{
+				PlayerStateCount++;
+			}
+		}
+
+		if (PlayerStateCount == PlayerCount)
+		{
+			// 무기사용이 종료되면 다시 플레이어로 돌아간다.
+			Master->SwitchIsTurnPlayer();
+			Death();
+		}
+		return;
 	}
 }
 

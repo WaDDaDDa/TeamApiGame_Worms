@@ -35,7 +35,6 @@ void Range100::Start()
 		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("circle100.bmp"), 1, 4);
 	}
 
-
 	Renderer->SetTexture("Blank.bmp");
 
 	SetBombRange({ 200.0f,200.0f });

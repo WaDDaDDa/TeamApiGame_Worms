@@ -82,6 +82,16 @@ void UI_MainLogo::Start()
 		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("Armageddon_10.bmp"));
 	}
 
+	if (nullptr == GameEngineSound::FindSound("HANDGUNFIRE.WAV"))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("HANDGUNFIRE.WAV"));
+	}
+
 
 	// ·»´õ·¯ ¼¼ÆÃ
 	TitleRenderer = CreateUIRenderer("UI_Title_Logo.bmp", RenderOrder::UI);
@@ -193,11 +203,14 @@ void UI_MainLogo::Update(float _Delta)
 
 			AllText[textIndex]->On();
 
+			EFFECTPlayer_Font = GameEngineSound::SoundPlay("HANDGUNFIRE.WAV");
+
 			++textIndex;
 
 			if (textIndex >= 10)
 			{
 				IsAllTextShow = false;
+				EFFECTPlayer_Font.Stop();
 			}
 		}
 	}

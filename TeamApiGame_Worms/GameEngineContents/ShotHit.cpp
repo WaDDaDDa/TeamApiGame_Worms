@@ -56,5 +56,6 @@ void ShotHit::Update(float _Delta)
 	if (Renderer->IsAnimationEnd())
 	{
 		Death();
+		BombCollision->Off();
 	}
 }

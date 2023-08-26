@@ -36,7 +36,7 @@ void FlameEffect::Start()
 		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("exhaust.bmp"), 1, 30);
 	}
 
-	SetBombRange({ 5.0f,5.0f });
+	SetFlameRange({ 5.0f,5.0f });
 
 	Renderer->SetTexture("Blank.bmp");
 
@@ -105,7 +105,7 @@ void FlameEffect::Update(float _Delta)
 
 void FlameEffect::FlyStart()
 {
-	SetDamage(5.0f);
+	SetDamage(2.0f);
 
 	Renderer->ChangeAnimation("FlameEffect");
 }

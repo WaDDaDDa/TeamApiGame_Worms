@@ -223,9 +223,7 @@ void PlayLevel::Update(float _Delta)
 			}
 		
 			BackGroundEffectRespawn -= _Delta;
-		
 	}
-
 }
 
 void PlayLevel::Release()

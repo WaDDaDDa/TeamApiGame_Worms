@@ -11,6 +11,7 @@
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/GameEngineCamera.h>
 #include <GameEngineCore/GameEngineCollision.h>
+#include <GameEnginePlatform/GameEngineSound.h>
 
 #include "UI_PlayerInfo.h"
 #include "GameStateManager.h"
@@ -54,6 +55,39 @@ void Player::Start()
 			FilePath.MoveParentToExistsChild("ContentsResources");
 			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
 			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("idleRight.bmp"), 1, 6);
+		}
+
+		if (false == ResourcesManager::GetInst().IsLoadTexture("IdleHp100Left.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("IdleHp100Left.bmp"), 1, 20);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("IdleHp100Right.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("IdleHp100Right.bmp"), 1, 20);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("IdleHp30Left.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("IdleHp30Left.bmp"), 1, 13);
+		}
+		if (false == ResourcesManager::GetInst().IsLoadTexture("IdleHp30Right.bmp"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Image\\Worms\\");
+			ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("IdleHp30Right.bmp"), 1, 13);
 		}
 
 		if (false == ResourcesManager::GetInst().IsLoadTexture("walkLeft.bmp"))
@@ -816,8 +850,14 @@ void Player::Start()
 	// Animation
 	{
 		// Left
-		MainRenderer->CreateAnimation("Left_Idle", "idleLeft.bmp", 0, 5, 0.1f, true);
-		MainRenderer->CreateAnimation("Left_Move", "walkLeft.bmp", 0, 14, 0.1f, true);
+		MainRenderer->CreateAnimation("Left_Idle", "idleLeft.bmp", 0, 5, 0.05f, true);
+		MainRenderer->CreateAnimation("Left_Blink1", "idleLeft.bmp", 0, 5, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_Blink2", "idleLeft.bmp", 5, 0, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_IdleHp100_1", "IdleHp100Left.bmp", 0, 19, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_IdleHp100_2", "IdleHp100Left.bmp", 19, 0, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_IdleHp30_1", "IdleHp30Left.bmp", 0, 12, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_IdleHp30_2", "IdleHp30Left.bmp", 12, 0, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_Move", "walkLeft.bmp", 0, 14, 0.05f, true);
 		MainRenderer->CreateAnimation("Left_JumpReady", "jumpReadyLeft.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_JumpUp", "flyUpLeft.bmp", 0, 1, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_Jump", "flyLinkLeft.bmp", 0, 6, 0.1f, false);
@@ -853,20 +893,26 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Left_Donkey", "AirStrikeOnLeft.bmp", 9, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_DonkeyFire", "AirStrikeFireLeft.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_DonkeyOff", "AirStrikeOffLeft.bmp", 0, 9, 0.05f, false);
-		MainRenderer->CreateAnimation("Left_HolyGranadeOn", "HolyGranadeOnLeft.bmp", 0, 9, 0.1f, false);
-		MainRenderer->CreateAnimation("Left_HolyGranadeOff", "HolyGranadeOffLeft.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Left_HolyGranadeOn", "HolyGranadeOnLeft.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Left_HolyGranadeOff", "HolyGranadeOffLeft.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_SuperSheepOn", "sheepOnLeft.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_SuperSheep", "sheepOnLeft.bmp", 9, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_SuperSheepOff", "sheepOffLeft.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_GraveStone", "GraveStone.bmp", 0, 59, 0.1f, true);
-		MainRenderer->CreateAnimation("Left_Win", "winLeft.bmp", 0, 13, 0.1f, true);
+		MainRenderer->CreateAnimation("Left_Win", "winLeft.bmp", 0, 13, 0.03f, true);
 		MainRenderer->CreateAnimation("Left_Diving1", "DivingLeft.bmp", 0, 2, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_Diving2", "DivingLeft.bmp", 2, 0, 0.1f, false);
 
 
 		// Right
-		MainRenderer->CreateAnimation("Right_Idle", "idleRight.bmp", 0, 5, 0.2f, true);
-		MainRenderer->CreateAnimation("Right_Move", "walkRight.bmp", 0, 14, 0.2f, true);
+		MainRenderer->CreateAnimation("Right_Idle", "idleRight.bmp", 0, 5, 0.05f, true);
+		MainRenderer->CreateAnimation("Right_Blink1", "idleRight.bmp", 0, 5, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_Blink2", "idleRight.bmp", 5, 0, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_IdleHp100_1", "IdleHp100Right.bmp", 0, 19, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_IdleHp100_2", "IdleHp100Right.bmp", 19, 0, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_IdleHp30_1", "IdleHp30Right.bmp", 0, 12, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_IdleHp30_2", "IdleHp30Right.bmp", 12, 0, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_Move", "walkRight.bmp", 0, 14, 0.05f, true);
 		MainRenderer->CreateAnimation("Right_JumpReady", "jumpReadyRight.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_JumpUp", "flyUpRight.bmp", 0, 1, 0.1f, false);
 		MainRenderer->CreateAnimation("Right_Jump", "flyLinkRight.bmp", 0, 6, 0.1f, false);
@@ -902,8 +948,8 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Right_Donkey", "AirStrikeOnRight.bmp", 9, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_DonkeyFire", "AirStrikeFireRight.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_DonkeyOff", "AirStrikeOffRight.bmp", 0, 9, 0.05f, false);
-		MainRenderer->CreateAnimation("Right_HolyGranadeOn", "HolyGranadeOnRight.bmp", 0, 9, 0.1f, false);
-		MainRenderer->CreateAnimation("Right_HolyGranadeOff", "HolyGranadeOffRight.bmp", 0, 9, 0.1f, false);
+		MainRenderer->CreateAnimation("Right_HolyGranadeOn", "HolyGranadeOnRight.bmp", 0, 9, 0.05f, false);
+		MainRenderer->CreateAnimation("Right_HolyGranadeOff", "HolyGranadeOffRight.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_SuperSheepOn", "sheepOnRight.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_SuperSheep", "sheepOnRight.bmp", 9, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_SuperSheepOff", "sheepOffRight.bmp", 0, 9, 0.05f, false);
@@ -963,6 +1009,26 @@ void Player::Start()
 			CrossHairRenderer->CreateAnimation("Right_CrossHair" + std::to_string(i), "crshairb_R.bmp", i, i, 0.1f, false);
 		}
 
+	}
+
+
+
+	// 폭발 사운드 로드
+	if (nullptr == GameEngineSound::FindSound("Explosion1.WAV"))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Explosion1.WAV"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Explosion2.WAV"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Explosion3.WAV"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("splish.WAV"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("THROWRELEASE.WAV"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("petrol.WAV"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("GIRDERIMPACT.WAV"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("TELEPORT.WAV"));
 	}
 	
 	{
@@ -1658,6 +1724,7 @@ void Player::InputMove()
 
 void Player::ChangeWeapon()
 {
+
 	if (true == GameEngineInput::IsDown('2'))
 	{
 		ChangeState(PlayerState::BazookaOn);
@@ -1755,6 +1822,21 @@ void Player::DamagingCheck()
 			GameEngineCollision* Collison = _Col[i];
 
 			GameEngineActor* Actor = Collison->GetActor();
+
+		}
+		ChangeState(PlayerState::Damaging);
+	}
+	else if (true == PlayerBodyCollision->Collision(CollisionOrder::Flame, _Col
+		, CollisionType::Rect
+		, CollisionType::CirCle)
+		)
+	{
+		for (size_t i = 0; i < _Col.size(); i++)
+		{
+			GameEngineCollision* Collison = _Col[i];
+
+			GameEngineActor* Actor = Collison->GetActor();
+
 		}
 		ChangeState(PlayerState::Damaging);
 	}
@@ -1857,7 +1939,7 @@ void Player::ChangeAimAngle(float _Delta)
 			{
 				CurAngle = LEFT_DOWN_MAXANGLE;
 				LengthX = 0;
-				LengthY = -92;
+				LengthY = 92;
 			}
 		}
 	}

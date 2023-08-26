@@ -93,6 +93,11 @@ void GameTurn::Update(float _Delta)
 
 	}
 
+	if (TurnPlayer->GetState() == PlayerState::DeathEnd && TurnPlayer->GetIsDiving())
+	{
+		ChangeTurnPlayer(_Delta);
+	}
+
 	if (TurnPlayTime <= GetLiveTime())
 	{
 		ChangeTurnPlayer(_Delta);

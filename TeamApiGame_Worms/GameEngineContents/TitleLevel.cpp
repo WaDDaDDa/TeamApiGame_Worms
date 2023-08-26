@@ -18,6 +18,38 @@ TitleLevel::~TitleLevel()
 
 void TitleLevel::Start()
 {
+	if (nullptr == GameEngineSound::FindSound("Worms_TitleScreen.mp3"))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Worms_TitleScreen.mp3"));
+	}
+
+	if (nullptr == GameEngineSound::FindSound("Worms_TitleScreen_Heartbeat.wav"))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Worms_TitleScreen_Heartbeat.wav"));
+	}
+
+	if (nullptr == GameEngineSound::FindSound("meganuke.wav"))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("meganuke.wav"));
+	}
+
+
+
 	IntroLogo = CreateActor<UI_IntroLogo>();
 	IntroLogo->SetPos(GameEngineWindow::MainWindow.GetScale().Half());
 
@@ -89,6 +121,7 @@ void TitleLevel::Title_Intro_Start()
 
 void TitleLevel::Title_ShowTitle_Start()
 {
+	BGMPlayer = GameEngineSound::SoundPlay("Worms_TitleScreen_Heartbeat.wav");
 	IntroLogo->ChangeState_Black();
 	MainLogo = CreateActor<UI_MainLogo>();
 
@@ -96,6 +129,9 @@ void TitleLevel::Title_ShowTitle_Start()
 
 void TitleLevel::Title_Main_Start()
 {
+	EFFECTPlayer_Bomb = GameEngineSound::SoundPlay("meganuke.wav");
+	BGMPlayer.Stop();
+	BGMPlayer = GameEngineSound::SoundPlay("Worms_TitleScreen.mp3");
 	IntroLogo->ChangeState_Main_Back();
 	MainLogo->On();
 	MainLogo->SetShowAllTitleText();
@@ -151,5 +187,11 @@ void TitleLevel::Title_Main_Update(float _Delta)
 		GameEngineCore::ChangeLevel("ModeSelectLevel");
 	}
 
+}
+
+void TitleLevel::LevelEnd(GameEngineLevel* _NextLevel)
+{
+	EFFECTPlayer_Bomb.Stop();
+	BGMPlayer.Stop();
 }
 

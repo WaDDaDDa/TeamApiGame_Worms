@@ -37,7 +37,17 @@
 
 void Player::IdleStart()
 {
-	ChangeAnimationState("Idle");
+	//ChangeAnimationState("Idle");
+
+	if (30 <= Hp)
+	{
+		ChangeAnimationState("IdleHp100_1");
+	}
+	else
+	{
+		ChangeAnimationState("IdleHp30_1");
+	}
+
 	CrossHairRenderer->Off();
 
 	//PlayerBodyCollision->On();
@@ -71,6 +81,49 @@ void Player::IdleUpdate(float _Delta)
 		return;
 	}
 
+	if (MainRenderer->IsAnimationEnd())
+	{
+		if (MainRenderer->IsAnimation("Left_IdleHp100_1") || MainRenderer->IsAnimation("Right_IdleHp100_1"))
+		{
+			ChangeAnimationState("IdleHp100_2");
+		}
+		else if (MainRenderer->IsAnimation("Left_IdleHp100_2") || MainRenderer->IsAnimation("Right_IdleHp100_2"))
+		{
+			ChangeAnimationState("IdleHp100_1");
+			IdleCount++;
+		}
+		else if (MainRenderer->IsAnimation("Left_IdleHp30_1") || MainRenderer->IsAnimation("Right_IdleHp30_1"))
+		{
+			ChangeAnimationState("IdleHp30_2");
+		}
+		else if (MainRenderer->IsAnimation("Left_IdleHp30_2") || MainRenderer->IsAnimation("Right_Idlehp30_2"))
+		{
+			ChangeAnimationState("IdleHp30_1");
+			IdleCount++;
+		}
+		else if (MainRenderer->IsAnimation("Left_Blink1") || MainRenderer->IsAnimation("Right_Blink1"))
+		{
+			ChangeAnimationState("Blink2");
+		}
+		else if (MainRenderer->IsAnimation("Left_Blink2") || MainRenderer->IsAnimation("Right_Blink2"))
+		{
+			if (30 <= Hp)
+			{
+				ChangeAnimationState("IdleHp100_1");
+			}
+			else
+			{
+				ChangeAnimationState("IdleHp30_1");
+			}
+		}
+	}
+
+	if (3 <= IdleCount)
+	{
+		IdleCount = 0;
+		ChangeAnimationState("Blink1");
+	}
+
 	if (true != IsTurnPlayer)
 	{
 		return;
@@ -84,8 +137,8 @@ void Player::IdleUpdate(float _Delta)
 	if (GameEngineInput::IsDown('T'))
 	{
 		TargetPos = MouseObject::GetPlayMousePos();
-		//CreateWeapon<TestWeapon>();
-		CreateWeapon<Donkey>();
+		CreateWeapon<TestWeapon>();
+		//CreateWeapon<Donkey>();
 	}
 
 	//if (true == GameEngineInput::IsPress(VK_LEFT)
@@ -118,7 +171,7 @@ void Player::IdleUpdate(float _Delta)
 
 	
 	
-
+	
 }
 
 void Player::MoveStart()
@@ -239,7 +292,7 @@ void Player::FallingUpdate(float _Delta)
 	}
 
 	// 물에 닿으면 Diving 상태
-	if (false)
+	if (1875.0f <= GetPos().Y)
 	{
 		ChangeState(PlayerState::Diving);
 	}
@@ -253,6 +306,8 @@ void Player::DamagingStart()
 	UI_PlayerDamage* DamageUI = GetLevel()->CreateActor<UI_PlayerDamage>();
 
 	std::vector<GameEngineCollision*> _Col;
+
+	// 만약 닿은 Collision이 Uzi와 Flame을 제외한 Bomb Collision이라면
 	if (true == PlayerBodyCollision->Collision(CollisionOrder::Bomb, _Col
 		, CollisionType::Rect
 		, CollisionType::CirCle
@@ -311,6 +366,7 @@ void Player::DamagingStart()
 		SetGravityVector(GravityDir * 250.0f);
 	}
 
+	// 닿은 Collision이 Uzi(ShotHit) Collision 이라면
 	if (true == PlayerBodyCollision->Collision(CollisionOrder::ShotHit, _Col
 		, CollisionType::Rect
 		, CollisionType::CirCle
@@ -334,7 +390,6 @@ void Player::DamagingStart()
 			WeaponPos = Actor->GetPos();
 
 			Collision->Off();
-
 			//PlayerBodyCollision->Off();
 		}
 		float4 PlayerGetPos = GetPos();
@@ -365,6 +420,66 @@ void Player::DamagingStart()
 
 		SetGravityVector(GravityDir * 150.0f);
 	}
+
+	// 닿은 Collision이 Flame 이라면
+	if (true == PlayerBodyCollision->Collision(CollisionOrder::Flame, _Col
+		, CollisionType::Rect
+		, CollisionType::CirCle
+	))
+	{
+		float4 WeaponPos = float4::ZERO;
+
+		float4 WeaponPlayerPos = float4::ZERO;
+		float WeaponDamage = 0.0f;
+
+		for (size_t i = 0; i < _Col.size(); i++)
+		{
+			GameEngineCollision* Collision = _Col[i];
+
+			GameEngineActor* Actor = Collision->GetActor();
+
+			BombEffect* Effect = dynamic_cast<BombEffect*>(Collision->GetActor());
+
+			WeaponDamage = Effect->GetDamage();
+
+			WeaponPos = Actor->GetPos();
+
+			//PlayerBodyCollision->Off();
+		}
+		float4 PlayerGetPos = GetPos();
+		PlayerGetPos.Y -= 15.0f;
+		GravityDir = PlayerGetPos - WeaponPos;
+		GravityDir.Normalize();
+		GravityDir += float4::UP;
+
+		if (0.5f <= GetLiveTime())
+		{
+			DamageUI->UpdateData_PlayerDamageUI(PlayerInfoUI->GetPos(), static_cast<int>(WeaponDamage), Player::TurnPlayerIndex);
+
+			this->Hp -= static_cast<int>(WeaponDamage);
+
+			UI_Box_AllTeamHpBar::GetAllTeamHpBarUI()->InitTeamHpBarData(TurnPlayerIndex, Hp);
+
+			ResetLiveTime();
+		}
+
+		// Damage 받는 부분
+		//{
+		//	WeaponPlayerPos = GetPos() - WeaponPos;
+
+		//	// 데미지 UI 출력
+		//	DamageUI->UpdateData_PlayerDamageUI(PlayerInfoUI->GetPos(), static_cast<int>(WeaponDamage), Player::TurnPlayerIndex);
+
+		//	this->Hp -= static_cast<int>(WeaponDamage);
+
+		//	UI_Box_AllTeamHpBar::GetAllTeamHpBarUI()->InitTeamHpBarData(TurnPlayerIndex, Hp);
+		//}
+
+		SetGravityVector(GravityDir * 100.0f);
+	}
+
+
+
 	ResetLiveTime();
 }
 void Player::DamagingUpdate(float _Delta)
@@ -384,9 +499,8 @@ void Player::DamagingUpdate(float _Delta)
 			Dir = PlayerDir::Left;
 		}
 
-
 		GravityDirMul = (GravityDir.Y + 1) * 90;
-		GravityDir.Y += _Delta * 1.5;
+		GravityDir.Y += _Delta;
 
 		int iGravityDirMul = static_cast<int>(GravityDirMul);
 
@@ -492,14 +606,212 @@ void Player::DamagingUpdate(float _Delta)
 	}
 
 
-	unsigned int Color = GetGroundColor(RGB(255, 255, 255));
+	// Damage 연속 인식
+	{
+		UI_PlayerDamage* DamageUI = GetLevel()->CreateActor<UI_PlayerDamage>();
+		std::vector<GameEngineCollision*> _Col;
 
-	if (RGB(255, 255, 255) != Color)
+		// Uzi
+		if (true == PlayerBodyCollision->Collision(CollisionOrder::ShotHit, _Col
+			, CollisionType::Rect
+			, CollisionType::CirCle
+		))
+		{
+			float4 WeaponPos = float4::ZERO;
+
+			float4 WeaponPlayerPos = float4::ZERO;
+			float WeaponDamage = 0.0f;
+
+			for (size_t i = 0; i < _Col.size(); i++)
+			{
+				GameEngineCollision* Collision = _Col[i];
+
+				GameEngineActor* Actor = Collision->GetActor();
+
+				BombEffect* Effect = dynamic_cast<BombEffect*>(Collision->GetActor());
+
+				WeaponDamage = Effect->GetDamage();
+
+				WeaponPos = Actor->GetPos();
+
+				Collision->Off();
+				//PlayerBodyCollision->Off();
+			}
+			float4 PlayerGetPos = GetPos();
+			PlayerGetPos.Y -= 15.0f;
+			GravityDir = PlayerGetPos - WeaponPos;
+			GravityDir.Normalize();
+			GravityDir += float4::UP;
+
+
+			// Damage 받는 부분
+			{
+				WeaponPlayerPos = GetPos() - WeaponPos;
+
+				float Damaging = WeaponDamage - (WeaponPlayerPos.Size());
+
+				if (0 >= Damaging)
+				{
+					Damaging = 1;
+				}
+
+				// 데미지 UI 출력
+				DamageUI->UpdateData_PlayerDamageUI(PlayerInfoUI->GetPos(), static_cast<int>(Damaging), Player::TurnPlayerIndex);
+
+				this->Hp -= static_cast<int>(Damaging);
+
+				UI_Box_AllTeamHpBar::GetAllTeamHpBarUI()->InitTeamHpBarData(TurnPlayerIndex, Hp);
+			}
+
+			SetGravityVector(GravityDir * 150.0f);
+		}
+
+		// Flame
+		if (true == PlayerBodyCollision->Collision(CollisionOrder::Flame, _Col
+			, CollisionType::Rect
+			, CollisionType::CirCle
+		))
+		{
+			float4 WeaponPos = float4::ZERO;
+
+			float4 WeaponPlayerPos = float4::ZERO;
+			float WeaponDamage = 0.0f;
+
+			for (size_t i = 0; i < _Col.size(); i++)
+			{
+				GameEngineCollision* Collision = _Col[i];
+
+				GameEngineActor* Actor = Collision->GetActor();
+
+				BombEffect* Effect = dynamic_cast<BombEffect*>(Collision->GetActor());
+
+				WeaponDamage = Effect->GetDamage();
+
+				WeaponPos = Actor->GetPos();
+
+				//PlayerBodyCollision->Off();
+			}
+			float4 PlayerGetPos = GetPos();
+			PlayerGetPos.Y -= 15.0f;
+			GravityDir = PlayerGetPos - WeaponPos;
+			GravityDir.Normalize();
+			GravityDir += float4::UP;
+
+
+			// Damage 받는 부분
+			{
+				WeaponPlayerPos = GetPos() - WeaponPos;
+
+				// 데미지 UI 출력
+				DamageUI->UpdateData_PlayerDamageUI(PlayerInfoUI->GetPos(), static_cast<int>(WeaponDamage), Player::TurnPlayerIndex);
+
+				this->Hp -= static_cast<int>(WeaponDamage);
+
+				UI_Box_AllTeamHpBar::GetAllTeamHpBarUI()->InitTeamHpBarData(TurnPlayerIndex, Hp);
+			}
+
+			SetGravityVector(GravityDir * 100.0f);
+		}
+
+	}
+
+
+
+
+	unsigned int DownCheckColor = GetGroundColor(RGB(255, 255, 255), DownCheckPos);
+	unsigned int UpCheckColor = GetGroundColor(RGB(255, 255, 255), UpCheckPos);
+	unsigned int LeftCheckColor = GetGroundColor(RGB(255, 255, 255), LeftCheckPos);
+	unsigned int RightCheckColor = GetGroundColor(RGB(255, 255, 255), RightCheckPos);
+
+	if (RGB(255, 255, 255) != UpCheckColor)
+	{
+		SetGravityVector({ GravityDir.X, 1.0f });
+
+		unsigned int CheckColor = GetGroundColor(RGB(255, 255, 255), UpCheckPos);
+
+		while (CheckColor != RGB(255, 255, 255))
+		{
+			CheckColor = GetGroundColor(RGB(255, 255, 255), UpCheckPos);
+			AddPos(float4::DOWN);
+		}
+	}
+
+	if (RGB(255, 255, 255) != LeftCheckColor)
+	{
+		if (0 >= GravityDir.X)
+		{
+			SetGravityVector({ -GravityDir.X , GravityDir.Y });
+		}
+		else
+		{
+			SetGravityVector(GravityDir);
+		}
+
+		unsigned int CheckColor = GetGroundColor(RGB(255, 255, 255), LeftCheckPos);
+
+		while (CheckColor != RGB(255, 255, 255))
+		{
+			CheckColor = GetGroundColor(RGB(255, 255, 255), LeftCheckPos);
+			AddPos(float4::RIGHT);
+		}
+	}
+
+	if (RGB(255, 255, 255) != RightCheckColor)
+	{
+		if (0 <= GravityDir.X)
+		{
+			SetGravityVector({ -GravityDir.X, GravityDir.Y });
+		}
+		else
+		{
+			SetGravityVector(GravityDir);
+		}
+
+		unsigned int CheckColor = GetGroundColor(RGB(255, 255, 255), RightCheckPos);
+
+		while (CheckColor != RGB(255, 255, 255))
+		{
+			CheckColor = GetGroundColor(RGB(255, 255, 255), RightCheckPos);
+			AddPos(float4::LEFT);
+		}
+	}
+
+	
+	
+
+	//if (RGB(255, 255, 255) == Color)
+	//{
+	//	Gravity(_Delta);
+	//}
+	//else // 모두흰색이 아니다 = 땅에닿아있다.
+	//{
+	//	unsigned int CheckColor = GetGroundColor(RGB(255, 255, 255), float4::UP);
+
+	//	// 체크중 어느하나라도  흰색이 아니라면 한칸올리기 반복한다.
+	//	while (CheckColor != RGB(255, 255, 255))
+	//	{
+	//		CheckColor = GetGroundColor(RGB(255, 255, 255), float4::UP);
+
+	//		AddPos(float4::UP);
+	//	}
+
+	//	GravityReset();
+	//}
+
+
+
+
+	if (RGB(255, 255, 255) != DownCheckColor)
 	{
 		GravityReset();
 		//ChangeState(PlayerState::Death);
 		ChangeState(PlayerState::Idle);
 		return;
+	}
+
+	if (1875.0f <= GetPos().Y)
+	{
+		ChangeState(PlayerState::Diving);
 	}
 
 	/*if (0 >= Hp)
@@ -528,10 +840,22 @@ void Player::DeathEndStart()
 	// 묘비 상태로 중력에는 영향을 받고있어야함.
 	// Death();
 	ChangeAnimationState("GraveStone");
+	MainRenderer->SetRenderScaleToTexture();
+	GravityReset();
 }
 void Player::DeathEndUpdate(float _Delta)
 {
-	GroundCheck(_Delta);
+	if (false == IsDiving)
+	{
+		GroundCheck(_Delta);
+	}
+	else
+	{
+		if (2150.0f > GetPos().Y)
+		{
+			Gravity(_Delta);
+		}
+	}
 }
 
 void Player::BazookaOnStart()
@@ -553,6 +877,7 @@ void Player::BazookaOnUpdate(float _Delta)
 void Player::BazookaStart()
 {
 	ChangeAnimationState("Bazooka15");
+	CrossHairRenderer->On();
 }
 void Player::BazookaUpdate(float _Delta)
 {
@@ -576,7 +901,7 @@ void Player::BazookaUpdate(float _Delta)
 	CrossHairPos.Normalize();
 	CrossHairPos *= 92;
 
-	if (true == GameEngineInput::IsUp('A') || GameEngineInput::GetPressTime('A') >= MaxChargingTime)
+	if (true == GameEngineInput::IsUp('A') || ChargingTime >= MaxChargingTime)
 	{
 
 		if (ChargingTime >= MaxChargingTime)
@@ -584,7 +909,6 @@ void Player::BazookaUpdate(float _Delta)
 			ChargingTime = MaxChargingTime;
 			ChangeState(PlayerState::BazookaFire);
 		}
-		GameEngineInput::ResetPressTime('A');
 
 		ChangeState(PlayerState::BazookaFire);
 		return;
@@ -592,7 +916,7 @@ void Player::BazookaUpdate(float _Delta)
 
 	if (true == GameEngineInput::IsPress('A'))
 	{
-		ChargingTime = GameEngineInput::GetPressTime('A');
+		ChargingTime += _Delta;
 		SetGauge(_Delta);
 	}
 
@@ -765,7 +1089,8 @@ void Player::UziOnUpdate(float _Delta)
 
 void Player::UziStart()
 {
-	ChangeAnimationState("Uzi15");
+	ChangeAnimationState("Uzi" + std::to_string(UziAnimationNumber));
+	CrossHairRenderer->On();
 }
 void Player::UziUpdate(float _Delta)
 {
@@ -789,10 +1114,7 @@ void Player::UziUpdate(float _Delta)
 	CrossHairPos.Normalize();
 	CrossHairPos *= 92;
 
-	if (GameEngineInput::IsDown('A'))
-	{
-		ChangeState(PlayerState::UziFire);
-	}
+	
 
 	int iCurAngle = static_cast<int>(CurAngle);
 	// 애니메이션과 무기각도를 맞추기위한 중간 계산식.
@@ -940,6 +1262,11 @@ void Player::UziUpdate(float _Delta)
 
 	ChangeCrossHairRenderPos(iCurAngle);
 
+	if (GameEngineInput::IsDown('A'))
+	{
+		ChangeState(PlayerState::UziFire);
+	}
+
 	InputMove();
 	ChangeWeapon();
 }
@@ -1016,6 +1343,7 @@ void Player::HomingMissileOnUpdate(float _Delta)
 void Player::HomingMissileStart()
 {
 	ChangeAnimationState("HomingMissile15");
+	CrossHairRenderer->On();
 }
 void Player::HomingMissileUpdate(float _Delta)
 {
@@ -1045,7 +1373,7 @@ void Player::HomingMissileUpdate(float _Delta)
 	}
 
 
-	if (true == GameEngineInput::IsUp('A') || GameEngineInput::GetPressTime('A') >= MaxChargingTime)
+	if (true == GameEngineInput::IsUp('A') || ChargingTime >= MaxChargingTime)
 	{
 
 		if (ChargingTime >= MaxChargingTime)
@@ -1053,15 +1381,13 @@ void Player::HomingMissileUpdate(float _Delta)
 			ChargingTime = MaxChargingTime;
 		}
 
-		GameEngineInput::ResetPressTime('A');
-
 		ChangeState(PlayerState::HomingMissileFire);
 		return;
 	}
 
 	if (true == GameEngineInput::IsPress('A'))
 	{
-		ChargingTime = GameEngineInput::GetPressTime('A');
+		ChargingTime += _Delta;
 		SetGauge(_Delta);
 	}
 
@@ -1213,6 +1539,7 @@ void Player::SheepOnStart()
 {
 	PrevMoveState = PlayerState::SheepOn;
 	ChangeAnimationState("SheepOn");
+	CrossHairRenderer->Off();
 }
 void Player::SheepOnUpdate(float _Delta)
 {
@@ -1252,9 +1579,9 @@ void Player::SheepUpdate(float _Delta)
 
 void Player::SheepFireStart()
 {
-	//CreateWeapon<Sheep>();
-	CreateWeapon<SuperSheep>();
+	CreateWeapon<Sheep>();
 }
+
 void Player::SheepFireUpdate(float _Delta)
 {
 	DamagingCheck();
@@ -1293,6 +1620,7 @@ void Player::GranadeOnUpdate(float _Delta)
 void Player::GranadeStart()
 {
 	ChangeAnimationState("Granade15");
+	CrossHairRenderer->On();
 }
 void Player::GranadeUpdate(float _Delta)
 {
@@ -1316,14 +1644,13 @@ void Player::GranadeUpdate(float _Delta)
 	CrossHairPos.Normalize();
 	CrossHairPos *= 92;
 
-	if (true == GameEngineInput::IsUp('A') || GameEngineInput::GetPressTime('A') >= MaxChargingTime)
+	if (true == GameEngineInput::IsUp('A') || ChargingTime >= MaxChargingTime)
 	{
 
 		if (ChargingTime >= MaxChargingTime)
 		{
 			ChargingTime = MaxChargingTime;
 		}
-		GameEngineInput::ResetPressTime('A');
 
 		ChangeState(PlayerState::GranadeFire);
 		return;
@@ -1331,7 +1658,7 @@ void Player::GranadeUpdate(float _Delta)
 
 	if (true == GameEngineInput::IsPress('A'))
 	{
-		ChargingTime = GameEngineInput::GetPressTime('A');
+		ChargingTime += _Delta;
 		SetGauge(_Delta);
 	}
 
@@ -1482,6 +1809,7 @@ void Player::TeleportOnStart()
 {
 	PrevMoveState = PlayerState::TeleportOn;
 	ChangeAnimationState("TeleportOn");
+	CrossHairRenderer->Off();
 }
 void Player::TeleportOnUpdate(float _Delta)
 {
@@ -1576,6 +1904,7 @@ void Player::AirStrikeOnStart()
 {
 	PrevMoveState = PlayerState::AirStrikeOn;
 	ChangeAnimationState("AirStrikeOn");
+	CrossHairRenderer->Off();
 }
 void Player::AirStrikeOnUpdate(float _Delta)
 {
@@ -1647,6 +1976,7 @@ void Player::GirderOnStart()
 {
 	// Girder 상태 이동 불가
 	ChangeAnimationState("GirderOn");
+	CrossHairRenderer->Off();
 }
 void Player::GirderOnUpdate(float _Delta)
 {
@@ -1660,8 +1990,6 @@ void Player::GirderStart()
 {
 	ChangeAnimationState("Girder");
 	Gride_Renderer->On();
-
-	//CreateWeapon<Grider>();
 }
 void Player::GirderUpdate(float _Delta)
 {
@@ -1680,6 +2008,8 @@ void Player::GirderUpdate(float _Delta)
 
 	if (true == GameEngineInput::IsDown(VK_RIGHT))
 	{
+		GameEngineSound::SoundPlay("GIRDERIMPACT.WAV");
+
 		GridState NewState = static_cast<GridState>(static_cast<int>(Gride_State) + 1);
 
 		if (18 == static_cast<int>(NewState))
@@ -1693,6 +2023,8 @@ void Player::GirderUpdate(float _Delta)
 
 	if (true == GameEngineInput::IsDown(VK_LEFT))
 	{
+		GameEngineSound::SoundPlay("GIRDERIMPACT.WAV");
+
 		GridState NewState = static_cast<GridState>(static_cast<int>(Gride_State) - 1);
 
 		if (-1 == static_cast<int>(NewState))
@@ -1705,6 +2037,7 @@ void Player::GirderUpdate(float _Delta)
 
 	if (true == GameEngineInput::IsDown(VK_LBUTTON))
 	{
+		GameEngineSound::SoundPlay("GIRDERIMPACT.WAV");
 		GameEngineWindowTexture* GroundTexture = dynamic_cast<PlayLevel*>(GetLevel())->GetGround()->GetGroundTexture();
 		GameEngineWindowTexture* GroundPIxelTexture = dynamic_cast<PlayLevel*>(GetLevel())->GetGround()->GetPixelGroundTexture();
 
@@ -1737,6 +2070,7 @@ void Player::DonkeyOnStart()
 {
 	PrevMoveState = PlayerState::DonkeyOn;
 	ChangeAnimationState("DonkeyOn");
+	CrossHairRenderer->Off();
 }
 void Player::DonkeyOnUpdate(float _Delta)
 {
@@ -1833,6 +2167,7 @@ void Player::HolyGranadeOnUpdate(float _Delta)
 void Player::HolyGranadeStart()
 {
 	ChangeAnimationState("HolyGranade15");
+	CrossHairRenderer->On();
 }
 void Player::HolyGranadeUpdate(float _Delta)
 {
@@ -1856,14 +2191,13 @@ void Player::HolyGranadeUpdate(float _Delta)
 	CrossHairPos.Normalize();
 	CrossHairPos *= 92;
 
-	if (true == GameEngineInput::IsUp('A') || GameEngineInput::GetPressTime('A') >= MaxChargingTime)
+	if (true == GameEngineInput::IsUp('A') || ChargingTime >= MaxChargingTime)
 	{
 
 		if (ChargingTime >= MaxChargingTime)
 		{
 			ChargingTime = MaxChargingTime;
 		}
-		GameEngineInput::ResetPressTime('A');
 
 		ChangeState(PlayerState::HolyGranadeFire);
 		return;
@@ -1871,7 +2205,7 @@ void Player::HolyGranadeUpdate(float _Delta)
 
 	if (true == GameEngineInput::IsPress('A'))
 	{
-		ChargingTime = GameEngineInput::GetPressTime('A');
+		ChargingTime += _Delta;
 		SetGauge(_Delta);
 	}
 
@@ -2023,6 +2357,7 @@ void Player::SuperSheepOnStart()
 {
 	PrevMoveState = PlayerState::SuperSheepOn;
 	ChangeAnimationState("SuperSheepOn");
+	CrossHairRenderer->Off();
 }
 void Player::SuperSheepOnUpdate(float _Delta)
 {
@@ -2049,11 +2384,13 @@ void Player::SuperSheepUpdate(float _Delta)
 	if (GameEngineInput::IsDown('1'))
 	{
 		ChangeState(PlayerState::SuperSheepOff);
+		return;
 	}
 
 	if (GameEngineInput::IsDown('A'))
 	{
 		ChangeState(PlayerState::SuperSheepFire);
+		return;
 	}
 
 	InputMove();
@@ -2095,9 +2432,24 @@ void Player::WinUpdate(float _Delta)
 void Player::DivingStart()
 {
 	ChangeAnimationState("Diving1");
+	MainRenderer->SetRenderScaleToTexture();
+	MainRenderer->SetRenderPos({ 0, 0 });
+	IsDiving = true;
 }
 void Player::DivingUpdate(float _Delta)
 {
+	// y -> 1875 ~ 2000
+	if (2030 >= GetPos().Y)
+	{
+		SetPos({ GetPos().X, GetPos().Y + (30 * _Delta)});
+	}
+	else
+	{
+		ChangeState(PlayerState::DeathEnd);
+	}
+
+
+
 	if (MainRenderer->IsAnimationEnd())
 	{
 		if (MainRenderer->IsAnimation("Left_Diving1") || MainRenderer->IsAnimation("Right_Diving1"))
@@ -2110,4 +2462,3 @@ void Player::DivingUpdate(float _Delta)
 		}
 	}
 }
-

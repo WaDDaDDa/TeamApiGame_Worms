@@ -53,7 +53,28 @@ void SuperSheep::Start()
 		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("aquashp2.bmp"), 1, 32);
 	}
 
-	
+	// 사운드 로드
+	if (nullptr == GameEngineSound::FindSound("sheepbaa.WAV"))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("sheepbaa.WAV"));
+	}
+	 
+	if (nullptr == GameEngineSound::FindSound("SUPERSHEEPRELEASE.WAV"))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("SUPERSHEEPRELEASE.WAV"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("SUPERSHEEPWHOOSH.WAV"));
+	}
+
 	Renderer->SetTexture("Blank.bmp");
 	Renderer->SetScaleRatio(1.2f);
 
@@ -449,6 +470,8 @@ void SuperSheep::StateUpdate(float _Delta)
 		return BombUpdate(_Delta);
 	case SuperSheepState::Damage:
 		return DamageUpdate(_Delta);
+	case SuperSheepState::InWater:
+		return InWaterUpdate(_Delta);
 	case SuperSheepState::Max:
 		return MaxUpdate(_Delta);
 	default:
@@ -480,6 +503,9 @@ void SuperSheep::ChangeState(SuperSheepState _State)
 		case SuperSheepState::Damage:
 			DamageStart();
 			break;
+		case SuperSheepState::InWater:
+			InWaterStart();
+			break;
 		case SuperSheepState::Max:
 			MaxStart();
 			break;
@@ -488,7 +514,7 @@ void SuperSheep::ChangeState(SuperSheepState _State)
 		}
 	}
 
-	//ResetLiveTime();
+	ResetLiveTime();
 
 	State = _State;
 }
@@ -605,6 +631,12 @@ void SuperSheep::FlyUpdate(float _Delta)
 		return;
 	}
 
+	if (GetPos().Y >= 1875)
+	{
+		ChangeState(SuperSheepState::InWater);
+		return;
+	}
+
 }
 
 void SuperSheep::RotateDir(float _Delta)
@@ -629,6 +661,7 @@ void SuperSheep::RotateDir(float _Delta)
 
 void SuperSheep::SuperFlyStart()
 {
+	SoundEffect = GameEngineSound::SoundPlay("SUPERSHEEPRELEASE.WAV");
 	Dir = float4::UP;
 }
 
@@ -640,6 +673,7 @@ void SuperSheep::SuperFlyUpdate(float _Delta)
 
 	if (EffectTime >= EffectInterval)
 	{
+
 		for (size_t i = 0; i < 4; i++)
 		{
 			float EffectX = GameEngineRandom::MainRandom.RandomFloat(-10.0f, 10.0f);
@@ -653,9 +687,11 @@ void SuperSheep::SuperFlyUpdate(float _Delta)
 
 	InterCheck += _Delta;
 
-	if (InterCheck >= 0.5f)
+	if (InterCheck >= 0.3f)
 	{
+		SoundEffect = GameEngineSound::SoundPlay("SUPERSHEEPWHOOSH.WAV");
 		AniInter = !AniInter;
+		InterCheck = 0.0f;
 	}
 
 	if (true == GameEngineInput::IsDown(VK_LEFT))
@@ -711,6 +747,8 @@ void SuperSheep::SuperFlyUpdate(float _Delta)
 
 void SuperSheep::JumpStart()
 {
+	SoundEffect = GameEngineSound::SoundPlay("sheepbaa.WAV");
+
 	if (DirState == SuperSheepDir::Right)
 	{
 		SetGravityVector(float4::UP * SuperSheepJumpPower + float4::RIGHT * SuperSheepSpeed);
@@ -752,12 +790,19 @@ void SuperSheep::JumpUpdate(float _Delta)
 		return;
 	}
 
-
+	if (GetPos().Y >= 1875)
+	{
+		ChangeState(SuperSheepState::InWater);
+		return;
+	}
 }
 
 void SuperSheep::BombStart()
 {
+	SoundEffect.Stop();
 	SuperSheepBomb = CreateBombEffect<Range75>();
+	SoundEffect = GameEngineSound::SoundPlay("Explosion2.WAV");
+
 	Renderer->Off();
 }
 
@@ -792,6 +837,39 @@ void SuperSheep::DamageUpdate(float _Delta)
 		// 무기사용이 종료되면 다시 플레이어로 돌아간다.
 		Master->SwitchIsTurnPlayer();
 		Death();
+	}
+}
+
+void SuperSheep::InWaterStart()
+{
+	SoundEffect = GameEngineSound::SoundPlay("splish.WAV");
+	SetGravityVector(float4::DOWN);
+	SetGravityPower(100.0f);
+}
+
+void SuperSheep::InWaterUpdate(float _Delta)
+{
+	Gravity(_Delta);
+
+	if (GetLiveTime() >= 3.0f)
+	{
+		size_t PlayerCount = Player::GetAllPlayer().size();
+		int PlayerStateCount = 0;
+		for (size_t i = 0; i < PlayerCount; i++)
+		{
+			if (PlayerState::Idle == Player::GetAllPlayer()[i]->GetState() || PlayerState::DeathEnd == Player::GetAllPlayer()[i]->GetState())
+			{
+				PlayerStateCount++;
+			}
+		}
+
+		if (PlayerStateCount == PlayerCount)
+		{
+			// 무기사용이 종료되면 다시 플레이어로 돌아간다.
+			Master->SwitchIsTurnPlayer();
+			Death();
+		}
+		return;
 	}
 }
 

@@ -15,6 +15,8 @@
 #include <GameEngineCore/ResourcesManager.h>
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEngineCore/GameEnginecollision.h>
+#include <GameEnginePlatform/GameEngineSound.h>
+
 
 Hallelujah::Hallelujah()
 {
@@ -111,14 +113,28 @@ void Hallelujah::Start()
 	//// -270
 	//Renderer->CreateAnimation("Hallelujah_Fly", "hgrenade.bmp", 32, 32, 0.05f, false);
 
+	// 사운드 로드
+	if (nullptr == GameEngineSound::FindSound("HOLYGRENADE.WAV"))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("HOLYGRENADE.WAV"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("holygrenadeimpact.WAV"));
+	}
+
 	{
 		//Collision
 		BodyCollision = CreateCollision(CollisionOrder::Weapon);
 
 		BodyCollision->SetCollisionScale({ 10, 10 });
 		BodyCollision->SetCollisionType(CollisionType::CirCle);
-		//HallelujahCollision->SetCollisionPos({ 0, -10 });
+		// HallelujahCollision->SetCollisionPos({ 0, -10 });
 	}
+
+	SoundEffect = GameEngineSound::SoundPlay("THROWRELEASE.WAV");
 
 	SetWeaponDamage(HallelujahDamage);
 	SetWeaponSpeed(HallelujahSpeed);
@@ -345,6 +361,8 @@ void Hallelujah::GroundCheck(float _Delta)
 
 void Hallelujah::TongTong(float4 _Pos)
 {
+	SoundEffect = GameEngineSound::SoundPlay("holygrenadeimpact.WAV");
+
 	unsigned int CheckColor = GetGroundColor(RGB(255, 255, 255));
 
 	float4 CurCravityVector = GetGravityVector();
@@ -438,9 +456,10 @@ void Hallelujah::IdleUpdate(float _Delta)
 
 	if (GetLiveTime() >= 3.0f)
 	{
-		ChangeState(HallelujahState::Bomb);
+		ChangeState(HallelujahState::PrevBomb);
 		return;
 	}
+
 	// 물에 빠짐
 	if (GetPos().Y >= 1875)
 	{
@@ -505,7 +524,7 @@ void Hallelujah::FlyUpdate(float _Delta)
 
 void Hallelujah::PrevBombStart()
 {
-
+	SoundEffect = GameEngineSound::SoundPlay("HOLYGRENADE.WAV");
 }
 
 void Hallelujah::PrevBombUpdate(float _Delta)
@@ -513,7 +532,7 @@ void Hallelujah::PrevBombUpdate(float _Delta)
 	//DirCheck();
 	GroundCheck(_Delta);
 
-	if (GetLiveTime() >= 3.0f)
+	if (GetLiveTime() >= 2.0f)
 	{
 		ChangeState(HallelujahState::Bomb);
 		return;
@@ -524,6 +543,7 @@ void Hallelujah::PrevBombUpdate(float _Delta)
 void Hallelujah::BombStart()
 {
 	HallelujahBomb = CreateBombEffect<Range100>();
+	SoundEffect = GameEngineSound::SoundPlay("Explosion3.WAV");
 	Renderer->Off();
 }
 
@@ -564,6 +584,7 @@ void Hallelujah::DamageUpdate(float _Delta)
 
 void Hallelujah::InWaterStart()
 {
+	SoundEffect = GameEngineSound::SoundPlay("splish.WAV");
 	SetGravityVector(float4::DOWN);
 	IsWindOff();
 	SetGravityPower(100.0f);

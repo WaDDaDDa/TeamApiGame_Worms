@@ -143,6 +143,7 @@ public:
 		// 무기사용으로 
 		class Weapon* NewWeapon = GetLevel()->CreateActor<WeaponType>();
 		float ChargeRatio = ChargingTime / MaxChargingTime;
+		ChargingTime = 0.0f;
 		NewWeapon->SetChargingSpeed(ChargeRatio);
 		// 플레이어의 제어권을 끄고
 		SwitchIsTurnPlayer();
@@ -172,13 +173,19 @@ public:
 		TurnPlayerIndex = _Index;
 	}
 
+	bool GetIsDiving()
+	{
+		return IsDiving;
+	}
+
+	void ChangeState(PlayerState _State);
 
 protected:
 	PlayerState State = PlayerState::Max;
 	PlayerDir Dir = PlayerDir::Left;
 	std::string CurState = "";
 
-	void ChangeState(PlayerState _State);
+
 	void StateUpdate(float _Delta);
 	void ChangeAnimationState(const std::string& _State);
 
@@ -380,9 +387,12 @@ private:
 
 	float GravityDirMul = 0;
 	
+	bool IsDiving = false;
+
+	int IdleCount = 0;
 
 	// Uzi 관련
-	int UziAnimationNumber = 0;
+	int UziAnimationNumber = 15;
 	int UziCount = 0;
 
 
@@ -402,6 +412,7 @@ private:
 	float4 LeftCheckPos = float4{ -5.0f, -10.0f };
 	float4 RightCheckPos = float4{ 5.0f, -10.0f };
 	float4 UpCheckPos = float4{ 0 , -20.0f };
+	float4 DownCheckPos = float4{ 0, 5.0f };
 
 	float ChargingTime = 0.0f;
 	float MaxChargingTime = 3.0f;

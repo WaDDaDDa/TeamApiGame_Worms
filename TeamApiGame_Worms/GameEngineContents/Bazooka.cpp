@@ -125,6 +125,8 @@ void Bazooka::Start()
 	SetWeaponDamage(BazookaDamage);
 	SetWeaponSpeed(BazookaSpeed);
 
+	SoundEffect = GameEngineSound::SoundPlay("petrol.WAV");
+
 	IsWindOn();
 
 	ChangeState(BazookaState::Max);
@@ -356,7 +358,7 @@ void Bazooka::FlyUpdate(float _Delta)
 void Bazooka::BombStart()
 {
 	BazookaBomb = CreateBombEffect<Range50>();
-
+	SoundEffect = GameEngineSound::SoundPlay("Explosion1.WAV");
 	Renderer->Off();
 }
 
@@ -396,6 +398,7 @@ void Bazooka::DamageUpdate(float _Delta)
 
 void Bazooka::InWaterStart()
 {
+	SoundEffect = GameEngineSound::SoundPlay("splish.WAV");
 	SetGravityVector(float4::DOWN);
 	IsWindOff();
 	SetGravityPower(100.0f);

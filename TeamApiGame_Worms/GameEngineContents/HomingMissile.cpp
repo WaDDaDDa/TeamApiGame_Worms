@@ -40,6 +40,17 @@ void HomingMissile::Start()
 		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("hmissil2.bmp"), 1, 32);
 	}
 
+	// 사운드 로드
+	if (nullptr == GameEngineSound::FindSound("WeaponHoming.WAV"))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("WeaponHoming.WAV"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Rocketrelease.WAV"));
+	}
 	
 	Renderer->SetTexture("Blank.bmp");
 
@@ -125,6 +136,8 @@ void HomingMissile::Start()
 		//GrenadeCollision->SetCollisionPos({ 0, -10 });
 		BodyCollision->Off();
 	}
+
+	SoundEffect = GameEngineSound::SoundPlay("petrol.WAV");
 
 	SetWeaponDamage(HomingMissileDamage);
 	SetWeaponSpeed(HomingMissileSpeed);
@@ -362,6 +375,8 @@ void HomingMissile::FlyUpdate(float _Delta)
 
 void HomingMissile::RockOnFlyStart()
 {
+	SoundEffect = GameEngineSound::SoundPlay("WeaponHoming.WAV");
+
 	TargetPos = Master->GetTargetPos();
 	DirCheck();
 	Dir.Normalize();
@@ -408,6 +423,8 @@ void HomingMissile::RockOnFlyUpdate(float _Delta)
 void HomingMissile::BombStart()
 {
 	HomingMissileBomb = CreateBombEffect<Range50>();
+	SoundEffect = GameEngineSound::SoundPlay("Explosion1.WAV");
+
 	Renderer->Off();
 }
 
@@ -447,6 +464,8 @@ void HomingMissile::DamageUpdate(float _Delta)
 
 void HomingMissile::InWaterStart()
 {
+	SoundEffect = GameEngineSound::SoundPlay("splish.WAV");
+
 	SetGravityVector(float4::DOWN);
 	IsWindOff();
 	SetGravityPower(100.0f);

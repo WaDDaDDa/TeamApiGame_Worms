@@ -147,7 +147,7 @@ void UI_Box_Teams::Start()
 void UI_Box_Teams::Update(float _Delta)
 {
 
-	MainRenderer->SetText(std::to_string(m_SelectIndex));
+	//MainRenderer->SetText(std::to_string(m_SelectIndex));
 	StateUpdate();
 	CheckButtonCollision();
 }

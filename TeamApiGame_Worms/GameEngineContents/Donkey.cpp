@@ -38,6 +38,16 @@ void Donkey::Start()
 		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("donkey.bmp"), 1, 1);
 	}
 
+	// 사운드 로드
+	if (nullptr == GameEngineSound::FindSound("HOLYDONKEYIMPACT.WAV"))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("HOLYDONKEYIMPACT.WAV"));
+	}
 	
 	{
 		//Collision
@@ -52,6 +62,8 @@ void Donkey::Start()
 
 	SetWeaponDamage(DonkeyDamage);
 	SetWeaponSpeed(DonkeySpeed);
+
+	// SoundEffect = GameEngineSound::SoundPlay("HOLYDONKEYIMPACT.WAV");
 
 
 	ChangeState(DonkeyState::Max);
@@ -156,6 +168,8 @@ void Donkey::FlyUpdate(float _Delta)
 void Donkey::JumpStart()
 {
 	DonkeyBomb = CreateBombEffect<Range100>();
+	SoundEffect = GameEngineSound::SoundPlay("HOLYDONKEYIMPACT.WAV");
+	SoundEffect = GameEngineSound::SoundPlay("Explosion3.WAV");
 	SetGravityVector(float4::UP * DonkeySpeed);
 	DonkeySpeed -= 120.0;
 }

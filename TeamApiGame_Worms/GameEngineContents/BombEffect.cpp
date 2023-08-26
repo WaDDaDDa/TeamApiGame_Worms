@@ -55,3 +55,13 @@ void BombEffect::SetShotHitRange(float4 _ShotHitRange)
 	BombCollision->SetCollisionType(CollisionType::CirCle);
 	BombCollision->SetCollisionPos({ 0, 0 });
 }
+
+void BombEffect::SetFlameRange(float4 _FlameRange)
+{
+	BombRange = _FlameRange;
+
+	BombCollision = CreateCollision(CollisionOrder::Flame);
+	BombCollision->SetCollisionScale(BombRange);
+	BombCollision->SetCollisionType(CollisionType::CirCle);
+	BombCollision->SetCollisionPos({ 0, 0 });
+}
