@@ -155,6 +155,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Airjet.h" />
+    <ClInclude Include="AirStrikeMissile.h" />
     <ClInclude Include="BackGround.h">
       <SubType>
       </SubType>
@@ -298,6 +300,8 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Airjet.cpp" />
+    <ClCompile Include="AirStrikeMissile.cpp" />
     <ClCompile Include="BackGround.cpp">
       <SubType>
       </SubType>

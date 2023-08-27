@@ -199,6 +199,8 @@ void ChageSelectWeapon(int _SelectedWeapon)
 	WeaponEnum SelectedWeapon = static_cast<WeaponEnum>(_SelectedWeapon); ;
 
 	Player* CurTurnPlayer = GameTurn::MainGameTurn->GetTurnPlayer();
+	// 무기변경시 Gride 렌더러 남아있는 현상 막기
+	CurTurnPlayer->Gride_Renderer->Off();
 
 	switch (SelectedWeapon)
 	{

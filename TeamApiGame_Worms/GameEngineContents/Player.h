@@ -180,6 +180,7 @@ public:
 
 	void ChangeState(PlayerState _State);
 
+	GameEngineRenderer* Gride_Renderer = nullptr;
 protected:
 	PlayerState State = PlayerState::Max;
 	PlayerDir Dir = PlayerDir::Left;
@@ -436,7 +437,6 @@ private:
 	void GriderConstruct(GameEngineWindowTexture* _GroundTexture, GameEngineWindowTexture* _GroundPixelTexture);
 	void ChangeGride_State(GridState _State);
 
-	GameEngineRenderer* Gride_Renderer = nullptr;
 	class GameEngineWindowTexture* Gride_PixelTexture = nullptr;
 
 	GridState Gride_State = GridState::s0;

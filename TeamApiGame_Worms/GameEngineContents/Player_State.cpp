@@ -19,6 +19,7 @@
 #include "TestWeapon.h"
 #include "SuperSheep.h"
 #include "TargetEffect.h"
+#include "AirStrikeMissile.h"
 
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineLevel.h>
@@ -1940,10 +1941,22 @@ void Player::AirStrikeUpdate(float _Delta)
 		ChangeState(PlayerState::AirStrikeOff);
 		return;
 	}
-	// 마우스 위치 이용해서 목표 설정
-	// 하늘에서 미사일 5개 스폰
 
-	//ChangaAnimationState("AirStrikeFire");
+	// 마우스 이용, 마우스 좌클릭시 애니메이션 전환
+	if (GameEngineInput::IsDown(VK_LBUTTON))
+	{
+		TargetPos = MouseObject::GetPlayMousePos();
+		ChangeState(PlayerState::AirStrikeFire);
+
+		if (nullptr != Target)
+		{
+			Target->Death();
+		}
+
+		Target = GetLevel()->CreateActor<TargetEffect>();
+		Target->SetMaster(this);
+		Target->SetPos(TargetPos);
+	}
 
 	if (MainRenderer->IsAnimation("Left_AirStrikeFire") || MainRenderer->IsAnimation("Right_AirStrikeFire"))
 	{
@@ -1966,11 +1979,19 @@ void Player::AirStrikeUpdate(float _Delta)
 void Player::AirStrikeFireStart()
 {
 	// 미사일 생성
+	ChangeAnimationState("AirStrikeFire");
 }
 void Player::AirStrikeFireUpdate(float _Delta)
 {
-	
-	ChangeState(PlayerState::AirStrikeOff);
+	DamagingCheck();
+	if (MainRenderer->IsAnimationEnd())
+	{
+		CreateWeapon<AirStrikeMissile>();
+		CreateWeapon<AirStrikeMissile>();
+		CreateWeapon<AirStrikeMissile>();
+
+		ChangeState(PlayerState::AirStrikeOff);
+	}
 }
 
 void Player::AirStrikeOffStart()
@@ -1979,6 +2000,8 @@ void Player::AirStrikeOffStart()
 }
 void Player::AirStrikeOffUpdate(float _Delta)
 {
+	DamagingCheck();
+
 	if (MainRenderer->IsAnimationEnd())
 	{
 		ChangeState(PlayerState::Idle);
@@ -2152,6 +2175,7 @@ void Player::DonkeyFireUpdate(float _Delta)
 	if (MainRenderer->IsAnimationEnd())
 	{
 		CreateWeapon<Donkey>();
+
 		ChangeState(PlayerState::DonkeyOff);
 	}
 }

@@ -213,6 +213,12 @@
     <ClCompile Include="TargetEffect.cpp">
       <Filter>Effect</Filter>
     </ClCompile>
+    <ClCompile Include="AirStrikeMissile.cpp">
+      <Filter>Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="Airjet.cpp">
+      <Filter>Effect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentCore.h" />
@@ -425,6 +431,12 @@
       <Filter>Map</Filter>
     </ClInclude>
     <ClInclude Include="TargetEffect.h">
+      <Filter>Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="AirStrikeMissile.h">
+      <Filter>Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Airjet.h">
       <Filter>Effect</Filter>
     </ClInclude>
   </ItemGroup>
