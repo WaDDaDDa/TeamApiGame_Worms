@@ -18,6 +18,7 @@
 #include "Hallelujah.h"
 #include "TestWeapon.h"
 #include "SuperSheep.h"
+#include "TargetEffect.h"
 
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineLevel.h>
@@ -1370,6 +1371,13 @@ void Player::HomingMissileUpdate(float _Delta)
 	if (GameEngineInput::IsDown(VK_LBUTTON))
 	{
 		TargetPos = MouseObject::GetPlayMousePos();
+		if (nullptr != Target)
+		{
+			Target->Death();
+		}
+		Target = GetLevel()->CreateActor<TargetEffect>();
+		Target->SetMaster(this);
+		Target->SetPos(TargetPos);
 	}
 
 
@@ -2105,6 +2113,15 @@ void Player::DonkeyUpdate(float _Delta)
 	{
 		TargetPos = MouseObject::GetPlayMousePos();
 		ChangeState(PlayerState::DonkeyFire);
+
+		if (nullptr != Target)
+		{
+			Target->Death();
+		}
+
+		Target = GetLevel()->CreateActor<TargetEffect>();
+		Target->SetMaster(this);
+		Target->SetPos(TargetPos);
 	}
 
 	if (MainRenderer->IsAnimation("Left_DonkeyFire") || MainRenderer->IsAnimation("Right_DonkeyFire"))

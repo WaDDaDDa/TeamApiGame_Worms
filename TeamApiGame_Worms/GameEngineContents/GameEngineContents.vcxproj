@@ -244,6 +244,7 @@
     </ClInclude>
     <ClInclude Include="SuperSheep.h" />
     <ClInclude Include="SuperSheepEffect.h" />
+    <ClInclude Include="TargetEffect.h" />
     <ClInclude Include="TestWeapon.h" />
     <ClInclude Include="TitleLevel.h">
       <SubType>
@@ -386,6 +387,7 @@
     </ClCompile>
     <ClCompile Include="SuperSheep.cpp" />
     <ClCompile Include="SuperSheepEffect.cpp" />
+    <ClCompile Include="TargetEffect.cpp" />
     <ClCompile Include="TestWeapon.cpp" />
     <ClCompile Include="TitleLevel.cpp">
       <SubType>

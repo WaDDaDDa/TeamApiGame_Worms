@@ -210,6 +210,9 @@
     <ClCompile Include="BackLand.cpp">
       <Filter>Map</Filter>
     </ClCompile>
+    <ClCompile Include="TargetEffect.cpp">
+      <Filter>Effect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentCore.h" />
@@ -420,6 +423,9 @@
     </ClInclude>
     <ClInclude Include="BackLand.h">
       <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetEffect.h">
+      <Filter>Effect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

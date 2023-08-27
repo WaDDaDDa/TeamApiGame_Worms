@@ -419,7 +419,7 @@ private:
 
 	// 마우스로 클릭한 후 사용하는 무기의 마우스 클릭 좌표.
 	float4 TargetPos = float4::ZERO;
-
+	class TargetEffect* Target = nullptr;
 	float4 TeleportPos = float4::ZERO;
 
 	// CrossHairPos 관련
