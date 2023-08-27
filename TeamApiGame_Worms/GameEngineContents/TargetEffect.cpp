@@ -10,6 +10,7 @@
 #include <GameEngineCore/ResourcesManager.h>
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEngineCore/GameEnginecollision.h>
+#include <GameEnginePlatform/GameEngineInput.h>
 
 TargetEffect::TargetEffect()
 {
@@ -49,9 +50,16 @@ void TargetEffect::LevelStart()
 
 void TargetEffect::Update(float _Delta)
 {
+	if (GameEngineInput::IsDown(VK_LBUTTON))
+	{
+		Death();
+		return;
+	}
+
 	if (false == Master->IsTurnPlayer)
 	{
 		Death();
+		return;
 	}
 }
 

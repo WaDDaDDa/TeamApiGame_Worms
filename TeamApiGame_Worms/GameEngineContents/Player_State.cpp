@@ -1372,10 +1372,7 @@ void Player::HomingMissileUpdate(float _Delta)
 	if (GameEngineInput::IsDown(VK_LBUTTON))
 	{
 		TargetPos = MouseObject::GetPlayMousePos();
-		if (nullptr != Target)
-		{
-			Target->Death();
-		}
+
 		Target = GetLevel()->CreateActor<TargetEffect>();
 		Target->SetMaster(this);
 		Target->SetPos(TargetPos);
@@ -1911,6 +1908,7 @@ void Player::TeleportOffUpdate(float _Delta)
 	if(MainRenderer->IsAnimationEnd())
 	{
 		ChangeState(PlayerState::Idle);
+		return;
 	}
 }
 
@@ -1925,6 +1923,7 @@ void Player::AirStrikeOnUpdate(float _Delta)
 	if (MainRenderer->IsAnimationEnd())
 	{
 		ChangeState(PlayerState::AirStrike);
+		return;
 	}
 
 	InputMove();
@@ -1946,16 +1945,13 @@ void Player::AirStrikeUpdate(float _Delta)
 	if (GameEngineInput::IsDown(VK_LBUTTON))
 	{
 		TargetPos = MouseObject::GetPlayMousePos();
-		ChangeState(PlayerState::AirStrikeFire);
-
-		if (nullptr != Target)
-		{
-			Target->Death();
-		}
 
 		Target = GetLevel()->CreateActor<TargetEffect>();
 		Target->SetMaster(this);
 		Target->SetPos(TargetPos);
+
+		ChangeState(PlayerState::AirStrikeFire);
+		return;
 	}
 
 	if (MainRenderer->IsAnimation("Left_AirStrikeFire") || MainRenderer->IsAnimation("Right_AirStrikeFire"))
@@ -1963,6 +1959,7 @@ void Player::AirStrikeUpdate(float _Delta)
 		if (MainRenderer->IsAnimationEnd())
 		{
 			ChangeState(PlayerState::AirStrikeFire);
+			return;
 		}
 	}
 
@@ -1970,6 +1967,7 @@ void Player::AirStrikeUpdate(float _Delta)
 	if (GameEngineInput::IsDown('1'))
 	{
 		ChangeState(PlayerState::AirStrikeOff);
+		return;
 	}
 
 	InputMove();
@@ -1991,6 +1989,7 @@ void Player::AirStrikeFireUpdate(float _Delta)
 		CreateWeapon<AirStrikeMissile>();
 
 		ChangeState(PlayerState::AirStrikeOff);
+		return;
 	}
 }
 
@@ -2005,6 +2004,7 @@ void Player::AirStrikeOffUpdate(float _Delta)
 	if (MainRenderer->IsAnimationEnd())
 	{
 		ChangeState(PlayerState::Idle);
+		return;
 	}
 }
 
@@ -2019,6 +2019,7 @@ void Player::GirderOnUpdate(float _Delta)
 	if (MainRenderer->IsAnimationEnd())
 	{
 		ChangeState(PlayerState::Girder);
+		return;
 	}
 }
 
@@ -2099,6 +2100,7 @@ void Player::GirderOffUpdate(float _Delta)
 	if (MainRenderer->IsAnimationEnd())
 	{
 		ChangeState(PlayerState::Idle);
+		return;
 	}
 }
 
@@ -2113,6 +2115,7 @@ void Player::DonkeyOnUpdate(float _Delta)
 	if (MainRenderer->IsAnimationEnd())
 	{
 		ChangeState(PlayerState::Donkey);
+		return;
 	}
 }
 
@@ -2135,16 +2138,13 @@ void Player::DonkeyUpdate(float _Delta)
 	if (GameEngineInput::IsDown(VK_LBUTTON))
 	{
 		TargetPos = MouseObject::GetPlayMousePos();
-		ChangeState(PlayerState::DonkeyFire);
-
-		if (nullptr != Target)
-		{
-			Target->Death();
-		}
 
 		Target = GetLevel()->CreateActor<TargetEffect>();
 		Target->SetMaster(this);
 		Target->SetPos(TargetPos);
+
+		ChangeState(PlayerState::DonkeyFire);
+		return;
 	}
 
 	if (MainRenderer->IsAnimation("Left_DonkeyFire") || MainRenderer->IsAnimation("Right_DonkeyFire"))
@@ -2152,12 +2152,14 @@ void Player::DonkeyUpdate(float _Delta)
 		if (MainRenderer->IsAnimationEnd())
 		{
 			ChangeState(PlayerState::DonkeyFire);
+			return;
 		}
 	}
 
 	if (GameEngineInput::IsDown('1'))
 	{
 		ChangeState(PlayerState::DonkeyOff);
+		return;
 	}
 
 	InputMove();
@@ -2177,6 +2179,7 @@ void Player::DonkeyFireUpdate(float _Delta)
 		CreateWeapon<Donkey>();
 
 		ChangeState(PlayerState::DonkeyOff);
+		return;
 	}
 }
 
@@ -2191,6 +2194,7 @@ void Player::DonkeyOffUpdate(float _Delta)
 	if (MainRenderer->IsAnimationEnd())
 	{
 		ChangeState(PlayerState::Idle);
+		return;
 	}
 }
 
