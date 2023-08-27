@@ -1802,6 +1802,7 @@ void Player::GranadeOffUpdate(float _Delta)
 	if (MainRenderer->IsAnimationEnd())
 	{
 		ChangeState(PlayerState::Idle);
+		return;
 	}
 }
 
@@ -1816,6 +1817,7 @@ void Player::TeleportOnUpdate(float _Delta)
 	if (MainRenderer->IsAnimationEnd())
 	{
 		ChangeState(PlayerState::Teleport);
+		return;
 	}
 
 	InputMove();
@@ -1838,14 +1840,15 @@ void Player::TeleportUpdate(float _Delta)
 	if (GameEngineInput::IsDown(VK_LBUTTON))
 	{
 		TeleportPos = MouseObject::GetPlayMousePos();
-		ColorCheck = GetGroundColor(RGB(255, 255, 255), TeleportPos);
+		ColorCheck = GetGroundColor(RGB(255, 255, 255), TeleportPos - GetPos());
 
-		if (ColorCheck == RGB(255, 255, 255))
+		if (ColorCheck != RGB(255, 255, 255))
 		{
 			return;
 		}
 
 		ChangeState(PlayerState::TeleportFire);
+		return;
 	}
 
 	InputMove();
@@ -1861,6 +1864,7 @@ void Player::TeleportFireUpdate(float _Delta)
 	if(MainRenderer->IsAnimationEnd())
 	{
 		ChangeState(PlayerState::TeleportMove);
+		return;
 	}
 }
 
@@ -1884,6 +1888,7 @@ void Player::TeleportMoveUpdate(float _Delta)
 		{
 			//ChangeState(PlayerState::TeleportOff);
 			ChangeState(PlayerState::Idle);
+			return;
 		}
 	}
 }
