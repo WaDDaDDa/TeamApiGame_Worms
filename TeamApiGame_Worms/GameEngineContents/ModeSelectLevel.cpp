@@ -1,9 +1,11 @@
 #include "ModeSelectLevel.h"
+#include "LobbyLevel.h"
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEngineCore/ResourcesManager.h>
 
 #include "BackGround.h"
 #include <GameEnginePlatform/GameEngineWindow.h>
+
 
 #pragma region UI에서 사용할 헤더 & 함수 전방 선언
 #include "UI_Mouse.h"
@@ -30,6 +32,7 @@ ModeSelectLevel::ModeSelectLevel()
 ModeSelectLevel::~ModeSelectLevel()
 {
 }
+
 
 void ModeSelectLevel::LevelStart(GameEngineLevel* _PrevLevel)
 {
@@ -83,15 +86,30 @@ void ModeSelectLevel::LevelStart(GameEngineLevel* _PrevLevel)
 		BackGroundPtr->VerticalPatternInit("Lobby_Backdrop.bmp");
 
 	}
+
+	{
+		if (nullptr == GameEngineSound::FindSound("Stats.wav"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("Stats.wav"));
+		}
+
+		BGMPlayer = GameEngineSound::SoundPlay("Stats.wav", 100);
+	}
 }
 
 void ModeSelectLevel::LevelEnd(GameEngineLevel* _NextLevel)
 {
+	
+	dynamic_cast<LobbyLevel*>(_NextLevel)->SetBGMPlayer(BGMPlayer);
 }
 
 void ModeSelectLevel::Start()
 {
-
+	
 }
 
 void ModeSelectLevel::Update(float _Delta)
@@ -110,6 +128,10 @@ void ModeSelectLevel::Update(float _Delta)
 	}
 }
 
+//void ModeSelectLevel::SetBGMPlayer(GameEngineSoundPlayer& _BGMPlayer)
+//{
+//	BGMPlayer = _BGMPlayer;
+//}
 #pragma region UI 함수 포인터 등록용 함수
 
 void QuitGame(DWORD_PTR, DWORD_PTR)
