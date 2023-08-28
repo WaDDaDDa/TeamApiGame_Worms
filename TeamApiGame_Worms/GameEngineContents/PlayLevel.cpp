@@ -61,7 +61,7 @@ Ground* PlayLevel::GetGround() const
 void PlayLevel::Start()
 {
 
-
+	
 
 
 
@@ -143,7 +143,31 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 		
 	}
 
-	
+	{
+		if (nullptr == GameEngineSound::FindSound("StartRound.wav"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("StartRound.wav"));
+			FilePath.MoveParentToExistsChild("Effects");
+
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("Generic.mp3"));
+
+		}
+		GameEngineSoundPlayer StartRound;
+		GameEngineSoundPlayer BGMPlayer;
+
+
+		StartRound = GameEngineSound::SoundPlay("StartRound.wav");
+		
+		BGMPlayer = GameEngineSound::SoundPlay("Generic.mp3");
+		BGMPlayer.SetVolume(0.5f);
+		BGMPlayer.SetLoop(10000);
+
+	}
 
 	                                     
 	// 플레이어 수만큼 랜덤으로 생성
@@ -226,6 +250,9 @@ void PlayLevel::Update(float _Delta)
 		
 			BackGroundEffectRespawn -= _Delta;
 	}
+
+
+	
 }
 
 void PlayLevel::Release()
