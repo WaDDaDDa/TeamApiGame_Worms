@@ -3,6 +3,7 @@
 #include "MouseObject.h"
 
 #include <GameEngineBase/GameEnginePath.h>
+#include <GameEngineBase/GameEngineRandom.h>
 #include <GameEnginePlatform/GameEngineWindow.h>
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/ResourcesManager.h>
@@ -1154,6 +1155,27 @@ void Player::Start()
 			GameEngineSound::SoundLoad(FilePath.PlusFilePath("Splash.wav"));
 		}
 
+		if (nullptr == GameEngineSound::FindSound("YESSIR.WAV"))
+		{
+			// 캐릭터 선택 1
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Sound\\English\\");
+
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("YESSIR.WAV"));
+		}
+
+		if (nullptr == GameEngineSound::FindSound("DROP.WAV"))
+		{
+			// 캐릭터 선택 2
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Sound\\English\\");
+
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("DROP.WAV"));
+		}
 	}
 	
 	{
@@ -1188,6 +1210,7 @@ void Player::Start()
 
 	Hp = GameStateManager::GameState->GetWormMaxHp();
 
+	
 }
 
 
@@ -1198,10 +1221,27 @@ void Player::Update(float _Delta)
 	if (IsTurnPlayer == false)
 	{
 		// GameEngineInput::Reset;
+		StartSound = true;
 	}
 
 	SetDirPosNormalize();
 	StateUpdate(_Delta);
+
+	if (IsTurnPlayer == true && StartSound == true)
+	{
+		int WhatSound = 0;
+		WhatSound = GameEngineRandom::MainRandom.RandomInt(1, 2);
+		if (WhatSound == 1)
+		{
+			GameEngineSound::SoundPlay("YESSIR.WAV");
+		}
+		else if (WhatSound == 2)
+		{
+			GameEngineSound::SoundPlay("DROP.WAV");
+		}
+
+		StartSound = false;
+	}
 
 	
 
