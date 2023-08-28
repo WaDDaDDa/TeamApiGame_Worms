@@ -1176,6 +1176,49 @@ void Player::Start()
 
 			GameEngineSound::SoundLoad(FilePath.PlusFilePath("DROP.WAV"));
 		}
+
+		if (nullptr == GameEngineSound::FindSound("INCOMING.WAV"))
+		{
+			// Donky 소환
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Sound\\English\\");
+
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("INCOMING.WAV"));
+		}
+
+		if (nullptr == GameEngineSound::FindSound("HOLYDONKEY.WAV"))
+		{
+			// Donky 소환 후
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("HOLYDONKEY.WAV"));
+		}
+
+		if (nullptr == GameEngineSound::FindSound("Communicator.wav"))
+		{
+			// Teleport 사용
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("Communicator.wav"));
+		}
+
+		if (nullptr == GameEngineSound::FindSound("TELEPORT.WAV"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("TELEPORT.WAV"));
+		}
 	}
 	
 	{

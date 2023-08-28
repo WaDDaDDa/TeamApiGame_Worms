@@ -1936,6 +1936,7 @@ void Player::TeleportUpdate(float _Delta)
 
 void Player::TeleportFireStart()
 {
+	GameEngineSound::SoundPlay("Communicator.wav");
 	ChangeAnimationState("TeleportFire");
 }
 void Player::TeleportFireUpdate(float _Delta)
@@ -1949,6 +1950,7 @@ void Player::TeleportFireUpdate(float _Delta)
 
 void Player::TeleportMoveStart()
 {
+	GameEngineSound::SoundPlay("TELEPORT.WAV");
 	ChangeAnimationState("TeleportMoveOn");
 }
 void Player::TeleportMoveUpdate(float _Delta)
@@ -2243,6 +2245,7 @@ void Player::DonkeyUpdate(float _Delta)
 void Player::DonkeyFireStart()
 {
 	ChangeAnimationState("DonkeyFire");
+	GameEngineSound::SoundPlay("INCOMING.WAV");
 }
 void Player::DonkeyFireUpdate(float _Delta)
 {
@@ -2251,6 +2254,7 @@ void Player::DonkeyFireUpdate(float _Delta)
 	{
 		CreateWeapon<Donkey>();
 
+		GameEngineSound::SoundPlay("HOLYDONKEY.WAV");
 		ChangeState(PlayerState::DonkeyOff);
 		return;
 	}
