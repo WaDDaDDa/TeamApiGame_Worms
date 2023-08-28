@@ -33,7 +33,7 @@ public:
         return TurnTime;
     }
 
-    bool GameOverCheck();
+    bool GameOverCheck(float _Delta);
 
     void TurnPlayerAllOff();
 
@@ -47,6 +47,8 @@ protected:
 private:
     Player* TurnPlayer = nullptr;
     class HealItem* Hitem = nullptr;
+
+    float GameOverDelta = 0.0f;
 
     void Start() override;
     void Init();

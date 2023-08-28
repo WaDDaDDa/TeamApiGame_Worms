@@ -133,7 +133,7 @@ void Player::IdleUpdate(float _Delta)
 		return;
 	}
 
-	if (true == GameTurn::MainGameTurn->GameOverCheck())
+	if (true == GameTurn::MainGameTurn->GameOverCheck(_Delta))
 	{
 		ChangeState(PlayerState::Win);
 	}
@@ -2559,7 +2559,12 @@ void Player::WinStart()
 }
 void Player::WinUpdate(float _Delta)
 {
-
+	WinTime += _Delta;
+	if (WinTime >= 5.0f)
+	{
+		GameEngineCore::ChangeLevel("TitleLevel");
+		return;
+	}
 }
 
 void Player::DivingStart()

@@ -379,7 +379,7 @@ private:
 	float PlayerJumpPower = 400.0f;
 
 	float CurAngle = 0.0f;
-
+	float WinTime = 0.0f;
 	PlayerState PrevMoveState = PlayerState::Idle;
 
 	int DamageCount = 0;
