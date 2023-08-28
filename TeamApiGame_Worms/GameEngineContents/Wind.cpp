@@ -3,7 +3,7 @@
 
 Wind* Wind::PlayWind = nullptr;
 
-#define WIND_LIMIT 300.0F
+
 
 
 Wind::Wind()

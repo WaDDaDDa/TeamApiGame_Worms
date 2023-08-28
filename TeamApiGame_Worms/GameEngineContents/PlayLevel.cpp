@@ -61,9 +61,22 @@ Ground* PlayLevel::GetGround() const
 void PlayLevel::Start()
 {
 
+	{
+		if (nullptr == GameEngineSound::FindSound("StartRound.wav"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("jetpackloop2.WAV"));
+		}
+
+		WindSound = GameEngineSound::SoundPlay("jetpackloop2.WAV");
+		WindSound.SetLoop(100000);
+		WindSound.SetVolume(0.0f);
+	}
 	
-
-
 
 
 	CreateActor<MouseObject>();
@@ -150,21 +163,20 @@ void PlayLevel::LevelStart(GameEngineLevel* _NextLevel)
 			FilePath.SetCurrentPath();
 			FilePath.MoveParentToExistsChild("ContentsResources");
 			FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
-
 			GameEngineSound::SoundLoad(FilePath.PlusFilePath("StartRound.wav"));
-			FilePath.MoveParentToExistsChild("Effects");
 
+			FilePath.MoveParentToExistsChild("Effects");
 			GameEngineSound::SoundLoad(FilePath.PlusFilePath("Generic.mp3"));
 
 		}
 		GameEngineSoundPlayer StartRound;
-		GameEngineSoundPlayer BGMPlayer;
+		
 
 
 		StartRound = GameEngineSound::SoundPlay("StartRound.wav");
 		
 		BGMPlayer = GameEngineSound::SoundPlay("Generic.mp3");
-		BGMPlayer.SetVolume(0.5f);
+		BGMPlayer.SetVolume(0.8f);
 		BGMPlayer.SetLoop(10000);
 
 	}
@@ -251,7 +263,11 @@ void PlayLevel::Update(float _Delta)
 			BackGroundEffectRespawn -= _Delta;
 	}
 
+	{
+		float WindPowerRatio = Wind::GetWind()->GetWindPower()/(WIND_LIMIT+50.0f);
+		WindSound.SetVolume(WindPowerRatio);
 
+	}
 	
 }
 
@@ -262,7 +278,8 @@ void PlayLevel::Release()
 
 void PlayLevel::LevelEnd(GameEngineLevel* _NextLevel)
 {
-
+	BGMPlayer.Stop();
+	WindSound.Stop();
 }
 
 void PlayLevel::PlayerSetting(size_t _PlayerCount)

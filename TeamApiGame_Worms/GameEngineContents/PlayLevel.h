@@ -29,6 +29,9 @@ private:
 	std::string GroundFileName = "";
 	std::string GroundPixelFileName = "";
 
+	class GameEngineSoundPlayer BGMPlayer;
+	class GameEngineSoundPlayer WindSound;
+
 	float CloudRespawn = 0.0f;
 	float BackGroundEffectRespawn = 0.0f;
 

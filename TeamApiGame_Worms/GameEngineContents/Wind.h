@@ -1,6 +1,9 @@
 
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
+
+#define WIND_LIMIT 300.0F
+
 class Wind :public GameEngineActor
 {
 public:
