@@ -466,6 +466,8 @@ private:
 	
 	int WhatSound = 0;
 
+	bool StartSound = true;
+
 
 	// UI
 	UI_PlayerInfo* PlayerInfoUI = nullptr;
