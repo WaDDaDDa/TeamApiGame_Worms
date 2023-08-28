@@ -66,6 +66,11 @@ void UI_Box_Barracks::Start()
 		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("UI_Teams_6Up.bmp"));
 	}
 
+	if (nullptr == GameEngineSound::FindSound("CursorSelect.wav"))
+	{
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("CursorSelect.wav"));
+	}
+
 #pragma endregion
 
 #pragma region 렌더러 초기 세팅
@@ -142,8 +147,7 @@ void UI_Box_Barracks::Start()
 }
 
 void UI_Box_Barracks::Update(float _Delta)
-{/*
-	MainRenderer->SetText(std::to_string(m_SelectIndex));*/
+{
 	StateUpdate();
 	CheckButtonCollision();
 }
@@ -162,6 +166,7 @@ void UI_Box_Barracks::AddPlayerTeam()
 
 	ChangePlayerTeamLayout(m_SelectIndex);
 
+	EFFECT_Player_Click = GameEngineSound::SoundPlay("CursorSelect.wav");
 
 	UI_Box_Teams::BoxTeamUI->ChangePlayerTeamLayout(m_SelectIndex);
 
@@ -193,6 +198,7 @@ void UI_Box_Barracks::StateUpdate()
 		break;
 
 	case BUTTON_STATE::BUTTON_STATE_UNHOVERED:
+		EFFECT_Player_Click.Stop();
 		break;
 
 	case BUTTON_STATE::BUTTON_STATE_CLICKED:
@@ -257,4 +263,3 @@ void UI_Box_Barracks::CheckButtonCollision()
 
 	}
 }
-

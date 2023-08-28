@@ -1,5 +1,6 @@
 #pragma once
 #include "UI_Button.h"
+#include <GameEnginePlatform/GameEngineSound.h>
 
 class UI_Terrain_Button : public UI_Button
 {
@@ -32,6 +33,6 @@ protected:
 	void ChangeState(BUTTON_STATE _ButtonState);
 
 private:
-
+	GameEngineSoundPlayer EFFECT_Player_Click;
 };
 

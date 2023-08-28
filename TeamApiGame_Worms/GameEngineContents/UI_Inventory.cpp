@@ -147,8 +147,8 @@ void UI_Inventory::Start()
 
 #pragma endregion
 
-	MouseUI = GetLevel()->CreateActor<UI_Mouse>();
-	MouseUI->GetMouseUIRenderer()->Off();
+	
+//	MouseUI->GetMouseUIRenderer()->Off();
 }
 
 void UI_Inventory::Update(float _Delta)
@@ -162,10 +162,10 @@ void UI_Inventory::ShowInventory(bool _isActive, float _Delta)
 	if (true == m_bIsActive && GetPos().X > 1185)
 	{
 		GetWeaponNameRenderer()->SetText(" ", 14);
-		MouseUI->GetMouseUIRenderer()->On();
-		float4 MosuePos = { 1155, 373 };
+	//	MouseUI->GetMouseUIRenderer()->On();
+	//	float4 MosuePos = { 1155, 373 };
 
-		GameEngineWindow::MainWindow.SetCursorPos(MosuePos);
+	//	GameEngineWindow::MainWindow.SetCursorPos(MosuePos);
 
 		float4 NextPos = GetPos() * float4::LEFT * _Delta;
 		AddPos(NextPos);
@@ -179,7 +179,7 @@ void UI_Inventory::ShowInventory(bool _isActive, float _Delta)
 
 	else if (false == m_bIsActive && GetPos().X < 1400)
 	{
-		MouseUI->GetMouseUIRenderer()->Off();
+	//	MouseUI->GetMouseUIRenderer()->Off();
 
 		float4 NextPos = GetPos() * float4::RIGHT * _Delta;
 		AddPos(NextPos);

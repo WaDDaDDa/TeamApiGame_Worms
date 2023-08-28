@@ -1,6 +1,7 @@
 #pragma once
 #include "UI_Button.h"
 #include <vector>
+#include <GameEnginePlatform/GameEngineSound.h>
 
 class UI_Box_Teams;
 class UI_Box_Barracks : public UI_Button
@@ -46,5 +47,7 @@ private:
 	GameEngineCollision* MainCollision = nullptr;
 
 	GameEngineRenderer* MainRenderer = nullptr;
+
+	GameEngineSoundPlayer EFFECT_Player_Click;
 
 };

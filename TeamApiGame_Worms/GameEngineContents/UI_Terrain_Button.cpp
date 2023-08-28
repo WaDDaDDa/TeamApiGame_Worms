@@ -14,8 +14,6 @@ UI_Terrain_Button::~UI_Terrain_Button()
 {
 }
 
-
-
 void UI_Terrain_Button::Start()
 {
 	// 리소스 로딩
@@ -44,6 +42,11 @@ void UI_Terrain_Button::Start()
 		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("LobbyMap_MapTrain.bmp"));
 	}
 
+	if (nullptr == GameEngineSound::FindSound("CursorSelect.wav"))
+	{
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("CursorSelect.wav"));
+	}
+
 	MainRenderer = CreateRenderer(RenderOrder::UI);
 
 	MainRenderer->SetRenderScale({ 400, 200 });
@@ -66,6 +69,9 @@ void UI_Terrain_Button::Update(float _Delta)
 
 void UI_Terrain_Button::ChangeSelectMap()
 {
+
+	EFFECT_Player_Click = GameEngineSound::SoundPlay("CursorSelect.wav");
+
 	if (m_SelectIndex < 3)
 	{
 		++m_SelectIndex;
@@ -102,6 +108,7 @@ void UI_Terrain_Button::ChangeSelectMap()
 		break;
 	}
 
+//	EFFECT_Player_Click.Stop();
 	ChangeState(BUTTON_STATE::BUTTON_STATE_HOVERED);
 }
 
@@ -114,6 +121,7 @@ void UI_Terrain_Button::StateUpdate()
 		break;
 
 	case BUTTON_STATE::BUTTON_STATE_UNHOVERED:
+		EFFECT_Player_Click.Stop();
 		break;
 
 	case BUTTON_STATE::BUTTON_STATE_CLICKED:
@@ -132,6 +140,7 @@ void UI_Terrain_Button::ChangeState(BUTTON_STATE _ButtonState)
 
 void UI_Terrain_Button::CheckButtonClick()
 {
+
 	if (true == GameEngineInput::IsDown(VK_LBUTTON))
 	{
 		ChangeState(BUTTON_STATE::BUTTON_STATE_CLICKED);

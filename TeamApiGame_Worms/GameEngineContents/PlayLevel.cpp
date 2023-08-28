@@ -33,6 +33,7 @@
 #include "UI_Wind.h"
 #include "UI_Timer.h"
 #include "UI_Box_AllTeamHpBar.h"
+#include "UI_Mouse.h"
 #include "ContentsDefine.h"
 
 void ChangeLevel(DWORD_PTR, DWORD_PTR);
@@ -66,6 +67,7 @@ void PlayLevel::Start()
 
 
 	CreateActor<MouseObject>();
+	CreateActor<UI_Mouse>();
 }
 
 
