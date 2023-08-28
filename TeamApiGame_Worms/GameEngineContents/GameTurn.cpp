@@ -248,6 +248,7 @@ void GameTurn::TurnPlayerAllOff()
 	{
 		Player::GetAllPlayer()[i]->IsTurnPlayer = false;
 	}
+	TurnPlayer->StartSound = false;
 }
 
 void GameTurn::StartTurnPlayer()
