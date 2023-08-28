@@ -1227,7 +1227,7 @@ void Player::Update(float _Delta)
 	SetDirPosNormalize();
 	StateUpdate(_Delta);
 
-	if (IsTurnPlayer == true && StartSound == true)
+	/*if (IsTurnPlayer == true && StartSound == true)
 	{
 		int WhatSound = 0;
 		WhatSound = GameEngineRandom::MainRandom.RandomInt(1, 2);
@@ -1241,7 +1241,7 @@ void Player::Update(float _Delta)
 		}
 
 		StartSound = false;
-	}
+	}*/
 
 	
 

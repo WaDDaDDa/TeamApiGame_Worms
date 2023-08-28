@@ -877,6 +877,16 @@ void Player::DeathEndStart()
 	ChangeAnimationState("GraveStone");
 	MainRenderer->SetRenderScaleToTexture();
 	GravityReset();
+
+	if (true == IsDiving)
+	{
+		UI_PlayerDamage* DamageUI = GetLevel()->CreateActor<UI_PlayerDamage>();
+		DamageUI->UpdateData_PlayerDamageUI(PlayerInfoUI->GetPos(), this->Hp, Player::TurnPlayerIndex);
+
+		this->Hp -= this->Hp;
+
+		UI_Box_AllTeamHpBar::GetAllTeamHpBarUI()->InitTeamHpBarData(TurnPlayerIndex, Hp);
+	}
 }
 void Player::DeathEndUpdate(float _Delta)
 {
