@@ -2263,7 +2263,7 @@ void Player::DonkeyOffUpdate(float _Delta)
 
 void Player::HolyGranadeOnStart()
 {
-	PrevMoveState = PlayerState::HolyGranade;
+	PrevMoveState = PlayerState::HolyGranadeOn;
 	ChangeAnimationState("HolyGranadeOn");
 	CrossHairRenderer->On();
 	SoundCount = 0;
