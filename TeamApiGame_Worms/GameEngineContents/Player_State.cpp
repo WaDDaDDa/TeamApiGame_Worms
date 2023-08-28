@@ -53,6 +53,7 @@ void Player::IdleStart()
 	CrossHairRenderer->Off();
 
 	//PlayerBodyCollision->On();
+	SoundCount = 0;
 }
 void Player::IdleUpdate(float _Delta)
 {
@@ -179,6 +180,8 @@ void Player::IdleUpdate(float _Delta)
 void Player::MoveStart()
 {
 	ChangeAnimationState("Move");
+	SoundCount = 0;
+	
 }
 void Player::MoveUpdate(float _Delta)
 {
@@ -187,6 +190,18 @@ void Player::MoveUpdate(float _Delta)
 	GroundCheck(_Delta);
 
 	Movement(_Delta);
+
+	if (0 >= SoundCount)
+	{
+		GameEngineSound::SoundPlay("Walk-Expand.wav");
+		SoundCount++;
+	}
+
+	if (MainRenderer->IsAnimationEnd())
+	{
+		SoundCount = 0;
+	}
+
 
 	if (true == GameEngineInput::IsFree(VK_LEFT) && true == GameEngineInput::IsFree(VK_RIGHT))
 	{
@@ -229,6 +244,7 @@ void Player::JumpStart()
 		SetGravityVector(float4::UP * PlayerJumpPower + float4::RIGHT * 300.0f);
 	}
 	
+	GameEngineSound::SoundPlay("JUMP1.WAV");
 }
 void Player::JumpUpdate(float _Delta)
 {
@@ -275,6 +291,7 @@ void Player::JumpUpdate(float _Delta)
 void Player::FallingStart()
 {
 	ChangeAnimationState("Falling");
+	
 }
 
 
@@ -290,6 +307,7 @@ void Player::FallingUpdate(float _Delta)
 	{
 		GravityReset();
 		ChangeState(PlayerState::Idle);
+		GameEngineSound::SoundPlay("WormLanding.wav");
 		return;
 	}
 
@@ -480,6 +498,7 @@ void Player::DamagingStart()
 		SetGravityVector(GravityDir * 100.0f);
 	}
 
+	GameEngineSound::SoundPlay("OW1.WAV");
 
 
 	ResetLiveTime();
@@ -865,6 +884,7 @@ void Player::BazookaOnStart()
 	PrevMoveState = PlayerState::BazookaOn;
 	ChangeAnimationState("BazookaOn");
 	CrossHairRenderer->On();
+	SoundCount = 0;
 }
 void Player::BazookaOnUpdate(float _Delta)
 {
@@ -918,6 +938,12 @@ void Player::BazookaUpdate(float _Delta)
 
 	if (true == GameEngineInput::IsPress('A'))
 	{
+		if (0 >= SoundCount)
+		{
+			GameEngineSound::SoundPlay("FIRE.WAV");
+			SoundCount++;
+		}
+		
 		ChargingTime += _Delta;
 		SetGauge(_Delta);
 	}
@@ -1045,6 +1071,7 @@ void Player::BazookaFireStart()
 {
 	CreateWeapon<Bazooka>();
 	AllGaugeOff();
+	SoundCount = 0;
 }
 
 void Player::BazookaFireUpdate(float _Delta)
@@ -1077,6 +1104,7 @@ void Player::UziOnStart()
 	PrevMoveState = PlayerState::UziOn;
 	ChangeAnimationState("UziOn");
 	CrossHairRenderer->On();
+	SoundCount = 0;
 }
 void Player::UziOnUpdate(float _Delta)
 {
@@ -1330,6 +1358,7 @@ void Player::HomingMissileOnStart()
 	PrevMoveState = PlayerState::HomingMissileOn;
 	ChangeAnimationState("HomingMissileOn");
 	CrossHairRenderer->On();
+	SoundCount = 0;
 }
 void Player::HomingMissileOnUpdate(float _Delta)
 {
@@ -1393,6 +1422,11 @@ void Player::HomingMissileUpdate(float _Delta)
 
 	if (true == GameEngineInput::IsPress('A'))
 	{
+		if (0 >= SoundCount)
+		{
+			GameEngineSound::SoundPlay("FIRE.WAV");
+			SoundCount++;
+		}
 		ChargingTime += _Delta;
 		SetGauge(_Delta);
 	}
@@ -1612,6 +1646,7 @@ void Player::GranadeOnStart()
 	PrevMoveState = PlayerState::GranadeOn;
 	ChangeAnimationState("GranadeOn");
 	CrossHairRenderer->On();
+	SoundCount = 0;
 }
 void Player::GranadeOnUpdate(float _Delta)
 {
@@ -1664,6 +1699,11 @@ void Player::GranadeUpdate(float _Delta)
 
 	if (true == GameEngineInput::IsPress('A'))
 	{
+		if (0 >= SoundCount)
+		{
+			GameEngineSound::SoundPlay("FIRE.WAV");
+			SoundCount++;
+		}
 		ChargingTime += _Delta;
 		SetGauge(_Delta);
 	}
@@ -2203,6 +2243,7 @@ void Player::HolyGranadeOnStart()
 	PrevMoveState = PlayerState::HolyGranade;
 	ChangeAnimationState("HolyGranadeOn");
 	CrossHairRenderer->On();
+	SoundCount = 0;
 }
 void Player::HolyGranadeOnUpdate(float _Delta)
 {
@@ -2255,6 +2296,11 @@ void Player::HolyGranadeUpdate(float _Delta)
 
 	if (true == GameEngineInput::IsPress('A'))
 	{
+		if (0 >= SoundCount)
+		{
+			GameEngineSound::SoundPlay("FIRE.WAV");
+			SoundCount++;
+		}
 		ChargingTime += _Delta;
 		SetGauge(_Delta);
 	}

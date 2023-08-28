@@ -857,7 +857,7 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Left_IdleHp100_2", "IdleHp100Left.bmp", 19, 0, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_IdleHp30_1", "IdleHp30Left.bmp", 0, 12, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_IdleHp30_2", "IdleHp30Left.bmp", 12, 0, 0.05f, false);
-		MainRenderer->CreateAnimation("Left_Move", "walkLeft.bmp", 0, 14, 0.05f, true);
+		MainRenderer->CreateAnimation("Left_Move", "walkLeft.bmp", 0, 14, 0.02f, true);
 		MainRenderer->CreateAnimation("Left_JumpReady", "jumpReadyLeft.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Left_JumpUp", "flyUpLeft.bmp", 0, 1, 0.1f, false);
 		MainRenderer->CreateAnimation("Left_Jump", "flyLinkLeft.bmp", 0, 6, 0.1f, false);
@@ -912,7 +912,7 @@ void Player::Start()
 		MainRenderer->CreateAnimation("Right_IdleHp100_2", "IdleHp100Right.bmp", 19, 0, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_IdleHp30_1", "IdleHp30Right.bmp", 0, 12, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_IdleHp30_2", "IdleHp30Right.bmp", 12, 0, 0.05f, false);
-		MainRenderer->CreateAnimation("Right_Move", "walkRight.bmp", 0, 14, 0.05f, true);
+		MainRenderer->CreateAnimation("Right_Move", "walkRight.bmp", 0, 14, 0.02f, true);
 		MainRenderer->CreateAnimation("Right_JumpReady", "jumpReadyRight.bmp", 0, 9, 0.05f, false);
 		MainRenderer->CreateAnimation("Right_JumpUp", "flyUpRight.bmp", 0, 1, 0.1f, false);
 		MainRenderer->CreateAnimation("Right_Jump", "flyLinkRight.bmp", 0, 6, 0.1f, false);
@@ -1029,6 +1029,73 @@ void Player::Start()
 		GameEngineSound::SoundLoad(FilePath.PlusFilePath("petrol.WAV"));
 		GameEngineSound::SoundLoad(FilePath.PlusFilePath("GIRDERIMPACT.WAV"));
 		GameEngineSound::SoundLoad(FilePath.PlusFilePath("TELEPORT.WAV"));
+	}
+
+	// Player Sound
+	if (nullptr == GameEngineSound::FindSound("FIRE.WAV"))
+	{
+		// 무기 발사
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Sound\\English\\");
+
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("FIRE.WAV"));
+	}
+
+	if(nullptr == GameEngineSound::FindSound("OW1.WAV"))
+	{
+		// 데미지 받을때
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Sound\\English\\");
+
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("OW1.WAV"));
+	}
+
+	if (nullptr == GameEngineSound::FindSound("Walk-Expand.wav"))
+	{
+		// 움직일때
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Walk-Expand.wav"));
+	}
+
+	if (nullptr == GameEngineSound::FindSound("ROCKETPOWERUP.WAV"))
+	{
+		// 게이지 상승
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("ROCKETPOWERUP.WAV"));
+	}
+
+	if (nullptr == GameEngineSound::FindSound("JUMP1.WAV"))
+	{
+		// 점프
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Sound\\English\\");
+
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("JUMP1.WAV"));
+	}
+
+	if (nullptr == GameEngineSound::FindSound("WormLanding.wav"))
+	{
+		// 점프 후 착지
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("WormLanding.wav"));
 	}
 	
 	{
@@ -1574,7 +1641,6 @@ void Player::ChangeCrossHairRenderPos(int _iCurAngle)
 
 void Player::DirCheck()
 {
-
 	if (true != IsTurnPlayer)
 	{
 		return;
@@ -1591,6 +1657,10 @@ void Player::DirCheck()
 		if (Dir == CurDir)
 		{
 			return;
+		}
+		else
+		{
+			SoundCount = 0;
 		}
 		Dir = CurDir;
 		CurAngle = 180 - CurAngle;
@@ -1609,6 +1679,10 @@ void Player::DirCheck()
 		if (Dir == CurDir)
 		{
 			return;
+		}
+		else
+		{
+			SoundCount = 0;
 		}
 		Dir = CurDir;
 		CurAngle = 180 - CurAngle;
@@ -1964,6 +2038,12 @@ void Player::SetGauge(float _Delta)
 	float4 GaugePos;
 	GaugePos = CrossHairPos;
 	GaugePos.Normalize();
+
+	if (1 >= SoundCount)
+	{
+		GameEngineSound::SoundPlay("ROCKETPOWERUP.WAV");
+		SoundCount++;
+	}
 
 	if (MaxChargingTime / 16 * 1 <= ChargingTime)
 	{

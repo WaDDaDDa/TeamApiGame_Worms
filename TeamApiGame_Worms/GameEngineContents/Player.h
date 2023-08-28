@@ -461,6 +461,8 @@ private:
 	GameEngineRenderer* GaugeRenderer15 = nullptr;
 	
 	
+	// Sound ฐüทร
+	int SoundCount = 0;
 	
 
 
