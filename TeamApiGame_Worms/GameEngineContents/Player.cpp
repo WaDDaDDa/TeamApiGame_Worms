@@ -1261,11 +1261,11 @@ void Player::Update(float _Delta)
 {	
 	CameraFocus(_Delta);
 
-	if (IsTurnPlayer == false)
-	{
-		// GameEngineInput::Reset;
-		StartSound = true;
-	}
+	//if (IsTurnPlayer == false)
+	//{
+	//	// GameEngineInput::Reset;
+	//	StartSound = true;
+	//}
 
 	SetDirPosNormalize();
 	StateUpdate(_Delta);

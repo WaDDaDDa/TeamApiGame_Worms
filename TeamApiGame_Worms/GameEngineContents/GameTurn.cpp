@@ -187,6 +187,7 @@ void GameTurn::ChangeTurnPlayer(float _Delta)
 	TurnPlayer = Player::GetAllPlayer()[StartValue];
 	// 현재 플레이어 bool값 true로 변경
 	TurnPlayer->SwitchIsTurnPlayer();
+	TurnPlayer->StartSound = true;
 
 	if (GameEngineRandom::MainRandom.RandomInt(0 , 1) == 1)
 	{
@@ -255,6 +256,8 @@ void GameTurn::StartTurnPlayer()
 {
 	GoLiveTime();
 	TurnPlayer->IsTurnPlayer = true;
+	TurnPlayer->StartSound = true;
+
 }
 
 void GameTurn::CreateItem(size_t _Count)
