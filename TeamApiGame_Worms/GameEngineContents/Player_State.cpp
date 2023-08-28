@@ -21,6 +21,7 @@
 #include "TargetEffect.h"
 #include "AirStrikeMissile.h"
 
+#include <GameEngineBase/GameEngineRandom.h>
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/GameEngineRenderer.h>
@@ -498,7 +499,8 @@ void Player::DamagingStart()
 		SetGravityVector(GravityDir * 100.0f);
 	}
 
-	GameEngineSound::SoundPlay("OW1.WAV");
+	//GameEngineSound::SoundPlay("OW1.WAV");
+	SoundCount = 0;
 
 
 	ResetLiveTime();
@@ -506,6 +508,16 @@ void Player::DamagingStart()
 void Player::DamagingUpdate(float _Delta)
 {
 	//GroundCheck(_Delta);
+	
+	if (0 >= SoundCount)
+	{
+		WhatSound = GameEngineRandom::MainRandom.RandomInt(1, 3);
+		std::string SoundName = "OW";
+		SoundName += std::to_string(WhatSound);
+		SoundName += ".WAV";
+		GameEngineSound::SoundPlay(SoundName);
+		SoundCount++;
+	}
 
 	Gravity(_Delta);
 
@@ -665,6 +677,7 @@ void Player::DamagingUpdate(float _Delta)
 			GravityDir += float4::UP;
 
 
+			SoundCount = 0;
 			// Damage 받는 부분
 			{
 				WeaponPlayerPos = GetPos() - WeaponPos;
@@ -718,7 +731,7 @@ void Player::DamagingUpdate(float _Delta)
 			GravityDir.Normalize();
 			GravityDir += float4::UP;
 
-
+			SoundCount = 0;
 			// Damage 받는 부분
 			{
 				WeaponPlayerPos = GetPos() - WeaponPos;
@@ -844,6 +857,7 @@ void Player::DamagingUpdate(float _Delta)
 void Player::DeathStart()
 {
 	ChangeAnimationState("Death");
+	GameEngineSound::SoundPlay("BYEBYE.WAV");
 }
 void Player::DeathUpdate(float _Delta)
 {
@@ -940,7 +954,16 @@ void Player::BazookaUpdate(float _Delta)
 	{
 		if (0 >= SoundCount)
 		{
-			GameEngineSound::SoundPlay("FIRE.WAV");
+			WhatSound = GameEngineRandom::MainRandom.RandomInt(1, 2);
+			if (WhatSound == 1)
+			{
+				GameEngineSound::SoundPlay("FIRE.WAV");
+			}
+			else if (WhatSound == 2)
+			{
+				GameEngineSound::SoundPlay("WATCHTHIS.WAV");
+			}
+			
 			SoundCount++;
 		}
 		
@@ -2530,6 +2553,7 @@ void Player::DivingStart()
 	ChangeAnimationState("Diving1");
 	MainRenderer->SetRenderScaleToTexture();
 	MainRenderer->SetRenderPos({ 0, 0 });
+	GameEngineSound::SoundPlay("Splash.wav");
 	IsDiving = true;
 }
 void Player::DivingUpdate(float _Delta)

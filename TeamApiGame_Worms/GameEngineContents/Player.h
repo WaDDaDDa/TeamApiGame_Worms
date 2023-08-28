@@ -464,6 +464,7 @@ private:
 	// Sound ฐüทร
 	int SoundCount = 0;
 	
+	int WhatSound = 0;
 
 
 	// UI

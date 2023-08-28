@@ -1032,70 +1032,128 @@ void Player::Start()
 	}
 
 	// Player Sound
-	if (nullptr == GameEngineSound::FindSound("FIRE.WAV"))
 	{
-		// 무기 발사
-		GameEnginePath FilePath;
-		FilePath.SetCurrentPath();
-		FilePath.MoveParentToExistsChild("ContentsResources");
-		FilePath.MoveChild("ContentsResources\\Sound\\English\\");
+		if (nullptr == GameEngineSound::FindSound("FIRE.WAV"))
+		{
+			// 무기 발사 1
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Sound\\English\\");
 
-		GameEngineSound::SoundLoad(FilePath.PlusFilePath("FIRE.WAV"));
-	}
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("FIRE.WAV"));
+		}
 
-	if(nullptr == GameEngineSound::FindSound("OW1.WAV"))
-	{
-		// 데미지 받을때
-		GameEnginePath FilePath;
-		FilePath.SetCurrentPath();
-		FilePath.MoveParentToExistsChild("ContentsResources");
-		FilePath.MoveChild("ContentsResources\\Sound\\English\\");
+		if (nullptr == GameEngineSound::FindSound("WATCHTHIS.WAV"))
+		{
+			// 무기 발사 2
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Sound\\English\\");
 
-		GameEngineSound::SoundLoad(FilePath.PlusFilePath("OW1.WAV"));
-	}
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("WATCHTHIS.WAV"));
+		}
 
-	if (nullptr == GameEngineSound::FindSound("Walk-Expand.wav"))
-	{
-		// 움직일때
-		GameEnginePath FilePath;
-		FilePath.SetCurrentPath();
-		FilePath.MoveParentToExistsChild("ContentsResources");
-		FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+		if (nullptr == GameEngineSound::FindSound("OW1.WAV"))
+		{
+			// 데미지 받을때 1
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Sound\\English\\");
 
-		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Walk-Expand.wav"));
-	}
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("OW1.WAV"));
+		}
 
-	if (nullptr == GameEngineSound::FindSound("ROCKETPOWERUP.WAV"))
-	{
-		// 게이지 상승
-		GameEnginePath FilePath;
-		FilePath.SetCurrentPath();
-		FilePath.MoveParentToExistsChild("ContentsResources");
-		FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+		if (nullptr == GameEngineSound::FindSound("OW2.WAV"))
+		{
+			// 데미지 받을때 2
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Sound\\English\\");
 
-		GameEngineSound::SoundLoad(FilePath.PlusFilePath("ROCKETPOWERUP.WAV"));
-	}
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("OW2.WAV"));
+		}
 
-	if (nullptr == GameEngineSound::FindSound("JUMP1.WAV"))
-	{
-		// 점프
-		GameEnginePath FilePath;
-		FilePath.SetCurrentPath();
-		FilePath.MoveParentToExistsChild("ContentsResources");
-		FilePath.MoveChild("ContentsResources\\Sound\\English\\");
+		if (nullptr == GameEngineSound::FindSound("OW3.WAV"))
+		{
+			// 데미지 받을때 3
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Sound\\English\\");
 
-		GameEngineSound::SoundLoad(FilePath.PlusFilePath("JUMP1.WAV"));
-	}
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("OW3.WAV"));
+		}
 
-	if (nullptr == GameEngineSound::FindSound("WormLanding.wav"))
-	{
-		// 점프 후 착지
-		GameEnginePath FilePath;
-		FilePath.SetCurrentPath();
-		FilePath.MoveParentToExistsChild("ContentsResources");
-		FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+		if (nullptr == GameEngineSound::FindSound("Walk-Expand.wav"))
+		{
+			// 움직일때
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
 
-		GameEngineSound::SoundLoad(FilePath.PlusFilePath("WormLanding.wav"));
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("Walk-Expand.wav"));
+		}
+
+		if (nullptr == GameEngineSound::FindSound("ROCKETPOWERUP.WAV"))
+		{
+			// 게이지 상승
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("ROCKETPOWERUP.WAV"));
+		}
+
+		if (nullptr == GameEngineSound::FindSound("JUMP1.WAV"))
+		{
+			// 점프
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Sound\\English\\");
+
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("JUMP1.WAV"));
+		}
+
+		if (nullptr == GameEngineSound::FindSound("WormLanding.wav"))
+		{
+			// 점프 후 착지
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("WormLanding.wav"));
+		}
+
+		if (nullptr == GameEngineSound::FindSound("BYEBYE.WAV"))
+		{
+			// 죽을 때
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Sound\\English\\");
+
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("BYEBYE.WAV"));
+		}
+
+		if (nullptr == GameEngineSound::FindSound("Splash.wav"))
+		{
+			// 물에 빠졌을때
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("Splash.wav"));
+		}
+
 	}
 	
 	{
