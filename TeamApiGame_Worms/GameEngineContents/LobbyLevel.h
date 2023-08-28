@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineLevel.h>
+#include <GameEnginePlatform/GameEngineSound.h>
 #include "UI_Terrain_Button.h"
 
 class LobbyLevel : public GameEngineLevel
@@ -13,7 +14,7 @@ public:
 	LobbyLevel& operator=(const LobbyLevel& _Other) = delete;
 	LobbyLevel& operator=(const LobbyLevel&& _Other) noexcept = delete;
 
-
+	void SetBGMPlayer(class GameEngineSoundPlayer& _BGMPlayer);
 protected:
 	void LevelStart(GameEngineLevel* _PrevLevel) override;
 	void LevelEnd(GameEngineLevel* _NextLevel) override;
@@ -22,6 +23,7 @@ private:
 	void Start() override;
 	void Update(float _Delta) override;
 	void Release() override;
+	class GameEngineSoundPlayer BGMPlayer;
 
 	class GameStateManager* GameSetting = nullptr;
 

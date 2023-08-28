@@ -1,7 +1,9 @@
 #include "LobbyLevel.h"
 
+
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEngineCore/ResourcesManager.h>
+
 
 
 #include "BackGround.h"
@@ -75,6 +77,11 @@ void LobbyLevel::Update(float _Delta)
 
 }
 
+void LobbyLevel::SetBGMPlayer(GameEngineSoundPlayer& _BGMPlayer)
+{
+	BGMPlayer = _BGMPlayer;
+}
+
 void LobbyLevel::LevelStart(GameEngineLevel* _PrevLevel)
 {
 
@@ -136,11 +143,14 @@ void LobbyLevel::LevelStart(GameEngineLevel* _PrevLevel)
 		BackGround* BackGroundPtr = CreateActor<BackGround>();
 		BackGroundPtr->VerticalPatternInit("Lobby_Backdrop.bmp");
 	}
+
+	
 }
 
 void LobbyLevel::LevelEnd(GameEngineLevel* _NextLevel)
 {
 	GameStateManager::GameState->OverOn();
+	BGMPlayer.Stop();
 }
 
 void LobbyLevel::Release()
