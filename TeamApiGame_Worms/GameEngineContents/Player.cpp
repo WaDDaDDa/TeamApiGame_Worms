@@ -1030,6 +1030,7 @@ void Player::Start()
 		GameEngineSound::SoundLoad(FilePath.PlusFilePath("petrol.WAV"));
 		GameEngineSound::SoundLoad(FilePath.PlusFilePath("GIRDERIMPACT.WAV"));
 		GameEngineSound::SoundLoad(FilePath.PlusFilePath("TELEPORT.WAV"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("SNOTPLOP.WAV"));
 	}
 
 	// Player Sound

@@ -208,6 +208,7 @@ void HealItem::IdleUpdate(float _Delta)
 			if (Actor1->IsTurnPlayer == true)
 			{
 				Actor1->HealHp();
+				GameEngineSound::SoundPlay("SNOTPLOP.WAV");
 				Death();
 			}
 		}
