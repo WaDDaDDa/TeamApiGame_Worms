@@ -38,6 +38,7 @@ GameEngineWindowTexture::GameEngineWindowTexture()
 
 GameEngineWindowTexture::~GameEngineWindowTexture() 
 {
+	
 }
 
 void GameEngineWindowTexture::ResLoad(const std::string& _Path)
