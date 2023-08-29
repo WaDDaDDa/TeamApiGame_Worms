@@ -219,6 +219,16 @@
     <ClCompile Include="Airjet.cpp">
       <Filter>Effect</Filter>
     </ClCompile>
+    <ClCompile Include="UI_LoadingCDRom.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadingLevel.cpp">
+      <Filter>GameLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="EndingLevel.cpp">
+      <Filter>GameLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_EndingBackGround.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentCore.h" />
@@ -439,6 +449,16 @@
     <ClInclude Include="Airjet.h">
       <Filter>Effect</Filter>
     </ClInclude>
+    <ClInclude Include="UI_LoadingCDRom.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadingLevel.h">
+      <Filter>GameLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="EndingLevel.h">
+      <Filter>GameLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_EndingBackGround.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Weapon">

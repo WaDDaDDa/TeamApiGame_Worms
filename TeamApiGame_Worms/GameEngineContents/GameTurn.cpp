@@ -234,8 +234,7 @@ bool GameTurn::GameOverCheck(float _Delta)
 		// 플레이어 전원 사망
 		if (GameOverDelta >= 5.0f)
 		{
-			//GameEngineCore::ChangeLevel("TitleLevel");
-			DestroyWindow(GameEngineWindow::MainWindow.GetHWND());
+			GameEngineCore::ChangeLevel("EndingLevel");
 			return true;
 		}
 		return true;

@@ -3,7 +3,9 @@
 #include "TitleLevel.h"
 #include "ModeSelectLevel.h"
 #include "LobbyLevel.h"
+#include "LoadingLevel.h"
 #include "PlayLevel.h"
+#include "EndingLevel.h"
 
 #include <GameEnginePlatform/GameEngineWindow.h>
 
@@ -22,7 +24,10 @@ void ContentCore::Start()
 	GameEngineCore::CreateLevel<TitleLevel>("TitleLevel");
 	GameEngineCore::CreateLevel<ModeSelectLevel>("ModeSelectLevel");
 	GameEngineCore::CreateLevel<LobbyLevel>("LobbyLevel");
+	GameEngineCore::CreateLevel<LoadingLevel>("LoadingLevel");
 	GameEngineCore::CreateLevel<PlayLevel>("PlayLevel");
+	GameEngineCore::CreateLevel<EndingLevel>("EndingLevel");
+
 
 	// 이 레벨이 화면에 보여라.
 	GameEngineCore::ChangeLevel("TitleLevel");

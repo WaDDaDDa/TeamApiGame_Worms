@@ -122,6 +122,7 @@ void TitleLevel::Title_Intro_Start()
 void TitleLevel::Title_ShowTitle_Start()
 {
 	BGMPlayer = GameEngineSound::SoundPlay("Worms_TitleScreen_Heartbeat.wav");
+	BGMPlayer.SetVolume(5.0f);
 	IntroLogo->ChangeState_Black();
 	MainLogo = CreateActor<UI_MainLogo>();
 

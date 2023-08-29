@@ -185,6 +185,7 @@
     <ClInclude Include="ContentsDefine.h" />
     <ClInclude Include="ContentsEnum.h" />
     <ClInclude Include="Donkey.h" />
+    <ClInclude Include="EndingLevel.h" />
     <ClInclude Include="FlameEffect.h" />
     <ClInclude Include="FlyEffect.h" />
     <ClInclude Include="FrontWave.h">
@@ -223,6 +224,7 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="HomingMissile.h" />
+    <ClInclude Include="LoadingLevel.h" />
     <ClInclude Include="LobbyLevel.h" />
     <ClInclude Include="ModeSelectLevel.h" />
     <ClInclude Include="MouseObject.h" />
@@ -262,9 +264,11 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="UI_EndingBackGround.h" />
     <ClInclude Include="UI_FadeObject.h" />
     <ClInclude Include="UI_IntroLogo.h" />
     <ClInclude Include="UI_Inventory.h" />
+    <ClInclude Include="UI_LoadingCDRom.h" />
     <ClInclude Include="UI_Lobby_SelectTitle.h" />
     <ClInclude Include="UI_MainLogo.h" />
     <ClInclude Include="UI_Meteor.h" />
@@ -328,6 +332,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Donkey.cpp" />
+    <ClCompile Include="EndingLevel.cpp" />
     <ClCompile Include="FlameEffect.cpp" />
     <ClCompile Include="FlyEffect.cpp" />
     <ClCompile Include="FrontWave.cpp">
@@ -366,6 +371,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="HomingMissile.cpp" />
+    <ClCompile Include="LoadingLevel.cpp" />
     <ClCompile Include="LobbyLevel.cpp" />
     <ClCompile Include="ModeSelectLevel.cpp" />
     <ClCompile Include="MouseObject.cpp" />
@@ -407,9 +413,11 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="UI_EndingBackGround.cpp" />
     <ClCompile Include="UI_FadeObject.cpp" />
     <ClCompile Include="UI_IntroLogo.cpp" />
     <ClCompile Include="UI_Inventory.cpp" />
+    <ClCompile Include="UI_LoadingCDRom.cpp" />
     <ClCompile Include="UI_Lobby_SelectTitle.cpp" />
     <ClCompile Include="UI_MainLogo.cpp" />
     <ClCompile Include="UI_Meteor.cpp" />

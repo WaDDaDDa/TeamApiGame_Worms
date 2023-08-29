@@ -26,6 +26,7 @@
 #include "UI_WormSelect_Button.h"
 #include "UI_WormMaxHp_Button.h"
 #include "UI_Teleportin_Button.h"
+#include "UI_LoadingCDRom.h"
 
 #include "ContentsDefine.h"
 #include "MouseObject.h"
@@ -48,6 +49,7 @@ LobbyLevel::~LobbyLevel()
 
 void LobbyLevel::Start()
 {
+
 	CreateActor<MouseObject>();
 	CreateActor<UI_Mouse>();
 
@@ -137,8 +139,6 @@ void LobbyLevel::LevelStart(GameEngineLevel* _PrevLevel)
 		BackGround* BackGroundPtr = CreateActor<BackGround>();
 		BackGroundPtr->VerticalPatternInit("Lobby_Backdrop.bmp");
 	}
-
-	
 }
 
 void LobbyLevel::LevelEnd(GameEngineLevel* _NextLevel)
@@ -155,7 +155,7 @@ void LobbyLevel::Release()
 
 void StartGame(DWORD_PTR, DWORD_PTR)
 {
-	GameEngineCore::ChangeLevel("PlayLevel");
+	GameEngineCore::ChangeLevel("LoadingLevel");
 }
 
 void ExitLobby(DWORD_PTR, DWORD_PTR)

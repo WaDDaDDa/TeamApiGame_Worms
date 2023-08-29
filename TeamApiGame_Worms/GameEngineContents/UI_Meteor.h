@@ -20,7 +20,6 @@ protected:
 private:
 	GameEngineRenderer* MainRenderer = nullptr;
 
-	float CurAngle = 0.0f;
 	float MeteorDeathPos = 0.0f;
 
 };

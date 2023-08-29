@@ -2565,8 +2565,7 @@ void Player::WinUpdate(float _Delta)
 	WinTime += _Delta;
 	if (WinTime >= 5.0f)
 	{
-		//GameEngineCore::ChangeLevel("TitleLevel");
-		DestroyWindow(GameEngineWindow::MainWindow.GetHWND());
+		GameEngineCore::ChangeLevel("EndingLevel");
 		return;
 	}
 }
