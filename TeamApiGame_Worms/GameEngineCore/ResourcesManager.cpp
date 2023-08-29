@@ -171,10 +171,17 @@ void ResourcesManager::DeleteTexture(const std::string& _Name)
 {
 	std::string UpperName = GameEngineString::ToUpperReturn(_Name);
 
+	GameEngineWindowTexture* Texture = ResourcesManager::FindTexture(UpperName);
+
 	if (AllTexture.find(UpperName) == AllTexture.end())
 	{
 		MsgBoxAssert("존재하지 않는 텍스쳐를 지우려고 하였습니다.");
 		
 	}
+		
 		AllTexture.erase(UpperName);
+		
+		delete Texture;
+		Texture = nullptr;
+		
 }
