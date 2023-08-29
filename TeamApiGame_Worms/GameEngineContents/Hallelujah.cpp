@@ -642,7 +642,7 @@ void Hallelujah::ReadyUpdate(float _Delta)
 
 void Hallelujah::Render(float _Delta)
 {
-	HDC dc = GameEngineWindow::MainWindow.GetBackBuffer()->GetImageDC();
+	/*HDC dc = GameEngineWindow::MainWindow.GetBackBuffer()->GetImageDC();
 
 	{
 		CollisionData Data;
@@ -705,5 +705,5 @@ void Hallelujah::Render(float _Delta)
 		Text2 += std::to_string(GetGravityVector().iY());
 
 		TextOutA(dc2, 2, 40, Text2.c_str(), static_cast<int>(Text2.size()));
-	}
+	}*/
 }
