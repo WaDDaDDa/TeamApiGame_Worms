@@ -116,45 +116,45 @@ void GameTurn::Update(float _Delta)
 
 void GameTurn::Render(float _Delta)
 {
-	HDC dc = GameEngineWindow::MainWindow.GetBackBuffer()->GetImageDC();
+	//HDC dc = GameEngineWindow::MainWindow.GetBackBuffer()->GetImageDC();
 
-	std::string Text = "턴 플레이어 현재위치 : ";
-	Text += std::to_string(TurnPlayer->GetPos().X);
-	Text += ", ";
-	Text += std::to_string(TurnPlayer->GetPos().Y);
-	Text += "  카메라 현재위치 :";
-	Text += std::to_string(GetLevel()->GetMainCamera()->GetPos().X);
-	Text += ", ";
-	Text += std::to_string(GetLevel()->GetMainCamera()->GetPos().Y);
+	//std::string Text = "턴 플레이어 현재위치 : ";
+	//Text += std::to_string(TurnPlayer->GetPos().X);
+	//Text += ", ";
+	//Text += std::to_string(TurnPlayer->GetPos().Y);
+	//Text += "  카메라 현재위치 :";
+	//Text += std::to_string(GetLevel()->GetMainCamera()->GetPos().X);
+	//Text += ", ";
+	//Text += std::to_string(GetLevel()->GetMainCamera()->GetPos().Y);
 
-	Text += "  턴 플레이어 번호 :";
-	Text += std::to_string(StartValue);
-	Text += "  턴 플레이어 체력 :";
-	Text += std::to_string(TurnPlayer->GetHp());
+	//Text += "  턴 플레이어 번호 :";
+	//Text += std::to_string(StartValue);
+	//Text += "  턴 플레이어 체력 :";
+	//Text += std::to_string(TurnPlayer->GetHp());
 
-	Text += "  턴 시간 :";
-	Text += std::to_string(GetLiveTime());
+	//Text += "  턴 시간 :";
+	//Text += std::to_string(GetLiveTime());
 
-	Text += "  CurAngle : ";
-	Text += std::to_string(static_cast<int>(TurnPlayer->GetCurAngle() * 1000));
+	//Text += "  CurAngle : ";
+	//Text += std::to_string(static_cast<int>(TurnPlayer->GetCurAngle() * 1000));
 
-	TextOutA(dc, 2, 3, Text.c_str(), static_cast<int>(Text.size()));
+	//TextOutA(dc, 2, 3, Text.c_str(), static_cast<int>(Text.size()));
 
-	
-	
+	//
+	//
 
-	{
-		HDC dc2 = GameEngineWindow::MainWindow.GetBackBuffer()->GetImageDC();
+	//{
+	//	HDC dc2 = GameEngineWindow::MainWindow.GetBackBuffer()->GetImageDC();
 
-		std::string Text2 = "WindVector : ";
-		Text2 += std::to_string(Wind::GetWind()->GetWindVector().X);
+	//	std::string Text2 = "WindVector : ";
+	//	Text2 += std::to_string(Wind::GetWind()->GetWindVector().X);
 
-	
+	//
 
 
 
-		TextOutA(dc2, 2,20, Text2.c_str(), static_cast<int>(Text2.size()));
-	}
+	//	TextOutA(dc2, 2,20, Text2.c_str(), static_cast<int>(Text2.size()));
+	//}
 
 }
 

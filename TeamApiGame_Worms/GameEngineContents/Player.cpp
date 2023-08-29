@@ -1298,7 +1298,7 @@ void Player::Update(float _Delta)
 
 void Player::Render(float _Delta)
 {
-	HDC dc = GameEngineWindow::MainWindow.GetBackBuffer()->GetImageDC();
+	/*HDC dc = GameEngineWindow::MainWindow.GetBackBuffer()->GetImageDC();
 
 	{
 	CollisionData Data;
@@ -1338,7 +1338,7 @@ void Player::Render(float _Delta)
 		Data.Scale = { 5,5 };
 
 		Rectangle(dc, Data.iLeft(), Data.iTop(), Data.iRight(), Data.iBot());
-	}
+	}*/
 
 	//std::string Text = "";
 	//Text += std::to_string(Hp);
