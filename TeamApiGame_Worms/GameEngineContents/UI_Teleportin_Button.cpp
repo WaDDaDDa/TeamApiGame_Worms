@@ -16,21 +16,46 @@ UI_Teleportin_Button::~UI_Teleportin_Button()
 
 void UI_Teleportin_Button::Start()
 {
-
-	// 리소스 로딩
-	GameEnginePath FilePath;
-	FilePath.SetCurrentPath();
-	FilePath.MoveParentToExistsChild("ContentsResources");
-	FilePath.MoveChild("ContentsResources\\UI\\");
-
-	if (false == ResourcesManager::GetInst().IsLoadTexture("UI_TeleportinOFF.bmp"))
+	// 이미지 리소스 로딩
 	{
-		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("UI_TeleportinOFF.bmp"));
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\UI\\");
+
+		if (false == ResourcesManager::GetInst().IsLoadTexture("UI_TeleportinOFF.bmp"))
+		{
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("UI_TeleportinOFF.bmp"));
+		}
+
+		if (false == ResourcesManager::GetInst().IsLoadTexture("UI_TeleportinON.bmp"))
+		{
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("UI_TeleportinON.bmp"));
+		}
+
+		if (false == ResourcesManager::GetInst().IsLoadTexture("H_UI_TeleportinOFF.bmp"))
+		{
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("H_UI_TeleportinOFF.bmp"));
+		}
+
+		if (false == ResourcesManager::GetInst().IsLoadTexture("H_UI_TeleportinON.bmp"))
+		{
+			ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("H_UI_TeleportinON.bmp"));
+		}
 	}
 
-	if (false == ResourcesManager::GetInst().IsLoadTexture("UI_TeleportinON.bmp"))
+	// 사운드 리소스 로딩
 	{
-		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("UI_TeleportinON.bmp"));
+		if (nullptr == GameEngineSound::FindSound("CursorSelect.wav"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("CursorSelect.wav"));
+		}
+	
 	}
 
 	MainRenderer = CreateRenderer(RenderOrder::UI);
@@ -79,6 +104,7 @@ void UI_Teleportin_Button::ChangeSelectValue()
 		break;
 	}
 
+	EFFECT_Player_Click = GameEngineSound::SoundPlay("CursorSelect.wav");
 	ChangeState(BUTTON_STATE::BUTTON_STATE_HOVERED);
 }
 
@@ -87,13 +113,17 @@ void UI_Teleportin_Button::StateUpdate()
 	switch (ButtonState)
 	{
 	case BUTTON_STATE::BUTTON_STATE_HOVERED:
+		HighlighterOn();
 		CheckButtonClick();
 		break;
 
 	case BUTTON_STATE::BUTTON_STATE_UNHOVERED:
+		EFFECT_Player_Click.Stop();
+		HighlighterOff();
 		break;
 
 	case BUTTON_STATE::BUTTON_STATE_CLICKED:
+		HighlighterOn();
 		ChangeSelectValue();
 		break;
 
@@ -153,4 +183,39 @@ void UI_Teleportin_Button::CheckButtonClick()
 void UI_Teleportin_Button::ChangeState(BUTTON_STATE _ButtonState)
 {
 	ButtonState = _ButtonState;
+}
+
+void UI_Teleportin_Button::HighlighterOn()
+{
+	switch (m_SelectIndex)
+	{
+	case 0:
+		MainRenderer->SetTexture("H_UI_TeleportinOFF.bmp");
+		break;
+
+	case 1:
+		MainRenderer->SetTexture("H_UI_TeleportinON.bmp");
+		break;
+
+	default:
+		break;
+	}
+
+}
+
+void UI_Teleportin_Button::HighlighterOff()
+{
+	switch (m_SelectIndex)
+	{
+	case 0:
+		MainRenderer->SetTexture("UI_TeleportinOFF.bmp");
+		break;
+
+	case 1:
+		MainRenderer->SetTexture("UI_TeleportinON.bmp");
+		break;
+
+	default:
+		break;
+	}
 }

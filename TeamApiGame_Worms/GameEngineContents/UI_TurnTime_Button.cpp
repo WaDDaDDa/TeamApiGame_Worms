@@ -57,6 +57,53 @@ void UI_TurnTime_Button::Start()
 		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("UI_TurnTime_6.bmp"));
 	}
 
+	// 하이라이트 리소스 로딩
+	if (false == ResourcesManager::GetInst().IsLoadTexture("H_UI_TurnTime_0.bmp"))
+	{
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("H_UI_TurnTime_0.bmp"));
+	}
+
+	if (false == ResourcesManager::GetInst().IsLoadTexture("H_UI_TurnTime_1.bmp"))
+	{
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("H_UI_TurnTime_1.bmp"));
+	}
+
+	if (false == ResourcesManager::GetInst().IsLoadTexture("H_UI_TurnTime_2.bmp"))
+	{
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("H_UI_TurnTime_2.bmp"));
+	}
+
+	if (false == ResourcesManager::GetInst().IsLoadTexture("H_UI_TurnTime_3.bmp"))
+	{
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("H_UI_TurnTime_3.bmp"));
+	}
+
+	if (false == ResourcesManager::GetInst().IsLoadTexture("H_UI_TurnTime_4.bmp"))
+	{
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("H_UI_TurnTime_4.bmp"));
+	}
+
+	if (false == ResourcesManager::GetInst().IsLoadTexture("H_UI_TurnTime_5.bmp"))
+	{
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("H_UI_TurnTime_5.bmp"));
+	}
+
+	if (false == ResourcesManager::GetInst().IsLoadTexture("H_UI_TurnTime_6.bmp"))
+	{
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("H_UI_TurnTime_6.bmp"));
+	}
+
+	// 사운드 리소스 로딩
+	if (nullptr == GameEngineSound::FindSound("CursorSelect.wav"))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("CursorSelect.wav"));
+	}
+
 	MainRenderer = CreateRenderer(RenderOrder::UI);
 
 	MainRenderer->SetRenderScale({ 68, 68 });
@@ -79,18 +126,47 @@ void UI_TurnTime_Button::Update(float _Delta)
 	CheckButtonCollision();
 }
 
-void UI_TurnTime_Button::ChangeSelectValue()
+void UI_TurnTime_Button::HighlighterOn()
 {
-	if (m_SelectIndex < 5)
+	switch (m_SelectIndex)
 	{
-		++m_SelectIndex;
-	}
+	case 0:
+		MainRenderer->SetTexture("H_UI_TurnTime_0.bmp");
+		GameStateManager::GameState->SetTurnTime(15.0f);
+		break;
 
-	else
-	{
-		m_SelectIndex = 0;
-	}
+	case 1:
+		MainRenderer->SetTexture("H_UI_TurnTime_1.bmp");
+		GameStateManager::GameState->SetTurnTime(20.0f);
+		break;
 
+	case 2:
+		MainRenderer->SetTexture("H_UI_TurnTime_2.bmp");
+		GameStateManager::GameState->SetTurnTime(30.0f);
+		break;
+
+	case 3:
+		MainRenderer->SetTexture("H_UI_TurnTime_3.bmp");
+		GameStateManager::GameState->SetTurnTime(45.0f);
+		break;
+
+	case 4:
+		MainRenderer->SetTexture("H_UI_TurnTime_4.bmp");
+		GameStateManager::GameState->SetTurnTime(60.0f);
+		break;
+
+	case 5:
+		MainRenderer->SetTexture("H_UI_TurnTime_5.bmp");
+		GameStateManager::GameState->SetTurnTime(90.0f);
+		break;
+
+	default:
+		break;
+	}
+}
+
+void UI_TurnTime_Button::HighlighterOff()
+{
 	switch (m_SelectIndex)
 	{
 	case 0:
@@ -126,6 +202,23 @@ void UI_TurnTime_Button::ChangeSelectValue()
 	default:
 		break;
 	}
+}
+
+void UI_TurnTime_Button::ChangeSelectValue()
+{
+	if (m_SelectIndex < 5)
+	{
+		++m_SelectIndex;
+	}
+
+	else
+	{
+		m_SelectIndex = 0;
+	}
+
+	HighlighterOn();
+
+	EFFECT_Player_Click = GameEngineSound::SoundPlay("CursorSelect.wav");
 
 	ChangeState(BUTTON_STATE::BUTTON_STATE_HOVERED);
 }
@@ -136,9 +229,12 @@ void UI_TurnTime_Button::StateUpdate()
 	{
 	case BUTTON_STATE::BUTTON_STATE_HOVERED:
 		CheckButtonClick();
+		HighlighterOn();
 		break;
 
 	case BUTTON_STATE::BUTTON_STATE_UNHOVERED:
+		HighlighterOff();
+		EFFECT_Player_Click.Stop();
 		break;
 
 	case BUTTON_STATE::BUTTON_STATE_CLICKED:

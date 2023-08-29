@@ -71,10 +71,6 @@ void UI_Box_Teams::Start()
 
 	MainRenderer->SetTexture("UI_Teams.bmp");
 
-//	GameStateManager::GameState->SetTeamNumber(6);
-
-
-
 	MainCollision = CreateCollision(CollisionOrder::UI);
 	MainCollision->SetCollisionType(CollisionType::Rect);
 	MainCollision->SetCollisionScale({ 350, 210 });
@@ -146,16 +142,12 @@ void UI_Box_Teams::Start()
 
 void UI_Box_Teams::Update(float _Delta)
 {
-
-	//MainRenderer->SetText(std::to_string(m_SelectIndex));
 	StateUpdate();
 	CheckButtonCollision();
 }
 
 void UI_Box_Teams::RemovePlayerTeam()
 {
-//	m_SelectIndex = GameStateManager::GameState->GetTeamNumber();
-
 	if (m_SelectIndex > 0)
 	{
 		--m_SelectIndex;
@@ -165,15 +157,8 @@ void UI_Box_Teams::RemovePlayerTeam()
 	{
 		m_SelectIndex = 0;
 	}
-	 
-
-//	UI_Box_Barracks::BoxBarracksUI->m_SelectIndex = 6 - m_SelectIndex;
-
-//	GameStateManager::GameState->SetTeamNumber(m_SelectIndex);
 
 	ChangePlayerTeamLayout(m_SelectIndex);
-
-	//UI_Box_Barracks::BoxBarracksUI->ChangePlayerTeamLayout(m_SelectIndex);
 
 	ChangeState(BUTTON_STATE::BUTTON_STATE_HOVERED);
 }

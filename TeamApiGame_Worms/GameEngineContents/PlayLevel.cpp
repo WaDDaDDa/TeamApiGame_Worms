@@ -280,6 +280,8 @@ void PlayLevel::LevelEnd(GameEngineLevel* _NextLevel)
 {
 	BGMPlayer.Stop();
 	WindSound.Stop();
+
+	GameStateManager::GameState->SetTeamNumber(0);
 }
 
 void PlayLevel::PlayerSetting(size_t _PlayerCount)

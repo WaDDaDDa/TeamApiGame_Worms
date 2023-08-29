@@ -16,7 +16,7 @@ UI_RoundTime_Button::~UI_RoundTime_Button()
 void UI_RoundTime_Button::Start()
 {
 
-	// 리소스 로딩
+	// 이미지 리소스 로딩
 	GameEnginePath FilePath;
 	FilePath.SetCurrentPath();
 	FilePath.MoveParentToExistsChild("ContentsResources");
@@ -58,6 +58,52 @@ void UI_RoundTime_Button::Start()
 	}
 
 
+	// 하이라이트 리소스 로딩
+	if (false == ResourcesManager::GetInst().IsLoadTexture("H_UI_Round0.bmp"))
+	{
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("H_UI_Round0.bmp"));
+	}
+
+	if (false == ResourcesManager::GetInst().IsLoadTexture("H_UI_Round1.bmp"))
+	{
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("H_UI_Round1.bmp"));
+	}
+
+	if (false == ResourcesManager::GetInst().IsLoadTexture("H_UI_Round2.bmp"))
+	{
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("H_UI_Round2.bmp"));
+	}
+
+	if (false == ResourcesManager::GetInst().IsLoadTexture("H_UI_Round3.bmp"))
+	{
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("H_UI_Round3.bmp"));
+	}
+
+	if (false == ResourcesManager::GetInst().IsLoadTexture("H_UI_Round4.bmp"))
+	{
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("H_UI_Round4.bmp"));
+	}
+
+	if (false == ResourcesManager::GetInst().IsLoadTexture("H_UI_Round5.bmp"))
+	{
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("H_UI_Round5.bmp"));
+	}
+
+	if (false == ResourcesManager::GetInst().IsLoadTexture("H_UI_Round6.bmp"))
+	{
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("H_UI_Round6.bmp"));
+	}
+
+	// 사운드 리소스 로딩
+	if (nullptr == GameEngineSound::FindSound("CursorSelect.wav"))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("CursorSelect.wav"));
+	}
 
 	MainRenderer = CreateRenderer(RenderOrder::UI);
 
@@ -91,40 +137,7 @@ void UI_RoundTime_Button::ChangeSelectValue()
 		m_SelectIndex = 0;
 	}
 
-	switch (m_SelectIndex)
-	{
-	case 0:
-		MainRenderer->SetTexture("UI_Round0.bmp");
-		break;
-
-	case 1:
-		MainRenderer->SetTexture("UI_Round1.bmp");
-		break;
-
-	case 2:
-		MainRenderer->SetTexture("UI_Round2.bmp");
-		break;
-
-	case 3:
-		MainRenderer->SetTexture("UI_Round3.bmp");
-		break;
-
-	case 4:
-		MainRenderer->SetTexture("UI_Round4.bmp");
-		break;
-
-	case 5:
-		MainRenderer->SetTexture("UI_Round5.bmp");
-		break;
-
-	case 6:
-		MainRenderer->SetTexture("UI_Round6.bmp");
-		break;
-
-	default:
-		break;
-	}
-
+	EFFECT_Player_Click = GameEngineSound::SoundPlay("CursorSelect.wav");
 	ChangeState(BUTTON_STATE::BUTTON_STATE_HOVERED);
 }
 
@@ -134,13 +147,17 @@ void UI_RoundTime_Button::StateUpdate()
 	{
 	case BUTTON_STATE::BUTTON_STATE_HOVERED:
 		CheckButtonClick();
+		HighlighterOn();
 		break;
 
 	case BUTTON_STATE::BUTTON_STATE_UNHOVERED:
+		EFFECT_Player_Click.Stop();
+		HighlighterOff();
 		break;
 
 	case BUTTON_STATE::BUTTON_STATE_CLICKED:
 		ChangeSelectValue();
+		HighlighterOn();
 		break;
 
 	default:
@@ -199,4 +216,81 @@ void UI_RoundTime_Button::CheckButtonClick()
 void UI_RoundTime_Button::ChangeState(BUTTON_STATE _ButtonState)
 {
 	ButtonState = _ButtonState;
+}
+
+void UI_RoundTime_Button::HighlighterOn()
+{
+	switch (m_SelectIndex)
+	{
+	case 0:
+		MainRenderer->SetTexture("H_UI_Round0.bmp");
+		break;
+
+	case 1:
+		MainRenderer->SetTexture("H_UI_Round1.bmp");
+		break;
+
+	case 2:
+		MainRenderer->SetTexture("H_UI_Round2.bmp");
+		break;
+
+	case 3:
+		MainRenderer->SetTexture("H_UI_Round3.bmp");
+		break;
+
+	case 4:
+		MainRenderer->SetTexture("H_UI_Round4.bmp");
+		break;
+
+	case 5:
+		MainRenderer->SetTexture("H_UI_Round5.bmp");
+		break;
+
+	case 6:
+		MainRenderer->SetTexture("H_UI_Round6.bmp");
+		break;
+
+	default:
+		break;
+	}
+
+}
+
+void UI_RoundTime_Button::HighlighterOff()
+{
+
+	switch (m_SelectIndex)
+	{
+	case 0:
+		MainRenderer->SetTexture("UI_Round0.bmp");
+		break;
+
+	case 1:
+		MainRenderer->SetTexture("UI_Round1.bmp");
+		break;
+
+	case 2:
+		MainRenderer->SetTexture("UI_Round2.bmp");
+		break;
+
+	case 3:
+		MainRenderer->SetTexture("UI_Round3.bmp");
+		break;
+
+	case 4:
+		MainRenderer->SetTexture("UI_Round4.bmp");
+		break;
+
+	case 5:
+		MainRenderer->SetTexture("UI_Round5.bmp");
+		break;
+
+	case 6:
+		MainRenderer->SetTexture("UI_Round6.bmp");
+		break;
+
+	default:
+		break;
+	}
+
 }

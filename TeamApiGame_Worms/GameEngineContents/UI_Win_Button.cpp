@@ -56,6 +56,54 @@ void UI_Win_Button::Start()
 		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("UI_Wins6.bmp"));
 	}
 
+	// 하이라이트 리소스 로딩
+	if (false == ResourcesManager::GetInst().IsLoadTexture("H_UI_Wins0.bmp"))
+	{
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("H_UI_Wins0.bmp"));
+	}
+
+	if (false == ResourcesManager::GetInst().IsLoadTexture("H_UI_Wins1.bmp"))
+	{
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("H_UI_Wins1.bmp"));
+	}
+
+	if (false == ResourcesManager::GetInst().IsLoadTexture("H_UI_Wins2.bmp"))
+	{
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("H_UI_Wins2.bmp"));
+	}
+
+	if (false == ResourcesManager::GetInst().IsLoadTexture("H_UI_Wins3.bmp"))
+	{
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("H_UI_Wins3.bmp"));
+	}
+
+	if (false == ResourcesManager::GetInst().IsLoadTexture("H_UI_Wins4.bmp"))
+	{
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("H_UI_Wins4.bmp"));
+	}
+
+	if (false == ResourcesManager::GetInst().IsLoadTexture("H_UI_Wins5.bmp"))
+	{
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("H_UI_Wins5.bmp"));
+	}
+
+	if (false == ResourcesManager::GetInst().IsLoadTexture("H_UI_Wins6.bmp"))
+	{
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("H_UI_Wins6.bmp"));
+	}
+
+
+	// 사운드 리소스 로딩
+	if (nullptr == GameEngineSound::FindSound("CursorSelect.wav"))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("CursorSelect.wav"));
+	}
+
 	MainRenderer = CreateRenderer(RenderOrder::UI);
 
 	MainRenderer->SetRenderScale({ 68, 68 });
@@ -75,18 +123,45 @@ void UI_Win_Button::Update(float _Delta)
 	CheckButtonCollision();
 }
 
-void UI_Win_Button::ChangeSelectValue()
+void UI_Win_Button::HighlighterOn()
 {
-	if (m_SelectIndex < 6)
+	switch (m_SelectIndex)
 	{
-		++m_SelectIndex;
-	}
+	case 0:
+		MainRenderer->SetTexture("H_UI_Wins0.bmp");
+		break;
 
-	else
-	{
-		m_SelectIndex = 0;
-	}
+	case 1:
+		MainRenderer->SetTexture("H_UI_Wins1.bmp");
+		break;
 
+	case 2:
+		MainRenderer->SetTexture("H_UI_Wins2.bmp");
+		break;
+
+	case 3:
+		MainRenderer->SetTexture("H_UI_Wins3.bmp");
+		break;
+
+	case 4:
+		MainRenderer->SetTexture("H_UI_Wins4.bmp");
+		break;
+
+	case 5:
+		MainRenderer->SetTexture("H_UI_Wins5.bmp");
+		break;
+
+	case 6:
+		MainRenderer->SetTexture("H_UI_Wins6.bmp");
+		break;
+
+	default:
+		break;
+	}
+}
+
+void UI_Win_Button::HighlighterOff()
+{
 	switch (m_SelectIndex)
 	{
 	case 0:
@@ -120,6 +195,23 @@ void UI_Win_Button::ChangeSelectValue()
 	default:
 		break;
 	}
+}
+
+void UI_Win_Button::ChangeSelectValue()
+{
+	if (m_SelectIndex < 6)
+	{
+		++m_SelectIndex;
+	}
+
+	else
+	{
+		m_SelectIndex = 0;
+	}
+
+	HighlighterOff();
+
+	EFFECT_Player_Click = GameEngineSound::SoundPlay("CursorSelect.wav");
 
 	ChangeState(BUTTON_STATE::BUTTON_STATE_HOVERED);
 }
@@ -129,13 +221,17 @@ void UI_Win_Button::StateUpdate()
 	switch (ButtonState)
 	{
 	case BUTTON_STATE::BUTTON_STATE_HOVERED:
+		HighlighterOn();
 		CheckButtonClick();
 		break;
 
 	case BUTTON_STATE::BUTTON_STATE_UNHOVERED:
+		HighlighterOff();
+		EFFECT_Player_Click.Stop();
 		break;
 
 	case BUTTON_STATE::BUTTON_STATE_CLICKED:
+		HighlighterOn();
 		ChangeSelectValue();
 		break;
 

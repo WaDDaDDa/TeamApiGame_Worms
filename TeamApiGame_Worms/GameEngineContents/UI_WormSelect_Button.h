@@ -1,5 +1,6 @@
 #pragma once
 #include "UI_Button.h"
+#include <GameEnginePlatform/GameEngineSound.h>
 
 class UI_WormSelect_Button : public UI_Button
 {
@@ -18,6 +19,10 @@ protected:
 	void Start() override;
 	void Update(float _Delta) override;
 
+private:
+	void HighlighterOn();
+	void HighlighterOff();
+
 	void ChangeSelectValue();
 
 	void StateUpdate();
@@ -26,6 +31,6 @@ protected:
 
 	void ChangeState(BUTTON_STATE _ButtonState);
 
-
+	GameEngineSoundPlayer EFFECT_Player_Click;
 
 };

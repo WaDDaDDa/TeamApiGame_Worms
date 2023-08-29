@@ -44,6 +44,38 @@ void UI_WormMaxHp_Button::Start()
 		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("UI_Hp200.bmp"));
 	}
 
+	// 하이라이트 리소스 로딩
+	if (false == ResourcesManager::GetInst().IsLoadTexture("H_UI_Hp00.bmp"))
+	{
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("H_UI_Hp00.bmp"));
+	}
+
+	if (false == ResourcesManager::GetInst().IsLoadTexture("H_UI_Hp100.bmp"))
+	{
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("H_UI_Hp100.bmp"));
+	}
+
+	if (false == ResourcesManager::GetInst().IsLoadTexture("H_UI_Hp150.bmp"))
+	{
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("H_UI_Hp150.bmp"));
+	}
+
+	if (false == ResourcesManager::GetInst().IsLoadTexture("H_UI_Hp200.bmp"))
+	{
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("H_UI_Hp200.bmp"));
+	}
+
+	// 사운드 리소스 로딩
+	if (nullptr == GameEngineSound::FindSound("CursorSelect.wav"))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("CursorSelect.wav"));
+	}
+
 	MainRenderer = CreateRenderer(RenderOrder::UI);
 
 	MainRenderer->SetRenderScale({ 68, 68 });
@@ -64,17 +96,32 @@ void UI_WormMaxHp_Button::Update(float _Delta)
 	CheckButtonCollision();
 }
 
-void UI_WormMaxHp_Button::ChangeSelectValue()
+void UI_WormMaxHp_Button::HighlighterOn()
 {
-	if (m_SelectIndex < 2)
+	switch (m_SelectIndex)
 	{
-		++m_SelectIndex;
-	}
-	else
-	{
-		m_SelectIndex = 0;
-	}
+	case 0:
+		MainRenderer->SetTexture("H_UI_Hp100.bmp");
+		GameStateManager::GameState->SetPlayerMaxHp(100);
+		break;
 
+	case 1:
+		MainRenderer->SetTexture("H_UI_Hp150.bmp");
+		GameStateManager::GameState->SetPlayerMaxHp(150);
+		break;
+
+	case 2:
+		MainRenderer->SetTexture("H_UI_Hp200.bmp");
+		GameStateManager::GameState->SetPlayerMaxHp(200);
+		break;
+
+	default:
+		break;
+	}
+}
+
+void UI_WormMaxHp_Button::HighlighterOff()
+{
 	switch (m_SelectIndex)
 	{
 	case 0:
@@ -95,7 +142,22 @@ void UI_WormMaxHp_Button::ChangeSelectValue()
 	default:
 		break;
 	}
+}
 
+void UI_WormMaxHp_Button::ChangeSelectValue()
+{
+	if (m_SelectIndex < 2)
+	{
+		++m_SelectIndex;
+	}
+	else
+	{
+		m_SelectIndex = 0;
+	}
+
+	HighlighterOn();
+
+	EFFECT_Player_Click = GameEngineSound::SoundPlay("CursorSelect.wav");
 	ChangeState(BUTTON_STATE::BUTTON_STATE_HOVERED);
 }
 
@@ -104,10 +166,13 @@ void UI_WormMaxHp_Button::StateUpdate()
 	switch (ButtonState)
 	{
 	case BUTTON_STATE::BUTTON_STATE_HOVERED:
+		HighlighterOn();
 		CheckButtonClick();
 		break;
 
 	case BUTTON_STATE::BUTTON_STATE_UNHOVERED:
+		EFFECT_Player_Click.Stop();
+		HighlighterOff();
 		break;
 
 	case BUTTON_STATE::BUTTON_STATE_CLICKED:

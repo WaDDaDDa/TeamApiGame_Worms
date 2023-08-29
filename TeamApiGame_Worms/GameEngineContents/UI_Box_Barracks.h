@@ -31,6 +31,11 @@ public:
 		return BoxBarracksUI;
 	}
 
+	void SetSelectIndex(int _NewIndex)
+	{
+		m_SelectIndex = _NewIndex;
+	}
+
 	int m_SelectIndex = 0;
 
 protected:

@@ -68,6 +68,11 @@ void UI_Box_Barracks::Start()
 
 	if (nullptr == GameEngineSound::FindSound("CursorSelect.wav"))
 	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+
 		GameEngineSound::SoundLoad(FilePath.PlusFilePath("CursorSelect.wav"));
 	}
 
@@ -148,12 +153,16 @@ void UI_Box_Barracks::Start()
 
 void UI_Box_Barracks::Update(float _Delta)
 {
+	MainRenderer->SetText(std::to_string(m_SelectIndex));
+
 	StateUpdate();
 	CheckButtonCollision();
 }
 
 void UI_Box_Barracks::AddPlayerTeam()
 {
+//	int m_SelectIndex = GameStateManager::GameState->GetTeamNumber();
+		
 	if (m_SelectIndex < 5)
 	{
 		++m_SelectIndex;

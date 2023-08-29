@@ -84,12 +84,6 @@ void LobbyLevel::SetBGMPlayer(GameEngineSoundPlayer& _BGMPlayer)
 
 void LobbyLevel::LevelStart(GameEngineLevel* _PrevLevel)
 {
-
-	//if (nullptr == GameSetting)
-	//{
-	//	MsgBoxAssert("게임 스테이트 매니저를 세팅해주지 않았습니다");
-	//}
-
 	// 레이아웃 세팅
 	UI_Box_Terrain* Box_Terrain = CreateActor<UI_Box_Terrain>();
 	Box_Terrain->SetPos({ 370, 140 });

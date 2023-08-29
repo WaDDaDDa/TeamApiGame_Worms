@@ -38,6 +38,33 @@ void UI_WormSelect_Button::Start()
 		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("UI_WormSelectRANDOM.bmp"));
 	}
 
+	// 하이라이트 리소스 로딩
+	if (false == ResourcesManager::GetInst().IsLoadTexture("H_UI_WormSelectOFF.bmp"))
+	{
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("H_UI_WormSelectOFF.bmp"));
+	}
+
+	if (false == ResourcesManager::GetInst().IsLoadTexture("H_UI_WormSelectON.bmp"))
+	{
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("H_UI_WormSelectON.bmp"));
+	}
+
+	if (false == ResourcesManager::GetInst().IsLoadTexture("H_UI_WormSelectRANDOM.bmp"))
+	{
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("H_UI_WormSelectRANDOM.bmp"));
+	}
+
+	// 사운드 리소스 로딩
+	if (nullptr == GameEngineSound::FindSound("CursorSelect.wav"))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Sound\\Effects\\");
+
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("CursorSelect.wav"));
+	}
+
 	MainRenderer = CreateRenderer(RenderOrder::UI);
 
 	MainRenderer->SetRenderScale({ 68, 68 });
@@ -58,18 +85,29 @@ void UI_WormSelect_Button::Update(float _Delta)
 	CheckButtonCollision();
 }
 
-void UI_WormSelect_Button::ChangeSelectValue()
+void UI_WormSelect_Button::HighlighterOn()
 {
-	if (m_SelectIndex < 3)
+	switch (m_SelectIndex)
 	{
-		++m_SelectIndex;
-	}
+	case 0:
+		MainRenderer->SetTexture("H_UI_WormSelectOFF.bmp");
+		break;
 
-	else
-	{
-		m_SelectIndex = 0;
-	}
+	case 1:
+		MainRenderer->SetTexture("H_UI_WormSelectON.bmp");
+		break;
 
+	case 2:
+		MainRenderer->SetTexture("H_UI_WormSelectRANDOM.bmp");
+		break;
+
+	default:
+		break;
+	}
+}
+
+void UI_WormSelect_Button::HighlighterOff()
+{
 	switch (m_SelectIndex)
 	{
 	case 0:
@@ -87,6 +125,23 @@ void UI_WormSelect_Button::ChangeSelectValue()
 	default:
 		break;
 	}
+}
+
+void UI_WormSelect_Button::ChangeSelectValue()
+{
+	if (m_SelectIndex < 3)
+	{
+		++m_SelectIndex;
+	}
+
+	else
+	{
+		m_SelectIndex = 0;
+	}
+
+	HighlighterOn();
+
+	EFFECT_Player_Click = GameEngineSound::SoundPlay("CursorSelect.wav");
 
 	ChangeState(BUTTON_STATE::BUTTON_STATE_HOVERED);
 }
@@ -96,10 +151,13 @@ void UI_WormSelect_Button::StateUpdate()
 	switch (ButtonState)
 	{
 	case BUTTON_STATE::BUTTON_STATE_HOVERED:
+		HighlighterOn();
 		CheckButtonClick();
 		break;
 
 	case BUTTON_STATE::BUTTON_STATE_UNHOVERED:
+		EFFECT_Player_Click.Stop();
+		HighlighterOff();
 		break;
 
 	case BUTTON_STATE::BUTTON_STATE_CLICKED:
