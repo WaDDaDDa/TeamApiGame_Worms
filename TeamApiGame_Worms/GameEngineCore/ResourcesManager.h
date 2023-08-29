@@ -69,6 +69,8 @@ public:
 
 	GameEngineWindowTexture* FindTexture(const std::string& _Name);
 
+	void DeleteTexture(const std::string& _Name);
+
 	GameEngineSprite* FindSprite(const std::string& _Name);
 
 

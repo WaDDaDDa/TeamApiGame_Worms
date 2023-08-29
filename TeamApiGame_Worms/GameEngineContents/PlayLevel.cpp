@@ -281,6 +281,10 @@ void PlayLevel::LevelEnd(GameEngineLevel* _NextLevel)
 	BGMPlayer.Stop();
 	WindSound.Stop();
 
+	ResourcesManager::GetInst().DeleteTexture("StageTexture");
+	ResourcesManager::GetInst().DeleteTexture("StagePixelTexture");
+
+
 	GameStateManager::GameState->SetTeamNumber(0);
 }
 
