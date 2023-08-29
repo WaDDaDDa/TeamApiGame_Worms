@@ -244,6 +244,15 @@ bool GameTurn::GameOverCheck(float _Delta)
 		// 플레이어 한명만 생존.
 		for (size_t i = 0; i < Psize; i++)
 		{
+			for (size_t i = 0; i < Psize; i++)
+			{
+				if (PlayerState::Idle == Player::GetAllPlayer()[i]->GetState())
+				{
+					TurnPlayer->IsTurnPlayer = false;
+					Player::GetAllPlayer()[i]->IsTurnPlayer = true;
+				}
+			}
+
 			return true;
 		}
 	}
