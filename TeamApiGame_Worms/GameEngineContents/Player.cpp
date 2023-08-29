@@ -1220,6 +1220,16 @@ void Player::Start()
 
 			GameEngineSound::SoundLoad(FilePath.PlusFilePath("TELEPORT.WAV"));
 		}
+
+		if (nullptr == GameEngineSound::FindSound("VICTORY.WAV"))
+		{
+			GameEnginePath FilePath;
+			FilePath.SetCurrentPath();
+			FilePath.MoveParentToExistsChild("ContentsResources");
+			FilePath.MoveChild("ContentsResources\\Sound\\English\\");
+
+			GameEngineSound::SoundLoad(FilePath.PlusFilePath("VICTORY.WAV"));
+		}
 	}
 	
 	{
