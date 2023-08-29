@@ -27,6 +27,7 @@
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEngineCore/GameEngineCollision.h>
 #include <GameEnginePlatform/GameEngineWindowTexture.h>
+#include <GameEnginePlatform/GameEngineWindow.h>
 
 
 // UI
@@ -167,7 +168,7 @@ void Player::IdleUpdate(float _Delta)
 
 	if (true == GameEngineInput::IsDown('S'))
 	{
-		ChangeState(PlayerState::Win);
+		//ChangeState(PlayerState::Win);
 	}
 
 	InputMove();
@@ -2556,13 +2557,16 @@ void Player::SuperSheepOffUpdate(float _Delta)
 void Player::WinStart()
 {
 	ChangeAnimationState("Win");
+	GameEngineSound::SoundPlay("VICTORY.wav");
+
 }
 void Player::WinUpdate(float _Delta)
 {
 	WinTime += _Delta;
 	if (WinTime >= 5.0f)
 	{
-		GameEngineCore::ChangeLevel("TitleLevel");
+		//GameEngineCore::ChangeLevel("TitleLevel");
+		DestroyWindow(GameEngineWindow::MainWindow.GetHWND());
 		return;
 	}
 }
