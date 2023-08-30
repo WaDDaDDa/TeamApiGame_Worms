@@ -250,6 +250,7 @@ bool GameTurn::GameOverCheck(float _Delta)
 				{
 					TurnPlayer->IsTurnPlayer = false;
 					Player::GetAllPlayer()[i]->IsTurnPlayer = true;
+					Player::GetAllPlayer()[i]->StartSound = false;
 				}
 			}
 
